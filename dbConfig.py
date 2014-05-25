@@ -1,3 +1,4 @@
+#TODO: Replace this with a writeable config file
 host = 'localhost'
 port = 27017
 documents = {'default': {'name': None,

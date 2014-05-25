@@ -1,10 +1,12 @@
 __author__ = 'arkilic'
 
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 import logging
 
 
 class MetadataStore(object):
+    #TODO: Make sure existing collections are retrieved from the database
     def __init__(self, host, port):
         """
         Constructor: MongoClient, Database, and native python loggers are created
@@ -19,7 +21,7 @@ class MetadataStore(object):
             self.client = MongoClient(host, port)
         except:
             self.logger.warning('MongoClient cannot be created')
-            raise Exception('MongoClient cannot be created')
+            raise ConnectionFailure('MongoClient cannot be created')
         self.database = self.client['metaDataStore']
 #Database operations
 
@@ -68,7 +70,11 @@ class MetadataStore(object):
 #client operations
 
     def insert(self, collection, document):
-        self.database[collection].insert(document)
+        try:
+            self.database[collection].insert(document)
+        except:
+            self.logger.warning('Insert failed. Cannot connect to database')
+            raise ConnectionFailure('Insert failed. Cannot connect to database')
 
     def save(self, document):
         pass
@@ -79,8 +85,20 @@ class MetadataStore(object):
     def remove(self, condition):
         pass
 
-    def find(self, condition):
-        pass
+    def find(self, collection, condition):
+        if condition is None:
+            try:
+                result = self.database[collection].find()
+            except:
+                self.logger.warning('Query failed. Cannot connect to database')
+                raise ConnectionFailure('Query failed. Cannot connect to database')
+        else:
+            try:
+                result = self.database[collection].find(condition)
+            except:
+                self.logger.warning('Query failed. Cannot connect to database')
+                raise ConnectionFailure('Query failed. Cannot connect to database')
+        return result
 
     def find_one(self, condition):
         pass

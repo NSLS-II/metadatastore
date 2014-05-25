@@ -22,3 +22,7 @@ def eager_load(db, collections, documents):
     """
     for collection in collections:
         db.insert(collection, documents['default'])
+
+"""
+Enforce document templates. Add to config dictionary
+"""

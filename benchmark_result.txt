@@ -1,0 +1,8 @@
+1 inserts take 0.324964523315 milliseconds
+1 inserts take 0.327110290527 milliseconds
+10 inserts take 0.710964202881 milliseconds
+100 inserts take 5.97190856934 milliseconds
+1000 inserts take 47.7299690247 milliseconds
+10000 inserts take 468.769073486 milliseconds
+100000 inserts take 4946.24185562 milliseconds
+1000000 inserts take 56670.1788902 milliseconds
