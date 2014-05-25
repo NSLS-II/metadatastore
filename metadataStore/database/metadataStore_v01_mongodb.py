@@ -20,68 +20,134 @@ class MetadataStore(object):
         except:
             self.logger.warning('MongoClient cannot be created')
             raise Exception('MongoClient cannot be created')
-        self.db = self.client.metadataStore
-        #TODO: template_depot and collection depot will parse json-like run_headers from confiration file
-        self.template_depot = dict()
-        self.collection_depot = list()
+        self.database = self.client['metaDataStore']
+#Database operations
 
-    def create_document_template(self, name,fields):
+    def add_user(self, name, password, read_only=True):
+        pass
+
+    def remove_user(self, name):
+        pass
+
+    def authenticate(self):
+        pass
+
+    def mongo_command(self, command):
         """
-        Creates a document template and appends it to template_depot
+        Sends a command directly to the database. Closest behavior pymongo has to ORM's core
         """
-        if isinstance(fields, list):
-            composed_collection = dict()
-            for field in fields:
-                composed_collection[field] = None
-            self.template_depot[name] = composed_collection
-        else:
-            raise ValueError('fields must be of type python list')
-    
-    def create_collection(self, name):
+        pass
+
+    def create_collection(self, name, **kwargs):
+        pass
+
+    def list_collections(self):
+        return self.database.collection_names()
+
+    def current_op(self):
         """
-        Creates a collection with specified name that is used for grouping documents in a logbook-like way
+        Get information regarding current operations running
         """
-        try:
-            collection = self.db.name
-            self.collection_depot.append(collection)
-        except:
-            self.logger.warning('Collection cannot be created')
-            raise Exception('Collection cannot be created')
+        pass
 
-    def add_to_doc(self, template_name, field):
-        if template_name not in self.template_depot.keys():
-            raise ValueError('Document template with specified name does not exist')
-        else:
-            temp = self.template_depot[template_name] 
-            temp[field] = None
-            self.template_depot[template_name] = temp
+    def drop_collection(self, name_or_collection):
+        """
+        Drop a collection either by name or collection object
+        """
+        pass
 
-    def remove_from_doc(self, template_name, field):
-        if template_name not in self.template_depot.keys():
-            raise ValueError('Document template with specified name does not exist')
-        else:
-            temp = self.template_depot[template_name] 
-            new_temp = dict()
-            for name in temp.keys():
-                if name is not field:
-                    new_temp[name] = temp[name]
-            self.template_depot[template_name] = new_temp
+    def error(self):
+        """
+        Returns the latest error occured in the database
+        """
 
-    def delete_document_template(self, template_name):
-        if template_name not in self.template_depot.keys():
-            raise ValueError('Document template with specified name does not exist')
-        else:
-            self.template_depot.pop(template_name, None)
+    def session_logout(self):
+        """
+        Close connection between this client
+        """
+#client operations
 
+    def insert(self, collection, document):
+        self.database[collection].insert(document)
 
-a = MetadataStore('localhost', 27017)
-#print a.db.random_logbook.find()
-a.create_document_template('arman', ['name'])
-print a.template_depot
-a.add_to_doc('arman', 'yeni')
-print a.template_depot
-a.remove_from_doc('arman', 'yeni')
-print a.template_depot
-a.delete_document_template('arman')
-print a.template_depot
-a.create_collection('logs_1')
+    def save(self, document):
+        pass
+
+    def update(self, document):
+        pass
+
+    def remove(self, condition):
+        pass
+
+    def find(self, condition):
+        pass
+
+    def find_one(self, condition):
+        pass
+
+    def parallel_scan(self, num_cursors):
+        pass
+
+    def count(self):
+        """
+        Returns number of documents in a collection
+        """
+        pass
+
+    def create_index(self):
+        pass
+
+    def ensure_index(self):
+        pass
+
+    def drop_index(self):
+        pass
+
+    def reindex(self):
+        pass
+
+    def options(self):
+        pass
+
+    def aggregate(self):
+        pass
+
+    def group(self, key, condition, initial, reduce, finalize=None, **kwargs):
+        pass
+
+    def rename(self, collection_name, new_name):
+        pass
+
+    def map_reduce(self):
+        pass
+
+    def find_and_modify(self):
+        pass
+
+#Bulk operations
+    def bulk_insert(self, document_list):
+        """
+        >>> from pprint import pprint
+        >>>
+        >>> bulk = db.test.initialize_ordered_bulk_op()
+        >>> # Remove all documents from the previous example.
+        ...
+        >>> bulk.find({}).remove()
+        >>> bulk.insert({'_id': 1})
+        >>> bulk.insert({'_id': 2})
+        >>> bulk.insert({'_id': 3})
+        >>> bulk.find({'_id': 1}).update({'$set': {'foo': 'bar'}})
+        >>> bulk.find({'_id': 4}).upsert().update({'$inc': {'j': 1}})
+        >>> bulk.find({'j': 1}).replace_one({'j': 2})
+        >>> result = bulk.execute()
+        >>> pprint(result)
+        {'nInserted': 3,
+         'nMatched': 2,
+         'nModified': 2,
+         'nRemoved': 10000,
+         'nUpserted': 1,
+         'upserted': [{u'_id': 4, u'index': 5}],
+         'writeConcernErrors': [],
+         'writeErrors': []}
+
+        """

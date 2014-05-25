@@ -1,16 +1,24 @@
 __author__ = 'arkilic'
 
+from metadataStore.database.metadataStore_v01_mongodb import MetadataStore
 #TODO: Read session information from configuration file
-
-def parse_mongoSession(config_file='<path-to-default-config-file>'):
-    """
-    Parses mongodb config file
-    """
-    pass
+"""
+session tools provide the tools for a session to be initiated, exported, stored etc...
+"""
 
 
-def init_mongoSession(config_parameters):
+def init_mongoSession(host, port, documents, collections):
     """
-    Returns mongoclient after creating the templates etc
+    Returns a metadataStore database object db after creating documents, collections etc
     """
-    pass
+    db = MetadataStore(host, port)
+    eager_load(db, collections, documents)
+    return db
+
+
+def eager_load(db, collections, documents):
+    """
+    Creates collections using default document template from config file with null entries
+    """
+    for collection in collections:
+        db.insert(collection, documents['default'])
