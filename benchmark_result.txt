@@ -1,8 +1,114 @@
-1 inserts take 0.324964523315 milliseconds
-1 inserts take 0.327110290527 milliseconds
-10 inserts take 0.710964202881 milliseconds
-100 inserts take 5.97190856934 milliseconds
-1000 inserts take 47.7299690247 milliseconds
-10000 inserts take 468.769073486 milliseconds
-100000 inserts take 4946.24185562 milliseconds
-1000000 inserts take 56670.1788902 milliseconds
+1 document(s) with 1 name-value field(s) each take a total of 1.13701820374 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.21808052063 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 2.32291221619 milliseconds
+1000 document(s) with 1 name-value field(s) each take a total of 12.669801712 milliseconds
+10000 document(s) with 1 name-value field(s) each take a total of 127.427101135 milliseconds
+100000 document(s) with 1 name-value field(s) each take a total of 1341.21203423 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 1.31702423096 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 1.3439655304 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 3.11207771301 milliseconds
+1000 document(s) with 5 name-value field(s) each take a total of 16.478061676 milliseconds
+10000 document(s) with 5 name-value field(s) each take a total of 189.954996109 milliseconds
+100000 document(s) with 5 name-value field(s) each take a total of 1802.24299431 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 1.33204460144 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 1.21712684631 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 3.5080909729 milliseconds
+1000 document(s) with 10 name-value field(s) each take a total of 28.1751155853 milliseconds
+10000 document(s) with 10 name-value field(s) each take a total of 213.404893875 milliseconds
+100000 document(s) with 10 name-value field(s) each take a total of 2244.17090416 milliseconds
+1 document(s) with 20 name-value field(s) each take a total of 1.51205062866 milliseconds
+10 document(s) with 20 name-value field(s) each take a total of 1.50895118713 milliseconds
+100 document(s) with 20 name-value field(s) each take a total of 4.19807434082 milliseconds
+1000 document(s) with 20 name-value field(s) each take a total of 28.0458927155 milliseconds
+10000 document(s) with 20 name-value field(s) each take a total of 297.710895538 milliseconds
+100000 document(s) with 20 name-value field(s) each take a total of 3106.69398308 milliseconds
+1 document(s) with 50 name-value field(s) each take a total of 1.35111808777 milliseconds
+10 document(s) with 50 name-value field(s) each take a total of 1.79600715637 milliseconds
+100 document(s) with 50 name-value field(s) each take a total of 6.81400299072 milliseconds
+1000 document(s) with 50 name-value field(s) each take a total of 63.8930797577 milliseconds
+10000 document(s) with 50 name-value field(s) each take a total of 592.087030411 milliseconds
+100000 document(s) with 50 name-value field(s) each take a total of 6424.80421066 milliseconds
+1 document(s) with 80 name-value field(s) each take a total of 1.75285339355 milliseconds
+10 document(s) with 80 name-value field(s) each take a total of 1.95598602295 milliseconds
+100 document(s) with 80 name-value field(s) each take a total of 9.53698158264 milliseconds
+1000 document(s) with 80 name-value field(s) each take a total of 82.9620361328 milliseconds
+10000 document(s) with 80 name-value field(s) each take a total of 919.409036636 milliseconds
+100000 document(s) with 80 name-value field(s) each take a total of 8894.47689056 milliseconds
+1 document(s) with 100 name-value field(s) each take a total of 1.25813484192 milliseconds
+10 document(s) with 100 name-value field(s) each take a total of 2.55417823792 milliseconds
+100 document(s) with 100 name-value field(s) each take a total of 10.7328891754 milliseconds
+1000 document(s) with 100 name-value field(s) each take a total of 105.971813202 milliseconds
+10000 document(s) with 100 name-value field(s) each take a total of 1072.43013382 milliseconds
+100000 document(s) with 100 name-value field(s) each take a total of 11789.4020081 milliseconds
+1 document(s) with 1 name-value field(s) each take a total of 0.876903533936 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.17421150208 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 2.57515907288 milliseconds
+1000 document(s) with 1 name-value field(s) each take a total of 15.5558586121 milliseconds
+10000 document(s) with 1 name-value field(s) each take a total of 129.556894302 milliseconds
+100000 document(s) with 1 name-value field(s) each take a total of 1352.41818428 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 1.21808052063 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 1.4021396637 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 2.77018547058 milliseconds
+1000 document(s) with 5 name-value field(s) each take a total of 17.0359611511 milliseconds
+10000 document(s) with 5 name-value field(s) each take a total of 172.773838043 milliseconds
+100000 document(s) with 5 name-value field(s) each take a total of 1845.56293488 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 1.42788887024 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 1.11985206604 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 4.96912002563 milliseconds
+1000 document(s) with 10 name-value field(s) each take a total of 23.5199928284 milliseconds
+10000 document(s) with 10 name-value field(s) each take a total of 220.423936844 milliseconds
+100000 document(s) with 10 name-value field(s) each take a total of 2229.86602783 milliseconds
+1 document(s) with 20 name-value field(s) each take a total of 1.73401832581 milliseconds
+10 document(s) with 20 name-value field(s) each take a total of 2.02512741089 milliseconds
+100 document(s) with 20 name-value field(s) each take a total of 4.19807434082 milliseconds
+1000 document(s) with 20 name-value field(s) each take a total of 28.4810066223 milliseconds
+10000 document(s) with 20 name-value field(s) each take a total of 302.287101746 milliseconds
+100000 document(s) with 20 name-value field(s) each take a total of 3169.03710365 milliseconds
+1 document(s) with 50 name-value field(s) each take a total of 1.43313407898 milliseconds
+10 document(s) with 50 name-value field(s) each take a total of 1.85298919678 milliseconds
+100 document(s) with 50 name-value field(s) each take a total of 8.25691223145 milliseconds
+1000 document(s) with 50 name-value field(s) each take a total of 61.4378452301 milliseconds
+10000 document(s) with 50 name-value field(s) each take a total of 591.966867447 milliseconds
+100000 document(s) with 50 name-value field(s) each take a total of 6398.90885353 milliseconds
+1 document(s) with 80 name-value field(s) each take a total of 1.37090682983 milliseconds
+10 document(s) with 80 name-value field(s) each take a total of 1.98006629944 milliseconds
+100 document(s) with 80 name-value field(s) each take a total of 9.96494293213 milliseconds
+1000 document(s) with 80 name-value field(s) each take a total of 80.1680088043 milliseconds
+10000 document(s) with 80 name-value field(s) each take a total of 915.576934814 milliseconds
+100000 document(s) with 80 name-value field(s) each take a total of 8924.91698265 milliseconds
+1 document(s) with 100 name-value field(s) each take a total of 2.3021697998 milliseconds
+10 document(s) with 100 name-value field(s) each take a total of 3.21197509766 milliseconds
+100 document(s) with 100 name-value field(s) each take a total of 10.5199813843 milliseconds
+1000 document(s) with 100 name-value field(s) each take a total of 100.220918655 milliseconds
+10000 document(s) with 100 name-value field(s) each take a total of 1068.83597374 milliseconds
+100000 document(s) with 100 name-value field(s) each take a total of 11716.4509296 milliseconds
+10000 inserts take 347.332000732 milliseconds
+10000 inserts take 350.411891937 milliseconds
+10000 inserts take 386.417865753 milliseconds
+23 inserts take 1.43909454346 milliseconds
+23 inserts take 1.90782546997 milliseconds
+23 inserts take 1.53613090515 milliseconds
+23 inserts take 1.45983695984 milliseconds
+2000000 inserts take 59520.7259655 milliseconds
+2000000 inserts take 60388.8180256 milliseconds
+2000000 inserts take 60598.8280773 milliseconds
+Returning cursor took 0.834941864014 milliseconds. Cursor has 9474540 elements
+Returning cursor took 0.482797622681 milliseconds. Cursor has 9474540 elements
+Returning cursor took 0.486135482788 milliseconds. Cursor has 9474540 elements
+Returning cursor took 0.454902648926 milliseconds. Cursor has 9474540 elements
+Returning cursor took 0.542879104614 milliseconds. Cursor has 9474540 elements
+Returning cursor took 0.524044036865 milliseconds. Cursor has 9474540 elements
+Query using 2 fieldsReturning cursor took 0.575065612793 milliseconds. Cursor has 9474540 elements
+Query using 2 fields Returning cursor took 0.600099563599 milliseconds. Cursor has 9474540 elements
+Query using 2 fields Returning cursor took 0.777006149292 milliseconds. Cursor has 9474540 elements
+Query using 2 fields Returning cursor took 0.653028488159 milliseconds. Cursor has 9474540 elements
+Query using 3 fields Returning cursor took 0.675916671753 milliseconds. Cursor has 33 elements
+Query using 2 fields Returning cursor took 0.781059265137 milliseconds. Cursor has 9474540 elements
+Query using 3 fields Returning cursor took 0.626802444458 milliseconds. Cursor has 33 elements
+Query using 2 fields Returning cursor took 0.519990921021 milliseconds. Cursor has 9474540 elements
+Query using 3 fields Returning cursor took 0.607967376709 milliseconds. Cursor has 33 elements
+Query using 2 fields Returning cursor took 0.520944595337 milliseconds. Cursor has 9474540 elements
+Query using 3 fields Returning cursor took 0.639915466309 milliseconds. Cursor has 33 elements
+Query using 2 fields Returning cursor took 0.62894821167 milliseconds. Cursor has 9474540 elements
+Query using 3 fields Returning cursor took 0.638008117676 milliseconds. Cursor has 33 elements
+Query using 3 fields Returning cursor took 0.641107559204 milliseconds. Cursor has 33 elements

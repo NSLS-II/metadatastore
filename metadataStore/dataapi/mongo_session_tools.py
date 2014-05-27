@@ -13,6 +13,7 @@ def init_mongoSession(host, port, documents, collections):
     """
     db = MetadataStore(host, port)
     eager_load(db, collections, documents)
+    collections = db.list_collections()
     return db
 
 

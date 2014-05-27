@@ -1,7 +1,7 @@
 __author__ = 'arkilic'
 
 from pymongo import MongoClient
-from pymongo.errors import ConnectionFailure
+from pymongo.errors import *
 import logging
 
 
@@ -23,6 +23,12 @@ class MetadataStore(object):
             self.logger.warning('MongoClient cannot be created')
             raise ConnectionFailure('MongoClient cannot be created')
         self.database = self.client['metaDataStore']
+        try:
+            self.existing_collections = self.database.collection_names()
+        except:
+            self.logger.warning('Collections cannot be retrieved')
+            raise ConnectionFailure('Collections cannot be retrieved')
+
 #Database operations
 
     def add_user(self, name, password, read_only=True):
@@ -70,17 +76,31 @@ class MetadataStore(object):
 #client operations
 
     def insert(self, collection, document):
+        """
+        Creates an entry or set of entries (if list of dictionaries passed) with specified collection name
+        
+        """
+        object_Id = None
         try:
-            self.database[collection].insert(document)
+            object_Id = self.database[collection].insert(document)
         except:
             self.logger.warning('Insert failed. Cannot connect to database')
             raise ConnectionFailure('Insert failed. Cannot connect to database')
+        return object_Id
 
     def save(self, document):
         pass
 
     def update(self, document):
         pass
+
+    def list_collections(self):
+        """
+        Returns the list of collections created under metadataStore database
+        Return type: List
+        """
+        self.existing_collections = self.database.collection_names()
+        return self.existing_collections
 
     def remove(self, condition):
         pass
@@ -141,31 +161,3 @@ class MetadataStore(object):
 
     def find_and_modify(self):
         pass
-
-#Bulk operations
-    def bulk_insert(self, document_list):
-        """
-        >>> from pprint import pprint
-        >>>
-        >>> bulk = db.test.initialize_ordered_bulk_op()
-        >>> # Remove all documents from the previous example.
-        ...
-        >>> bulk.find({}).remove()
-        >>> bulk.insert({'_id': 1})
-        >>> bulk.insert({'_id': 2})
-        >>> bulk.insert({'_id': 3})
-        >>> bulk.find({'_id': 1}).update({'$set': {'foo': 'bar'}})
-        >>> bulk.find({'_id': 4}).upsert().update({'$inc': {'j': 1}})
-        >>> bulk.find({'j': 1}).replace_one({'j': 2})
-        >>> result = bulk.execute()
-        >>> pprint(result)
-        {'nInserted': 3,
-         'nMatched': 2,
-         'nModified': 2,
-         'nRemoved': 10000,
-         'nUpserted': 1,
-         'upserted': [{u'_id': 4, u'index': 5}],
-         'writeConcernErrors': [],
-         'writeErrors': []}
-
-        """

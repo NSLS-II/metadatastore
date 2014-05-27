@@ -11,7 +11,7 @@ and data_catalog-like applications can make use of this data_api module in order
 
 
 def insert(collection, document):
-    if collection not in collections:
+    if collection not in db.list_collections():
         #TODO: Get collections from db.listCollections()
         db.logger.warning('Cannot insert. Collection must be created before insert')
         raise ValueError('Cannot insert. Collection must be created before insert')
@@ -23,8 +23,9 @@ def create_collection(collection):
     """
     Create collection eagerly loads a collection into mongodb session using the dummy default document template
     """
-    if collection in collections:
-        raise ValueError('Collection has already been created')
+    collection_list = db.list_collections()
+    if collection in collection_list:
+        return 'Collection has already been created'
     else:
         db.database[collection].insert(documents['default'])
         collections.append(collection)
@@ -32,13 +33,27 @@ def create_collection(collection):
 
 def find(collection_name, **kwargs):
     """
-    Replace with wildcards
+    Returns a collection within
     """
     result = None
-    if collection_name not in collections:
+    if collection_name not in db.list_collections():
         raise ValueError('Collection with given name does not exist')
     else:
             result = db.find(collection_name, kwargs)
+    return result
+
+
+def query(collection_name, limit=1, **kwargs):
+
+    """
+    Returns a list of decomposed entries
+    Return type: List of dictionaries
+    """
+    cursor = find(collection_name, **kwargs)
+    # cursor_count = cursor.count()
+    result = list()
+    for i in xrange(limit):
+        result.append(cursor.__getitem__(i))
     return result
 
 
