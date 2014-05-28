@@ -33,7 +33,8 @@ def create_collection(collection):
 
 def find(collection_name, **kwargs):
     """
-    Returns a collection within
+    Returns a cursor to documents found given query criteria
+    Return type: pymongo Cursor object
     """
     result = None
     if collection_name not in db.list_collections():
@@ -43,16 +44,20 @@ def find(collection_name, **kwargs):
     return result
 
 
-def query(collection_name, limit=1, **kwargs):
+def query(collection_name, limit=50, **kwargs):
 
     """
     Returns a list of decomposed entries
     Return type: List of dictionaries
     """
     cursor = find(collection_name, **kwargs)
-    # cursor_count = cursor.count()
+    cursor_count = cursor.count()
     result = list()
-    for i in xrange(limit):
+    if cursor_count>50:
+        top_limit = limit
+    else:
+        top_limit = cursor_count
+    for i in xrange(top_limit):
         result.append(cursor.__getitem__(i))
     return result
 
@@ -61,5 +66,6 @@ def find_one():
     pass
 
 
-def count():
+def update():
     pass
+

@@ -43,4 +43,4 @@ insert('my_collection', entry_list)
 #Warning: Please make sure limit is set properly. The limit is set manually currently. Future releases of this tool will
 #smartly allocate a limit unless enforced manually this way
 
-print query('my_collection',limit=1, owner='arkilic', sampleId='xyz')
+print query('my_collection',limit=5, owner='arkilic', sampleId='xyz')

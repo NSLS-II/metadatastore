@@ -27,6 +27,7 @@ def randstring(length=5):
     valid_letters = string.letters
     return ''.join((random.choice(valid_letters) for i in xrange(length)))
 
+
 def benchmark_insert(count):
     f = open('/Users/arkilic/metadataStore/benchmark_result.txt', 'a')
     document_list = compose_document(count)
