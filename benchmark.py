@@ -66,42 +66,42 @@ def benchmark_insert_docSize(doc_size, entry_size):
     insert('benchmark_logbook', doc_list)
     end = time.time()
     total_time = end-start
-    print str(eRntry_size) + ' document(s) with ' + str(doc_size) + ' name-value field(s) each take a total of ' + str(total_time*1000) + ' milliseconds\n'
-    f.write(str(entry_size) + ' document(s) with ' + str(doc_size) + ' name-value field(s) each take a total of ' + str(total_time*1000) + ' milliseconds\n')
+    print str(entry_size) + ' document(s) with ' + str(doc_size) + ' name-value field(s) each take a total of '\
+        + str(total_time*1000) + ' milliseconds\n'
+    f.write(str(entry_size) + ' document(s) with ' + str(doc_size) + ' name-value field(s) each take a total of '
+        + str(total_time*1000) + ' milliseconds\n')
     f.close()
 
 
-def benchmark_find_cursor(collection_name, **kwargs):
-    # f = open('/Users/arkilic/metadataStore/benchmark_result.txt', 'a')
+def benchmark_query(collection_name, **kwargs):
+    f = open('/Users/arkilic/metadataStore/benchmark_result.txt', 'a')
+    field_count = len(kwargs.keys())
     start = time.time()
-    result = find(collection_name, **kwargs)
+    result = query(collection_name, limit=50, **kwargs)
     end = time.time()
-    total_time = end-start
-    # print 'Query using ' + str(len(kwargs)) + ' fields' + ' Returning cursor took ' + str(total_time*1000) +\
-    #       ' milliseconds. Cursor has ' + str(result.count()) +\
-    #       ' elements\n'
-    # f.write('Query using ' + str(len(kwargs)) + ' fields' + ' Returning cursor took ' + str(total_time*1000) +
-    #         ' milliseconds. Cursor has ' + str(result.count()) +
-    #         ' elements\n')
-    # f.close()
-    return result
+    total_time = (end - start)*1000
+    print 'Query with ' + str(field_count) + ' fields searched that returns + ' + str(len(result)) + ' documents with ' \
+          + str(total_time) + ' milliseconds'
+    f.write('Query with ' + str(field_count) + ' fields searched that returns + ' + str(len(result)) + ' documents with ' \
+            + str(total_time) + ' milliseconds\n')
+    f.close()
 
 
-def benchmark_find_single_from_cursor(collection_name, **kwargs):
-    start = time.time()
-    benchmark_find_cursor(collection_name, **kwargs)[0]
-    end = time.time()
-    total_time = end-start
-    print 'It took ' + str(total_time*1000) + ' milliseconds'
+create_collection('benchmark_logbook')
 
-# benchmark_insert(2000000)
-# for i in (1,5, 10, 20, 50, 80, 100):
-#     for j in (1, 10, 100, 1000, 10000, 100000):
-#         benchmark_insert_docSize(i, j)
-#
+benchmark_insert(100000)
+# start = time.time()
+# query('benchmark_logbook', Id=1,  limit=10)
+# end = time.time()
+# print 'It has been ' + str((end-start)*1000) + ' milliseconds'
 
-# benchmark_find_cursor('benchmark_logbook', owner='arkilic', property='scan')
-print benchmark_find_cursor('benchmark_logbook', owner='arkilic', property='scan', sampleId='xyz1')
-benchmark_find_single_from_cursor('benchmark_logbook', owner='arkilic', property='scan', sampleId='xyz1')
-
-print query('benchmark_logbook', limit=10, owner='arkilic', property='scan', sampleId='xyz1', Id=1)
+benchmark_query('benchmark_logbook', Id=1)
+benchmark_query('benchmark_logbook', Id=3, text='composed_doc3')
+benchmark_query('benchmark_logbook', text='composed_doc3')
+benchmark_query('benchmark_logbook', sampleId='xyz5')
+benchmark_query('benchmark_logbook', Id=4, text='composed_doc4', sampleId='xyz4')
+benchmark_query('benchmark_logbook', Id=5, text='composed_doc5', sampleId='xyz5', image_url='/home/arkilic/imgs/5.tiff')
+benchmark_query('benchmark_logbook', Id=3, text='composed_doc3')
+benchmark_query('benchmark_logbook', Id=4, text='composed_doc4', sampleId='xyz4')
+benchmark_query('benchmark_logbook', Id=5, text='composed_doc5', sampleId='xyz5', image_url='/home/arkilic/imgs/5.tiff')
+benchmark_query('benchmark_logbook', owner='arkilic')

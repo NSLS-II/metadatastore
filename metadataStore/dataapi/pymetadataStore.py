@@ -45,21 +45,26 @@ def find(collection_name, **kwargs):
 
 
 def query(collection_name, limit=50, **kwargs):
-
     """
     Returns a list of decomposed entries
     Return type: List of dictionaries
     """
+    #TODO: use keywords to extract
+    import pymongo
+    db.database[collection_name].ensure_index([('Id', pymongo.DESCENDING)])
     cursor = find(collection_name, **kwargs)
-    cursor_count = cursor.count()
     result = list()
-    if cursor_count>50:
-        top_limit = limit
-    else:
-        top_limit = cursor_count
-    for i in xrange(top_limit):
-        result.append(cursor.__getitem__(i))
+    try:
+        for i in xrange(limit):
+            result.append(cursor.__getitem__(i))
+    except IndexError:
+        pass
+    cursor.close()
     return result
+
+
+def collection_count(name):
+    return db.collection_count(collection_name=name)
 
 
 def find_one():

@@ -126,11 +126,11 @@ class MetadataStore(object):
     def parallel_scan(self, num_cursors):
         pass
 
-    def count(self):
+    def collection_count(self, collection_name):
         """
         Returns number of documents in a collection
         """
-        pass
+        return self.database[collection_name].count()
 
     def create_index(self):
         pass

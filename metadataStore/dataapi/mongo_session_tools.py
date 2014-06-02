@@ -1,5 +1,6 @@
 __author__ = 'arkilic'
 
+import pymongo
 from metadataStore.database.metadataStore_v01_mongodb import MetadataStore
 #TODO: Read session information from configuration file
 """
@@ -23,6 +24,7 @@ def eager_load(db, collections, documents):
     """
     for collection in collections:
         db.insert(collection, documents['default'])
+        db.database[collection].create_index([('Id', pymongo.DESCENDING)])
 
 """
 Enforce document templates. Add to config dictionary

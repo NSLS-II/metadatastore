@@ -1,114 +1,956 @@
-1 document(s) with 1 name-value field(s) each take a total of 1.13701820374 milliseconds
-10 document(s) with 1 name-value field(s) each take a total of 1.21808052063 milliseconds
-100 document(s) with 1 name-value field(s) each take a total of 2.32291221619 milliseconds
-1000 document(s) with 1 name-value field(s) each take a total of 12.669801712 milliseconds
-10000 document(s) with 1 name-value field(s) each take a total of 127.427101135 milliseconds
-100000 document(s) with 1 name-value field(s) each take a total of 1341.21203423 milliseconds
-1 document(s) with 5 name-value field(s) each take a total of 1.31702423096 milliseconds
-10 document(s) with 5 name-value field(s) each take a total of 1.3439655304 milliseconds
-100 document(s) with 5 name-value field(s) each take a total of 3.11207771301 milliseconds
-1000 document(s) with 5 name-value field(s) each take a total of 16.478061676 milliseconds
-10000 document(s) with 5 name-value field(s) each take a total of 189.954996109 milliseconds
-100000 document(s) with 5 name-value field(s) each take a total of 1802.24299431 milliseconds
-1 document(s) with 10 name-value field(s) each take a total of 1.33204460144 milliseconds
-10 document(s) with 10 name-value field(s) each take a total of 1.21712684631 milliseconds
-100 document(s) with 10 name-value field(s) each take a total of 3.5080909729 milliseconds
-1000 document(s) with 10 name-value field(s) each take a total of 28.1751155853 milliseconds
-10000 document(s) with 10 name-value field(s) each take a total of 213.404893875 milliseconds
-100000 document(s) with 10 name-value field(s) each take a total of 2244.17090416 milliseconds
-1 document(s) with 20 name-value field(s) each take a total of 1.51205062866 milliseconds
-10 document(s) with 20 name-value field(s) each take a total of 1.50895118713 milliseconds
-100 document(s) with 20 name-value field(s) each take a total of 4.19807434082 milliseconds
-1000 document(s) with 20 name-value field(s) each take a total of 28.0458927155 milliseconds
-10000 document(s) with 20 name-value field(s) each take a total of 297.710895538 milliseconds
-100000 document(s) with 20 name-value field(s) each take a total of 3106.69398308 milliseconds
-1 document(s) with 50 name-value field(s) each take a total of 1.35111808777 milliseconds
-10 document(s) with 50 name-value field(s) each take a total of 1.79600715637 milliseconds
-100 document(s) with 50 name-value field(s) each take a total of 6.81400299072 milliseconds
-1000 document(s) with 50 name-value field(s) each take a total of 63.8930797577 milliseconds
-10000 document(s) with 50 name-value field(s) each take a total of 592.087030411 milliseconds
-100000 document(s) with 50 name-value field(s) each take a total of 6424.80421066 milliseconds
-1 document(s) with 80 name-value field(s) each take a total of 1.75285339355 milliseconds
-10 document(s) with 80 name-value field(s) each take a total of 1.95598602295 milliseconds
-100 document(s) with 80 name-value field(s) each take a total of 9.53698158264 milliseconds
-1000 document(s) with 80 name-value field(s) each take a total of 82.9620361328 milliseconds
-10000 document(s) with 80 name-value field(s) each take a total of 919.409036636 milliseconds
-100000 document(s) with 80 name-value field(s) each take a total of 8894.47689056 milliseconds
-1 document(s) with 100 name-value field(s) each take a total of 1.25813484192 milliseconds
-10 document(s) with 100 name-value field(s) each take a total of 2.55417823792 milliseconds
-100 document(s) with 100 name-value field(s) each take a total of 10.7328891754 milliseconds
-1000 document(s) with 100 name-value field(s) each take a total of 105.971813202 milliseconds
-10000 document(s) with 100 name-value field(s) each take a total of 1072.43013382 milliseconds
-100000 document(s) with 100 name-value field(s) each take a total of 11789.4020081 milliseconds
-1 document(s) with 1 name-value field(s) each take a total of 0.876903533936 milliseconds
-10 document(s) with 1 name-value field(s) each take a total of 1.17421150208 milliseconds
-100 document(s) with 1 name-value field(s) each take a total of 2.57515907288 milliseconds
-1000 document(s) with 1 name-value field(s) each take a total of 15.5558586121 milliseconds
-10000 document(s) with 1 name-value field(s) each take a total of 129.556894302 milliseconds
-100000 document(s) with 1 name-value field(s) each take a total of 1352.41818428 milliseconds
-1 document(s) with 5 name-value field(s) each take a total of 1.21808052063 milliseconds
-10 document(s) with 5 name-value field(s) each take a total of 1.4021396637 milliseconds
-100 document(s) with 5 name-value field(s) each take a total of 2.77018547058 milliseconds
-1000 document(s) with 5 name-value field(s) each take a total of 17.0359611511 milliseconds
-10000 document(s) with 5 name-value field(s) each take a total of 172.773838043 milliseconds
-100000 document(s) with 5 name-value field(s) each take a total of 1845.56293488 milliseconds
-1 document(s) with 10 name-value field(s) each take a total of 1.42788887024 milliseconds
-10 document(s) with 10 name-value field(s) each take a total of 1.11985206604 milliseconds
-100 document(s) with 10 name-value field(s) each take a total of 4.96912002563 milliseconds
-1000 document(s) with 10 name-value field(s) each take a total of 23.5199928284 milliseconds
-10000 document(s) with 10 name-value field(s) each take a total of 220.423936844 milliseconds
-100000 document(s) with 10 name-value field(s) each take a total of 2229.86602783 milliseconds
-1 document(s) with 20 name-value field(s) each take a total of 1.73401832581 milliseconds
-10 document(s) with 20 name-value field(s) each take a total of 2.02512741089 milliseconds
-100 document(s) with 20 name-value field(s) each take a total of 4.19807434082 milliseconds
-1000 document(s) with 20 name-value field(s) each take a total of 28.4810066223 milliseconds
-10000 document(s) with 20 name-value field(s) each take a total of 302.287101746 milliseconds
-100000 document(s) with 20 name-value field(s) each take a total of 3169.03710365 milliseconds
-1 document(s) with 50 name-value field(s) each take a total of 1.43313407898 milliseconds
-10 document(s) with 50 name-value field(s) each take a total of 1.85298919678 milliseconds
-100 document(s) with 50 name-value field(s) each take a total of 8.25691223145 milliseconds
-1000 document(s) with 50 name-value field(s) each take a total of 61.4378452301 milliseconds
-10000 document(s) with 50 name-value field(s) each take a total of 591.966867447 milliseconds
-100000 document(s) with 50 name-value field(s) each take a total of 6398.90885353 milliseconds
-1 document(s) with 80 name-value field(s) each take a total of 1.37090682983 milliseconds
-10 document(s) with 80 name-value field(s) each take a total of 1.98006629944 milliseconds
-100 document(s) with 80 name-value field(s) each take a total of 9.96494293213 milliseconds
-1000 document(s) with 80 name-value field(s) each take a total of 80.1680088043 milliseconds
-10000 document(s) with 80 name-value field(s) each take a total of 915.576934814 milliseconds
-100000 document(s) with 80 name-value field(s) each take a total of 8924.91698265 milliseconds
-1 document(s) with 100 name-value field(s) each take a total of 2.3021697998 milliseconds
-10 document(s) with 100 name-value field(s) each take a total of 3.21197509766 milliseconds
-100 document(s) with 100 name-value field(s) each take a total of 10.5199813843 milliseconds
-1000 document(s) with 100 name-value field(s) each take a total of 100.220918655 milliseconds
-10000 document(s) with 100 name-value field(s) each take a total of 1068.83597374 milliseconds
-100000 document(s) with 100 name-value field(s) each take a total of 11716.4509296 milliseconds
-10000 inserts take 347.332000732 milliseconds
-10000 inserts take 350.411891937 milliseconds
-10000 inserts take 386.417865753 milliseconds
-23 inserts take 1.43909454346 milliseconds
-23 inserts take 1.90782546997 milliseconds
-23 inserts take 1.53613090515 milliseconds
-23 inserts take 1.45983695984 milliseconds
-2000000 inserts take 59520.7259655 milliseconds
-2000000 inserts take 60388.8180256 milliseconds
-2000000 inserts take 60598.8280773 milliseconds
-Returning cursor took 0.834941864014 milliseconds. Cursor has 9474540 elements
-Returning cursor took 0.482797622681 milliseconds. Cursor has 9474540 elements
-Returning cursor took 0.486135482788 milliseconds. Cursor has 9474540 elements
-Returning cursor took 0.454902648926 milliseconds. Cursor has 9474540 elements
-Returning cursor took 0.542879104614 milliseconds. Cursor has 9474540 elements
-Returning cursor took 0.524044036865 milliseconds. Cursor has 9474540 elements
-Query using 2 fieldsReturning cursor took 0.575065612793 milliseconds. Cursor has 9474540 elements
-Query using 2 fields Returning cursor took 0.600099563599 milliseconds. Cursor has 9474540 elements
-Query using 2 fields Returning cursor took 0.777006149292 milliseconds. Cursor has 9474540 elements
-Query using 2 fields Returning cursor took 0.653028488159 milliseconds. Cursor has 9474540 elements
-Query using 3 fields Returning cursor took 0.675916671753 milliseconds. Cursor has 33 elements
-Query using 2 fields Returning cursor took 0.781059265137 milliseconds. Cursor has 9474540 elements
-Query using 3 fields Returning cursor took 0.626802444458 milliseconds. Cursor has 33 elements
-Query using 2 fields Returning cursor took 0.519990921021 milliseconds. Cursor has 9474540 elements
-Query using 3 fields Returning cursor took 0.607967376709 milliseconds. Cursor has 33 elements
-Query using 2 fields Returning cursor took 0.520944595337 milliseconds. Cursor has 9474540 elements
-Query using 3 fields Returning cursor took 0.639915466309 milliseconds. Cursor has 33 elements
-Query using 2 fields Returning cursor took 0.62894821167 milliseconds. Cursor has 9474540 elements
-Query using 3 fields Returning cursor took 0.638008117676 milliseconds. Cursor has 33 elements
-Query using 3 fields Returning cursor took 0.641107559204 milliseconds. Cursor has 33 elements
+1 document(s) with 1 name-value field(s) each take a total of 0.860929489136 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.67012214661 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 3.7739276886 milliseconds
+1000 document(s) with 1 name-value field(s) each take a total of 24.0581035614 milliseconds
+10000 document(s) with 1 name-value field(s) each take a total of 123.038053513 milliseconds
+100000 document(s) with 1 name-value field(s) each take a total of 1243.48688126 milliseconds
+1000000 document(s) with 1 name-value field(s) each take a total of 14133.5248947 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 1.40309333801 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 1.40690803528 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 2.83598899841 milliseconds
+1000 document(s) with 5 name-value field(s) each take a total of 16.795873642 milliseconds
+10000 document(s) with 5 name-value field(s) each take a total of 170.725822449 milliseconds
+100000 document(s) with 5 name-value field(s) each take a total of 2031.01420403 milliseconds
+1000000 document(s) with 5 name-value field(s) each take a total of 20466.5050507 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 1.57999992371 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 6.16502761841 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 3.54790687561 milliseconds
+1000 document(s) with 10 name-value field(s) each take a total of 20.162820816 milliseconds
+10000 document(s) with 10 name-value field(s) each take a total of 216.565132141 milliseconds
+100000 document(s) with 10 name-value field(s) each take a total of 2149.84917641 milliseconds
+1000000 document(s) with 10 name-value field(s) each take a total of 24760.3759766 milliseconds
+1 document(s) with 20 name-value field(s) each take a total of 1.65104866028 milliseconds
+10 document(s) with 20 name-value field(s) each take a total of 1.63507461548 milliseconds
+100 document(s) with 20 name-value field(s) each take a total of 4.24790382385 milliseconds
+1000 document(s) with 20 name-value field(s) each take a total of 28.0358791351 milliseconds
+10000 document(s) with 20 name-value field(s) each take a total of 296.38004303 milliseconds
+100000 document(s) with 20 name-value field(s) each take a total of 3092.83709526 milliseconds
+1000000 document(s) with 20 name-value field(s) each take a total of 35130.7351589 milliseconds
+1 document(s) with 50 name-value field(s) each take a total of 1.58715248108 milliseconds
+10 document(s) with 50 name-value field(s) each take a total of 1.76596641541 milliseconds
+100 document(s) with 50 name-value field(s) each take a total of 6.36506080627 milliseconds
+1000 document(s) with 50 name-value field(s) each take a total of 55.3669929504 milliseconds
+10000 document(s) with 50 name-value field(s) each take a total of 578.329086304 milliseconds
+100000 document(s) with 50 name-value field(s) each take a total of 5949.68008995 milliseconds
+1000000 document(s) with 50 name-value field(s) each take a total of 73532.0799351 milliseconds
+1 document(s) with 80 name-value field(s) each take a total of 1.75905227661 milliseconds
+10 document(s) with 80 name-value field(s) each take a total of 2.07090377808 milliseconds
+100 document(s) with 80 name-value field(s) each take a total of 9.06610488892 milliseconds
+1000 document(s) with 80 name-value field(s) each take a total of 76.1890411377 milliseconds
+10000 document(s) with 80 name-value field(s) each take a total of 847.57399559 milliseconds
+100000 document(s) with 80 name-value field(s) each take a total of 8635.28585434 milliseconds
+1000000 document(s) with 80 name-value field(s) each take a total of 101260.096073 milliseconds
+1 document(s) with 100 name-value field(s) each take a total of 2.8018951416 milliseconds
+10 document(s) with 100 name-value field(s) each take a total of 2.5520324707 milliseconds
+100 document(s) with 100 name-value field(s) each take a total of 16.7529582977 milliseconds
+1000 document(s) with 100 name-value field(s) each take a total of 99.4689464569 milliseconds
+10000 document(s) with 100 name-value field(s) each take a total of 1044.20113564 milliseconds
+100000 document(s) with 100 name-value field(s) each take a total of 11112.2601032 milliseconds
+1000000 document(s) with 100 name-value field(s) each take a total of 336777.660131 milliseconds
+1 document(s) with 1 name-value field(s) each take a total of 1.22880935669 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.0039806366 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 4.92286682129 milliseconds
+1000 document(s) with 1 name-value field(s) each take a total of 13.8130187988 milliseconds
+10000 document(s) with 1 name-value field(s) each take a total of 160.614967346 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 1.39999389648 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 1.44195556641 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 2.83598899841 milliseconds
+1000 document(s) with 5 name-value field(s) each take a total of 19.3150043488 milliseconds
+10000 document(s) with 5 name-value field(s) each take a total of 183.142900467 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 1.38092041016 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 1.53207778931 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 3.54886054993 milliseconds
+1000 document(s) with 10 name-value field(s) each take a total of 21.2111473083 milliseconds
+10000 document(s) with 10 name-value field(s) each take a total of 222.995996475 milliseconds
+1 document(s) with 20 name-value field(s) each take a total of 1.08695030212 milliseconds
+10 document(s) with 20 name-value field(s) each take a total of 1.48105621338 milliseconds
+100 document(s) with 20 name-value field(s) each take a total of 4.13584709167 milliseconds
+1000 document(s) with 20 name-value field(s) each take a total of 32.2711467743 milliseconds
+10000 document(s) with 20 name-value field(s) each take a total of 322.564840317 milliseconds
+1 document(s) with 50 name-value field(s) each take a total of 1.46698951721 milliseconds
+10 document(s) with 50 name-value field(s) each take a total of 1.5070438385 milliseconds
+100 document(s) with 50 name-value field(s) each take a total of 7.38596916199 milliseconds
+1000 document(s) with 50 name-value field(s) each take a total of 57.962179184 milliseconds
+10000 document(s) with 50 name-value field(s) each take a total of 635.214805603 milliseconds
+1 document(s) with 80 name-value field(s) each take a total of 1.44290924072 milliseconds
+10 document(s) with 80 name-value field(s) each take a total of 1.90997123718 milliseconds
+100 document(s) with 80 name-value field(s) each take a total of 9.67907905579 milliseconds
+1000 document(s) with 80 name-value field(s) each take a total of 84.4020843506 milliseconds
+10000 document(s) with 80 name-value field(s) each take a total of 929.687976837 milliseconds
+1 document(s) with 100 name-value field(s) each take a total of 1.34801864624 milliseconds
+10 document(s) with 100 name-value field(s) each take a total of 2.14600563049 milliseconds
+100 document(s) with 100 name-value field(s) each take a total of 12.5679969788 milliseconds
+1000 document(s) with 100 name-value field(s) each take a total of 105.657100677 milliseconds
+10000 document(s) with 100 name-value field(s) each take a total of 1150.71082115 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8089221 documents in collection takes 7783.37693214 milliseconds
+Query with 2 fields searched that returns + 0 documents with 8089221 documents in collection takes 7993.81899834 milliseconds
+Query with 3 fields searched that returns + 0 documents with 8089221 documents in collection takes 7950.57296753 milliseconds
+Query with 4 fields searched that returns + 0 documents with 8089221 documents in collection takes 7968.25695038 milliseconds
+1 document(s) with 1 name-value field(s) each take a total of 1.10101699829 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.13892555237 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 2.36201286316 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 0.925064086914 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 1.140832901 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 2.79092788696 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 2.32291221619 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 1.54590606689 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 3.59177589417 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8089554 documents in collection takes 7786.85188293 milliseconds
+Query with 2 fields searched that returns + 0 documents with 8089554 documents in collection takes 7995.42498589 milliseconds
+Query with 3 fields searched that returns + 0 documents with 8089554 documents in collection takes 7988.51799965 milliseconds
+Query with 4 fields searched that returns + 0 documents with 8089554 documents in collection takes 7987.69187927 milliseconds
+Query with 1 fields e that returns + 0 documents with 8089554 documents in collection takes 7848.55294228 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8089554 documents in collection takes 8098.63805771 milliseconds
+Query with 2 fields searched that returns + 0 documents with 8089554 documents in collection takes 7970.7429409 milliseconds
+Query with 3 fields searched that returns + 0 documents with 8089554 documents in collection takes 7959.1050148 milliseconds
+Query with 4 fields searched that returns + 0 documents with 8089554 documents in collection takes 7964.58292007 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8089554 documents in collection takes 7850.34704208 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8089554 documents in collection takes 7719.57206726 milliseconds
+Query with 2 fields searched that returns + 0 documents with 8089554 documents in collection takes 7986.02819443 milliseconds
+Query with 3 fields searched that returns + 0 documents with 8089554 documents in collection takes 7969.19083595 milliseconds
+Query with 4 fields searched that returns + 0 documents with 8089554 documents in collection takes 7965.83390236 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8089554 documents in collection takes 7855.45516014 milliseconds
+1 document(s) with 1 name-value field(s) each take a total of 0.90503692627 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.53303146362 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 2.67481803894 milliseconds
+1000 document(s) with 1 name-value field(s) each take a total of 17.0979499817 milliseconds
+10000 document(s) with 1 name-value field(s) each take a total of 155.001163483 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 1.52802467346 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 1.29008293152 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 2.86102294922 milliseconds
+1000 document(s) with 5 name-value field(s) each take a total of 17.5938606262 milliseconds
+10000 document(s) with 5 name-value field(s) each take a total of 176.671981812 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 1.45506858826 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 1.17588043213 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 3.31211090088 milliseconds
+1000 document(s) with 10 name-value field(s) each take a total of 20.6568241119 milliseconds
+10000 document(s) with 10 name-value field(s) each take a total of 223.542928696 milliseconds
+1 document(s) with 20 name-value field(s) each take a total of 1.18803977966 milliseconds
+10 document(s) with 20 name-value field(s) each take a total of 1.41406059265 milliseconds
+100 document(s) with 20 name-value field(s) each take a total of 4.31180000305 milliseconds
+1000 document(s) with 20 name-value field(s) each take a total of 29.0379524231 milliseconds
+10000 document(s) with 20 name-value field(s) each take a total of 308.861970901 milliseconds
+1 document(s) with 50 name-value field(s) each take a total of 1.4820098877 milliseconds
+10 document(s) with 50 name-value field(s) each take a total of 1.60694122314 milliseconds
+100 document(s) with 50 name-value field(s) each take a total of 6.74200057983 milliseconds
+1000 document(s) with 50 name-value field(s) each take a total of 55.9289455414 milliseconds
+1 document(s) with 1 name-value field(s) each take a total of 0.842809677124 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.25813484192 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 2.33507156372 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 1.17492675781 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 1.20401382446 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 2.98404693604 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 1.28817558289 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 1.38807296753 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 2.84194946289 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8135442 documents in collection takes 7819.56005096 milliseconds
+Query with 2 fields searched that returns + 0 documents with 8135442 documents in collection takes 7989.1910553 milliseconds
+Query with 3 fields searched that returns + 0 documents with 8135442 documents in collection takes 7984.44700241 milliseconds
+Query with 4 fields searched that returns + 0 documents with 8135442 documents in collection takes 7980.77702522 milliseconds
+1 document(s) with 1 name-value field(s) each take a total of 1.36709213257 milliseconds
+10 document(s) with 1 name-value field(s) each take a total of 1.34515762329 milliseconds
+100 document(s) with 1 name-value field(s) each take a total of 2.62808799744 milliseconds
+1 document(s) with 5 name-value field(s) each take a total of 1.23715400696 milliseconds
+10 document(s) with 5 name-value field(s) each take a total of 2.72393226624 milliseconds
+100 document(s) with 5 name-value field(s) each take a total of 2.79593467712 milliseconds
+1 document(s) with 10 name-value field(s) each take a total of 1.67798995972 milliseconds
+10 document(s) with 10 name-value field(s) each take a total of 1.29580497742 milliseconds
+100 document(s) with 10 name-value field(s) each take a total of 3.60989570618 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8135775 documents in collection takes 7843.60694885 milliseconds
+Query with 2 fields searched that returns + 0 documents with 8135775 documents in collection takes 7982.02705383 milliseconds
+Query with 3 fields searched that returns + 0 documents with 8135775 documents in collection takes 7981.86302185 milliseconds
+Query with 4 fields searched that returns + 0 documents with 8135775 documents in collection takes 7985.87393761 milliseconds
+Query with 1 fields searched that returns + 0 documents with 8135775 documents in collection takes 7875.93507767 milliseconds
+1000 inserts take 25.4521369934 milliseconds
+Query with 1 fields searched that returns + 1 documents with 8136775 documents in collection takes 15654.0529728 milliseconds
+1000 inserts take 25.4781246185 milliseconds
+Query with 1 fields searched that returns + 2 documents with 8137775 documents in collection takes 23478.9991379 milliseconds
+Query with 2 fields searched that returns + 2 documents with 8137775 documents in collection takes 24605.8850288 milliseconds
+1000 inserts take 27.811050415 milliseconds
+1000 inserts take 26.1850357056 milliseconds
+1000 inserts take 30.4710865021 milliseconds
+1000 inserts take 25.5610942841 milliseconds
+1000 inserts take 27.0020961761 milliseconds
+1000 inserts take 29.7667980194 milliseconds
+1000 inserts take 29.7501087189 milliseconds
+1000 inserts take 27.1048545837 milliseconds
+1000 inserts take 38.7201309204 milliseconds
+1000 inserts take 26.2920856476 milliseconds
+1000 inserts take 28.1090736389 milliseconds
+1000 inserts take 28.6641120911 milliseconds
+Query with 1 fields searched that returns + 10 documents with 82949.6309757 milliseconds
+Query with 1 fields searched that returns + 10 documents with 156098.966122 milliseconds
+Query with 1 fields searched that returns + 10 documents with 158822.113991 milliseconds
+Query with 1 fields searched that returns + 10 documents with 80435.1499081 milliseconds
+Query with 1 fields searched that returns + 10 documents with 157894.574165 milliseconds
+Query with 1 fields searched that returns + 0 documents with 7907.61590004 milliseconds
+1000 inserts take 44.9969768524 milliseconds
+1000 inserts take 38.4449958801 milliseconds
+1000 inserts take 35.7339382172 milliseconds
+1000 inserts take 37.1119976044 milliseconds
+1000 inserts take 35.3789329529 milliseconds
+1000 inserts take 42.8509712219 milliseconds
+1000000 inserts take 43612.7109528 milliseconds
+Query with 1 fields searched that returns + 7 documents with 677.161931992 milliseconds
+Query with 1 fields searched that returns + 7 documents with 663.619995117 milliseconds
+Query with 1 fields searched that returns + 7 documents with 719.988822937 milliseconds
+Query with 1 fields searched that returns + 7 documents with 689.779043198 milliseconds
+Query with 1 fields searched that returns + 7 documents with 698.505163193 milliseconds
+10000 inserts take 270.112991333 milliseconds
+10000 inserts take 244.546175003 milliseconds
+10000 inserts take 249.765872955 milliseconds
+100000 inserts take 2537.39404678 milliseconds
+1000000 inserts take 28141.4489746 milliseconds
+1000000 inserts take 28107.7721119 milliseconds
+Query with 1 fields searched that returns + 1 documents with 329.382896423 milliseconds
+Query with 2 fields searched that returns + 1 documents with 216.131925583 milliseconds
+Query with 3 fields searched that returns + 1 documents with 205.729961395 milliseconds
+Query with 4 fields searched that returns + 1 documents with 204.098939896 milliseconds
+Query with 2 fields searched that returns + 1 documents with 203.892946243 milliseconds
+Query with 3 fields searched that returns + 1 documents with 202.507019043 milliseconds
+Query with 4 fields searched that returns + 1 documents with 201.354026794 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.61492347717 milliseconds
+Query with 1 fields searched that returns + 1 documents with 1797.67608643 milliseconds
+Query with 2 fields searched that returns + 1 documents with 1.92499160767 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.92999839783 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.84297561646 milliseconds
+Query with 2 fields searched that returns + 1 documents with 1.99103355408 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.91211700439 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.70087814331 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.43801689148 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.95400619507 milliseconds
+Query with 2 fields searched that returns + 1 documents with 1.95097923279 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.08401679993 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.95693969727 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.2120475769 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.9690990448 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.07591056824 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.01713562012 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.00216674805 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.08609008789 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.16786766052 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.87103652954 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.80809402466 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.37100028992 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.02290916443 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.31611251831 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.05199623108 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.1710395813 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.27808952332 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.31885910034 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.29597091675 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.47883796692 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.26998329163 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.0338973999 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.65383720398 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.27808952332 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.98698043823 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.05516815186 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.42495536804 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.90281867981 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.88589096069 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.8039894104 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.54893302917 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.02202796936 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.71709060669 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.27904319763 milliseconds
+Query with 2 fields searched that returns + 1 documents with 1.8310546875 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.92308425903 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.27689743042 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.39891624451 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.96497344971 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.10285186768 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.97386741638 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.94978713989 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.28095054626 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.93810462952 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.35295295715 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.7400932312 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.94399261475 milliseconds
+Query with 2 fields searched that returns + 1 documents with 1.75809860229 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.02798843384 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.06303596497 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.28404998779 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.3410320282 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.01606750488 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.20882415771 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.88200378418 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.09593772888 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.76215171814 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.19798088074 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.04300880432 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.12502479553 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.0809173584 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.69598579407 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.7449131012 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.97880172729 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.29399108887 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.2000541687 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.05914878845 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.02600860596 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.17811965942 milliseconds
+Query with 1 fields searched that returns + 10 documents with 9.20486450195 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.62594223022 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.44491004944 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.10182571411 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.74205207825 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.82621383667 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.03888320923 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.20291519165 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.90507888794 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.84290313721 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.5007724762 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.22389602661 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.9091835022 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.84481048584 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.98500061035 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.4601688385 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.46607780457 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.09014320374 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.93493270874 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.83718109131 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.22818756104 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.10277938843 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.71892547607 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.83193588257 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.27295875549 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.55703926086 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.30305099487 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.82311439514 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.01814079285 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.2160282135 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.53813171387 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.24010848999 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.39002227783 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.78401374817 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.89988517761 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.53407859802 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.21078300476 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.62181663513 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.31902503967 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.83400917053 milliseconds
+Query with 1 fields searched that returns + 10 documents with 10.1068019867 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.53582000732 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.09205055237 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.18503379822 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.22604179382 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.15594673157 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.07106971741 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.83408164978 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.75177574158 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.8510093689 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.99501419067 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.73513793945 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.12614440918 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.77996063232 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.21507453918 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.3597946167 milliseconds
+Query with 1 fields searched that returns + 10 documents with 8.98385047913 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.59900093079 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.86102294922 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.81500816345 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.1681060791 milliseconds
+Query with 2 fields searched that returns + 1 documents with 4.30107116699 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.83789634705 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.44300270081 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.37619400024 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.41296195984 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.61800193787 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.71582603455 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.5360584259 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.90489196777 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.84314155579 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.9468536377 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.06386566162 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.91895866394 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.86889076233 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.82192230225 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.88510322571 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.8932094574 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.55410575867 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.87103652954 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.07101821899 milliseconds
+Query with 1 fields searched that returns + 1 documents with 4.2290687561 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.27897071838 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.61704826355 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.72107124329 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.32403182983 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.28612327576 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.8018951416 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.98304176331 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.9079914093 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.81810760498 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.10802459717 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.57890129089 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.34405899048 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.71415710449 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.89297103882 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.0219039917 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.53510475159 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.11708450317 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.79784202576 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.78186798096 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.49791145325 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.03983688354 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.77805328369 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.13706016541 milliseconds
+Query with 1 fields searched that returns + 1 documents with 4.01496887207 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.29113006592 milliseconds
+Query with 3 fields searched that returns + 1 documents with 4.30297851562 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.40700149536 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.77416610718 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.22103500366 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.72703170776 milliseconds
+Query with 1 fields searched that returns + 10 documents with 6.53600692749 milliseconds
+Query with 1 fields searched that returns + 1 documents with 1836.19308472 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.36003303528 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.9559135437 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.96187400818 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.11517715454 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.93302536011 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.94995307922 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.20405578613 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.68507003784 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.54385375977 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.30281257629 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.02386283875 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.02505493164 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.90322303772 milliseconds
+Query with 4 fields searched that returns + 1 documents with 3.27801704407 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.32111930847 milliseconds
+1000000 inserts take 33979.9768925 milliseconds
+Query with 1 fields searched that returns + 2 documents with 4.38594818115 milliseconds
+Query with 2 fields searched that returns + 2 documents with 4.54497337341 milliseconds
+Query with 3 fields searched that returns + 2 documents with 5.22518157959 milliseconds
+Query with 4 fields searched that returns + 2 documents with 3.85093688965 milliseconds
+Query with 2 fields searched that returns + 2 documents with 4.24385070801 milliseconds
+Query with 3 fields searched that returns + 2 documents with 3.62205505371 milliseconds
+Query with 4 fields searched that returns + 2 documents with 3.50284576416 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.86304473877 milliseconds
+1000000 inserts take 34807.8479767 milliseconds
+Query with 1 fields searched that returns + 3 documents with 4.74309921265 milliseconds
+Query with 2 fields searched that returns + 3 documents with 4.82892990112 milliseconds
+Query with 3 fields searched that returns + 3 documents with 4.90593910217 milliseconds
+Query with 4 fields searched that returns + 3 documents with 4.54306602478 milliseconds
+Query with 2 fields searched that returns + 3 documents with 4.16898727417 milliseconds
+Query with 3 fields searched that returns + 3 documents with 3.90815734863 milliseconds
+Query with 4 fields searched that returns + 3 documents with 3.74603271484 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.55405426025 milliseconds
+1000000 inserts take 33488.83605 milliseconds
+Query with 1 fields searched that returns + 4 documents with 4.78100776672 milliseconds
+Query with 2 fields searched that returns + 4 documents with 5.35702705383 milliseconds
+Query with 3 fields searched that returns + 4 documents with 4.80508804321 milliseconds
+Query with 4 fields searched that returns + 4 documents with 4.98294830322 milliseconds
+Query with 2 fields searched that returns + 4 documents with 4.75597381592 milliseconds
+Query with 3 fields searched that returns + 4 documents with 4.57096099854 milliseconds
+Query with 4 fields searched that returns + 4 documents with 4.50015068054 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.24792480469 milliseconds
+1000000 inserts take 35138.2799149 milliseconds
+Query with 1 fields searched that returns + 5 documents with 6.82997703552 milliseconds
+Query with 2 fields searched that returns + 5 documents with 5.82098960876 milliseconds
+Query with 3 fields searched that returns + 5 documents with 4.84991073608 milliseconds
+Query with 4 fields searched that returns + 5 documents with 5.79404830933 milliseconds
+Query with 2 fields searched that returns + 5 documents with 5.56516647339 milliseconds
+Query with 3 fields searched that returns + 5 documents with 4.69589233398 milliseconds
+Query with 4 fields searched that returns + 5 documents with 5.22994995117 milliseconds
+Query with 1 fields searched that returns + 10 documents with 7.24220275879 milliseconds
+1000000 inserts take 34435.587883 milliseconds
+Query with 1 fields searched that returns + 6 documents with 6.39700889587 milliseconds
+Query with 2 fields searched that returns + 6 documents with 6.04295730591 milliseconds
+Query with 3 fields searched that returns + 6 documents with 5.81192970276 milliseconds
+Query with 4 fields searched that returns + 6 documents with 5.77807426453 milliseconds
+Query with 2 fields searched that returns + 6 documents with 5.57804107666 milliseconds
+Query with 3 fields searched that returns + 6 documents with 5.76710700989 milliseconds
+Query with 4 fields searched that returns + 6 documents with 5.82814216614 milliseconds
+Query with 1 fields searched that returns + 10 documents with 8.81695747375 milliseconds
+1000000 inserts take 34566.7059422 milliseconds
+Query with 1 fields searched that returns + 7 documents with 6.72507286072 milliseconds
+Query with 2 fields searched that returns + 7 documents with 6.27708435059 milliseconds
+Query with 3 fields searched that returns + 7 documents with 6.09397888184 milliseconds
+Query with 4 fields searched that returns + 7 documents with 6.52098655701 milliseconds
+Query with 2 fields searched that returns + 7 documents with 6.08086585999 milliseconds
+Query with 3 fields searched that returns + 7 documents with 6.25205039978 milliseconds
+Query with 4 fields searched that returns + 7 documents with 6.16192817688 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.3989181519 milliseconds
+1000000 inserts take 34998.552084 milliseconds
+Query with 1 fields searched that returns + 8 documents with 8.58306884766 milliseconds
+Query with 2 fields searched that returns + 8 documents with 6.74605369568 milliseconds
+Query with 3 fields searched that returns + 8 documents with 7.17902183533 milliseconds
+Query with 4 fields searched that returns + 8 documents with 7.07006454468 milliseconds
+Query with 2 fields searched that returns + 8 documents with 6.44302368164 milliseconds
+Query with 3 fields searched that returns + 8 documents with 6.82997703552 milliseconds
+Query with 4 fields searched that returns + 8 documents with 6.95395469666 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.0729999542 milliseconds
+1000000 inserts take 35197.4380016 milliseconds
+Query with 1 fields searched that returns + 9 documents with 9.58704948425 milliseconds
+Query with 2 fields searched that returns + 9 documents with 7.56812095642 milliseconds
+Query with 3 fields searched that returns + 9 documents with 7.63988494873 milliseconds
+Query with 4 fields searched that returns + 9 documents with 9.28521156311 milliseconds
+Query with 2 fields searched that returns + 9 documents with 7.01808929443 milliseconds
+Query with 3 fields searched that returns + 9 documents with 7.13706016541 milliseconds
+Query with 4 fields searched that returns + 9 documents with 8.27193260193 milliseconds
+Query with 1 fields searched that returns + 50 documents with 30.4539203644 milliseconds
+1000000 inserts take 35735.9850407 milliseconds
+Query with 1 fields searched that returns + 10 documents with 12.4018192291 milliseconds
+Query with 2 fields searched that returns + 10 documents with 13.561964035 milliseconds
+Query with 3 fields searched that returns + 10 documents with 13.0450725555 milliseconds
+Query with 4 fields searched that returns + 10 documents with 11.3089084625 milliseconds
+Query with 2 fields searched that returns + 10 documents with 10.7941627502 milliseconds
+Query with 3 fields searched that returns + 10 documents with 11.1749172211 milliseconds
+Query with 4 fields searched that returns + 10 documents with 11.5990638733 milliseconds
+Query with 1 fields searched that returns + 50 documents with 38.5589599609 milliseconds
+1000000 inserts take 35403.0268192 milliseconds
+Query with 1 fields searched that returns + 11 documents with 10.8289718628 milliseconds
+Query with 2 fields searched that returns + 11 documents with 12.0780467987 milliseconds
+Query with 3 fields searched that returns + 11 documents with 11.5559101105 milliseconds
+Query with 4 fields searched that returns + 11 documents with 8.63981246948 milliseconds
+Query with 2 fields searched that returns + 11 documents with 10.097026825 milliseconds
+Query with 3 fields searched that returns + 11 documents with 8.34393501282 milliseconds
+Query with 4 fields searched that returns + 11 documents with 8.44287872314 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.6989212036 milliseconds
+Query with 1 fields searched that returns + 11 documents with 8.55493545532 milliseconds
+Query with 2 fields searched that returns + 11 documents with 9.70911979675 milliseconds
+Query with 3 fields searched that returns + 11 documents with 10.0100040436 milliseconds
+Query with 4 fields searched that returns + 11 documents with 9.38701629639 milliseconds
+Query with 2 fields searched that returns + 11 documents with 8.43191146851 milliseconds
+Query with 3 fields searched that returns + 11 documents with 8.7468624115 milliseconds
+Query with 4 fields searched that returns + 11 documents with 8.36110115051 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.7169685364 milliseconds
+1000000 inserts take 56840.8930302 milliseconds
+Query with 1 fields searched that returns + 12 documents with 11.2738609314 milliseconds
+Query with 2 fields searched that returns + 12 documents with 10.1110935211 milliseconds
+Query with 3 fields searched that returns + 12 documents with 10.2269649506 milliseconds
+Query with 4 fields searched that returns + 12 documents with 10.56599617 milliseconds
+Query with 2 fields searched that returns + 12 documents with 8.55994224548 milliseconds
+Query with 3 fields searched that returns + 12 documents with 9.01699066162 milliseconds
+Query with 4 fields searched that returns + 12 documents with 9.122133255 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.8739204407 milliseconds
+1000000 inserts take 62143.7599659 milliseconds
+Query with 1 fields searched that returns + 13 documents with 11.2180709839 milliseconds
+Query with 2 fields searched that returns + 13 documents with 10.2159976959 milliseconds
+Query with 1 fields searched that returns + 13 documents with 18283.6449146 milliseconds
+Query with 3 fields searched that returns + 13 documents with 12.1200084686 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.7038021088 milliseconds
+Query with 2 fields searched that returns + 13 documents with 9.08994674683 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.38105583191 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.1017951965 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.599905014 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.7119808197 milliseconds
+Query with 2 fields searched that returns + 13 documents with 12.5091075897 milliseconds
+Query with 1 fields searched that returns + 13 documents with 34499.712944 milliseconds
+Query with 3 fields searched that returns + 13 documents with 11.5258693695 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.2000236511 milliseconds
+Query with 2 fields searched that returns + 13 documents with 10.8830928802 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.98115539551 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.1809501648 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.4318199158 milliseconds
+Query with 1 fields searched that returns + 13 documents with 8.69798660278 milliseconds
+Query with 2 fields searched that returns + 13 documents with 9.87386703491 milliseconds
+Query with 1 fields searched that returns + 13 documents with 8.52012634277 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.71102714539 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.1931095123 milliseconds
+Query with 2 fields searched that returns + 13 documents with 9.56106185913 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.81998443604 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.2660655975 milliseconds
+Query with 1 fields searched that returns + 50 documents with 30.0569534302 milliseconds
+Query with 1 fields searched that returns + 13 documents with 10.978937149 milliseconds
+Query with 2 fields searched that returns + 13 documents with 9.65404510498 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.34100151062 milliseconds
+Query with 1 fields searched that returns + 13 documents with 33961.5290165 milliseconds
+Query with 3 fields searched that returns + 13 documents with 12.0320320129 milliseconds
+Query with 4 fields searched that returns + 13 documents with 11.4140510559 milliseconds
+Query with 2 fields searched that returns + 13 documents with 10.7071399689 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.85288619995 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.1780891418 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.8728942871 milliseconds
+Query with 1 fields searched that returns + 13 documents with 10.8699798584 milliseconds
+Query with 2 fields searched that returns + 13 documents with 10.1521015167 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.36794281006 milliseconds
+Query with 1 fields searched that returns + 13 documents with 10.4880332947 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.69290733337 milliseconds
+Query with 4 fields searched that returns + 13 documents with 13.0269527435 milliseconds
+Query with 2 fields searched that returns + 13 documents with 13.277053833 milliseconds
+Query with 3 fields searched that returns + 13 documents with 10.0359916687 milliseconds
+Query with 4 fields searched that returns + 13 documents with 9.73701477051 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.6139717102 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.3150138855 milliseconds
+Query with 2 fields searched that returns + 13 documents with 9.12594795227 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.90009307861 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.64188575745 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.52196121216 milliseconds
+Query with 4 fields searched that returns + 13 documents with 9.8979473114 milliseconds
+Query with 2 fields searched that returns + 13 documents with 10.7040405273 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.77611541748 milliseconds
+Query with 4 fields searched that returns + 13 documents with 9.9458694458 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.2139053345 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.49287414551 milliseconds
+Query with 2 fields searched that returns + 13 documents with 9.65285301208 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.44995880127 milliseconds
+Query with 1 fields searched that returns + 13 documents with 9.15503501892 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.70506668091 milliseconds
+Query with 4 fields searched that returns + 13 documents with 9.78899002075 milliseconds
+Query with 2 fields searched that returns + 13 documents with 9.66000556946 milliseconds
+Query with 3 fields searched that returns + 13 documents with 9.53102111816 milliseconds
+Query with 4 fields searched that returns + 13 documents with 9.90390777588 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.0069580078 milliseconds
+Query with 1 fields searched that returns + 13 documents with 11.4929676056 milliseconds
+Query with 2 fields searched that returns + 13 documents with 10.6120109558 milliseconds
+Query with 1 fields searched that returns + 13 documents with 10.2100372314 milliseconds
+Query with 1 fields searched that returns + 13 documents with 10.3168487549 milliseconds
+Query with 3 fields searched that returns + 13 documents with 10.4219913483 milliseconds
+Query with 4 fields searched that returns + 13 documents with 11.0659599304 milliseconds
+Query with 2 fields searched that returns + 13 documents with 10.3828907013 milliseconds
+Query with 3 fields searched that returns + 13 documents with 10.47706604 milliseconds
+Query with 4 fields searched that returns + 13 documents with 10.183095932 milliseconds
+Query with 1 fields searched that returns + 50 documents with 32.5930118561 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.32601165771 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.37488746643 milliseconds
+Query with 1 fields searched that returns + 0 documents with 3.05891036987 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.88987159729 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.2931098938 milliseconds
+Query with 4 fields searched that returns + 0 documents with 2.20799446106 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.63094902039 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.21800804138 milliseconds
+Query with 4 fields searched that returns + 0 documents with 2.121925354 milliseconds
+Query with 1 fields searched that returns + 0 documents with 3.97801399231 milliseconds
+Query with 1 fields searched that returns + 0 documents with 4.20188903809 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.65002250671 milliseconds
+Query with 1 fields searched that returns + 0 documents with 4.33802604675 milliseconds
+Query with 1 fields searched that returns + 0 documents with 5.6619644165 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.47406959534 milliseconds
+Query with 4 fields searched that returns + 0 documents with 2.65789031982 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.6068687439 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.48599052429 milliseconds
+Query with 4 fields searched that returns + 0 documents with 2.39014625549 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.72297859192 milliseconds
+Query with 1 fields searched that returns + 0 documents with 6.01816177368 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.56395339966 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.24304199219 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.47001647949 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.26187705994 milliseconds
+Query with 4 fields searched that returns + 0 documents with 2.58183479309 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.22682952881 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.1288394928 milliseconds
+Query with 4 fields searched that returns + 0 documents with 2.15196609497 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.64406204224 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.36701965332 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.6159286499 milliseconds
+Query with 1 fields searched that returns + 0 documents with 2.5749206543 milliseconds
+Query with 1 fields searched that returns + 0 documents with 3.04794311523 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.91514396667 milliseconds
+Query with 4 fields searched that returns + 0 documents with 3.20911407471 milliseconds
+Query with 2 fields searched that returns + 0 documents with 2.65216827393 milliseconds
+Query with 3 fields searched that returns + 0 documents with 2.89988517761 milliseconds
+Query with 4 fields searched that returns + 0 documents with 3.249168396 milliseconds
+Query with 1 fields searched that returns + 0 documents with 3.11994552612 milliseconds
+10000 inserts take 355.21197319 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.56698036194 milliseconds
+Query with 2 fields searched that returns + 1 documents with 3.17406654358 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.849817276 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.62205505371 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.9981136322 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.99906730652 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.81596183777 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.70199775696 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.51317024231 milliseconds
+Query with 1 fields searched that returns + 50 documents with 26.7632007599 milliseconds
+10000 inserts take 367.707967758 milliseconds
+Query with 1 fields searched that returns + 2 documents with 4.07314300537 milliseconds
+Query with 2 fields searched that returns + 2 documents with 3.79180908203 milliseconds
+Query with 1 fields searched that returns + 2 documents with 3.33404541016 milliseconds
+Query with 1 fields searched that returns + 2 documents with 3.39698791504 milliseconds
+Query with 3 fields searched that returns + 2 documents with 3.25512886047 milliseconds
+Query with 4 fields searched that returns + 2 documents with 3.60679626465 milliseconds
+Query with 2 fields searched that returns + 2 documents with 3.43203544617 milliseconds
+Query with 3 fields searched that returns + 2 documents with 3.28087806702 milliseconds
+Query with 4 fields searched that returns + 2 documents with 3.41796875 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.8939476013 milliseconds
+10000000 inserts take 752300.046921 milliseconds
+Query with 1 fields searched that returns + 1 documents with 21421.0710526 milliseconds
+Query with 2 fields searched that returns + 1 documents with 9.14311408997 milliseconds
+Query with 1 fields searched that returns + 1 documents with 22836.2269402 milliseconds
+Query with 1 fields searched that returns + 1 documents with 22332.326889 milliseconds
+Query with 3 fields searched that returns + 1 documents with 3.46493721008 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.9878616333 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.87103652954 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.7539730072 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.60090827942 milliseconds
+Query with 1 fields searched that returns + 50 documents with 22113.2400036 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.09801101685 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.20417976379 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.33905220032 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.00192832947 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.93810462952 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.09307670593 milliseconds
+Query with 2 fields searched that returns + 1 documents with 1.99890136719 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.98602676392 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.88899040222 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.7050476074 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.54504585266 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.74085998535 milliseconds
+Query with 1 fields searched that returns + 1 documents with 4.33397293091 milliseconds
+Query with 1 fields searched that returns + 1 documents with 3.81898880005 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.92713737488 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.45308876038 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.05993652344 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.93476676941 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.71701812744 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.7220478058 milliseconds
+100 inserts take 4.85920906067 milliseconds
+100 inserts take 5.51891326904 milliseconds
+100 inserts take 3.4019947052 milliseconds
+100 inserts take 3.25798988342 milliseconds
+100 inserts take 4.0431022644 milliseconds
+Query with 1 fields searched that returns + 2 documents with 4.92906570435 milliseconds
+Query with 2 fields searched that returns + 2 documents with 4.00900840759 milliseconds
+Query with 1 fields searched that returns + 2 documents with 2.83098220825 milliseconds
+Query with 1 fields searched that returns + 2 documents with 2.72798538208 milliseconds
+Query with 3 fields searched that returns + 2 documents with 2.57992744446 milliseconds
+Query with 4 fields searched that returns + 2 documents with 3.16214561462 milliseconds
+Query with 2 fields searched that returns + 2 documents with 2.5041103363 milliseconds
+Query with 3 fields searched that returns + 2 documents with 2.59709358215 milliseconds
+Query with 4 fields searched that returns + 2 documents with 2.95495986938 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.3669700623 milliseconds
+100 inserts take 5.02705574036 milliseconds
+Query with 1 fields searched that returns + 1 documents with 5.93090057373 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.7289390564 milliseconds
+Query with 1 fields searched that returns + 1 documents with 1.90901756287 milliseconds
+Query with 1 fields searched that returns + 1 documents with 1.83510780334 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.96504592896 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.29096412659 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.09498405457 milliseconds
+Query with 3 fields searched that returns + 1 documents with 1.81794166565 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.15101242065 milliseconds
+Query with 1 fields searched that returns + 50 documents with 30.2619934082 milliseconds
+100 inserts take 4.25910949707 milliseconds
+Query with 1 fields searched that returns + 2 documents with 4.18996810913 milliseconds
+Query with 2 fields searched that returns + 2 documents with 2.49218940735 milliseconds
+Query with 1 fields searched that returns + 2 documents with 2.73895263672 milliseconds
+Query with 1 fields searched that returns + 2 documents with 2.56395339966 milliseconds
+Query with 3 fields searched that returns + 2 documents with 2.90584564209 milliseconds
+Query with 4 fields searched that returns + 2 documents with 3.35597991943 milliseconds
+Query with 2 fields searched that returns + 2 documents with 2.94494628906 milliseconds
+Query with 3 fields searched that returns + 2 documents with 2.52103805542 milliseconds
+Query with 4 fields searched that returns + 2 documents with 2.99787521362 milliseconds
+Query with 1 fields searched that returns + 50 documents with 30.5099487305 milliseconds
+100 inserts take 3.58486175537 milliseconds
+Query with 1 fields searched that returns + 3 documents with 4.2610168457 milliseconds
+Query with 2 fields searched that returns + 3 documents with 3.51095199585 milliseconds
+Query with 1 fields searched that returns + 3 documents with 2.79498100281 milliseconds
+Query with 1 fields searched that returns + 3 documents with 3.00884246826 milliseconds
+Query with 3 fields searched that returns + 3 documents with 3.38101387024 milliseconds
+Query with 4 fields searched that returns + 3 documents with 4.07409667969 milliseconds
+Query with 2 fields searched that returns + 3 documents with 3.05080413818 milliseconds
+Query with 3 fields searched that returns + 3 documents with 2.86602973938 milliseconds
+Query with 4 fields searched that returns + 3 documents with 3.06701660156 milliseconds
+Query with 1 fields searched that returns + 50 documents with 27.6188850403 milliseconds
+10000 inserts take 288.125991821 milliseconds
+Query with 1 fields searched that returns + 4 documents with 5.91087341309 milliseconds
+Query with 2 fields searched that returns + 4 documents with 4.13918495178 milliseconds
+Query with 1 fields searched that returns + 4 documents with 5.95998764038 milliseconds
+Query with 1 fields searched that returns + 4 documents with 6.05392456055 milliseconds
+Query with 3 fields searched that returns + 4 documents with 3.66902351379 milliseconds
+Query with 4 fields searched that returns + 4 documents with 3.84593009949 milliseconds
+Query with 2 fields searched that returns + 4 documents with 3.47495079041 milliseconds
+Query with 3 fields searched that returns + 4 documents with 3.74007225037 milliseconds
+Query with 4 fields searched that returns + 4 documents with 3.62515449524 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.1419754028 milliseconds
+100000 inserts take 2856.72688484 milliseconds
+Query with 1 fields searched that returns + 5 documents with 5.27691841125 milliseconds
+Query with 2 fields searched that returns + 5 documents with 4.06384468079 milliseconds
+Query with 1 fields searched that returns + 5 documents with 30.6680202484 milliseconds
+Query with 1 fields searched that returns + 5 documents with 38.5060310364 milliseconds
+Query with 3 fields searched that returns + 5 documents with 4.42290306091 milliseconds
+Query with 4 fields searched that returns + 5 documents with 4.39715385437 milliseconds
+Query with 2 fields searched that returns + 5 documents with 4.51588630676 milliseconds
+Query with 3 fields searched that returns + 5 documents with 4.25601005554 milliseconds
+Query with 4 fields searched that returns + 5 documents with 4.01902198792 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.2549133301 milliseconds
+1000000 inserts take 31844.0990448 milliseconds
+Query with 1 fields searched that returns + 6 documents with 3488.13986778 milliseconds
+Query with 2 fields searched that returns + 6 documents with 8.89182090759 milliseconds
+Query with 1 fields searched that returns + 6 documents with 250.777006149 milliseconds
+Query with 1 fields searched that returns + 6 documents with 312.389135361 milliseconds
+Query with 3 fields searched that returns + 6 documents with 5.32603263855 milliseconds
+Query with 4 fields searched that returns + 6 documents with 5.68103790283 milliseconds
+Query with 2 fields searched that returns + 6 documents with 4.8680305481 milliseconds
+Query with 3 fields searched that returns + 6 documents with 4.43816184998 milliseconds
+Query with 4 fields searched that returns + 6 documents with 4.72688674927 milliseconds
+Query with 1 fields searched that returns + 50 documents with 27.8649330139 milliseconds
+10 inserts take 1.34301185608 milliseconds
+Query with 1 fields searched that returns + 7 documents with 6.07299804688 milliseconds
+Query with 2 fields searched that returns + 7 documents with 5.50317764282 milliseconds
+Query with 1 fields searched that returns + 7 documents with 490.918874741 milliseconds
+Query with 1 fields searched that returns + 7 documents with 588.251113892 milliseconds
+Query with 3 fields searched that returns + 7 documents with 5.98192214966 milliseconds
+Query with 4 fields searched that returns + 7 documents with 5.44619560242 milliseconds
+Query with 2 fields searched that returns + 7 documents with 5.1748752594 milliseconds
+Query with 3 fields searched that returns + 7 documents with 5.00893592834 milliseconds
+Query with 4 fields searched that returns + 7 documents with 6.098985672 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.3529758453 milliseconds
+10 inserts take 1.16801261902 milliseconds
+Query with 1 fields searched that returns + 8 documents with 7.93600082397 milliseconds
+Query with 2 fields searched that returns + 8 documents with 8.84795188904 milliseconds
+Query with 1 fields searched that returns + 8 documents with 741.083145142 milliseconds
+Query with 1 fields searched that returns + 8 documents with 876.642942429 milliseconds
+Query with 3 fields searched that returns + 8 documents with 7.38382339478 milliseconds
+Query with 4 fields searched that returns + 8 documents with 6.11591339111 milliseconds
+Query with 2 fields searched that returns + 8 documents with 5.65195083618 milliseconds
+Query with 3 fields searched that returns + 8 documents with 6.48784637451 milliseconds
+Query with 4 fields searched that returns + 8 documents with 6.16002082825 milliseconds
+Query with 1 fields searched that returns + 50 documents with 30.9209823608 milliseconds
+10 inserts take 1.41191482544 milliseconds
+Query with 1 fields searched that returns + 9 documents with 7.42101669312 milliseconds
+Query with 2 fields searched that returns + 9 documents with 5.66101074219 milliseconds
+Query with 1 fields searched that returns + 9 documents with 965.423107147 milliseconds
+Query with 1 fields searched that returns + 9 documents with 1159.60407257 milliseconds
+Query with 3 fields searched that returns + 9 documents with 8.66293907166 milliseconds
+Query with 4 fields searched that returns + 9 documents with 7.21096992493 milliseconds
+Query with 2 fields searched that returns + 9 documents with 5.55896759033 milliseconds
+Query with 3 fields searched that returns + 9 documents with 6.27613067627 milliseconds
+Query with 4 fields searched that returns + 9 documents with 6.511926651 milliseconds
+Query with 1 fields searched that returns + 50 documents with 29.4439792633 milliseconds
+10 inserts take 1.13892555237 milliseconds
+Query with 1 fields searched that returns + 10 documents with 8.20183753967 milliseconds
+Query with 2 fields searched that returns + 10 documents with 7.17496871948 milliseconds
+Query with 1 fields searched that returns + 10 documents with 1214.38980103 milliseconds
+Query with 1 fields searched that returns + 10 documents with 1431.84995651 milliseconds
+Query with 3 fields searched that returns + 10 documents with 8.55088233948 milliseconds
+Query with 4 fields searched that returns + 10 documents with 7.11393356323 milliseconds
+Query with 2 fields searched that returns + 10 documents with 6.36386871338 milliseconds
+Query with 3 fields searched that returns + 10 documents with 6.8781375885 milliseconds
+Query with 4 fields searched that returns + 10 documents with 7.78913497925 milliseconds
+Query with 1 fields searched that returns + 50 documents with 30.6940078735 milliseconds
+10 inserts take 2.0740032196 milliseconds
+Query with 1 fields searched that returns + 11 documents with 2087.36395836 milliseconds
+Query with 2 fields searched that returns + 11 documents with 8.19683074951 milliseconds
+Query with 1 fields searched that returns + 11 documents with 1402.22787857 milliseconds
+Query with 1 fields searched that returns + 11 documents with 1694.59414482 milliseconds
+Query with 3 fields searched that returns + 11 documents with 8.18800926208 milliseconds
+Query with 4 fields searched that returns + 11 documents with 8.22901725769 milliseconds
+Query with 2 fields searched that returns + 11 documents with 6.95490837097 milliseconds
+Query with 3 fields searched that returns + 11 documents with 7.01308250427 milliseconds
+Query with 4 fields searched that returns + 11 documents with 6.88886642456 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.6600589752 milliseconds
+10 inserts take 1.09601020813 milliseconds
+Query with 1 fields searched that returns + 1 documents with 5.02800941467 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.42805480957 milliseconds
+Query with 1 fields searched that returns + 1 documents with 1.97601318359 milliseconds
+Query with 1 fields searched that returns + 1 documents with 2.01892852783 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.21705436707 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.90591812134 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.22110748291 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.35509872437 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.68292427063 milliseconds
+Query with 1 fields searched that returns + 10 documents with 8.62503051758 milliseconds
+10 inserts take 1.68204307556 milliseconds
+Query with 1 fields searched that returns + 2 documents with 4.24218177795 milliseconds
+Query with 2 fields searched that returns + 2 documents with 2.78282165527 milliseconds
+Query with 1 fields searched that returns + 2 documents with 2.83694267273 milliseconds
+Query with 1 fields searched that returns + 2 documents with 2.96211242676 milliseconds
+Query with 3 fields searched that returns + 2 documents with 2.97904014587 milliseconds
+Query with 4 fields searched that returns + 2 documents with 3.89289855957 milliseconds
+Query with 2 fields searched that returns + 2 documents with 3.71813774109 milliseconds
+Query with 3 fields searched that returns + 2 documents with 3.46207618713 milliseconds
+Query with 4 fields searched that returns + 2 documents with 2.6068687439 milliseconds
+Query with 1 fields searched that returns + 20 documents with 12.1669769287 milliseconds
+10 inserts take 1.34706497192 milliseconds
+Query with 1 fields searched that returns + 3 documents with 4.41980361938 milliseconds
+Query with 2 fields searched that returns + 3 documents with 3.41796875 milliseconds
+Query with 1 fields searched that returns + 3 documents with 3.17978858948 milliseconds
+Query with 1 fields searched that returns + 3 documents with 2.94899940491 milliseconds
+Query with 3 fields searched that returns + 3 documents with 3.22198867798 milliseconds
+Query with 4 fields searched that returns + 3 documents with 2.90393829346 milliseconds
+Query with 2 fields searched that returns + 3 documents with 3.26681137085 milliseconds
+Query with 3 fields searched that returns + 3 documents with 3.20792198181 milliseconds
+Query with 4 fields searched that returns + 3 documents with 3.35693359375 milliseconds
+Query with 1 fields searched that returns + 30 documents with 21.8639373779 milliseconds
+10 inserts take 1.10292434692 milliseconds
+10 inserts take 2.68292427063 milliseconds
+Query with 1 fields searched that returns + 5 documents with 5.0790309906 milliseconds
+Query with 2 fields searched that returns + 5 documents with 4.49991226196 milliseconds
+Query with 1 fields searched that returns + 5 documents with 5.26213645935 milliseconds
+Query with 1 fields searched that returns + 5 documents with 4.74214553833 milliseconds
+Query with 3 fields searched that returns + 5 documents with 4.5371055603 milliseconds
+Query with 4 fields searched that returns + 5 documents with 4.62484359741 milliseconds
+Query with 2 fields searched that returns + 5 documents with 5.87010383606 milliseconds
+Query with 3 fields searched that returns + 5 documents with 6.22987747192 milliseconds
+Query with 4 fields searched that returns + 5 documents with 6.37292861938 milliseconds
+Query with 1 fields searched that returns + 50 documents with 26.8158912659 milliseconds
+10000 inserts take 306.988954544 milliseconds
+Query with 1 fields searched that returns + 6 documents with 6.63900375366 milliseconds
+Query with 2 fields searched that returns + 6 documents with 4.68993186951 milliseconds
+Query with 1 fields searched that returns + 6 documents with 7.14015960693 milliseconds
+Query with 1 fields searched that returns + 6 documents with 7.34996795654 milliseconds
+Query with 3 fields searched that returns + 6 documents with 4.72497940063 milliseconds
+Query with 4 fields searched that returns + 6 documents with 4.89401817322 milliseconds
+Query with 2 fields searched that returns + 6 documents with 4.72497940063 milliseconds
+Query with 3 fields searched that returns + 6 documents with 4.21190261841 milliseconds
+Query with 4 fields searched that returns + 6 documents with 4.8999786377 milliseconds
+Query with 1 fields searched that returns + 50 documents with 25.7530212402 milliseconds
+10000 inserts take 290.5189991 milliseconds
+Query with 1 fields searched that returns + 7 documents with 6.53696060181 milliseconds
+Query with 2 fields searched that returns + 7 documents with 4.86183166504 milliseconds
+Query with 1 fields searched that returns + 7 documents with 10.9550952911 milliseconds
+Query with 1 fields searched that returns + 7 documents with 12.0739936829 milliseconds
+Query with 3 fields searched that returns + 7 documents with 5.16986846924 milliseconds
+Query with 4 fields searched that returns + 7 documents with 5.24115562439 milliseconds
+Query with 2 fields searched that returns + 7 documents with 5.9380531311 milliseconds
+Query with 3 fields searched that returns + 7 documents with 5.16510009766 milliseconds
+Query with 4 fields searched that returns + 7 documents with 5.61881065369 milliseconds
+Query with 1 fields searched that returns + 50 documents with 27.5959968567 milliseconds
+10000 inserts take 264.855146408 milliseconds
+Query with 1 fields searched that returns + 1 documents with 15.9199237823 milliseconds
+Query with 2 fields searched that returns + 1 documents with 1.89399719238 milliseconds
+Query with 1 fields searched that returns + 1 documents with 5.04398345947 milliseconds
+Query with 1 fields searched that returns + 1 documents with 5.91206550598 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.68387794495 milliseconds
+Query with 4 fields searched that returns + 1 documents with 2.36010551453 milliseconds
+Query with 2 fields searched that returns + 1 documents with 2.3410320282 milliseconds
+Query with 3 fields searched that returns + 1 documents with 2.05898284912 milliseconds
+Query with 4 fields searched that returns + 1 documents with 1.9519329071 milliseconds
+Query with 1 fields searched that returns + 50 documents with 27.8270244598 milliseconds
+10000 inserts take 282.022953033 milliseconds
+Query with 1 fields searched that returns + 2 documents with 3.83400917053 milliseconds
+Query with 2 fields searched that returns + 2 documents with 2.62784957886 milliseconds
+Query with 1 fields searched that returns + 2 documents with 8.7890625 milliseconds
+Query with 1 fields searched that returns + 2 documents with 9.52911376953 milliseconds
+Query with 3 fields searched that returns + 2 documents with 2.52604484558 milliseconds
+Query with 4 fields searched that returns + 2 documents with 2.5839805603 milliseconds
+Query with 2 fields searched that returns + 2 documents with 2.53915786743 milliseconds
+Query with 3 fields searched that returns + 2 documents with 2.56705284119 milliseconds
+Query with 4 fields searched that returns + 2 documents with 2.4950504303 milliseconds
+Query with 1 fields searched that returns + 50 documents with 27.5499820709 milliseconds
+10000 inserts take 284.964084625 milliseconds
+Query with 1 fields searched that returns + 3 documents with 5.35702705383 milliseconds
+Query with 2 fields searched that returns + 3 documents with 3.29303741455 milliseconds
+Query with 1 fields searched that returns + 3 documents with 14.9059295654 milliseconds
+Query with 1 fields searched that returns + 3 documents with 17.3089504242 milliseconds
+Query with 3 fields searched that returns + 3 documents with 3.60298156738 milliseconds
+Query with 4 fields searched that returns + 3 documents with 3.40104103088 milliseconds
+Query with 2 fields searched that returns + 3 documents with 3.05104255676 milliseconds
+Query with 3 fields searched that returns + 3 documents with 3.11803817749 milliseconds
+Query with 4 fields searched that returns + 3 documents with 3.60798835754 milliseconds
+Query with 1 fields searched that returns + 50 documents with 27.9548168182 milliseconds
+100000 inserts take 2843.10889244 milliseconds
+Query with 1 fields searched that returns + 4 documents with 6.0338973999 milliseconds
+Query with 2 fields searched that returns + 4 documents with 3.40580940247 milliseconds
+Query with 1 fields searched that returns + 4 documents with 45.1879501343 milliseconds
+Query with 1 fields searched that returns + 4 documents with 51.0959625244 milliseconds
+Query with 3 fields searched that returns + 4 documents with 3.59416007996 milliseconds
+Query with 4 fields searched that returns + 4 documents with 3.72695922852 milliseconds
+Query with 2 fields searched that returns + 4 documents with 3.47113609314 milliseconds
+Query with 3 fields searched that returns + 4 documents with 3.42392921448 milliseconds
+Query with 4 fields searched that returns + 4 documents with 3.90815734863 milliseconds
+Query with 1 fields searched that returns + 50 documents with 28.0630588531 milliseconds
+100000 inserts take 2885.80298424 milliseconds
+Query with 1 fields searched that returns + 5 documents with 5.13792037964 milliseconds
+Query with 2 fields searched that returns + 5 documents with 5.038022995 milliseconds
+Query with 1 fields searched that returns + 5 documents with 101.643800735 milliseconds
+Query with 1 fields searched that returns + 5 documents with 106.97722435 milliseconds
+Query with 3 fields searched that returns + 5 documents with 4.84204292297 milliseconds
+Query with 4 fields searched that returns + 5 documents with 4.47297096252 milliseconds
+Query with 2 fields searched that returns + 5 documents with 3.89003753662 milliseconds
+Query with 3 fields searched that returns + 5 documents with 4.30011749268 milliseconds
+Query with 4 fields searched that returns + 5 documents with 4.34303283691 milliseconds
+Query with 1 fields searched that returns + 50 documents with 27.8508663177 milliseconds
