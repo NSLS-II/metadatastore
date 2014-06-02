@@ -88,13 +88,7 @@ def benchmark_query(collection_name, **kwargs):
 
 
 create_collection('benchmark_logbook')
-
 benchmark_insert(100000)
-# start = time.time()
-# query('benchmark_logbook', Id=1,  limit=10)
-# end = time.time()
-# print 'It has been ' + str((end-start)*1000) + ' milliseconds'
-
 benchmark_query('benchmark_logbook', Id=1)
 benchmark_query('benchmark_logbook', Id=3, text='composed_doc3')
 benchmark_query('benchmark_logbook', text='composed_doc3')
