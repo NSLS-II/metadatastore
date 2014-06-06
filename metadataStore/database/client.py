@@ -1,6 +1,5 @@
 __author__ = 'arkilic'
-
-
+__version__ = '0.0.2'
 from mongoengine import connect
 from pymongo.errors import ConnectionFailure
 import logging
@@ -25,6 +24,3 @@ class MongoConnection(object):
         except:
             self.logger.warning('MongoClient cannot be created')
             raise ConnectionFailure('MongoClient cannot be created')
-
-    def connection_adapter(self):
-        return self.conn
