@@ -24,3 +24,6 @@ class MongoConnection(object):
         except:
             self.logger.warning('MongoClient cannot be created')
             raise ConnectionFailure('MongoClient cannot be created')
+
+    def get_conn(self):
+        return self.conn

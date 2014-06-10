@@ -3,22 +3,11 @@ import time
 import datetime
 
 from metadataStore.database.client import MongoConnection
-from metadataStore.database.collection import Header, BeamlineConfig, Event
+from metadataStore.dataapi.db_tools import *
+from metadataStore.database.collection_depot import *
 
 MongoConnection('test', 'kronos.nsls2.bnl.gov', 27017)
 
-header = Header(_id=0, owner='arkilic', start_time=datetime.datetime.utcnow(),
-                end_time=datetime.datetime.utcnow(), beamline_id='xyz').save()
-for i in xrange(100):
-    start = time.time()
-    cfg = BeamlineConfig(headers=[header], wavelength=(234.5+i)).save()
-    end = time.time()
-    print 'Header takes ' + str((end-start)*1000) + ' milliseconds'
-    # print BeamlineConfig.objects(headers__in=[header])
+header = save_header(run_id=36, run_owner='arkilic', create_time=datetime.datetime.utcnow(),
+                     update_time=datetime.datetime.utcnow(), beamline_id='xyz')
 
-
-eventA = Event(_id=7, headers=[header], data={'motor1': 193}).save()
-
-
-evr = Event.objects(headers__all=[header])
-print evr[0].data
