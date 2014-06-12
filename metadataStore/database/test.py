@@ -1,13 +1,30 @@
-__author__ = 'arkilic'
+# __author__ = 'arkilic'
 import time
 import datetime
 
-from metadataStore.database.client import MongoConnection
-from metadataStore.dataapi.db_tools import *
-from metadataStore.database.collection_depot import *
+from metadataStore.dataapi.metadataTools import *
+from metadataStore.database.databaseTables import *
+from metadataStore.database.databaseTables import BeamlineConfig, Header
 
-MongoConnection('test', 'kronos.nsls2.bnl.gov', 27017)
 
-header = save_header(run_id=36, run_owner='arkilic', create_time=datetime.datetime.utcnow(),
-                     update_time=datetime.datetime.utcnow(), beamline_id='xyz')
+header = Header(_id=140, owner='arkilic', create_time=datetime.datetime.utcnow(), update_time=datetime.datetime.utcnow(), beamline_id='xyz')
 
+start = time.time()
+header = save_header(run_id=130, run_owner='arkilic', create_time=datetime.datetime.utcnow(), update_time=datetime.datetime.utcnow(), beamline_id='xyz')
+end = time.time()
+print 'It takes ' + str((end-start)*1000) + ' milliseconds'
+
+
+
+header = save_header(run_id=137, run_owner='arkilic', create_time=datetime.datetime.utcnow(),
+                     update_time=datetime.datetime.utcnow(), beamline_id='xyzaag')
+
+
+BeamlineConfig(_id=219, headers=[header]).save()
+
+bcfg = save_beamline_config(header_id=130, beamline_cfg_id=7)
+
+
+bcfg = save_beamline_config(header_id=130, beamline_cfg_id=317)
+
+print BeamlineConfig.objects()

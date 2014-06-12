@@ -3,6 +3,15 @@ import datetime
 from metadataStore.dataapi.pymetadataStore import *
 import time
 
+
+
+
+################################
+#           OBSOLETE           #
+# TO BE REPLACED BY NEW        #
+################################
+
+
 #Create a collection that will hold entries. (Logbook in Olog terminology)
 create_collection('my_collection')
 

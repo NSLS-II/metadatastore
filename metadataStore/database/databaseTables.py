@@ -1,11 +1,11 @@
 __author__ = 'arkilic'
 from mongoengine import *
-
+from mongoengine.fields import *
 
 class Header(DynamicDocument):
     _id = IntField(primary_key=True, unique=True)
     create_time = DateTimeField(required=True)
-    update_time = DateTimeField(required=True)
+    update_time = DateTimeField()
     owner = StringField(max_length=20, required=True)
     beamline_id = StringField(max_length=20, required=True)
     meta = {
@@ -14,9 +14,8 @@ class Header(DynamicDocument):
 
 
 class BeamlineConfig(DynamicDocument):
-    _id = IntField(unique=True)
-
-    headers = ListField(ReferenceField(Header), required=True)
+    _id = IntField(primary_key=True, required=False)
+    headers = ListField(ReferenceField('Header', reverse_delete_rule=CASCADE), required=True)
     energy = FloatField()
     wavelength = FloatField()
     i_zero = FloatField()
@@ -25,7 +24,7 @@ class BeamlineConfig(DynamicDocument):
 
 class Event(DynamicDocument):
     _id = IntField(primary_key=True, unique=True, required=True)
-    headers = ListField(ReferenceField(Header), required=True)
+    headers = ListField(ReferenceField('Header', reverse_delete_rule=CASCADE), required=True)
     seqno = IntField()
     start_time = DateTimeField(required=True)
     end_time = DateTimeField(required=True)
