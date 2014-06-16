@@ -3,10 +3,11 @@ __version__ = '0.0.2'
 from mongoengine.errors import OperationError
 from metadataStore.database.databaseTables import Header, BeamlineConfig, Event
 from metadataStore.sessionManager.databaseInit import metadataLogger
-from pymongo import *
-from metadataStore.sessionManager.databaseInit import conn
+import re
+
 
 #TODO: Add ranges to searches
+
 
 def save_header(run_id, run_owner, create_time, beamline_id, update_time):
     #TODO: add write_concern and safety measures to rollback
@@ -82,17 +83,57 @@ def delete_header():
     pass
 
 
-def find(**kwargs):
+def find(header_id=None, owner=None, create_time=None, update_time=None, ):
     """
     Find by event_id, beamline_config_id, header_id
-    """
-    a =BeamlineConfig.objects(author__header_id=137)
-    return a
+    As of MongoEngine 0.8 the querysets utilise a local cache.
+    So iterating it multiple times will only cause a single query.
+    If this is not the desired behavour you can call no_cache (version 0.8.3+)
+     to return a non-caching queryset.
+    # """
+    wild_cards = ['*', '.', '$']
+    query_dict = dict()
+    if owner is not None:
+        for entry in wild_cards:
+            if entry in owner:
+                query_dict['owner'] = {'$regex': re.compile(owner, re.IGNORECASE)}
+                break
+            else:
+                query_dict['owner'] = owner
+    if header_id is not None:
+        if isinstance(header_id, list):
+            if len(header_id) == 2:
+                query_dict['_id'] = {'$gte': header_id[1], '$lte': header_id[0]}
+            elif len(header_id) == 1:
+                query_dict['_id'] = header_id[0]
+            else:
+                query_dict['_id'] = {'$in': header_id}
+        else:
+            query_dict['_id'] = header_id
 
-    # db = conn['metaDataStore']
-    # return db.header.find(**kwargs)
+    if create_time is not None:
+        #TODO: Implement similar range search on create_time as in header_id
+        pass
+
+    print query_dict
+    header_info = find_header(query_dict)
+    #TODO: Once header_id is obtained pull all beamline_config and events, pack them into a list and export ;)
+    return header_info
 
 
+def find_header(query_dict):
+    collection = Header._get_collection()
+    return collection.find(query_dict)
 
 
+def find_event(header_ids, **kwargs):
+    kwargs['headers'] = [header_ids]
+    collection = Event._get_collection()
+    return collection.find(kwargs)
+
+
+def find_beamline_config(header_ids, **kwargs):
+    kwargs['headers'] = [header_ids]
+    collection = BeamlineConfig._get_collection()
+    return collection.find(kwargs)
 

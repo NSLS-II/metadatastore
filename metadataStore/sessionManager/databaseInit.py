@@ -11,7 +11,7 @@ from metadataStore.sessionManager.databaseLogger import DbLogger
 
 try:
     conn = connect(db=database, host=host, port=port)
-    db = pymongo.MongoClient(host=host, port=port)['metaDataStore']
+    db = conn['metaDataStore']
 except:
     raise ConnectionFailure('Connection cannot be established')
 

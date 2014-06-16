@@ -2,7 +2,8 @@ __author__ = 'arkilic'
 from mongoengine import *
 from mongoengine.fields import *
 
-class Header(DynamicDocument):
+
+class Header(Document):
     _id = IntField(primary_key=True, unique=True)
     create_time = DateTimeField(required=True)
     update_time = DateTimeField()
@@ -11,6 +12,7 @@ class Header(DynamicDocument):
     meta = {
         'indexes': ['-_id']
     }
+
 
 
 class BeamlineConfig(DynamicDocument):
