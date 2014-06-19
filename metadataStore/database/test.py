@@ -17,6 +17,7 @@ from metadataStore.database.databaseTables import BeamlineConfig, Header
 # print 'It takes ' + str((end-start)*1000) + ' milliseconds'
 #
 #
+
 #
 header = save_header(run_id=237, run_owner='arkilic', start_time=datetime.datetime.utcnow(),
                      update_time=datetime.datetime.utcnow(), beamline_id='xyzaag')
@@ -42,10 +43,8 @@ header = save_header(run_id=237, run_owner='arkilic', start_time=datetime.dateti
 # #
 # print datetime.datetime.now()
 # # #
-# # crsr2 = find(header_id=[237, 130, 137], owner='ark*')
-# # for i in xrange(crsr2.count()):
-# #     print crsr2.__getitem__(i)
-# #
+crsr2 = find(header_id=[237, 130, 137], owner='ark*')
+
 #
 
 # crsr3 = find(header_id={'start': 130, 'end': 137})
@@ -56,11 +55,25 @@ header = save_header(run_id=237, run_owner='arkilic', start_time=datetime.dateti
 header = save_header(run_id=437, run_owner='arkilic', start_time=datetime.datetime(2012, 4, 10, 18, 34, 23, 574796),
                      update_time=datetime.datetime.utcnow(), beamline_id='xyzaag')
 
+event = record_event(event_id=139, header_id=237, start_time=datetime.datetime(2014,10,4),
+                     end_time=datetime.datetime.utcnow())
+event = record_event(event_id=129, header_id=237, start_time=datetime.datetime(2014,10,5),
+                     end_time=datetime.datetime.utcnow())
 
-#
-crsr4 = find(start_time=datetime.datetime(2010, 5, 17))
-for i in xrange(crsr4.count()):
-    print crsr4.__getitem__(i)
+event = record_event(event_id=149, header_id=237, start_time=datetime.datetime(2014,10,4),
+                     end_time=datetime.datetime.utcnow())
+
+event = record_event(event_id=149, header_id=237, start_time=datetime.datetime(2014,10,5),
+                     end_time=datetime.datetime.utcnow())
+
+event = record_event(event_id=249, header_id=137, start_time=datetime.datetime(2014,10,5),
+                     end_time=datetime.datetime.utcnow())
+# for entry in find_event(header_ids=[137, 237]):
+#     print entry
+
+result = find(header_id={'start': 130, 'end': 237}, contents=True)
+for entry in result:
+    print entry
 
 
 

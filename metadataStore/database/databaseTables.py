@@ -39,4 +39,3 @@ class Event(DynamicDocument):
 
 
 #TODO: Read and add fields to beamline_config and events from config file for a given session
-#TODO: Ensure/create indexing. how is this handled via mongoengine ORM

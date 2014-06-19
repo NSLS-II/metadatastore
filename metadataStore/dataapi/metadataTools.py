@@ -81,24 +81,26 @@ def delete_header():
     pass
 
 
-def find(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None):
+def find(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False):
     """
-    Find by event_id, beamline_config_id, header_id
-    As of MongoEngine 0.8 the querysets utilise a local cache.
+    Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
     So iterating it multiple times will only cause a single query.
-    If this is not the desired behavour you can call no_cache (version 0.8.3+)
-     to return a non-caching queryset.
+    If this is not the desired behavour you can call no_cache (version 0.8.3+) to return a non-caching queryset.
      Usage:
-     >>> find(header_id=130)
+     If contents=False, only run_header information is returned
+        contents=True will return beamline_config and events related to given run_header(s)
+     >>> find(header_id=130, contents=True)
      >>> find(header_id=[130,123,145,247,...])
      >>> find(header_id={'start': 129, 'end': 141})
      >>> find(create_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
       >>> find(create_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
-      >>> find(create_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000),'end': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)})
+      >>> find(create_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000),
+                            'end': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)})
       >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
       >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
-    # """
-    supported_wildcard = ['*', '.', '?']
+    """
+    #TODO: Make content recovery more efficient for different use cases if possible
+    supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
     if owner is not None:
         for entry in supported_wildcard:
@@ -139,13 +141,20 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
                 break
             else:
                 query_dict['beamline_id'] = beamline_id
-
-
-
-    print query_dict
-    header_info = find_header(query_dict)
-    #TODO: Once header_id is obtained pull all beamline_config and events, pack them into a list and export ;)
-    return header_info
+    header_cursor = find_header(query_dict)
+    headers_list = list()
+    for i in xrange(header_cursor.count()):
+        headers_list.append(header_cursor.__getitem__(i))
+    if contents is False:
+        result = headers_list
+    else:
+        header_ids = list()
+        for header in headers_list:
+            header_ids.append(header['_id'])
+            event_cursor = find_event(header_ids)
+            header['events'] = __decode_cursor(event_cursor)
+        result = headers_list
+    return result
 
 
 def __validate_time(time_entry):
@@ -156,15 +165,25 @@ def __validate_time(time_entry):
     return flag
 
 
+def __decode_cursor(cursor_object):
+    events = dict()
+    temp_dict = dict()
+    for i in xrange(cursor_object.count()):
+        temp_dict = cursor_object.__getitem__(i)
+        event_id = temp_dict['_id']
+        events[temp_dict['_id']] = temp_dict
+    return events
+
+
 def find_header(query_dict):
     collection = Header._get_collection()
     return collection.find(query_dict)
 
 
-def find_event(header_ids, **kwargs):
-    kwargs['headers'] = [header_ids]
+def find_event(header_ids, event_query_dict={}):
+    event_query_dict['headers'] = {'$in': header_ids}
     collection = Event._get_collection()
-    return collection.find(kwargs)
+    return collection.find(event_query_dict)
 
 
 def find_beamline_config(header_ids, **kwargs):
