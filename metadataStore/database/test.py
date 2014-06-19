@@ -52,29 +52,35 @@ crsr2 = find(header_id=[237, 130, 137], owner='ark*')
 #     print crsr3.__getitem__(i)
 
 #
-header = save_header(run_id=437, run_owner='arkilic', start_time=datetime.datetime(2012, 4, 10, 18, 34, 23, 574796),
-                     update_time=datetime.datetime.utcnow(), beamline_id='xyzaag')
-
-event = record_event(event_id=139, header_id=237, start_time=datetime.datetime(2014,10,4),
-                     end_time=datetime.datetime.utcnow())
-event = record_event(event_id=129, header_id=237, start_time=datetime.datetime(2014,10,5),
-                     end_time=datetime.datetime.utcnow())
-
-event = record_event(event_id=149, header_id=237, start_time=datetime.datetime(2014,10,4),
-                     end_time=datetime.datetime.utcnow())
-
-event = record_event(event_id=149, header_id=237, start_time=datetime.datetime(2014,10,5),
-                     end_time=datetime.datetime.utcnow())
-
-event = record_event(event_id=249, header_id=137, start_time=datetime.datetime(2014,10,5),
-                     end_time=datetime.datetime.utcnow())
+# header = save_header(run_id=437, run_owner='arkilic', start_time=datetime.datetime(2012, 4, 10, 18, 34, 23, 574796),
+#                      update_time=datetime.datetime.utcnow(), beamline_id='xyzaag')
+#
+# event = record_event(event_id=139, header_id=237, start_time=datetime.datetime(2014,10,4),
+#                      end_time=datetime.datetime.utcnow())
+# event = record_event(event_id=129, header_id=237, start_time=datetime.datetime(2014,10,5),
+#                      end_time=datetime.datetime.utcnow())
+#
+# event = record_event(event_id=149, header_id=237, start_time=datetime.datetime(2014,10,4),
+#                      end_time=datetime.datetime.utcnow())
+#
+# event = record_event(event_id=149, header_id=237, start_time=datetime.datetime(2014,10,5),
+#                      end_time=datetime.datetime.utcnow())
+#
+# event = record_event(event_id=249, header_id=137, start_time=datetime.datetime(2014,10,5),
+#                      end_time=datetime.datetime.utcnow())
 # for entry in find_event(header_ids=[137, 237]):
 #     print entry
+#
+# result = find(header_id={'start': 130, 'end': 237}, contents=True)
+# for entry in result:
+#     print entry
+for i in xrange(400):
+    event = record_event(event_id=i, header_id=237, start_time=datetime.datetime(2014,10,1),
+                         end_time=datetime.datetime.utcnow())
 
-result = find(header_id={'start': 130, 'end': 237}, contents=True)
+result = find(header_id=237, contents=True)
 for entry in result:
     print entry
-
 
 
 

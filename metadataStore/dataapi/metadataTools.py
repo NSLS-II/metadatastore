@@ -149,6 +149,7 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
         result = headers_list
     else:
         header_ids = list()
+        print headers_list
         for header in headers_list:
             header_ids.append(header['_id'])
             event_cursor = find_event(header_ids)

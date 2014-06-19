@@ -34,7 +34,7 @@ class Event(DynamicDocument):
     description = StringField(max_length=50)
     data = DictField()
     meta = {
-        'indexes': ['-_id']
+        'indexes': ['-headers']
     }
 
 
