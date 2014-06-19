@@ -72,17 +72,17 @@ crsr2 = find(header_id=[237, 130, 137], owner='ark*')
 #     print entry
 #
 # result = find(header_id={'start': 130, 'end': 237}, contents=True)
-# for entry in result:
-#     print entry
-for i in xrange(400):
-    event = record_event(event_id=i, header_id=237, start_time=datetime.datetime(2014,10,1),
-                         end_time=datetime.datetime.utcnow())
-
-result = find(header_id=237, contents=True)
+# # for entry in result:
+# #     print entry
+# for i in xrange(400):
+#     event = record_event(event_id=i, header_id=437, start_time=datetime.datetime(2014,10,1),
+#                          end_time=datetime.datetime.utcnow(), data={'name': ('arman'+ str(i)), 'lastname': 'arkilic'})
+# #
+result = find(header_id=437, contents=True)
 for entry in result:
     print entry
 
-
+# print find(header_id='last', contents=True)
 
 # db = Header._get_db()
 # crsr3 = db['header'].find({'start_time': {'$lt': datetime.datetime(2040, 12, 17, 1, 1),

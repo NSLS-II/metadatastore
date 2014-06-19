@@ -102,49 +102,55 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
     #TODO: Make content recovery more efficient for different use cases if possible
     supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
-    if owner is not None:
-        for entry in supported_wildcard:
-            if entry in owner:
-                query_dict['owner'] = {'$regex': re.compile(owner, re.IGNORECASE)}
-                break
-            else:
-                query_dict['owner'] = owner
-    if header_id is not None:
-        if isinstance(header_id, list):
-            if len(header_id) == 1:
-                query_dict['_id'] = header_id[0]
-            else:
-                query_dict['_id'] = {'$in': header_id}
-        elif isinstance(header_id, dict):
-            query_dict['_id'] = {'$gte': header_id['start'], '$lte': header_id['end']}
-        else:
-            query_dict['_id'] = header_id
-
-    if start_time is not None:
-        if isinstance(start_time, list):
-            for time_entry in start_time:
-                __validate_time(time_entry)
-            query_dict['start_time'] = {'$in': start_time}
-        elif isinstance(start_time, dict):
-            #TODO: Replace validate time input with list avoid multiple lines of code
-            __validate_time(start_time['start'])
-            __validate_time(start_time['end'])
-            query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
-        else:
-            if __validate_time(start_time):
-                query_dict['start_time'] = {'$gte': start_time,
-                                            '$lt': datetime.datetime.utcnow()}
-    if beamline_id is not None:
-        for entry in supported_wildcard:
-            if entry in beamline_id:
-                query_dict['beamline_id'] = {'$regex': re.compile(beamline_id, re.IGNORECASE)}
-                break
-            else:
-                query_dict['beamline_id'] = beamline_id
-    header_cursor = find_header(query_dict)
     headers_list = list()
-    for i in xrange(header_cursor.count()):
-        headers_list.append(header_cursor.__getitem__(i))
+    if header_id is 'last':
+        coll = Header._get_collection()
+        header_cursor = coll.find().sort([('_id', -1)]).limit(1)
+        print header_cursor[0]
+        headers_list.append(header_cursor[0])
+    else:
+        if owner is not None:
+            for entry in supported_wildcard:
+                if entry in owner:
+                    query_dict['owner'] = {'$regex': re.compile(owner, re.IGNORECASE)}
+                    break
+                else:
+                    query_dict['owner'] = owner
+        if header_id is not None:
+            if isinstance(header_id, list):
+                if len(header_id) == 1:
+                    query_dict['_id'] = header_id[0]
+                else:
+                    query_dict['_id'] = {'$in': header_id}
+            elif isinstance(header_id, dict):
+                query_dict['_id'] = {'$gte': header_id['start'], '$lte': header_id['end']}
+            else:
+                query_dict['_id'] = header_id
+
+        if start_time is not None:
+            if isinstance(start_time, list):
+                for time_entry in start_time:
+                    __validate_time(time_entry)
+                query_dict['start_time'] = {'$in': start_time}
+            elif isinstance(start_time, dict):
+                #TODO: Replace validate time input with list avoid multiple lines of code
+                __validate_time(start_time['start'])
+                __validate_time(start_time['end'])
+                query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
+            else:
+                if __validate_time(start_time):
+                    query_dict['start_time'] = {'$gte': start_time,
+                                                '$lt': datetime.datetime.utcnow()}
+        if beamline_id is not None:
+            for entry in supported_wildcard:
+                if entry in beamline_id:
+                    query_dict['beamline_id'] = {'$regex': re.compile(beamline_id, re.IGNORECASE)}
+                    break
+                else:
+                    query_dict['beamline_id'] = beamline_id
+        header_cursor = find_header(query_dict)
+        for i in xrange(header_cursor.count()):
+            headers_list.append(header_cursor.__getitem__(i))
     if contents is False:
         result = headers_list
     else:
