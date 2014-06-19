@@ -89,6 +89,8 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
      Usage:
      If contents=False, only run_header information is returned
         contents=True will return beamline_config and events related to given run_header(s)
+     >>> find(header_id='last')
+     >>> find(header_id='last', contents=True)
      >>> find(header_id=130, contents=True)
      >>> find(header_id=[130,123,145,247,...])
      >>> find(header_id={'start': 129, 'end': 141})
@@ -106,7 +108,6 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
     if header_id is 'last':
         coll = Header._get_collection()
         header_cursor = coll.find().sort([('_id', -1)]).limit(1)
-        print header_cursor[0]
         headers_list.append(header_cursor[0])
     else:
         if owner is not None:
@@ -155,11 +156,12 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
         result = headers_list
     else:
         header_ids = list()
-        print headers_list
         for header in headers_list:
             header_ids.append(header['_id'])
             event_cursor = find_event(header_ids)
+            beamline_cfg_cursor = find_beamline_config(header_ids)
             header['events'] = __decode_cursor(event_cursor)
+            header['beamline_config'] = __decode_cursor(beamline_cfg_cursor)
         result = headers_list
     return result
 
@@ -193,8 +195,8 @@ def find_event(header_ids, event_query_dict={}):
     return collection.find(event_query_dict)
 
 
-def find_beamline_config(header_ids, **kwargs):
-    kwargs['headers'] = [header_ids]
+def find_beamline_config(header_ids, beamline_cfg_query_dict={}):
+    beamline_cfg_query_dict['headers'] = [header_ids]
     collection = BeamlineConfig._get_collection()
-    return collection.find(kwargs)
+    return collection.find(beamline_cfg_query_dict)
 
