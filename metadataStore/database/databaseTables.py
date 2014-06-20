@@ -6,12 +6,12 @@ from mongoengine.fields import *
 class Header(Document):
     _id = IntField(primary_key=True, unique=True)
     start_time = DateTimeField(required=True)
-    # end_time = DateTimeField(required=False)
+    end_time = DateTimeField(required=False)
     update_time = DateTimeField()
     owner = StringField(max_length=20, required=True)
     beamline_id = StringField(max_length=20, required=True)
     meta = {
-        'indexes': ['-_id']
+        'indexes': ['-_id', '-start_time']
     }
 
 

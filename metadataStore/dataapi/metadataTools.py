@@ -9,13 +9,12 @@ import datetime
 #TODO: Mongoengine index creation pattern
 
 
-def save_header(run_id, run_owner, start_time, beamline_id, update_time):
+def save_header(run_id, run_owner, start_time, beamline_id):
     #TODO: add write_concern and safety measures to rollback
-    if update_time is None:
-        update_time = start_time
+    update_time = start_time
     try:
         header = Header(_id=run_id, owner=run_owner, start_time=start_time,
-                        update_time=update_time, beamline_id=beamline_id).save(wtimeout=100)
+                        update_time=update_time,end_time=start_time, beamline_id=beamline_id).save(wtimeout=100)
     except:
         metadataLogger.logger.warning('Header cannot be created')
         raise OperationError('Header cannot be created')
@@ -94,9 +93,9 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
      >>> find(header_id=130, contents=True)
      >>> find(header_id=[130,123,145,247,...])
      >>> find(header_id={'start': 129, 'end': 141})
-     >>> find(create_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
-      >>> find(create_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
-      >>> find(create_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000),
+     >>> find(start_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
+      >>> find(start_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
+      >>> find(start_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000),
                             'end': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)})
       >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
       >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
@@ -125,21 +124,22 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
                     query_dict['_id'] = {'$in': header_id}
             elif isinstance(header_id, dict):
                 query_dict['_id'] = {'$gte': header_id['start'], '$lte': header_id['end']}
+            elif isinstance(header_id, str):
+                raise ValueError('header_id can not be a string')
             else:
                 query_dict['_id'] = header_id
 
         if start_time is not None:
             if isinstance(start_time, list):
                 for time_entry in start_time:
-                    __validate_time(time_entry)
+                    __validate_time([time_entry])
                 query_dict['start_time'] = {'$in': start_time}
             elif isinstance(start_time, dict):
                 #TODO: Replace validate time input with list avoid multiple lines of code
-                __validate_time(start_time['start'])
-                __validate_time(start_time['end'])
+                __validate_time([start_time['start'],start_time['end']])
                 query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
             else:
-                if __validate_time(start_time):
+                if __validate_time([start_time]):
                     query_dict['start_time'] = {'$gte': start_time,
                                                 '$lt': datetime.datetime.utcnow()}
         if beamline_id is not None:
@@ -160,26 +160,25 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
             header_ids.append(header['_id'])
             event_cursor = find_event(header_ids)
             beamline_cfg_cursor = find_beamline_config(header_ids)
+            print('event cursor count', event_cursor.count())
             header['events'] = __decode_cursor(event_cursor)
             header['beamline_config'] = __decode_cursor(beamline_cfg_cursor)
         result = headers_list
     return result
 
 
-def __validate_time(time_entry):
-    if isinstance(time_entry, datetime.datetime):
-        flag = True
-    else:
-        raise TypeError('Date must be datetime object')
+def __validate_time(time_entry_list):
+    for entry in time_entry_list:
+        if isinstance(entry, datetime.datetime):
+            flag = True
+        else:
+            raise TypeError('Date must be datetime object')
     return flag
 
 
 def __decode_cursor(cursor_object):
     events = dict()
-    temp_dict = dict()
-    for i in xrange(cursor_object.count()):
-        temp_dict = cursor_object.__getitem__(i)
-        event_id = temp_dict['_id']
+    for temp_dict in cursor_object:
         events[temp_dict['_id']] = temp_dict
     return events
 
