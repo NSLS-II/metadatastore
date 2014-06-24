@@ -14,7 +14,8 @@ def save_header(run_id, run_owner, start_time, beamline_id):
     update_time = start_time
     try:
         header = Header(_id=run_id, owner=run_owner, start_time=start_time,
-                        update_time=update_time,end_time=start_time, beamline_id=beamline_id).save(wtimeout=100)
+                        update_time=update_time,end_time=start_time, beamline_id=beamline_id).save(wtimeout=100,
+                                                                                                  write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Header cannot be created')
         raise OperationError('Header cannot be created')
@@ -44,7 +45,7 @@ def record_event(event_id, header_id,  start_time, end_time, seqno=None, descrip
         raise ValueError('run_header cannot be located. Check header_id')
     try:
         event = Event(_id=event_id, headers=header_list, seqno=seqno, start_time=start_time, end_time=end_time,
-                      description=description, data=data).save()
+                      description=description, data=data).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Event cannot be recorded')
         raise OperationError('Event cannot be recorded')
@@ -56,7 +57,7 @@ def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=Non
     beamline_cfg = BeamlineConfig(_id=beamline_cfg_id, headers=header_list, enery=energy, wavelength=wavelength,
                                       i_zero=i_zero, diffractometer=diffractometer)
     try:
-        beamline_cfg.save(wtimeout=100)
+        beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Beamline configuration cannot be saved')
         raise OperationError('Beamline configuration cannot be saved')
@@ -65,18 +66,6 @@ def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=Non
 
 def __update_header():
     #TODO: Once event is complete this routine is triggered to update the end_time of the event
-    pass
-
-
-def delete_event():
-    pass
-
-
-def delete_header():
-    """
-    Delete a header and all related events, beamline configs etc
-    """
-    #TODO: Delete all relational data alongside this?
     pass
 
 

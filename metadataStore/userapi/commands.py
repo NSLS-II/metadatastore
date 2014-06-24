@@ -5,42 +5,23 @@ __author__ = 'arkilic'
 from metadataStore.dataapi.metadataTools import *
 
 
-def create(type, fields={}):
-    #TODO:
-    if type is 'header':
-        print 'create header'
-    elif type is 'beamline_config':
-        print 'create beamline config given header id'
-    elif type is 'event':
-        print 'create event given header id'
+def create(param_dict):
+    """
+    sample_dict = {'header':{'header_id':1903, 'owner': 'arkilic', 'beamline_id': 'csx', 'custom': {}},
+    'beamline_config':{'beamline_config_id': 12, 'header_id': 1903, 'wavelenght':12.345,
+    'custom':{'new_field': 'value}}}
+    """
+    if isinstance(param_dict, dict):
+        try:
+            header_dict = param_dict['header']
+            beamline_cfg_dict = param_dict['beamline_config']
+        except:
+            raise KeyError('Input dictionary must have appropriate keys. Please check sample_dict')
     else:
-        raise ValueError(str(type) + ' not a valid type choice')
-    """
-    Creates a run_header, beamline_config, or event with provided a header_id
-    """
+        raise TypeError('Input must be a dictionary. Please check sample_dict')
 
 
-def insert():
-    """
-    Inserts events into specified or default run_header
-    """
-    #TODO: unless run_header _id is specified, use last run_id to insert events
-    pass
-
-
-def insert_config():
-    pass
-
-
-def update_config():
-    pass
-
-
-def update():
-    pass
-
-
-def delete():
+def log():
     pass
 
 
