@@ -1,29 +1,90 @@
 __author__ = 'arkilic'
 
-#TODO: Database does not check whether entry exists or not prior to creation for things that are specified as unique. Add such check here
+#TODO: Database does not check whether entry exists or not prior to creation for things that are specified as unique. Add such check here or belongs to client????
 #TODO: Read the default parameters from config file
 from metadataStore.dataapi.metadataTools import *
 
 
 def create(param_dict):
     """
-    sample_dict = {'header':{'header_id':1903, 'owner': 'arkilic', 'beamline_id': 'csx', 'custom': {}},
-    'beamline_config':{'beamline_config_id': 12, 'header_id': 1903, 'wavelenght':12.345,
-    'custom':{'new_field': 'value}}}
+    Create allows creation of a run_header and beamline_config. Routine must be provided with dictionary of dictionaries
+    with keys header and beamline_config as shown below:
+    Usage:
+    >>> sample_dict = {'header':{'run_id': 1903, 'run_owner': 'arkilic', 'beamline_id': 'csx', 'custom': {},
+                        'start_time': datetime.datetime.utcnow()},
+                        'beamline_config':{'beamline_config_id': 122, 'header_id': 1903, 'wavelength': 12.345,
+                        'custom': {'new_field': 'value'}}}
+    >>> create(sample_dict)
+
+    Returns: Header and BeamlineConfig objects
     """
     if isinstance(param_dict, dict):
         try:
             header_dict = param_dict['header']
             beamline_cfg_dict = param_dict['beamline_config']
-        except:
-            raise KeyError('Input dictionary must have appropriate keys. Please check sample_dict')
+            if header_dict:
+               id = header_dict['run_id']
+               owner = header_dict['run_owner']
+               start_time = header_dict['start_time']
+               beamline_id = header_dict['beamline_id']
+               custom_field = header_dict['custom']
+            if beamline_cfg_dict:
+                b_id = beamline_cfg_dict['beamline_config_id']
+                bh_id = beamline_cfg_dict['header_id']
+            if beamline_cfg_dict.has_key('energy'):
+                energy = beamline_cfg_dict['energy']
+            else:
+                energy = None
+            if beamline_cfg_dict.has_key('wavelength'):
+                wavelength = beamline_cfg_dict['wavelength']
+            else:
+                wavelength = None
+            if beamline_cfg_dict.has_key('i_zero'):
+                i_zero = beamline_cfg_dict['i_zero']
+            else:
+                i_zero = None
+            if beamline_cfg_dict.has_key('diffractometer'):
+                diffractometer = beamline_cfg_dict['diffractometer']
+            else:
+                diffractometer = {}
+            if beamline_cfg_dict.has_key('custom'):
+                custom = beamline_cfg_dict['custom']
+            else:
+                custom = dict()
+        except KeyError:
+            raise
+        try:
+            if header_dict:
+                header = save_header(run_id=id, run_owner=owner, start_time=start_time, beamline_id=beamline_id,
+                                     custom=custom_field)
+            else:
+                header = None
+            print beamline_cfg_dict
+            if beamline_cfg_dict:
+                bcfg = save_beamline_config(beamline_cfg_id=b_id, header_id=bh_id, energy=energy, wavelength=wavelength,
+                                            i_zero=i_zero, diffractometer=diffractometer, custom=custom)
+            else:
+                bcfg = None
+        except OperationError:
+            raise
     else:
-        raise TypeError('Input must be a dictionary. Please check sample_dict')
+        raise TypeError('Input must be a dictionary. Please check sample_dict in python docs')
+    return header, bcfg
+
+def log(text, owner, event_id, header_id, seq_no, start_time=datetime.datetime.utcnow(),
+        end_time=datetime.datetime.utcnow(), data={}):
+        try:
+            record_event(event_id=event_id, header_id=header_id, start_time=start_time, end_time=end_time,
+                         description=text, data=data)
+        except OperationError:
+            raise
 
 
-def log():
-    pass
+def search(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False):
+    try:
+        result = find(header_id=header_id, owner=owner, start_time=start_time, update_time=update_time,
+                      beamline_id=beamline_id, contents=contents)
+    except OperationError:
+        raise
+    return result
 
-
-def search():
-    pass

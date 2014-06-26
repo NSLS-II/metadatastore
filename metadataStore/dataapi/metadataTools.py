@@ -9,12 +9,12 @@ import datetime
 #TODO: Mongoengine index creation pattern
 
 
-def save_header(run_id, run_owner, start_time, beamline_id):
+def save_header(run_id, run_owner, start_time, beamline_id, custom=dict()):
     #TODO: add write_concern and safety measures to rollback
     update_time = start_time
     try:
         header = Header(_id=run_id, owner=run_owner, start_time=start_time,
-                        update_time=update_time,end_time=start_time, beamline_id=beamline_id).save(wtimeout=100,
+                        update_time=update_time,end_time=start_time, beamline_id=beamline_id, custom=custom).save(wtimeout=100,
                                                                                                   write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Header cannot be created')
@@ -52,10 +52,11 @@ def record_event(event_id, header_id,  start_time, end_time, seqno=None, descrip
     return event
 
 
-def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=None, i_zero=None, diffractometer=None):
+def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=None, i_zero=None, diffractometer={},
+                         custom={}):
     header_list = get_header(header_id)
     beamline_cfg = BeamlineConfig(_id=beamline_cfg_id, headers=header_list, enery=energy, wavelength=wavelength,
-                                      i_zero=i_zero, diffractometer=diffractometer)
+                                  i_zero=i_zero, diffractometer=diffractometer, custom=custom)
     try:
         beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
     except:
@@ -89,7 +90,7 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
       >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
       >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
     """
-    #TODO: Make content recovery more efficient for different use cases if possible
+    #TODO: Add embedded document search
     supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
     headers_list = list()
@@ -124,7 +125,6 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
                     __validate_time([time_entry])
                 query_dict['start_time'] = {'$in': start_time}
             elif isinstance(start_time, dict):
-                #TODO: Replace validate time input with list avoid multiple lines of code
                 __validate_time([start_time['start'],start_time['end']])
                 query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
             else:
@@ -139,8 +139,8 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
                 else:
                     query_dict['beamline_id'] = beamline_id
         header_cursor = find_header(query_dict)
-        for i in xrange(header_cursor.count()):
-            headers_list.append(header_cursor.__getitem__(i))
+        for entry in header_cursor:
+            headers_list.append(entry)
     if contents is False:
         result = headers_list
     else:
