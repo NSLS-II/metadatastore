@@ -42,7 +42,7 @@ def record_event(event_id, header_id,  start_time, end_time, seqno=None, descrip
     #TODO: add end_time to each header with given _id once event recorded
     if not header_list:
         metadataLogger.logger.warning('run_header cannot be located. Check header_id')
-        raise ValueError('run_header cannot be located. Check header_id')
+        raise TypeError('run_header cannot be located. Check header_id')
     try:
         event = Event(_id=event_id, headers=header_list, seqno=seqno, start_time=start_time, end_time=end_time,
                       description=description, data=data).save(wtimeout=100, write_concern={'w': 1})
@@ -60,8 +60,8 @@ def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=Non
     try:
         beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
     except:
-        metadataLogger.logger.warning('Beamline configuration cannot be saved')
-        raise OperationError('Beamline configuration cannot be saved')
+        metadataLogger.logger.warning('Beamline config cannot be saved')
+        raise OperationError('Beamline config cannot be saved')
     return beamline_cfg
 
 
@@ -70,7 +70,7 @@ def __update_header():
     pass
 
 
-def find(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False):
+def find(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False, custom={}):
     """
     Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
     So iterating it multiple times will only cause a single query.
@@ -94,6 +94,7 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
     supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
     headers_list = list()
+
     if header_id is 'last':
         coll = Header._get_collection()
         header_cursor = coll.find().sort([('_id', -1)]).limit(1)
@@ -115,7 +116,7 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
             elif isinstance(header_id, dict):
                 query_dict['_id'] = {'$gte': header_id['start'], '$lte': header_id['end']}
             elif isinstance(header_id, str):
-                raise ValueError('header_id can not be a string')
+                raise TypeError('header_id can not be a string')
             else:
                 query_dict['_id'] = header_id
 
@@ -149,7 +150,6 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
             header_ids.append(header['_id'])
             event_cursor = find_event(header_ids)
             beamline_cfg_cursor = find_beamline_config(header_ids)
-            print('event cursor count', event_cursor.count())
             header['events'] = __decode_cursor(event_cursor)
             header['beamline_config'] = __decode_cursor(beamline_cfg_cursor)
         result = headers_list

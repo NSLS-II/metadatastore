@@ -2,6 +2,7 @@ __author__ = 'arkilic'
 
 #TODO: Database does not check whether entry exists or not prior to creation for things that are specified as unique. Add such check here or belongs to client????
 #TODO: Read the default parameters from config file
+#TODO: Convert user input to datetime.datetime()
 from metadataStore.dataapi.metadataTools import *
 
 
@@ -71,6 +72,7 @@ def create(param_dict):
         raise TypeError('Input must be a dictionary. Please check sample_dict in python docs')
     return header, bcfg
 
+
 def log(text, owner, event_id, header_id, seq_no, start_time=datetime.datetime.utcnow(),
         end_time=datetime.datetime.utcnow(), data={}):
         try:
@@ -80,10 +82,10 @@ def log(text, owner, event_id, header_id, seq_no, start_time=datetime.datetime.u
             raise
 
 
-def search(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False):
+def search(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False, custom={}):
     try:
         result = find(header_id=header_id, owner=owner, start_time=start_time, update_time=update_time,
-                      beamline_id=beamline_id, contents=contents)
+                      beamline_id=beamline_id, contents=contents, custom=custom)
     except OperationError:
         raise
     return result

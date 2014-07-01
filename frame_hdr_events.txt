@@ -92,6 +92,7 @@ run_hdr : {
     }
 
     event_stream : {
+        header_id:
         1 : { id, seqno, ... }
         2 : { id, seqno, ... }
           :

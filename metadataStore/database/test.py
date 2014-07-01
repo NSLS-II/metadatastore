@@ -31,8 +31,6 @@ result = find(start_time={'start': datetime.datetime(2004, 1, 17, 0, 0),
 end = time.time()
 print (1000*(end-start), ' milliseconds')
 
-
-
 for entry in result:
     print entry.keys()
 

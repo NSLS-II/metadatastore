@@ -16,7 +16,6 @@ class Header(Document):
     }
 
 
-
 class BeamlineConfig(DynamicDocument):
     _id = IntField(primary_key=True, required=False)
     headers = ListField(ReferenceField('Header', reverse_delete_rule=DO_NOTHING), required=True)
@@ -41,3 +40,4 @@ class Event(DynamicDocument):
 
 
 #TODO: Read and add fields to beamline_config and events from config file for a given session
+
