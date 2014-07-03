@@ -63,7 +63,7 @@ def create(param_dict):
             print beamline_cfg_dict
             if beamline_cfg_dict:
                 bcfg = save_beamline_config(beamline_cfg_id=b_id, header_id=bh_id, energy=energy, wavelength=wavelength,
-                                            i_zero=i_zero, diffractometer=diffractometer, custom=custom)
+                                            i_zero=i_zero, custom=custom)
             else:
                 bcfg = None
         except OperationError:
@@ -73,19 +73,19 @@ def create(param_dict):
     return header, bcfg
 
 
-def log(text, owner, event_id, header_id, seq_no, start_time=datetime.datetime.utcnow(),
+def log(text, owner, event_id, header_id, event_type_id, run_id, seqno=None, start_time=datetime.datetime.utcnow(),
         end_time=datetime.datetime.utcnow(), data={}):
         try:
-            record_event(event_id=event_id, header_id=header_id, start_time=start_time, end_time=end_time,
-                         description=text, data=data)
+            record_event(event_id=event_id, header_id=header_id, event_type_id=event_type_id, run_id=run_id,
+                         seqno=seqno, start_time=start_time, end_time=end_time, description=text, data=data)
         except OperationError:
             raise
 
 
-def search(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False, custom={}):
+def search(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False, **kwargs):
     try:
         result = find(header_id=header_id, owner=owner, start_time=start_time, update_time=update_time,
-                      beamline_id=beamline_id, contents=contents, custom=custom)
+                      beamline_id=beamline_id, contents=contents, **kwargs)
     except OperationError:
         raise
     return result

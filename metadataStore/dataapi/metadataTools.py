@@ -36,7 +36,8 @@ def get_header(id):
     return header_object
 
 
-def record_event(event_id, header_id,  start_time, end_time, seqno=None, description=None, data=None):
+def record_event(event_id, header_id,  start_time, event_type_id, run_id, end_time=None, seqno=None,
+                 description=None, data=None):
     header_list = get_header(header_id)
     #TODO: add write_concern and safety measures to rollback
     #TODO: add end_time to each header with given _id once event recorded
@@ -44,19 +45,19 @@ def record_event(event_id, header_id,  start_time, end_time, seqno=None, descrip
         metadataLogger.logger.warning('run_header cannot be located. Check header_id')
         raise TypeError('run_header cannot be located. Check header_id')
     try:
-        event = Event(_id=event_id, headers=header_list, seqno=seqno, start_time=start_time, end_time=end_time,
+        event = Event(_id=event_id, headers=header_list,event_type_id=event_type_id, run_id=run_id, seqno=seqno,
+                      start_time=start_time, end_time=end_time,
                       description=description, data=data).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Event cannot be recorded')
-        raise OperationError('Event cannot be recorded')
+        raise
     return event
 
 
-def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=None, i_zero=None, diffractometer={},
-                         custom={}):
+def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=None, i_zero=None, custom={}):
     header_list = get_header(header_id)
     beamline_cfg = BeamlineConfig(_id=beamline_cfg_id, headers=header_list, enery=energy, wavelength=wavelength,
-                                  i_zero=i_zero, diffractometer=diffractometer, custom=custom)
+                                  i_zero=i_zero, custom=custom)
     try:
         beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
     except:
@@ -70,7 +71,8 @@ def __update_header():
     pass
 
 
-def find(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False, custom={}):
+def find(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None,
+         event_seq_no=None, contents=False, **kwargs):
     """
     Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
     So iterating it multiple times will only cause a single query.
@@ -100,59 +102,71 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
         header_cursor = coll.find().sort([('_id', -1)]).limit(1)
         headers_list.append(header_cursor[0])
     else:
-        if owner is not None:
-            for entry in supported_wildcard:
-                if entry in owner:
-                    query_dict['owner'] = {'$regex': re.compile(owner, re.IGNORECASE)}
-                    break
-                else:
-                    query_dict['owner'] = owner
-        if header_id is not None:
-            if isinstance(header_id, list):
-                if len(header_id) == 1:
-                    query_dict['_id'] = header_id[0]
-                else:
-                    query_dict['_id'] = {'$in': header_id}
-            elif isinstance(header_id, dict):
-                query_dict['_id'] = {'$gte': header_id['start'], '$lte': header_id['end']}
-            elif isinstance(header_id, str):
-                raise TypeError('header_id can not be a string')
+        if header_id is None and owner is None and start_time is None and update_time is None and beamline_id is None:
+            if event_seq_no is not None and kwargs:
+                pass
+#TODO: Check kwargs to see in custom field searched. Get all the events with that given seq_no and kwargs.No headers!
+            elif event_seq_no is not None and not kwargs:
+                query_dict['seqno'] = event_seq_no
             else:
-                query_dict['_id'] = header_id
+                print 'Everything is none now. Are you talking to me?'
+            print query_dict
+        else:
+            #TODO add the case where event_seq_no is not None and some header parameter is provided. This case return the headers with events and pick the given requested events from all headers
+            if owner is not None:
+                for entry in supported_wildcard:
+                    if entry in owner:
+                        query_dict['owner'] = {'$regex': re.compile(owner, re.IGNORECASE)}
+                        break
+                    else:
+                        query_dict['owner'] = owner
+            if header_id is not None:
+                if isinstance(header_id, list):
+                    if len(header_id) == 1:
+                        query_dict['_id'] = header_id[0]
+                    else:
+                        query_dict['_id'] = {'$in': header_id}
+                elif isinstance(header_id, dict):
+                    query_dict['_id'] = {'$gte': header_id['start'], '$lte': header_id['end']}
+                elif isinstance(header_id, str):
+                    raise TypeError('header_id can not be a string')
+                else:
+                    query_dict['_id'] = header_id
 
-        if start_time is not None:
-            if isinstance(start_time, list):
-                for time_entry in start_time:
-                    __validate_time([time_entry])
-                query_dict['start_time'] = {'$in': start_time}
-            elif isinstance(start_time, dict):
-                __validate_time([start_time['start'],start_time['end']])
-                query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
-            else:
-                if __validate_time([start_time]):
-                    query_dict['start_time'] = {'$gte': start_time,
-                                                '$lt': datetime.datetime.utcnow()}
-        if beamline_id is not None:
-            for entry in supported_wildcard:
-                if entry in beamline_id:
-                    query_dict['beamline_id'] = {'$regex': re.compile(beamline_id, re.IGNORECASE)}
-                    break
+            if start_time is not None:
+                if isinstance(start_time, list):
+                    for time_entry in start_time:
+                        __validate_time([time_entry])
+                    query_dict['start_time'] = {'$in': start_time}
+                elif isinstance(start_time, dict):
+                    __validate_time([start_time['start'],start_time['end']])
+                    query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
                 else:
-                    query_dict['beamline_id'] = beamline_id
-        header_cursor = find_header(query_dict)
-        for entry in header_cursor:
-            headers_list.append(entry)
-    if contents is False:
-        result = headers_list
-    else:
-        header_ids = list()
-        for header in headers_list:
-            header_ids.append(header['_id'])
-            event_cursor = find_event(header_ids)
-            beamline_cfg_cursor = find_beamline_config(header_ids)
-            header['events'] = __decode_cursor(event_cursor)
-            header['beamline_config'] = __decode_cursor(beamline_cfg_cursor)
-        result = headers_list
+                    if __validate_time([start_time]):
+                        query_dict['start_time'] = {'$gte': start_time,
+                                                    '$lt': datetime.datetime.utcnow()}
+            if beamline_id is not None:
+                for entry in supported_wildcard:
+                    if entry in beamline_id:
+                        query_dict['beamline_id'] = {'$regex': re.compile(beamline_id, re.IGNORECASE)}
+                        break
+                    else:
+                        query_dict['beamline_id'] = beamline_id
+
+            header_cursor = find_header(query_dict)
+            for entry in header_cursor:
+                headers_list.append(entry)
+        if contents is False:
+            result = headers_list
+        else:
+            header_ids = list()
+            for header in headers_list:
+                header_ids.append(header['_id'])
+                event_cursor = find_event(header_ids)
+                beamline_cfg_cursor = find_beamline_config(header_ids)
+                header['events'] = __decode_cursor(event_cursor)
+                header['beamline_config'] = __decode_cursor(beamline_cfg_cursor)
+            result = headers_list
     return result
 
 
