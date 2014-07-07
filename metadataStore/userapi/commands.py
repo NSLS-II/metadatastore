@@ -82,10 +82,12 @@ def log(text, owner, event_id, header_id, event_type_id, run_id, seqno=None, sta
             raise
 
 
-def search(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None, contents=False, **kwargs):
+def search(header_id=None, owner=None, start_time=None, text=None, update_time=None, beamline_id=None,
+           contents=False, **kwargs):
+    print text
     try:
         result = find(header_id=header_id, owner=owner, start_time=start_time, update_time=update_time,
-                      beamline_id=beamline_id, contents=contents, **kwargs)
+                      beamline_id=beamline_id, contents=contents, text=text, **kwargs)
     except OperationError:
         raise
     return result

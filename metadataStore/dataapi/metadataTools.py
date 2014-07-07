@@ -71,7 +71,7 @@ def __update_header():
     pass
 
 
-def find(header_id=None, owner=None, start_time=None, update_time=None, beamline_id=None,
+def find(header_id=None, text=None, owner=None, start_time=None, update_time=None, beamline_id=None,
          event_seq_no=None, contents=False, **kwargs):
     """
     Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
@@ -102,7 +102,8 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
         header_cursor = coll.find().sort([('_id', -1)]).limit(1)
         headers_list.append(header_cursor[0])
     else:
-        if header_id is None and owner is None and start_time is None and update_time is None and beamline_id is None:
+        if header_id is None and owner is None and start_time is None and update_time is None and beamline_id is None \
+                and text is None:
             if event_seq_no is not None and kwargs:
                 pass
 #TODO: Check kwargs to see in custom field searched. Get all the events with that given seq_no and kwargs.No headers!
@@ -156,6 +157,13 @@ def find(header_id=None, owner=None, start_time=None, update_time=None, beamline
             header_cursor = find_header(query_dict)
             for entry in header_cursor:
                 headers_list.append(entry)
+            if text is not None:
+                for entry in supported_wildcard:
+                    if entry in text:
+                        query_dict['description'] = {'$regex': re.compile(text, re.IGNORECASE)}
+                        break
+                    else:
+                        query_dict['description'] = text
         if contents is False:
             result = headers_list
         else:
