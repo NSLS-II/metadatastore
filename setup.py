@@ -12,7 +12,8 @@ except ImportError:
         from distutils.core import setup
 
 from distutils.core import setup, Extension
-import numpy
+import numpy as np
+import os
 
 MAJOR = 0
 MINOR = 0
@@ -24,6 +25,13 @@ QUALIFIER = ''
 
 FULLVERSION = VERSION
 print(FULLVERSION)
+
+# Utility function to read the README file.
+# Used for the long_description.  It's nice, because now 1) we have a top level
+# README file and 2) it's easier to type in the README file than to put a raw
+# string in below ...
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 if not ISRELEASED:
     import subprocess
@@ -61,9 +69,18 @@ setup(
     name='metadataStore',
     version=FULLVERSION,
     author='Arkilic',
+    author_email=None,
+    license="BSD (3-clause)",
+    url = "https://github.com/arkilic/metadataStore",
     packages=['metadataStore',
-             'metadataStore.config', 'metadataStore.dataapi',
-             'metadataStore.database', 'metadataStore.sessionManager',
-             'metadataStore.userapi',
-    ]
+              'metadataStore.config', 'metadataStore.dataapi',
+              'metadataStore.database', 'metadataStore.sessionManager',
+              'metadataStore.userapi',
+    ],
+    long_description=read('README.md'),
+    classifiers=[
+        "License :: OSI Approved :: BSD License",
+        "Development Status :: 3 - Alpha",
+        "Programming Language :: Python :: 2.7",
+    ],
 )
