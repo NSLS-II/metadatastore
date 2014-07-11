@@ -8,7 +8,7 @@ run_hdr : {
     generating_file : string
     sample : {
         id : number
-        description :S string
+        description : string
     }
     project : string
     
@@ -16,7 +16,7 @@ run_hdr : {
         energy : number
         wavelength : number
         i_zero : number
-        
+
         diffractometer : {
             geometry : string
             xtal : {
@@ -36,59 +36,62 @@ run_hdr : {
         }
     }
 
-    event_A : {
-        id : number
-        seqno : number
-        description : "gather diffractometer angles"
-        data : {
-            motors : {
-                theta   : [ value, timestamp ]
-                2theta  : [ value, timestamp ]
-                phi     : [ value, timestamp ]
-                chi     : [ value, timestamp ]
+    events = {
+
+        event_A : {
+            id : number
+            seqno : number
+            description : "gather diffractometer angles"
+            data : {
+                motors : {
+                    theta   : [ value, timestamp ]
+                    2theta  : [ value, timestamp ]
+                    phi     : [ value, timestamp ]
+                    chi     : [ value, timestamp ]
+                }
             }
-        }
-    }
+        },
 
-    event_B : {
-        id : number
-        seqno : number
-        description : "acquire dark-frame"
-        data : {
-            timestamp : number
-            frame_id : number
-            width : number
-            height : number
-            compressed : string
-            compression_type : string
-            data : [ ... ]
-        }
-        file : {
-            url : string
-            chunksize : number
-            ...
-        }
-    }
+        event_B : {
+            id : number
+            seqno : number
+            description : "acquire dark-frame"
+            data : {
+                timestamp : number
+                frame_id : number
+                width : number
+                height : number
+                compressed : string
+                compression_type : string
+                data : [ ... ]
+            }
+            file : {
+                url : string
+                chunksize : number
+                ...
+            }
+        },
 
-    event_C : {
-        id : number
-        seqno : number
-        description : "acquire frame and I0 counts"
-        dataframe : {
-            timestamp : number
-            frame_id : number
-            width : number
-            height : number
-            compressed : string
-            compression_type : string
-            data : [ ... ]
-        }
-        file : {
-            url : string
-            chunksize : number
-            ...
-        }
-        i_zero : [ value, timestamp ]
+        event_C : {
+            id : number
+            seqno : number
+            description : "acquire frame and I0 counts"
+            dataframe : {
+                timestamp : number
+                frame_id : number
+                width : number
+                height : number
+                compressed : string
+                compression_type : string
+                data : [ ... ]
+            }
+            file : {
+                url : string
+                chunksize : number
+                ...
+            }
+            i_zero : [ value, timestamp ]
+        },
     }
 
     event_stream : {
