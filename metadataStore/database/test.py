@@ -2,8 +2,8 @@
 import time
 import datetime
 
-from ..dataapi.metadataTools import *
-from ..database.databaseTables import *
+from metadataStore.dataapi.metadataTools import *
+from metadataStore.database.databaseTables import *
 # unused import
 from metadataStore.database.databaseTables import BeamlineConfig, Header
 
