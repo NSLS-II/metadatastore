@@ -4,6 +4,7 @@ import datetime
 
 from metadataStore.dataapi.metadataTools import *
 from metadataStore.database.databaseTables import *
+# unused import
 from metadataStore.database.databaseTables import BeamlineConfig, Header
 
 header1 = save_header(run_id=438, run_owner='arkilic', start_time=datetime.datetime(2014,4,10),beamline_id='xyz')
