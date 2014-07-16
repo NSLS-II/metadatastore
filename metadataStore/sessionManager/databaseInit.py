@@ -7,6 +7,7 @@ from metadataStore.config.parseConfig import database, host, port
 from metadataStore.sessionManager.databaseLogger import DbLogger
 
 try:
+    print(host)
     conn = connect(db=database, host=host, port=int(port))
     db = conn['metaDataStore']
 except:
