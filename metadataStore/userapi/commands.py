@@ -81,7 +81,37 @@ def log(text, owner, event_id, header_id, event_type_id, run_id, seqno=None, sta
         except OperationError:
             raise
 
-
+search_keys_dict = {
+    "header_id" : {
+        "description" : "The unique identifier of the run",
+        "type" : str,
+        },
+    "owner" : {
+        "description" : "The user name of the person that created the header",
+        "type" : str,
+        },
+    "start_time" : {
+        "description" : "The start time in utc",
+        "type" : datetime,
+        },
+    "text" : {
+        "description" : "The description that the 'owner' associated with the run",
+        "type" : str,
+        },
+    "update_time" : {
+        "description" : "??",
+        "type" : datetime,
+        },
+    "beamline_id" : {
+        "description" : "The identifier of the beamline.  Ex: CSX, SRX, etc...",
+        "type" : str,
+        },
+    "contents" : {
+        "description" : ("True: returns all fields. False: returns some subset "
+                         "of the fields"),
+        "type" : bool,
+        },
+    }
 def search(header_id=None, owner=None, start_time=None, text=None, update_time=None, beamline_id=None,
            contents=False, **kwargs):
     print text
