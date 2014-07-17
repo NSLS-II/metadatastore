@@ -122,3 +122,5 @@ def search(header_id=None, owner=None, start_time=None, text=None, update_time=N
         raise
     return result
 
+def search_dict(search_dict):
+    return search(**search_dict)
