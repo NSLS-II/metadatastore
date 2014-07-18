@@ -30,6 +30,21 @@ create(sample_dict3)
 
 ####Create Log entries####################################
 #Simple text logging
-log(text='my first text log attempt', owner='arkilic', event_id=0, run_id=109, event_type_id=13, header_id=1903, seqno=0)
+# for i in xrange(100000):
+#     text_field = 'my first text log attempt'
+#     run_id_field = 109 + i
+#     event_type_id = 34
+#     start = time.time()
+#     log(text=text_field, owner='arkilic', event_id=i, run_id=run_id_field, event_type_id=34,
+#         header_id=1903)
+#     end = time.time()
+#     print str((end-start)*1000) + ' ms'
 
-print search(text='my first text log attempt')
+
+text_field = 'my first text log attempt'
+# run_id_field = 109 + i
+event_type_id = 34
+start = time.time()
+print search(event_type=34, contents=True)
+end = time.time()
+print str((end-start)*1000) + ' ms'

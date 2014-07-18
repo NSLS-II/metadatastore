@@ -1,23 +1,19 @@
 __author__ = 'arkilic'
-
-#TODO: Database does not check whether entry exists or not prior to creation for things that are specified as unique. Add such check here or belongs to client????
-#TODO: Read the default parameters from config file
-#TODO: Convert user input to datetime.datetime()
-from metadataStore.dataapi.metadataTools import *
+from metadataStore.dataapi.raw_commands import *
 
 
 def create(param_dict):
     """
     Create allows creation of a run_header and beamline_config. Routine must be provided with dictionary of dictionaries
     with keys header and beamline_config as shown below:
-    Usage:
+
     >>> sample_dict = {'header':{'run_id': 1903, 'run_owner': 'arkilic', 'beamline_id': 'csx', 'custom': {},
                         'start_time': datetime.datetime.utcnow()},
                         'beamline_config':{'beamline_config_id': 122, 'header_id': 1903, 'wavelength': 12.345,
                         'custom': {'new_field': 'value'}}}
     >>> create(sample_dict)
 
-    Returns: Header and BeamlineConfig objects
+    :return: Header and BeamlineConfig objects
     """
     if isinstance(param_dict, dict):
         try:
@@ -75,11 +71,41 @@ def create(param_dict):
 
 def log(text, owner, event_id, header_id, event_type_id, run_id, seqno=None, start_time=datetime.datetime.utcnow(),
         end_time=datetime.datetime.utcnow(), data={}):
-        try:
-            record_event(event_id=event_id, header_id=header_id, event_type_id=event_type_id, run_id=run_id,
-                         seqno=seqno, start_time=start_time, end_time=end_time, description=text, data=data)
-        except OperationError:
-            raise
+    """
+    Creates an event entry to save experimental/data analysis progress. metadataStore can be used standalone without/
+    dataBroker.
+    :param text: Data Collection and/or analysis description
+    :type text: str or unicode
+    :param event_id: Unique mongodb _id field assigned to a given event
+    :type event_id: int
+    :param header_id: Run_header _id that event belongs to
+    :type header_id: int
+    :param event_type_id: int
+    :type event_type_id:
+    :param run_id: int
+    :type run_id:
+    :param seqno: int
+    :type seqno:
+    :param start_time: formatted datetime of event
+    :type start_time: datetime
+    :param end_time: formatted datetime
+    :type end_time: datetime
+
+    *Usage:*
+
+    >>> log(text='sample entry', owner='arkilic', event_id=1335, header_id=498, event_type_id=4, run_id=45)
+    >>> log(text='sample entry', owner='arkilic', event_id=1335, header_id=498, event_type_id=4, run_id=45,
+        ... data={'motor1': [12,45,67,87,42], 'motor2': [22,55,77,17,12], 'wavelength': [3.45, 1.34, 6.45, 5.13, 4.67]})
+    >>> log(text='sample entry', owner='arkilic', event_id=1335, header_id=498, event_type_id=4, run_id=45,
+        ... start_time=datetime.datetime(2014,4,5,12,55,1000)
+
+    :returns: None
+    """
+    try:
+        record_event(event_id=event_id, header_id=header_id, event_type_id=event_type_id, run_id=run_id,
+                     seqno=seqno, start_time=start_time, end_time=end_time, description=text, data=data)
+    except OperationError:
+        raise
 
 
 def search(header_id=None, owner=None, start_time=None, text=None, update_time=None, beamline_id=None,

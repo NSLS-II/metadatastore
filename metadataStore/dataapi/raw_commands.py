@@ -1,24 +1,27 @@
 __author__ = 'arkilic'
 __version__ = '0.0.2'
 from mongoengine.errors import OperationError
-from metadataStore.database.databaseTables import Header, BeamlineConfig, Event
+from metadataStore.database.databaseTables import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger
 import re
+import getpass
 import datetime
 
-#TODO: Mongoengine index creation pattern
 
-
-def save_header(run_id, run_owner, start_time, beamline_id, custom=dict()):
-    #TODO: add write_concern and safety measures to rollback
-    update_time = start_time
+def save_header(header_id, header_owner=getpass.getuser(), start_time=datetime.datetime.utcnow(), beamline_id=None,
+                scan_id=None, custom=dict()):
+    """
+    >>> save_header(header_id=1345)
+    >>> save_header(header_id=1345, owner='arkilic')
+    >>> save_header(header_id=1345, custom={'field1': 'value1', 'field2': 'value2'})
+    """
     try:
-        header = Header(_id=run_id, owner=run_owner, start_time=start_time,
-                        update_time=update_time,end_time=start_time, beamline_id=beamline_id, custom=custom).save(wtimeout=100,
-                                                                                                  write_concern={'w': 1})
+        header = Header(_id=header_id, owner=header_owner, start_time=start_time,
+                        end_time=start_time, beamline_id=beamline_id, scan_id=scan_id,
+                        custom=custom).save(wtimeout=100,write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Header cannot be created')
-        raise OperationError('Header cannot be created')
+        raise
     return header
 
 
@@ -31,31 +34,69 @@ def list_headers():
     return headers
 
 
-def get_header(id):
-    header_object = Header.objects(_id=id)
+def get_header_object(id):
+    try:
+        header_object = Header.objects(_id=id)
+    except:
+        raise
     return header_object
 
 
-def record_event(event_id, header_id,  start_time, event_type_id, run_id, end_time=None, seqno=None,
-                 description=None, data=None):
-    header_list = get_header(header_id)
-    #TODO: add write_concern and safety measures to rollback
-    #TODO: add end_time to each header with given _id once event recorded
-    if not header_list:
-        metadataLogger.logger.warning('run_header cannot be located. Check header_id')
-        raise TypeError('run_header cannot be located. Check header_id')
+def insert_event_descriptor(event_descriptor_id, header_id, event_type_id, event_type_name=None, type_descriptor=dict(),
+                            tag=None):
+    """
+    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, event_type_name='scan')
+    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, event_type_name='scan',
+    ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'})
+    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, event_type_name='scan',
+    ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'}, tag='analysis')
+    """
     try:
-        event = Event(_id=event_id, headers=header_list,event_type_id=event_type_id, run_id=run_id, seqno=seqno,
-                      start_time=start_time, end_time=end_time,
-                      description=description, data=data).save(wtimeout=100, write_concern={'w': 1})
+        event_descriptor = EventDescriptor(_id=event_descriptor_id, header_id=header_id, event_type_id=event_type_id,
+                                           event_type_name=event_type_name, type_descriptor=type_descriptor,
+                                           tag=tag).save(wtimeout=100, write_concern={'w': 1})
     except:
-        metadataLogger.logger.warning('Event cannot be recorded')
+        metadataLogger.logger.warning('EventDescriptor cannot be created')
         raise
+    return event_descriptor
+
+
+def get_event_descriptor_object(id):
+    try:
+        event_descriptor_object = EventDescriptor.objects(_id=id)
+    except:
+        raise
+    return event_descriptor_object
+
+
+def list_event_descriptors():
+    try:
+        event_descriptors = EventDescriptor.objects.all()
+    except:
+        metadataLogger.logger.warning('EventDescriptors can not be retrieved')
+        raise
+    return event_descriptors
+
+
+def insert_event(event_id, header_id, descriptor_id, description=None, owner=getpass.getuser(), seq_no=None,
+                 data=dict()):
+    descriptor_list = get_event_descriptor_object(descriptor_id)
+    if not descriptor_list:
+        metadataLogger.logger.warning('EventDescriptor cannot be located. Check descriptor_id')
+        raise ValueError('EventDescriptor cannot be located. Check descriptor_id')
+    else:
+        try:
+            event = Event(_id=event_id, header_id=header_id, event_descriptor_id=descriptor_id, description=description,
+                          owner=owner, seq_no=seq_no, data=data).save(wtimeout=100, write_concern={'w': 1})
+        except:
+            metadataLogger.logger.warning('Event cannot be recorded')
+            raise
+        update_header_end_time(header_id=header_id, end_time=datetime.datetime.utcnow())
     return event
 
 
 def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=None, i_zero=None, custom={}):
-    header_list = get_header(header_id)
+    header_list = get_header_object(header_id)
     beamline_cfg = BeamlineConfig(_id=beamline_cfg_id, headers=header_list, enery=energy, wavelength=wavelength,
                                   i_zero=i_zero, custom=custom)
     try:
@@ -66,9 +107,34 @@ def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=Non
     return beamline_cfg
 
 
-def __update_header():
-    #TODO: Once event is complete this routine is triggered to update the end_time of the event
-    pass
+def update_header_end_time(header_id, end_time):
+    coll = Header._get_collection()
+    try:
+        result = coll.find({'_id': header_id})
+    except:
+        raise
+    original_entry = list()
+    for entry in result:
+        original_entry.append(entry)
+    original_entry[0]['end_time'] =  end_time
+    try:
+        coll.update({'_id': header_id}, original_entry[0] ,upsert=False)
+    except:
+        metadataLogger.logger.warning('Header end_time cannot be updated')
+        raise
+
+
+
+
+#TODO: Review the code this line on!
+
+
+
+
+
+
+
+
 
 
 def find(header_id=None, text=None, owner=None, start_time=None, update_time=None, beamline_id=None,
@@ -108,7 +174,7 @@ def find(header_id=None, text=None, owner=None, start_time=None, update_time=Non
                 pass
 #TODO: Check kwargs to see in custom field searched. Get all the events with that given seq_no and kwargs.No headers!
             elif event_seq_no is not None and not kwargs:
-                query_dict['seqno'] = event_seq_no
+                query_dict['seq_no'] = event_seq_no
             else:
                 print 'Everything is none now. Are you talking to me?'
             print query_dict
@@ -209,4 +275,3 @@ def find_beamline_config(header_ids, beamline_cfg_query_dict={}):
     beamline_cfg_query_dict['headers'] = [header_ids]
     collection = BeamlineConfig._get_collection()
     return collection.find(beamline_cfg_query_dict)
-

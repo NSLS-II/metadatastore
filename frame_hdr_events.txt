@@ -1,106 +1,51 @@
 run_hdr : {
-    id : number
+    id : hashed input
     start_time : number
     end_time : number
     uid : string
     beamline_id : string
-    
-    generating_file : string
-    sample : {
-        id : number
-        description :S string
-    }
-    project : string
-    
-    beamline_config : {
-        energy : number
-        wavelength : number
-        i_zero : number
-        
-        diffractometer : {
-            geometry : string
-            xtal : {
-                a,b,c : numbers
-                alpha, beta, gamma : numbers
-                space_group : string
-                ...
-            }
-            B : [...]
-            U : [...]
-            motors : {
-                theta : number
-                2theta : number
-                phi : number
-                chi : number
-            }
-        }
+
+    beamline_config: {
+        id: hashed input
+        headers: list of run headers specific beamline_config belongs
+        beamline_id: string
+        custom: dictionary
     }
 
-    event_A : {
-        id : number
-        seqno : number
-        description : "gather diffractometer angles"
-        data : {
-            motors : {
-                theta   : [ value, timestamp ]
-                2theta  : [ value, timestamp ]
-                phi     : [ value, timestamp ]
-                chi     : [ value, timestamp ]
-            }
-        }
+    event_group: {
+        id : hashed input
+        headers: list of run headers specific event group belongs
+        event_type_id: integer
+        event_type_name: string
+        aliases: dictionary
+        custom: dictionary
     }
 
-    event_B : {
-        id : number
-        seqno : number
-        description : "acquire dark-frame"
-        data : {
-            timestamp : number
-            frame_id : number
-            width : number
-            height : number
-            compressed : string
-            compression_type : string
-            data : [ ... ]
-        }
-        file : {
-            url : string
-            chunksize : number
-            ...
-        }
+    event: {
+        id: hashed input
+        event_groups: list of event groups specific event belongs
+        description: String
+        seq_no: integer
+        data: dictionary
     }
 
-    event_C : {
-        id : number
-        seqno : number
-        description : "acquire frame and I0 counts"
-        dataframe : {
-            timestamp : number
-            frame_id : number
-            width : number
-            height : number
-            compressed : string
-            compression_type : string
-            data : [ ... ]
-        }
-        file : {
-            url : string
-            chunksize : number
-            ...
-        }
-        i_zero : [ value, timestamp ]
+    event: {
+        id: hashed input
+        event_groups: list of event groups specific event belongs
+        description: String
+        seq_no: integer
+        data: dictionary
     }
 
-    event_stream : {
-        header_id:
-        1 : { id, seqno, ... }
-        2 : { id, seqno, ... }
-          :
-          :
-          :
-        N : { id, seqno, ... }
 
-}
-            
-        
-       
+
+    event: {
+        id: hashed input
+        event_groups: list of event groups specific event belongs
+        description: String
+        seq_no: integer
+        data: dictionary
+    }
+
+
+    }
