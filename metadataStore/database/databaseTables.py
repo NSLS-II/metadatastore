@@ -2,10 +2,11 @@ __author__ = 'arkilic'
 from mongoengine import IntField, DateTimeField, DictField, StringField
 from mongoengine import ReferenceField, ListField,Document, DO_NOTHING
 
-
+#TODO: Add :type var: for syphinx
 class Header(Document):
     """
     :param _id: hashed primary key
+    :type _id:
     :param start_time: run header initialization timestamp
     :param end_time: run header close timestamp
     :param owner: user info from system

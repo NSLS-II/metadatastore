@@ -123,18 +123,7 @@ def update_header_end_time(header_id, end_time):
         metadataLogger.logger.warning('Header end_time cannot be updated')
         raise
 
-
-
-
-#TODO: Review the code this line on!
-
-
-
-
-
-
-
-
+#####################TODO: Review the code this line on!##########################
 
 
 def find(header_id=None, text=None, owner=None, start_time=None, update_time=None, beamline_id=None,
@@ -158,7 +147,9 @@ def find(header_id=None, text=None, owner=None, start_time=None, update_time=Non
       >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
       >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
     """
-    #TODO: Add embedded document search
+
+#TODO: Add last and current as keywords to header
+
     supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
     headers_list = list()
@@ -172,7 +163,6 @@ def find(header_id=None, text=None, owner=None, start_time=None, update_time=Non
                 and text is None:
             if event_seq_no is not None and kwargs:
                 pass
-#TODO: Check kwargs to see in custom field searched. Get all the events with that given seq_no and kwargs.No headers!
             elif event_seq_no is not None and not kwargs:
                 query_dict['seq_no'] = event_seq_no
             else:
@@ -269,6 +259,8 @@ def find_event(header_ids, event_query_dict={}):
     event_query_dict['headers'] = {'$in': header_ids}
     collection = Event._get_collection()
     return collection.find(event_query_dict)
+
+
 
 
 def find_beamline_config(header_ids, beamline_cfg_query_dict={}):

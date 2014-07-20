@@ -92,7 +92,6 @@ def log(text, owner, event_id, header_id, event_type_id, run_id, seqno=None, sta
     :type end_time: datetime
 
     *Usage:*
-
     >>> log(text='sample entry', owner='arkilic', event_id=1335, header_id=498, event_type_id=4, run_id=45)
     >>> log(text='sample entry', owner='arkilic', event_id=1335, header_id=498, event_type_id=4, run_id=45,
         ... data={'motor1': [12,45,67,87,42], 'motor2': [22,55,77,17,12], 'wavelength': [3.45, 1.34, 6.45, 5.13, 4.67]})
@@ -101,8 +100,9 @@ def log(text, owner, event_id, header_id, event_type_id, run_id, seqno=None, sta
 
     :returns: None
     """
+    #TODO: Make time range search user friendly: replace datetime with string time formatting
     try:
-        record_event(event_id=event_id, header_id=header_id, event_type_id=event_type_id, run_id=run_id,
+        insert_event(event_id=event_id, header_id=header_id, event_type_id=event_type_id, run_id=run_id,
                      seqno=seqno, start_time=start_time, end_time=end_time, description=text, data=data)
     except OperationError:
         raise
@@ -110,7 +110,8 @@ def log(text, owner, event_id, header_id, event_type_id, run_id, seqno=None, sta
 
 def search(header_id=None, owner=None, start_time=None, text=None, update_time=None, beamline_id=None,
            contents=False, **kwargs):
-    print text
+    #TODO: Modify according to changes in log() and raw_commands
+    #TODO: Make time range search user friendly: replace datetime with string time formatting
     try:
         result = find(header_id=header_id, owner=owner, start_time=start_time, update_time=update_time,
                       beamline_id=beamline_id, contents=contents, text=text, **kwargs)
