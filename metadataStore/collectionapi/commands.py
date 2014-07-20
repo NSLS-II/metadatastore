@@ -1,5 +1,5 @@
 __author__ = 'arkilic'
-from ..dataapi.raw_commands import insert_event, save_header, insert_event_descriptor, save_beamline_config
+from metadataStore.dataapi.raw_commands import insert_event, save_header, insert_event_descriptor, save_beamline_config
 
 
 def create(header=None, beamline_config=None, event_descriptor=None):
@@ -8,8 +8,7 @@ def create(header=None, beamline_config=None, event_descriptor=None):
     """
     if header is not None:
         if isinstance(header,dict):
-            h_keys = header.keys()
-
+            pass
         else:
             raise TypeError('Header must be a Python dictionary ')
     if beamline_config is not None:
@@ -45,8 +44,14 @@ def __verify_event_desc_keys(key_list):
     """
     Header keys given as a list
     """
+    status = False
     valid_keys = ['id', 'header_id', 'event_type_id', 'event_type_name', 'type_descriptor', 'tag']
     for key in key_list:
         if key not in valid_keys:
             raise KeyError(str(key) + ' is not a valid key for Header')
             break
+        else:
+            status = True
+    return status
+
+__verify_header_keys(['amrna'])
