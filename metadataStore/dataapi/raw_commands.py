@@ -1,27 +1,31 @@
 __author__ = 'arkilic'
 __version__ = '0.0.2'
-from mongoengine.errors import OperationError
-from metadataStore.database.databaseTables import Header, BeamlineConfig, Event, EventDescriptor
-from metadataStore.sessionManager.databaseInit import metadataLogger
-import re
 import getpass
 import datetime
 
+from mongoengine.errors import OperationError
+
+from metadataStore.database.databaseTables import Header, BeamlineConfig, Event, EventDescriptor
+from metadataStore.sessionManager.databaseInit import metadataLogger
+
 
 def save_header(header_id, header_owner=getpass.getuser(), start_time=datetime.datetime.utcnow(), beamline_id=None,
-                scan_id=None, custom=dict()):
+                scan_id=None, status='In Progress',custom=dict()):
     """
     >>> save_header(header_id=1345)
     >>> save_header(header_id=1345, owner='arkilic')
     >>> save_header(header_id=1345, custom={'field1': 'value1', 'field2': 'value2'})
     """
-    try:
-        header = Header(_id=header_id, owner=header_owner, start_time=start_time,
-                        end_time=start_time, beamline_id=beamline_id, scan_id=scan_id,
-                        custom=custom).save(wtimeout=100,write_concern={'w': 1})
-    except:
-        metadataLogger.logger.warning('Header cannot be created')
-        raise
+    if get_header_object(header_id):
+        raise ValueError('Header with given header_id exists')
+    else:
+        try:
+            header = Header(_id=header_id, owner=header_owner, start_time=start_time,
+                            end_time=start_time, beamline_id=beamline_id, scan_id=scan_id,
+                            custom=custom, status=status).save(wtimeout=100,write_concern={'w': 1})
+        except:
+            metadataLogger.logger.warning('Header cannot be created')
+            raise
     return header
 
 
@@ -51,13 +55,16 @@ def insert_event_descriptor(event_descriptor_id, header_id, event_type_id, event
     >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, event_type_name='scan',
     ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'}, tag='analysis')
     """
-    try:
-        event_descriptor = EventDescriptor(_id=event_descriptor_id, header_id=header_id, event_type_id=event_type_id,
-                                           event_type_name=event_type_name, type_descriptor=type_descriptor,
-                                           tag=tag).save(wtimeout=100, write_concern={'w': 1})
-    except:
-        metadataLogger.logger.warning('EventDescriptor cannot be created')
-        raise
+    if get_event_descriptor_object(event_descriptor_id):
+        raise ValueError('EventDescriptor with given event_descriptor_id exists')
+    else:
+        try:
+            event_descriptor = EventDescriptor(_id=event_descriptor_id, header_id=header_id, event_type_id=event_type_id,
+                                               event_type_name=event_type_name, type_descriptor=type_descriptor,
+                                               tag=tag).save(wtimeout=100, write_concern={'w': 1})
+        except:
+            metadataLogger.logger.warning('EventDescriptor cannot be created')
+            raise
     return event_descriptor
 
 
@@ -91,23 +98,29 @@ def insert_event(event_id, header_id, descriptor_id, description=None, owner=get
         except:
             metadataLogger.logger.warning('Event cannot be recorded')
             raise
-        update_header_end_time(header_id=header_id, end_time=datetime.datetime.utcnow())
     return event
 
 
-def save_beamline_config(beamline_cfg_id, header_id, energy=None, wavelength=None, i_zero=None, custom={}):
-    header_list = get_header_object(header_id)
-    beamline_cfg = BeamlineConfig(_id=beamline_cfg_id, headers=header_list, enery=energy, wavelength=wavelength,
-                                  i_zero=i_zero, custom=custom)
-    try:
-        beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
-    except:
-        metadataLogger.logger.warning('Beamline config cannot be saved')
-        raise OperationError('Beamline config cannot be saved')
+def save_beamline_config(beamline_cfg_id, header_id, config_params={}):
+    """
+    Save beamline configuration
+    """
+    if get_header_object(header_id):
+        beamline_cfg = BeamlineConfig(_id=beamline_cfg_id, header_id=header_id, config_params=config_params)
+        try:
+            beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
+        except:
+            metadataLogger.logger.warning('Beamline config cannot be saved')
+            raise OperationError('Beamline config cannot be saved')
+    else:
+        raise ValueError('Header with given header_id cannot be located')
     return beamline_cfg
 
 
 def update_header_end_time(header_id, end_time):
+    """
+    Updates header end_time to current timestamp given end_time and header_id. See insert_event
+    """
     coll = Header._get_collection()
     try:
         result = coll.find({'_id': header_id})
@@ -123,7 +136,25 @@ def update_header_end_time(header_id, end_time):
         metadataLogger.logger.warning('Header end_time cannot be updated')
         raise
 
-#####################TODO: Review the code this line on!##########################
+
+def update_header_status(header_id, status):
+    """
+    Updates run header status given header_id and status
+    """
+    coll = Header._get_collection()
+    try:
+        result = coll.find({'_id': header_id})
+    except:
+        raise
+    original_entry = list()
+    for entry in result:
+        original_entry.append(entry)
+    original_entry[0]['status'] =  status
+    try:
+        coll.update({'_id': header_id}, original_entry[0] ,upsert=False)
+    except:
+        metadataLogger.logger.warning('Header end_time cannot be updated')
+        raise
 
 
 def find(header_id=None, text=None, owner=None, start_time=None, update_time=None, beamline_id=None,
@@ -147,91 +178,38 @@ def find(header_id=None, text=None, owner=None, start_time=None, update_time=Non
       >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
       >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
     """
-
-#TODO: Add last and current as keywords to header
-
     supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
-    headers_list = list()
-
-    if header_id is 'last':
+    header = None
+    events = None
+    try:
         coll = Header._get_collection()
-        header_cursor = coll.find().sort([('_id', -1)]).limit(1)
-        headers_list.append(header_cursor[0])
+    except:
+        metadataLogger.logger.warning('Collection Header cannot be accessed')
+        raise
+    if header_id is 'current':
+        header_cursor = coll.find().sort([('end_time', -1)]).limit(5)
+        header = header_cursor[0]
+        if contents is True:
+            event_desc = find_event_descriptor(header['_id'])
+            for e_d in event_desc:
+                header['event_descriptor_' + str(e_d['_id'])] = e_d
+                events = find_event(event_descriptor_id=e_d['_id'])
+                header['event_descriptor_' + str(e_d['_id'])]['events'] = __decode_cursor(events)
+    elif header_id is 'last':
+        header_cursor = coll.find().sort([('end_time', -1)]).limit(5)
+        header = header_cursor[1]
+        if contents is True:
+            event_desc = find_event_descriptor(header['_id'])
+            for e_d in event_desc:
+                header['event_descriptor_' + str(e_d['_id'])] = e_d
+                events = find_event(event_descriptor_id=e_d['_id'])
+                header['event_descriptor_' + str(e_d['_id'])]['events'] = __decode_cursor(events)
     else:
-        if header_id is None and owner is None and start_time is None and update_time is None and beamline_id is None \
-                and text is None:
-            if event_seq_no is not None and kwargs:
-                pass
-            elif event_seq_no is not None and not kwargs:
-                query_dict['seq_no'] = event_seq_no
-            else:
-                print 'Everything is none now. Are you talking to me?'
-            print query_dict
-        else:
-            #TODO add the case where event_seq_no is not None and some header parameter is provided. This case return the headers with events and pick the given requested events from all headers
-            if owner is not None:
-                for entry in supported_wildcard:
-                    if entry in owner:
-                        query_dict['owner'] = {'$regex': re.compile(owner, re.IGNORECASE)}
-                        break
-                    else:
-                        query_dict['owner'] = owner
-            if header_id is not None:
-                if isinstance(header_id, list):
-                    if len(header_id) == 1:
-                        query_dict['_id'] = header_id[0]
-                    else:
-                        query_dict['_id'] = {'$in': header_id}
-                elif isinstance(header_id, dict):
-                    query_dict['_id'] = {'$gte': header_id['start'], '$lte': header_id['end']}
-                elif isinstance(header_id, str):
-                    raise TypeError('header_id can not be a string')
-                else:
-                    query_dict['_id'] = header_id
-
-            if start_time is not None:
-                if isinstance(start_time, list):
-                    for time_entry in start_time:
-                        __validate_time([time_entry])
-                    query_dict['start_time'] = {'$in': start_time}
-                elif isinstance(start_time, dict):
-                    __validate_time([start_time['start'],start_time['end']])
-                    query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
-                else:
-                    if __validate_time([start_time]):
-                        query_dict['start_time'] = {'$gte': start_time,
-                                                    '$lt': datetime.datetime.utcnow()}
-            if beamline_id is not None:
-                for entry in supported_wildcard:
-                    if entry in beamline_id:
-                        query_dict['beamline_id'] = {'$regex': re.compile(beamline_id, re.IGNORECASE)}
-                        break
-                    else:
-                        query_dict['beamline_id'] = beamline_id
-
-            header_cursor = find_header(query_dict)
-            for entry in header_cursor:
-                headers_list.append(entry)
-            if text is not None:
-                for entry in supported_wildcard:
-                    if entry in text:
-                        query_dict['description'] = {'$regex': re.compile(text, re.IGNORECASE)}
-                        break
-                    else:
-                        query_dict['description'] = text
-        if contents is False:
-            result = headers_list
-        else:
-            header_ids = list()
-            for header in headers_list:
-                header_ids.append(header['_id'])
-                event_cursor = find_event(header_ids)
-                beamline_cfg_cursor = find_beamline_config(header_ids)
-                header['events'] = __decode_cursor(event_cursor)
-                header['beamline_config'] = __decode_cursor(beamline_cfg_cursor)
-            result = headers_list
-    return result
+        if header_id is not None:
+            query_dict['_id'] = header_id
+            print __decode_hdr_cursor(find_header(query_dict))
+    return header
 
 
 def __validate_time(time_entry_list):
@@ -241,6 +219,12 @@ def __validate_time(time_entry_list):
         else:
             raise TypeError('Date must be datetime object')
     return flag
+
+def __decode_hdr_cursor(cursor_object):
+    headers = dict()
+    for temp_dict in cursor_object:
+        headers['header_' + str(temp_dict['_id'])] = temp_dict
+    return headers
 
 
 def __decode_cursor(cursor_object):
@@ -255,15 +239,19 @@ def find_header(query_dict):
     return collection.find(query_dict)
 
 
-def find_event(header_ids, event_query_dict={}):
-    event_query_dict['headers'] = {'$in': header_ids}
+def find_event(event_descriptor_id, event_query_dict={}):
+    event_query_dict['event_descriptor_id'] = event_descriptor_id
     collection = Event._get_collection()
     return collection.find(event_query_dict)
 
 
+def find_event_descriptor(header_id, event_query_dict={}):
+    event_query_dict['header_id'] = header_id
+    collection = EventDescriptor._get_collection()
+    return collection.find(event_query_dict)
 
 
-def find_beamline_config(header_ids, beamline_cfg_query_dict={}):
-    beamline_cfg_query_dict['headers'] = [header_ids]
+def find_beamline_config(header_id, beamline_cfg_query_dict={}):
+    beamline_cfg_query_dict['header_id'] = header_id
     collection = BeamlineConfig._get_collection()
     return collection.find(beamline_cfg_query_dict)

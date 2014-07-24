@@ -1,8 +1,10 @@
 __author__ = 'arkilic'
 from mongoengine import IntField, DateTimeField, DictField, StringField
-from mongoengine import ReferenceField, ListField,Document, DO_NOTHING
+from mongoengine import ReferenceField, Document, DO_NOTHING
 
 #TODO: Add :type var: for syphinx
+
+
 class Header(Document):
     """
     :param _id: hashed primary key
@@ -17,7 +19,8 @@ class Header(Document):
     start_time = DateTimeField(required=True)
     end_time = DateTimeField(required=False)
     owner = StringField(max_length=20, required=True)
-    scan_id = IntField()
+    scan_id = IntField(required=True)
+    status = StringField(max_length=20)
     beamline_id = StringField(max_length=20, required=False)
     custom = DictField(required=False)
     meta = {'indexes': ['-_id', '-start_time', '-owner']}
