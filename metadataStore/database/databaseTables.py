@@ -39,7 +39,7 @@ class EventDescriptor(Document):
     event_type_id = IntField(min_value=0)
     event_type_name = StringField(max_length=10)
     type_descriptor = DictField()
-    tag = StringField(max_length=10)
+    tag = StringField(max_length=20)
     meta = {'indexes': ['-header_id', '-event_type_id', '-event_type_name']}
 
 
