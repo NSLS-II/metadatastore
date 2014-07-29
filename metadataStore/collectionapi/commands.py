@@ -7,7 +7,10 @@ def create(header=None, beamline_config=None, event_descriptor=None):
     Create header, beamline_config, and event_descriptor
     """
     if header is not None:
+        header_keys = ['header_id', 'start_time', 'end_time', 'owner', 'beamline_id', 'custom']
         if isinstance(header, dict):
+            for entry in header:
+                if entry in header_keys:
             hdr_keys = header.keys()
             if __verify_header_keys(hdr_keys):
                 save_header(header_id=header['id'], start_time = header['start_time'])
