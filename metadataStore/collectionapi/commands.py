@@ -22,7 +22,6 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
     """
     if header is not None:
-        print header.keys()
         if isinstance(header, dict):
             if 'scan_id' in header:
                 scan_id = header['scan_id']
@@ -58,11 +57,9 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
     if beamline_config is not None:
         if isinstance(beamline_config, dict):
-            print beamline_config
             if 'scan_id' in beamline_config:
                 scan_id = beamline_config['scan_id']
             else:
-                print 'yup'
                 raise ValueError('scan_id is a required field')
             if 'config_params' in beamline_config:
                 config_params = beamline_config['config_params']
