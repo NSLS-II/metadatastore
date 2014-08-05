@@ -134,6 +134,7 @@ def get_event_descriptor_hid_edid(name, s_id):
 
     :param id: Unique identifier for EventDescriptor instance (refers to _id in mongodb schema)
     :type id: int
+    :returns: header_id and event_descriptor_id
 
     """
     header_id = get_header_id(s_id)
