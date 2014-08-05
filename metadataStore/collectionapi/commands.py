@@ -5,7 +5,7 @@ import getpass
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor
 
 
-def create(header=dict(), beamline_config=dict(), event_descriptor=dict()):
+def create(header=None, beamline_config=None, event_descriptor=None):
     """
     Create header, beamline_config, and event_descriptor
 
@@ -23,7 +23,6 @@ def create(header=dict(), beamline_config=dict(), event_descriptor=dict()):
     """
     if header is not None:
         print header.keys()
-        print header['scan_id']
         if isinstance(header, dict):
             if 'scan_id' in header:
                 scan_id = header['scan_id']
@@ -49,16 +48,17 @@ def create(header=dict(), beamline_config=dict(), event_descriptor=dict()):
                 status = header['status']
             else:
                 status = 'In Progress'
+            try:
+                save_header(scan_id=scan_id, header_owner=owner, start_time=start_time, beamline_id=beamline_id,
+                            status=status, custom=custom)
+            except:
+                raise
         else:
             raise TypeError('Header must be a Python dictionary ')
-        try:
-            save_header(scan_id=scan_id, header_owner=owner, start_time=start_time, beamline_id=beamline_id,
-                        status=status, custom=custom)
-        except:
-            raise
+
     if beamline_config is not None:
         if isinstance(beamline_config, dict):
-            print beamline_config.keys()
+            print beamline_config
             if 'scan_id' in beamline_config:
                 scan_id = beamline_config['scan_id']
             else:
@@ -68,9 +68,13 @@ def create(header=dict(), beamline_config=dict(), event_descriptor=dict()):
                 config_params = beamline_config['config_params']
             else:
                 config_params = dict()
+            try:
+                save_beamline_config(scan_id=scan_id, config_params=config_params)
+            except:
+                raise
         else:
             raise TypeError('BeamlineConfig must be a Python dictionary')
-        save_beamline_config(scan_id=scan_id, config_params=config_params)
+
     if event_descriptor is not None:
         if isinstance(event_descriptor, dict):
             if 'scan_id' in event_descriptor:
@@ -93,8 +97,11 @@ def create(header=dict(), beamline_config=dict(), event_descriptor=dict()):
                 tag = event_descriptor['tag']
             else:
                 tag = None
-            insert_event_descriptor(scan_id=scan_id, event_type_id=event_type_id, event_type_name=event_type_name,
-                                    type_descriptor=type_descriptor, tag=tag)
+            try:
+                insert_event_descriptor(scan_id=scan_id, event_type_id=event_type_id, event_type_name=event_type_name,
+                                        type_descriptor=type_descriptor, tag=tag)
+            except:
+                raise
         else:
             raise TypeError('EventDescriptor must be a Python dictionary')
 
