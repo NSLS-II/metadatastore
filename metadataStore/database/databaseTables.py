@@ -22,7 +22,7 @@ class Header(Document):
     start_time = DateTimeField(required=True)
     end_time = DateTimeField(required=False)
     owner = StringField(max_length=20, required=True)
-    scan_id = IntField(required=True)
+    scan_id = IntField(required=True, unique=True)
     status = StringField(max_length=20)
     beamline_id = StringField(max_length=20, required=False)
     custom = DictField(required=False)
@@ -44,7 +44,7 @@ class EventDescriptor(Document):
     """
     header_id = ReferenceField('Header', reverse_delete_rule=DO_NOTHING, required=True)
     event_type_id = IntField(min_value=0)
-    event_type_name = StringField(max_length=10)
+    event_type_name = StringField(max_length=10, required=True)
     type_descriptor = DictField()
     tag = StringField(max_length=20)
     meta = {'indexes': ['-header_id', '-event_type_id', '-event_type_name']}
@@ -78,8 +78,6 @@ class Event(Document):
 
 class BeamlineConfig(Document):
     """
-    :param _id: hashed primary key
-    :type param _id: ObjectID pointer object(see pymongo documentation for details)
     :param beamline_id: beamline descriptor
     :type beamline_id: string
     :param header_id: foreign key pointing back to header
@@ -87,7 +85,5 @@ class BeamlineConfig(Document):
     :param config_params: configuration parameter name-value container
     :type config_params: dictionary
     """
-    #_id = IntField(primary_key=True, unique=True, required=True)
-    beamline_id = StringField(max_length=10)
     header_id = ReferenceField('Header', reverse_delete_rule=DO_NOTHING, required=True)
     config_params = DictField()

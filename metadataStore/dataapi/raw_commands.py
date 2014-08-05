@@ -27,6 +27,7 @@ def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.dat
     :type status: str
     :param custom: Additional attribute value fields that can be user defined
     :type custom: dict
+    :returns: header object
 
     >>> save_header(scan_id=12)
     >>> save_header(scan_id=13, owner='arkilic')
@@ -187,19 +188,20 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
     return event
 
 
-def save_beamline_config(beamline_cfg_id, header_id, config_params={}):
+#TODO:
+
+def save_beamline_config(scan_id, config_params={}):
     """
     Save beamline configuration
     """
-    if get_header_object(header_id):
-        beamline_cfg = BeamlineConfig(_id=beamline_cfg_id, header_id=header_id, config_params=config_params)
-        try:
-            beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
-        except:
-            metadataLogger.logger.warning('Beamline config cannot be saved')
-            raise OperationError('Beamline config cannot be saved')
-    else:
-        raise ValueError('Header with given header_id cannot be located')
+    header_id = get_header_id(scan_id)
+    print header_id
+    beamline_cfg = BeamlineConfig(header_id=header_id, config_params=config_params)
+    try:
+        beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
+    except:
+        metadataLogger.logger.warning('Beamline config cannot be saved')
+        raise OperationError('Beamline config cannot be saved')
     return beamline_cfg
 
 

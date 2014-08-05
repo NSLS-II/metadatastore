@@ -1,37 +1,102 @@
 __author__ = 'arkilic'
-from metadataStore.dataapi.raw_commands import save_header
+import datetime
+import getpass
+
+from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor
 
 
-def create(header=None, beamline_config=None, event_descriptor=None):
+def create(header=dict(), beamline_config=dict(), event_descriptor=dict()):
     """
     Create header, beamline_config, and event_descriptor
+
+    :param header: Header attribute-value pairs
+    :type header: dict
+    :param beamline_config: BeamlineConfig attribute-value pairs
+    :type beamline_config: dict
+    :param event_descriptor: EventDescriptor attribute-value pairs
+    :type event_descriptor: dict
+
+    :Raises: TypeError, ValueError, ConnectionFailure, NotUniqueError
+
+     :returns: None
+
     """
     if header is not None:
-        header_keys = ['header_id', 'start_time', 'end_time', 'owner', 'beamline_id', 'custom']
+        print header.keys()
+        print header['scan_id']
         if isinstance(header, dict):
-            for entry in header:
-                if entry in header_keys:
-            hdr_keys = header.keys()
-            if __verify_header_keys(hdr_keys):
-                save_header(header_id=header['id'], start_time = header['start_time'])
+            if 'scan_id' in header:
+                scan_id = header['scan_id']
+            else:
+                raise ValueError('scan_id is a required field')
+            if 'start_time' in header:
+                start_time = header['start_time']
+            else:
+                start_time = datetime.datetime.utcnow()
+            if 'owner' in header:
+                owner = header['owner']
+            else:
+                owner = getpass.getuser()
+            if 'beamline_id' in header:
+                beamline_id = header['beamline_id']
+            else:
+                beamline_id = None
+            if 'custom' in header:
+                custom = header['custom']
+            else:
+                custom = dict()
+            if 'status' in header:
+                status = header['status']
+            else:
+                status = 'In Progress'
         else:
             raise TypeError('Header must be a Python dictionary ')
+        try:
+            save_header(scan_id=scan_id, header_owner=owner, start_time=start_time, beamline_id=beamline_id,
+                        status=status, custom=custom)
+        except:
+            raise
     if beamline_config is not None:
         if isinstance(beamline_config, dict):
-            pass
+            print beamline_config.keys()
+            if 'scan_id' in beamline_config:
+                scan_id = beamline_config['scan_id']
+            else:
+                print 'yup'
+                raise ValueError('scan_id is a required field')
+            if 'config_params' in beamline_config:
+                config_params = beamline_config['config_params']
+            else:
+                config_params = dict()
         else:
             raise TypeError('BeamlineConfig must be a Python dictionary')
+        save_beamline_config(scan_id=scan_id, config_params=config_params)
     if event_descriptor is not None:
         if isinstance(event_descriptor, dict):
-            pass
+            if 'scan_id' in event_descriptor:
+                scan_id = event_descriptor['scan_id']
+            else:
+                raise ValueError('scan_id is required for EventDescriptor entries')
+            if 'event_type_id' in event_descriptor:
+                event_type_id = event_descriptor['event_type_id']
+            else:
+                event_type_id = None
+            if 'event_type_name' in event_descriptor:
+                event_type_name = event_descriptor['event_type_name']
+            else:
+                raise ValueError('event_type_name is required for EventDescriptor')
+            if 'type_descriptor' in event_descriptor:
+                type_descriptor = event_descriptor['type_descriptor']
+            else:
+                type_descriptor = dict()
+            if 'tag' in event_descriptor:
+                tag = event_descriptor['tag']
+            else:
+                tag = None
+            insert_event_descriptor(scan_id=scan_id, event_type_id=event_type_id, event_type_name=event_type_name,
+                                    type_descriptor=type_descriptor, tag=tag)
         else:
             raise TypeError('EventDescriptor must be a Python dictionary')
-
-
-def insert(collection, param_dict):
-    #TODO: Make sure collection exists
-    #TODO: Make sure given collection, param_dict is appropriate
-    pass
 
 
 def __verify_header_keys(key_list):
@@ -66,4 +131,9 @@ def __verify_event_desc_keys(key_list):
     return status
 
 
-create(header={'id': 112})
+def search():
+    pass
+
+
+def end_collection():
+    pass

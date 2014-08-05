@@ -38,3 +38,8 @@ start = time.time()
 hdr3 = find(scan_id=h_id, data=True)
 print hdr3[hdr3.keys()[0]]['event_descriptor_0']['events']
 end = time.time()
+
+
+start = time.time()
+hdr3 = save_beamline_config(scan_id=h_id, config_params={'nam1': 'val'})
+end = time.time()
