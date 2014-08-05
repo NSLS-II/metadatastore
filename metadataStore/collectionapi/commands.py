@@ -2,7 +2,7 @@ __author__ = 'arkilic'
 import datetime
 import getpass
 
-from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor
+from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
 
 
 def create(header=None, beamline_config=None, event_descriptor=None):
@@ -103,6 +103,54 @@ def create(header=None, beamline_config=None, event_descriptor=None):
             raise TypeError('EventDescriptor must be a Python dictionary')
 
 
+def record(event=dict()):
+    """
+    some bs goes here
+    """
+    if 'scan_id' in event:
+        scan_id = event['scan_id']
+    else:
+        raise ValueError('scan_id is required in order to record an event')
+    if 'descriptor_name' in event:
+        descriptor_name = event['descriptor_name']
+    else:
+        raise ValueError('Descriptor is required in order to record an event')
+    if 'description' in event:
+        description = event['description']
+    else:
+        description = None
+    if 'owner' in event:
+        owner = event['owner']
+    else:
+        owner = getpass.getuser()
+    if 'seq_no' in event:
+        seq_no = event['seq_no']
+    else:
+        raise ValueError('seq_no is required field')
+    if 'data' in event:
+        data = event['data']
+    else:
+        data = dict()
+    try:
+        insert_event(scan_id=scan_id, descriptor_name=descriptor_name, owner=owner, seq_no=seq_no, data=data)
+    except:
+        raise
+
+def search():
+    pass
+
+
+def init_collection():
+    """
+    Using config file create beamline config, header, and event descriptor for a given run
+    """
+    pass
+
+
+def end_collection():
+    pass
+
+
 def __verify_header_keys(key_list):
     """
     Header keys given as a list
@@ -133,11 +181,3 @@ def __verify_event_desc_keys(key_list):
         else:
             status = True
     return status
-
-
-def search():
-    pass
-
-
-def end_collection():
-    pass
