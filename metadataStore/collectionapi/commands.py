@@ -3,6 +3,7 @@ import datetime
 import getpass
 
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
+from metadataStore.dataapi.raw_commands import find
 
 
 def create(header=None, beamline_config=None, event_descriptor=None):
@@ -156,15 +157,35 @@ def record(event=dict()):
         raise
 
 
-def search():
-    pass
-
-
-def init_collection():
+def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False):
     """
-    Using config file create beamline config, header, and event descriptor for a given run
+    Provides an easy way to search Header objects that are saved in metadataStore
+    :param scan_id: Unique identifier for a given run
+    :type scan_id: int
+    :param owner: run header owner(unix user by default)
+    :type owner: str
+    :param start_time: Header creation time
+    :type start_time: datetime.datetime object
+    :param beamline_id: beamline descriptor
+    :type beamline_id: str
+    :param end_time: Header status time
+    :type end_time: datetime.datetime object
+    :param data: data field for collection routines to save experiemental progress
+    :type data: dict
+
+    Usage:
+
+    >>> search(scan_id=s_id)
+    >>> search(scan_id=s_id, owner='ark*')
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5))
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkilic')
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='ark*')
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkili.')
+
     """
-    pass
+    result = find(scan_id=scan_id, owner=owner, start_time=start_time, beamline_id=beamline_id, end_time=end_time,
+                  data=data)
+    return result
 
 
 def end_collection():
