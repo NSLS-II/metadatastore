@@ -105,7 +105,25 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
 def record(event=dict()):
     """
-    some bs goes here
+    Events are saved given scan_id and descriptor name and additional optional parameters
+
+    :param event: Dictionary used in order to save name-value pairs for Event entries
+    :type event: dict
+
+    :Raises: ConnectionFailure, NotUniqueError, ValueError
+
+    Required fields: scan_id, descriptor_name
+    Optional fields: owner, seq_no, data, description
+
+    Usage:
+
+    >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan'})
+
+    >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
+                  ... 'data':{'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'}})
+
+    >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
+                  ... 'data':{'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'}},'description': 'Linear scan')
     """
     if 'scan_id' in event:
         scan_id = event['scan_id']
@@ -132,9 +150,11 @@ def record(event=dict()):
     else:
         data = dict()
     try:
-        insert_event(scan_id=scan_id, descriptor_name=descriptor_name, owner=owner, seq_no=seq_no, data=data)
+        insert_event(scan_id=scan_id, descriptor_name=descriptor_name, owner=owner, seq_no=seq_no, data=data,
+                     description=description)
     except:
         raise
+
 
 def search():
     pass
@@ -149,35 +169,3 @@ def init_collection():
 
 def end_collection():
     pass
-
-
-def __verify_header_keys(key_list):
-    """
-    Header keys given as a list
-    """
-    status = False
-    valid_keys = ['id', 'start_time', 'end_time', 'owner', 'scan_id', 'beamline_id', 'custom']
-    for key in key_list:
-        if key not in valid_keys:
-            raise KeyError(str(key) + ' is not a valid key for Header')
-            break
-        else:
-            status = True
-    return status
-
-
-def __verify_event_desc_keys(key_list):
-    """
-    Header keys given as a list
-    :param key_list: keys for event_descriptor dictionary
-    :type key_list: list
-    """
-    status = False
-    valid_keys = ['id', 'header_id', 'event_type_id', 'event_type_name', 'type_descriptor', 'tag']
-    for key in key_list:
-        if key not in valid_keys:
-            raise KeyError(str(key) + ' is not a valid key for Header')
-            break
-        else:
-            status = True
-    return status
