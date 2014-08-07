@@ -134,10 +134,45 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
     except:
         raise
 
+search_keys_dict = {
+    "scan_id" : {
+        "description" : "The unique identifier of the run",
+        "type" : str,
+        },
+    "owner" : {
+        "description" : "The user name of the person that created the header",
+        "type" : str,
+        },
+    "start_time" : {
+        "description" : "The start time in utc",
+        "type" : datetime,
+        },
+    "text" : {
+        "description" : "The description that the 'owner' associated with the run",
+        "type" : str,
+        },
+    "update_time" : {
+        "description" : "??",
+        "type" : datetime,
+        },
+    "beamline_id" : {
+        "description" : "The identifier of the beamline.  Ex: CSX, SRX, etc...",
+        "type" : str,
+        },
+    "data" : {
+        "description" : ("True: returns all fields. False: returns some subset "
+                         "of the fields"),
+        "type" : bool,
+        },
+    }
 
 def search(owner=None, start_time=None, end_time=None, scan_id=None, data=False):
     #TODO: Modify according to changes in log() and raw_commands
     #TODO: Make time range search user friendly: replace datetime with string time formatting
+    if isinstance(scan_id, str):
+        scan_id = int(scan_id)
+    if isinstance(data, str):
+        data = data == "True"
     try:
         result = find(owner=owner, start_time=start_time, end_time=end_time, scan_id=scan_id, data=data)
     except OperationError:
