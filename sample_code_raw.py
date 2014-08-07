@@ -1,4 +1,4 @@
-__author__ = 'arkilic'
+w__author__ = 'arkilic'
 import time
 import random
 
