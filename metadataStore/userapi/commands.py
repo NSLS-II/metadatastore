@@ -22,7 +22,10 @@ def create(header=None, beamline_config=None, event_descriptor=None):
     if header is not None:
         if isinstance(header, dict):
             if 'scan_id' in header:
-                scan_id = header['scan_id']
+                if isinstance(header['scan_id'], int):
+                    scan_id = header['scan_id']
+                else:
+                    raise TypeError('scan_id must be an integer')
             else:
                 raise ValueError('scan_id is a required field')
             if 'start_time' in header:
@@ -80,10 +83,10 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                 event_type_id = event_descriptor['event_type_id']
             else:
                 event_type_id = None
-            if 'event_type_name' in event_descriptor:
-                event_type_name = event_descriptor['event_type_name']
+            if 'descriptor_name' in event_descriptor:
+                descriptor_name = event_descriptor['descriptor_name']
             else:
-                raise ValueError('event_type_name is required for EventDescriptor')
+                raise ValueError('descriptor_name is required for EventDescriptor')
             if 'type_descriptor' in event_descriptor:
                 type_descriptor = event_descriptor['type_descriptor']
             else:
@@ -93,7 +96,7 @@ def create(header=None, beamline_config=None, event_descriptor=None):
             else:
                 tag = None
             try:
-                insert_event_descriptor(scan_id=scan_id, event_type_id=event_type_id, event_type_name=event_type_name,
+                insert_event_descriptor(scan_id=scan_id, event_type_id=event_type_id, descriptor_name=descriptor_name,
                                         type_descriptor=type_descriptor, tag=tag)
             except:
                 raise

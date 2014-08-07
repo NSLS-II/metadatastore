@@ -93,7 +93,7 @@ def get_header_id(scan_id):
     return result
 
 
-def insert_event_descriptor(scan_id, event_type_id, event_type_name=None, type_descriptor=dict(),
+def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_descriptor=dict(),
                             tag=None):
     """
     Create event_descriptor entries that serve as descriptors for given events that are part of a run header
@@ -102,17 +102,17 @@ def insert_event_descriptor(scan_id, event_type_id, event_type_name=None, type_d
     :type scan_id: int
     :param event_type_id: Simple identifier for a given event type. Refer to api documentation for specific event types
     :type event_type_id: int
-    :param event_type_name: Name information for a given event
-    :type event_type_name: str
+    :param descriptor_name: Name information for a given event
+    :type descriptor_name: str
     :param type_descriptor: Additional user/data collection define attribute-value pairs
     :type type_descriptor: dict
     :param tag: Provides information regarding nature of event
     :type tag: str
 
-    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, event_type_name='scan')
-    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, event_type_name='scan',
+    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan')
+    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan',
     ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'})
-    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, event_type_name='scan',
+    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan',
     ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'}, tag='analysis')
     """
     #if get_event_descriptor_object(event_descriptor_id):
@@ -121,7 +121,7 @@ def insert_event_descriptor(scan_id, event_type_id, event_type_name=None, type_d
     header_id = get_header_id(scan_id)
     try:
         event_descriptor = EventDescriptor(header_id=header_id, event_type_id=event_type_id,
-                                           event_type_name=event_type_name, type_descriptor=type_descriptor,
+                                           descriptor_name=descriptor_name, type_descriptor=type_descriptor,
                                            tag=tag).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('EventDescriptor cannot be created')
@@ -141,7 +141,7 @@ def get_event_descriptor_hid_edid(name, s_id):
     header_id = get_header_id(s_id)
     try:
         event_descriptor_coll = EventDescriptor._get_collection()
-        result = event_descriptor_coll.find({'event_type_name': name, 'header_id': header_id}).limit(1)
+        result = event_descriptor_coll.find({'descriptor_name': name, 'header_id': header_id}).limit(1)
     except:
         raise
     res = result[0]
@@ -311,7 +311,10 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                     else:
                         query_dict['owner'] = owner
         if scan_id is not None:
-            query_dict['scan_id'] = scan_id
+            if isinstance(scan_id, int):
+                query_dict['scan_id'] = scan_id
+            else:
+                raise TypeError('scan_id must be an integer')
         if beamline_id is not None:
             query_dict['beamline_id'] = beamline_id
         if start_time is not None:

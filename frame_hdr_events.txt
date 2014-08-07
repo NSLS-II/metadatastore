@@ -16,7 +16,7 @@ run_hdr : {
         id : hashed input
         headers: list of run headers specific event group belongs
         event_type_id: integer
-        event_type_name: string
+        descriptor_name: string
         aliases: dictionary
         custom: dictionary
     }

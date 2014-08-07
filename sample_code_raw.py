@@ -14,7 +14,7 @@ end = time.time()
 print('Header insert time is ' + str((end-start)*1000) + ' ms')
 #
 start = time.time()
-insert_event_descriptor(scan_id=h_id, event_type_id=1, event_type_name='scan')
+insert_event_descriptor(scan_id=h_id, event_type_id=1, descriptor_name='scan')
 end = time.time()
 print('Descriptor insert time is ' + str((end-start)*1000) + ' ms')
 #
