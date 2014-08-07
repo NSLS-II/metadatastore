@@ -19,7 +19,22 @@ end = time.time()
 print('Descriptor insert time is ' + str((end-start)*1000) + ' ms')
 #
 start = time.time()
-insert_event(scan_id=h_id, descriptor_name='scan', owner='arkilic')
+hdr3 = save_beamline_config(scan_id=h_id, config_params={'nam1': 'val'})
+end = time.time()
+
+start = time.time()
+insert_event(scan_id=h_id, descriptor_name='scan', owner='arkilic', seq_no=0)
+end = time.time()
+print('Event insert time is ' + str((end-start)*1000) + ' ms')
+
+
+start = time.time()
+insert_event(scan_id=h_id, descriptor_name='scan', owner='arkilic', seq_no=1)
+end = time.time()
+print('Event insert time is ' + str((end-start)*1000) + ' ms')
+
+start = time.time()
+insert_event(scan_id=h_id, descriptor_name='scan', owner='arkilic', seq_no=2)
 end = time.time()
 print('Event insert time is ' + str((end-start)*1000) + ' ms')
 #
@@ -27,19 +42,14 @@ start = time.time()
 hdr1 = find(scan_id='current', data=True)
 end = time.time()
 print('Header query time is '+str((end-start)*1000) + ' ms')
-#
-# start = time.time()
-# hdr2 = find(header_id='current', data=False)
-# print hdr2
-# end = time.time()
-# print('Header query time is '+str((end-start)*1000) + ' ms')
 
 start = time.time()
-hdr3 = find(scan_id=h_id, data=True)
-print hdr3[hdr3.keys()[0]]['event_descriptor_0']['events']
+hdr2 = find(scan_id='current', data=False)
 end = time.time()
-
+print('Header query time is '+str((end-start)*1000) + ' ms')
 
 start = time.time()
-hdr3 = save_beamline_config(scan_id=h_id, config_params={'nam1': 'val'})
+hdr3 = find(owner='arkilic', data=True)
 end = time.time()
+# print hdr3[hdr3.keys()[0]]['configs'].keys()
+

@@ -160,6 +160,7 @@ def record(event=dict()):
 def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False):
     """
     Provides an easy way to search Header objects that are saved in metadataStore
+
     :param scan_id: Unique identifier for a given run
     :type scan_id: int
     :param owner: run header owner(unix user by default)
