@@ -16,11 +16,8 @@ def create(header=None, beamline_config=None, event_descriptor=None):
     :type beamline_config: dict
     :param event_descriptor: EventDescriptor attribute-value pairs
     :type event_descriptor: dict
-
     :Raises: TypeError, ValueError, ConnectionFailure, NotUniqueError
-
-     :returns: None
-
+    :returns: None
     """
     if header is not None:
         if isinstance(header, dict):
@@ -107,7 +104,6 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(), description=None):
     """
     Events are saved given scan_id and descriptor name and additional optional parameters
-
     :param scan_id: Unique run identifier
     :type scan_id: int
     :param descriptor_name: EventDescriptor that serves as an Event header
@@ -118,8 +114,6 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
     :type owner: str
     :param data: Serves as an experimental data storage structure
     :type data: dict
-
-
     :Raises: ConnectionFailure, NotUniqueError, ValueError
 
     Required fields: scan_id, descriptor_name, seq_no
@@ -149,4 +143,3 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None, data=False)
     except OperationError:
         raise
     return result
-

@@ -162,6 +162,7 @@ def list_event_descriptors():
 
 def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getuser(), seq_no=None,
                  data=dict()):
+    #TODO: Make seq_no required
     """
     Create event entries that record experimental data 
     
@@ -169,7 +170,7 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
     :type descriptor_name: str
     :param description: User generated optional string to be used as descriptors
     :type description: str
-    :param owner: Event owner (default: debian session owner)
+    :param owner: Event owner (default: unix session owner)
     :type owner: str
     :param seq_no: specifies the event's place in data sequence within a the event descriptor set
     :type seq_no: int
@@ -195,7 +196,6 @@ def save_beamline_config(scan_id, config_params={}):
     Save beamline configuration
     """
     header_id = get_header_id(scan_id)
-    print header_id
     beamline_cfg = BeamlineConfig(header_id=header_id, config_params=config_params)
     try:
         beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
@@ -245,8 +245,9 @@ def update_header_status(header_id, status):
         raise
 
 
-def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
-         **kwargs):
+def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False):
+    #TODO: add beamline_config to search() returns
+
     """
     Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
     So iterating it multiple times will only cause a single query.
@@ -339,6 +340,8 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
         #TODO: For each header within the returned results, add event_desc field
         hdr_keys = header.keys()
         for key in hdr_keys:
+            beamline_cfg = find_beamline_config(header_id=header[key]['_id'])
+            header[key]['configs'] = __decode_bcfg_cursor(beamline_cfg)
             event_desc = find_event_descriptor(header[key]['_id'])
             i = 0
             for e_d in event_desc:
@@ -363,10 +366,20 @@ def __validate_time(time_entry_list):
 
 def __decode_hdr_cursor(cursor_object):
     headers = dict()
+    i = 0
     for temp_dict in cursor_object:
-        headers['header_' + str(temp_dict['_id'])] = temp_dict
+        headers['header_' + str(i)] = temp_dict
+        i += 1
     return headers
 
+
+def __decode_bcfg_cursor(cursor_object):
+    b_configs = dict()
+    i = 0
+    for temp_dict in cursor_object:
+        b_configs['config_'+  str(i)] = temp_dict
+        i += 1
+    return b_configs
 
 def __decode_e_d_cursor(cursor_object):
     event_descriptors = dict()
@@ -405,3 +418,44 @@ def find_beamline_config(header_id, beamline_cfg_query_dict={}):
     beamline_cfg_query_dict['header_id'] = header_id
     collection = BeamlineConfig._get_collection()
     return collection.find(beamline_cfg_query_dict)
+
+
+def convertToHumanReadable(date_time):
+    """
+    converts a python datetime object to the
+    format "X days, Y hours ago"
+
+    @param date_time: Python datetime object
+
+    @return:
+        fancy datetime:: string
+    """
+    current_datetime = datetime.datetime.now()
+    delta = str(current_datetime - date_time)
+    if delta.find(',') > 0:
+        days, hours = delta.split(',')
+        days = int(days.split()[0].strip())
+        hours, minutes = hours.split(':')[0:2]
+    else:
+        hours, minutes = delta.split(':')[0:2]
+        days = 0
+    days, hours, minutes = int(days), int(hours), int(minutes)
+    date_lets =[]
+    years, months, xdays = None, None, None
+    plural = lambda x: 's' if x!=1 else ''
+    if days >= 365:
+        years = int(days/365)
+        date_lets.append('%d year%s' % (years, plural(years)))
+        days = days%365
+    if days >= 30 and days < 365:
+        months = int(days/30)
+        date_lets.append('%d month%s' % (months, plural(months)))
+        days = days%30
+    if not years and days > 0 and days < 30:
+        xdays =days
+        date_lets.append('%d day%s' % (xdays, plural(xdays)))
+    if not (months or years) and hours != 0:
+        date_lets.append('%d hour%s' % (hours, plural(hours)))
+    if not (xdays or months or years):
+        date_lets.append('%d minute%s' % (minutes, plural(minutes)))
+    return ', '.join(date_lets) + ' ago.'
