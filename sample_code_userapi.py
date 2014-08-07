@@ -4,7 +4,7 @@ import random
 from metadataStore.userapi.commands import create, record, search
 
 
-s_id = random.randint(0, 1000000)
+s_id = random.randint(0, 10000)
 seq_n = random.randint(0, 10)
 print s_id
 print search(scan_id=s_id)
