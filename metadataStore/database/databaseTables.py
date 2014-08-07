@@ -22,7 +22,7 @@ class Header(Document):
     start_time = DateTimeField(required=True)
     end_time = DateTimeField(required=False)
     owner = StringField(max_length=20, required=True)
-    scan_id = IntField(required=True, unique=True)
+    scan_id = IntField(required=True)
     status = StringField(max_length=20)
     beamline_id = StringField(max_length=20, required=False)
     custom = DictField(required=False)
