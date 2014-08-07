@@ -6,6 +6,8 @@ from metadataStore.collectionapi.commands import create, record, search
 import time
 s_id = random.randint(0, 10000)
 
+print("s_id: {0}".format(s_id))
+
 create(header={'scan_id': s_id})
 create(beamline_config={'scan_id': s_id})
 create(event_descriptor={'scan_id': s_id, 'event_type_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
