@@ -2,6 +2,9 @@ __author__ = 'arkilic'
 
 from metadataStore.dataapi.raw_commands import *
 
+import logging
+logger = logging.getLogger(__name__)
+
 #TODO: Use whoosh to add "did you mean ....?" for misspells
 #TODO: Make datetime user friendly
 
@@ -140,7 +143,7 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
 search_keys_dict = {
     "scan_id" : {
         "description" : "The unique identifier of the run",
-        "type" : str,
+        "type" : int,
         },
     "owner" : {
         "description" : "The user name of the person that created the header",
@@ -151,7 +154,8 @@ search_keys_dict = {
         "type" : datetime,
         },
     "text" : {
-        "description" : "The description that the 'owner' associated with the run",
+        "description" : "The description that the 'owner' associated with the "
+                        "run",
         "type" : str,
         },
     "update_time" : {
@@ -169,15 +173,95 @@ search_keys_dict = {
         },
     }
 
-def search(owner=None, start_time=None, end_time=None, scan_id=None, data=False):
+def search(owner=None, start_time=None, end_time=None, scan_id=None,
+           data=False):
+    """
+    Search the experimental database with the provided search keys. If no search
+    keys are provided, the default behavior is to return nothing.
+
+    Parameters
+    ----------
+    owner : str, optional
+        User name to search on
+    start_time: datetime, optional
+        Only return results after start_time
+    end_time: datetime, optional
+        Only return results before start_time
+    scan_id: int, optional
+        Search by specific scan_id.  If scan_id is a string, search() will try
+        to cast it to an integer.  If this fails, an error message will be
+        be logged
+    data: bool, optional
+        True: Add data to the returned dictionary
+        False: Don't include data in the returned dictionary
+        If data is a string, search() will test to see if it's value is "True"
+        or "False" and
+
+    Returns
+    -------
+    list:
+        If the combination of search parameters finds something, a list of
+        dictionaries is returned/
+        If the combination of search parameters finds nothing or no search
+        parameters are provided, None is returned
+    """
     #TODO: Modify according to changes in log() and raw_commands
     #TODO: Make time range search user friendly: replace datetime with string time formatting
-    if isinstance(scan_id, str):
-        scan_id = int(scan_id)
-    if isinstance(data, str):
-        data = data == "True"
+
+    print(search.func_code.co_varnames)
+    # input parameter validation
+    err_msg = ""
+    search_dict = {}
+
+    # try to cast scan_id to an integer
     try:
-        result = find(owner=owner, start_time=start_time, end_time=end_time, scan_id=scan_id, data=data)
+        scan_id = int(scan_id)
+    except ValueError:
+        # this will be caught in the type checking
+        pass
+
+    # check to see if data is anything other than a boolean
+    if not isinstance(data, bool):
+        # check to see if it is a string that can be converted to a boolean
+        if data is "True":
+            data = True
+        elif data is "False":
+            data = False
+        else:
+            # type issues will be caught when all input parameters are type
+            # checked
+            pass
+
+    # iterate over all parameters to type check and format a search dictionary
+    # of terms that are both valid and not None
+    params_list = [('owner', owner, str), ('start_time', start_time, datetime),
+                   ('end_time', end_time, datetime), ('scan_id', scan_id, int),
+                   ('data', data, bool)]
+
+    for (name, value, param_type) in params_list:
+        logger.info("name: {0}, param: {1}, param_type: {2}".format(name,
+                                                                    value,
+                                                                    param_type))
+        if (value is not None) and (not isinstance(value, param_type)):
+            err_msg += ("Error: Your '{0}' value is {1} and its class is {2}. "
+                        "Please provide a {3} object to use this search "
+                        "key\n").format(name, value, value.__class__,
+                                        param_type)
+            continue
+        # populate the search dict with parameters that are of the right type
+        # and are not none
+        search_dict[name] = value
+
+    if err_msg != "":
+        logger.error(err_msg)
+        #print(err_msg)
+        # raise ValueError(err_msg)
+
+    # log the search dictionary as info
+    logger.info("Search dictionary: {0}".format(search_dict))
+    # actually perform the search
+    try:
+        result = find(**search_dict)
     except OperationError:
         raise
     return result
