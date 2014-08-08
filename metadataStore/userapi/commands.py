@@ -141,35 +141,35 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
         raise
 
 search_keys_dict = {
-    "scan_id" : {
-        "description" : "The unique identifier of the run",
-        "type" : int,
+    "scan_id": {
+        "description": "The unique identifier of the run",
+        "type": int,
         },
-    "owner" : {
-        "description" : "The user name of the person that created the header",
-        "type" : str,
+    "owner": {
+        "description": "The user name of the person that created the header",
+        "type": str,
         },
-    "start_time" : {
-        "description" : "The start time in utc",
-        "type" : datetime,
+    "start_time": {
+        "description": "The start time in utc",
+        "type": datetime,
         },
-    "text" : {
-        "description" : "The description that the 'owner' associated with the "
+    "text": {
+        "description": "The description that the 'owner' associated with the "
                         "run",
-        "type" : str,
+        "type": str,
         },
-    "update_time" : {
-        "description" : "??",
-        "type" : datetime,
+    "update_time": {
+        "description": "??",
+        "type": datetime,
         },
-    "beamline_id" : {
-        "description" : "The identifier of the beamline.  Ex: CSX, SRX, etc...",
-        "type" : str,
+    "beamline_id": {
+        "description": "The identifier of the beamline.  Ex: CSX, SRX, etc...",
+        "type": str,
         },
-    "data" : {
-        "description" : ("True: returns all fields. False: returns some subset "
+    "data": {
+        "description": ("True: returns all fields. False: returns some subset "
                          "of the fields"),
-        "type" : bool,
+        "type": bool,
         },
     }
 
