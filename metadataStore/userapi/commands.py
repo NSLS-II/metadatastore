@@ -208,7 +208,6 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
     #TODO: Modify according to changes in log() and raw_commands
     #TODO: Make time range search user friendly: replace datetime with string time formatting
 
-    print(search.func_code.co_varnames)
     # input parameter validation
     err_msg = ""
     search_dict = {}
@@ -234,6 +233,12 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
 
     # iterate over all parameters to type check and format a search dictionary
     # of terms that are both valid and not None
+    # todo autobuild the params list from the input parameter names with
+    # search.func_code.co_varnames and search.func_code.co_argcount and the
+    # search_keys_dict
+    # print("search.func_code.co_varnames: {0}".format(search.func_code.co_varnames))
+    # print("search.func_code.co_argcount: {0}".format(search.func_code.co_argcount))
+
     params_list = [('owner', owner, str), ('start_time', start_time, datetime),
                    ('end_time', end_time, datetime), ('scan_id', scan_id, int),
                    ('data', data, bool)]
