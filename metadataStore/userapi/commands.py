@@ -183,15 +183,15 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
     ----------
     owner : str, optional
         User name to search on
-    start_time: datetime, optional
+    start_time : datetime, optional
         Only return results after start_time
-    end_time: datetime, optional
+    end_time : datetime, optional
         Only return results before start_time
-    scan_id: int, optional
+    scan_id : int, optional
         Search by specific scan_id.  If scan_id is a string, search() will try
         to cast it to an integer.  If this fails, an error message will be
         be logged
-    data: bool, optional
+    data : bool, optional
         True: Add data to the returned dictionary
         False: Don't include data in the returned dictionary
         If data is a string, search() will test to see if it's value is "True"
@@ -199,7 +199,7 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
 
     Returns
     -------
-    list:
+    list :
         If the combination of search parameters finds something, a list of
         dictionaries is returned/
         If the combination of search parameters finds nothing or no search
