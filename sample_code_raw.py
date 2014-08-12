@@ -12,12 +12,12 @@ start = time.time()
 save_header(beamline_id='csx29', scan_id=h_id)
 end = time.time()
 print('Header insert time is ' + str((end-start)*1000) + ' ms')
-#
+
 start = time.time()
 insert_event_descriptor(scan_id=h_id, event_type_id=1, descriptor_name='scan')
 end = time.time()
 print('Descriptor insert time is ' + str((end-start)*1000) + ' ms')
-#
+
 start = time.time()
 hdr3 = save_beamline_config(scan_id=h_id, config_params={'nam1': 'val'})
 end = time.time()

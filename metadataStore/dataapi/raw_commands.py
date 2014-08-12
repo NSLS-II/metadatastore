@@ -4,8 +4,9 @@ import getpass
 import datetime
 import re
 
-from mongoengine.errors import OperationError
+from pymongo.errors import OperationFailure
 
+from metadataStore.sessionManager.databaseInit import db
 from metadataStore.database.databaseTables import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger
 
@@ -47,18 +48,6 @@ def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.dat
     return header
 
 
-def list_headers():
-    """
-    Return all Header instances created
-    """
-    try:
-        headers = Header.objects.all()
-    except:
-        metadataLogger.logger.warning('Headers cannot be accessed')
-        raise OperationError('Headers cannot be accessed')
-    return headers
-
-
 def get_header_object(id):
     """
     Return the Header object with given id
@@ -67,7 +56,7 @@ def get_header_object(id):
     :type id: pymongo.ObjectId instance
     """
     try:
-        header_object = Header.objects(_id=id)
+        header_object = db['header'].find({'_id': id})
     except:
         raise
     return header_object
@@ -81,7 +70,7 @@ def get_header_id(scan_id):
     :type scan_id: int
 
     """
-    collection = Header._get_collection()
+    collection = db['header']
     try:
         hdr_crsr = collection.find({'scan_id': scan_id}).limit(1)
     except:
@@ -89,7 +78,6 @@ def get_header_id(scan_id):
     if hdr_crsr.count() == 0:
         raise Exception('header_id cannot be retrieved. Please validate scan_id')
     result = hdr_crsr[0]['_id']
-    hdr_crsr.close()
     return result
 
 
@@ -115,9 +103,6 @@ def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_d
     >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan',
     ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'}, tag='analysis')
     """
-    #if get_event_descriptor_object(event_descriptor_id):
-    #    raise ValueError('EventDescriptor with given event_descriptor_id exists')
-    #else:
     header_id = get_header_id(scan_id)
     try:
         event_descriptor = EventDescriptor(header_id=header_id, event_type_id=event_type_id,
@@ -140,20 +125,19 @@ def get_event_descriptor_hid_edid(name, s_id):
     """
     header_id = get_header_id(s_id)
     try:
-        event_descriptor_coll = EventDescriptor._get_collection()
-        result = event_descriptor_coll.find({'descriptor_name': name, 'header_id': header_id}).limit(1)
+        result =  db['event_type_descriptor'].find({'header_id': header_id, 'descriptor_name': name}).limit(1)[0]
     except:
         raise
-    res = result[0]
-    return res['header_id'], res['_id']
+    return result['header_id'], result['_id']
 
 
 def list_event_descriptors():
     """
     Returns all EventDescriptor instances saved into the database
     """
+    collection = db['event_descriptor']
     try:
-        event_descriptors = EventDescriptor.objects.all()
+        event_descriptors = db.find()
     except:
         metadataLogger.logger.warning('EventDescriptors can not be retrieved')
         raise
@@ -176,7 +160,7 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
     :type seq_no: int
     :param data: Data Collection routine defined name-value 
     :type data: dict
-    :Raises: TypeError, OperationError, ConnectionFailure
+    :Raises: TypeError, OperationFailure, ConnectionFailure
     :returns: Event object
     """
     header_id, descriptor_id = get_event_descriptor_hid_edid(descriptor_name, scan_id)
@@ -201,7 +185,7 @@ def save_beamline_config(scan_id, config_params={}):
         beamline_cfg.save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Beamline config cannot be saved')
-        raise OperationError('Beamline config cannot be saved')
+        raise OperationFailure('Beamline config cannot be saved')
     return beamline_cfg
 
 
@@ -209,7 +193,7 @@ def update_header_end_time(header_id, end_time):
     """
     Updates header end_time to current timestamp given end_time and header_id. See insert_event
     """
-    coll = Header._get_collection()
+    coll = db['header']
     try:
         result = coll.find({'_id': header_id})
     except:
@@ -229,7 +213,7 @@ def update_header_status(header_id, status):
     """
     Updates run header status given header_id and status
     """
-    coll = Header._get_collection()
+    coll = db['header']
     try:
         result = coll.find({'_id': header_id})
     except:
@@ -270,7 +254,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
     supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
     try:
-        coll = Header._get_collection()
+        coll = db['header']
     except:
         metadataLogger.logger.warning('Collection Header cannot be accessed')
         raise
@@ -401,25 +385,25 @@ def __decode_cursor(cursor_object):
 
 
 def find_header(query_dict):
-    collection = Header._get_collection()
+    collection = db['header']
     return collection.find(query_dict)
 
 
 def find_event(event_descriptor_id, event_query_dict={}):
     event_query_dict['event_descriptor_id'] = event_descriptor_id
-    collection = Event._get_collection()
+    collection = db['event']
     return collection.find(event_query_dict)
 
 
 def find_event_descriptor(header_id, event_query_dict={}):
     event_query_dict['header_id'] = header_id
-    collection = EventDescriptor._get_collection()
+    collection = db['event_descriptor']
     return collection.find(event_query_dict)
 
 
 def find_beamline_config(header_id, beamline_cfg_query_dict={}):
     beamline_cfg_query_dict['header_id'] = header_id
-    collection = BeamlineConfig._get_collection()
+    collection = db['beamline_config']
     return collection.find(beamline_cfg_query_dict)
 
 

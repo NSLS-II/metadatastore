@@ -1,12 +1,12 @@
 __author__ = 'arkilic'
 
-from metadataStore.dataapi.raw_commands import *
-
 import logging
+
+from metadataStore.dataapi.raw_commands import *
 logger = logging.getLogger(__name__)
 
 #TODO: Use whoosh to add "did you mean ....?" for misspells
-#TODO: Make datetime user friendly
+#TODO: Use metadataLogger class instance from sessionInit instead of on the fly logging object
 
 
 def create(header=None, beamline_config=None, event_descriptor=None):
