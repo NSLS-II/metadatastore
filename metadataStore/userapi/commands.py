@@ -3,7 +3,7 @@ __author__ = 'arkilic'
 import logging
 import getpass
 import datetime
-
+from collections import OrderedDict
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event, insert_event_descriptor, find
 logger = logging.getLogger(__name__)
 
@@ -142,38 +142,104 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
     except:
         raise
 
-search_keys_dict = {
-    "scan_id": {
-        "description": "The unique identifier of the run",
-        "type": int,
-        },
-    "owner": {
-        "description": "The user name of the person that created the header",
-        "type": str,
-        },
-    "start_time": {
-        "description": "The start time in utc",
-        "type": datetime,
-        },
-    "text": {
-        "description": "The description that the 'owner' associated with the "
-                        "run",
-        "type": str,
-        },
-    "update_time": {
-        "description": "??",
-        "type": datetime,
-        },
-    "beamline_id": {
-        "description": "The identifier of the beamline.  Ex: CSX, SRX, etc...",
-        "type": str,
-        },
-    "data": {
-        "description": ("True: returns all fields. False: returns some subset "
-                         "of the fields"),
-        "type": bool,
-        },
+
+search_keys_dict = OrderedDict()
+search_keys_dict["scan_id"] = {
+    "description": "The unique identifier of the run",
+    "type": int,
     }
+search_keys_dict["owner"] = {
+    "description": "The user name of the person that created the header",
+    "type": str,
+    }
+search_keys_dict["start_time"] = {
+    "description": "The start time in utc",
+    "type": datetime.datetime,
+    }
+search_keys_dict["end_time"] = {
+    "description": "The end time in utc",
+    "type": datetime.datetime,
+    }
+search_keys_dict["data"] = {
+    "description": ("True: returns all fields. False: returns some subset "
+                     "of the fields"),
+    "type": bool,
+    }
+
+
+def validate(var_dict, target_dict=search_keys_dict):
+    """
+    Helper function to validate parameter input, strip 'None' parameters
+    and attempt to cast input parameters of the wrong type to the correct
+    type
+
+    Parameters
+    ----------
+    var_dict : dict
+        Dictionary whose keys are in target_dict and whose values are to be
+        type checked against the "type" field in the target_dict. None values
+        cannot be typechecked and are thus added to the return_dict as None.
+    target_dict : dict
+        Dictionary whose keys are input parameter names and whose value is
+        a dict with "description" and "type" keys.
+
+    Returns
+    -------
+    dict
+        Validated dictionary whose keys are all in target_dict and whose
+        values are correctly typed or None
+
+    Raises
+    ------
+    ValueError
+        - If any of the input parameters are not correctly typed or they
+        cannot be cast to the correct type
+        - If var_dict has no entries.
+        - If target_dict has no entries.
+    KeyError
+        If any of the keys in var_dict are not in target_dict
+    """
+    # check to make sure input dictionaries have keys
+    if not var_dict:
+        raise ValueError("var_dict has no keys")
+    if not target_dict:
+        raise ValueError("target_dict has no keys")
+
+    # init the dict to return
+    typechecked_dict = {}
+
+    for key in var_dict:
+        try:
+            # will raise a KeyError if key is not in target_dict
+            target_type = target_dict[key]["type"]
+        except KeyError:
+            raise KeyError("key [[{0}]] is not in the target_dict. Typechecking"
+                           " cannot proceed".format(key))
+        # get the value
+        val = var_dict[key]
+        # typecheck the value
+        try:
+            # STRING -> BOOL
+            if target_type == bool and isinstance(val, str):
+                val = val.lower()
+                if val == "true":
+                    val = True
+                elif val == "false":
+                    val = False
+                else:
+                    raise ValueError()
+            # try to cast it to the target_type
+            val = target_type(val)
+        except ValueError:
+            raise ValueError("key [[{0}]] has a value of [[{1}]] which cannot "
+                             "be cast to [[{2}]]".format(key, val, target_type))
+
+        # add the kv pair to the typechecked dict. Note that None values are
+        # still added to the dictionary
+        typechecked_dict[key] = val
+
+    return typechecked_dict
+
 
 def search(owner=None, start_time=None, end_time=None, scan_id=None,
            data=False):
@@ -206,63 +272,32 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
         dictionaries is returned/
         If the combination of search parameters finds nothing or no search
         parameters are provided, None is returned
+
+    Raises
+    ------
+    ValueError
+        If any of the input parameters are not correctly typed
+
     """
     #TODO: Modify according to changes in log() and raw_commands
     #TODO: Make time range search user friendly: replace datetime with string time formatting
 
-    # input parameter validation
-    err_msg = ""
     search_dict = {}
 
-    # try to cast scan_id to an integer
-    try:
-        scan_id = int(scan_id)
-    except ValueError:
-        # this will be caught in the type checking
-        pass
+    # construct a dictionary whose keys are input parameter names and whose
+    # values are the input parameter values. Drop values which are None
+    # get the number of arguments
+    argcount = search.func_code.co_argcount
+    # get the input parameter names
+    varnames = search.func_code.co_varnames[:argcount]
+    # create the list of input parameter values
+    varvals = [owner, start_time, end_time, scan_id, data]
+    for name, val in zip(varnames, varvals):
+        if val is not None:
+            search_dict[name] = val
 
-    # check to see if data is anything other than a boolean
-    if not isinstance(data, bool):
-        # check to see if it is a string that can be converted to a boolean
-        if data is "True":
-            data = True
-        elif data is "False":
-            data = False
-        else:
-            # type issues will be caught when all input parameters are type
-            # checked
-            pass
-
-    # iterate over all parameters to type check and format a search dictionary
-    # of terms that are both valid and not None
-    # todo autobuild the params list from the input parameter names with
-    # search.func_code.co_varnames and search.func_code.co_argcount and the
-    # search_keys_dict
-    # print("search.func_code.co_varnames: {0}".format(search.func_code.co_varnames))
-    # print("search.func_code.co_argcount: {0}".format(search.func_code.co_argcount))
-
-    params_list = [('owner', owner, str), ('start_time', start_time, datetime),
-                   ('end_time', end_time, datetime), ('scan_id', scan_id, int),
-                   ('data', data, bool)]
-
-    for (name, value, param_type) in params_list:
-        logger.info("name: {0}, param: {1}, param_type: {2}".format(name,
-                                                                    value,
-                                                                    param_type))
-        if (value is not None) and (not isinstance(value, param_type)):
-            err_msg += ("Error: Your '{0}' value is {1} and its class is {2}. "
-                        "Please provide a {3} object to use this search "
-                        "key\n").format(name, value, value.__class__,
-                                        param_type)
-            continue
-        # populate the search dict with parameters that are of the right type
-        # and are not none
-        search_dict[name] = value
-
-    if err_msg != "":
-        logger.error(err_msg)
-        #print(err_msg)
-        # raise ValueError(err_msg)
+    # validate the search dictionary
+    search_dict = validate(search_dict, search_keys_dict)
 
     # log the search dictionary as info
     logger.info("Search dictionary: {0}".format(search_dict))
