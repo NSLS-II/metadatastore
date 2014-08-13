@@ -261,9 +261,7 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
         search_dict[name] = value
 
     if err_msg != "":
-        logger.error(err_msg)
-        #print(err_msg)
-        # raise ValueError(err_msg)
+        raise ValueError(err_msg)
 
     # log the search dictionary as info
     logger.info("Search dictionary: {0}".format(search_dict))
