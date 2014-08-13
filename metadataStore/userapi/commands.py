@@ -214,12 +214,13 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
     err_msg = ""
     search_dict = {}
 
-    # try to cast scan_id to an integer
-    try:
-        scan_id = int(scan_id)
-    except ValueError:
-        # this will be caught in the type checking
-        pass
+    if scan_id is not None:
+        # try to cast scan_id to an integer
+        try:
+            scan_id = int(scan_id)
+        except ValueError:
+            # this will be caught in the type checking
+            pass
 
     # check to see if data is anything other than a boolean
     if not isinstance(data, bool):
