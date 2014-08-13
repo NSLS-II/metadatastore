@@ -397,7 +397,7 @@ def find_event(event_descriptor_id, event_query_dict={}):
 
 def find_event_descriptor(header_id, event_query_dict={}):
     event_query_dict['header_id'] = header_id
-    collection = db['event_descriptor']
+    collection = db['event_type_descriptor']
     return collection.find(event_query_dict)
 
 

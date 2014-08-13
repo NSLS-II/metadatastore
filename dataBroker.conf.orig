@@ -4,12 +4,10 @@ beamline_id=null
 
 [metadataStore]
 database=metaDataStore
-<<<<<<< HEAD
 host=xf23id-broker
 =======
 host=kronos.nsls2.bnl.gov
 #host=localhost
->>>>>>> canon/orm_metadataStore
 port=27017
 username=dummy
 password=dummy

@@ -14,7 +14,11 @@ class TestHeaderObject(unittest.TestCase):
     Tests Included:
         scan_id uniqueness
         Header save data verification
-        scan_id querying given uniqueness of
+        scan_id consistency using _id
+        start_time data type
+        end_time data type
+        status data type
+
     """
     def setUp(self):
         self.s_id = random.randint(0,1000)
@@ -40,11 +44,11 @@ class TestHeaderObject(unittest.TestCase):
         self.assertRaises(TypeError, Header, scan_id=self.s_id, beamline_id='csx',
                           owner='arkilic', custom={'attribute': 'value'}, end_time='08/13/2014-08:23:19')
 
-    def test_status(self):
+    def test_status_format(self):
         self.assertRaises(TypeError, Header, start_time='08/13/2014-08:23:19', scan_id=self.s_id, beamline_id='csx',
                           owner='arkilic', custom={'attribute': 'value'}, status=134)
 
-    def test_custom(self):
+    def test_custom_format(self):
         self.assertRaises(TypeError, Header, start_time='08/13/2014-08:23:19', scan_id=self.s_id, beamline_id='csx',
                           owner='arkilic', custom={'attribute': 'value'}, status=134)
 

@@ -15,4 +15,4 @@ create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type
 record(scan_id=s_id, descriptor_name='scan', seq_no=seq_n)
 record(scan_id=s_id, descriptor_name='scan', seq_no=seq_n, data={'name': 'value'})
 record(scan_id=s_id, descriptor_name='scan', seq_no=seq_n, data={'name': 'value'}, description='some entry')
-print search(scan_id=s_id, data=False)
+print search(scan_id=s_id, data=True)

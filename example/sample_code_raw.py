@@ -38,6 +38,13 @@ insert_event(scan_id=h_id, descriptor_name='scan', owner='arkilic', seq_no=2)
 end = time.time()
 print('Event insert time is ' + str((end-start)*1000) + ' ms')
 #
+
+
+
+hdr3 = find(scan_id=h_id, data=True)
+print hdr3['header_0']['event_descriptor_0']['events'].keys()
+
+
 start = time.time()
 hdr1 = find(scan_id='current', data=True)
 end = time.time()
@@ -49,7 +56,9 @@ end = time.time()
 print('Header query time is '+str((end-start)*1000) + ' ms')
 
 start = time.time()
-hdr3 = find(owner='arkilic', data=True)
+hdr3 = find(scan_id=h_id, data=True)
 end = time.time()
-# print hdr3[hdr3.keys()[0]]['configs'].keys()
+print hdr3['header_0'].keys()
+# for entry in hdr3:
+#     print entry.keys()
 
