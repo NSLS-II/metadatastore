@@ -1,4 +1,4 @@
-w__author__ = 'arkilic'
+__author__ = 'arkilic'
 import time
 import random
 
@@ -56,9 +56,9 @@ end = time.time()
 print('Header query time is '+str((end-start)*1000) + ' ms')
 
 start = time.time()
-hdr3 = find(scan_id=h_id, data=True)
+hdr3 = find(data=True, num_header=45)
 end = time.time()
-print hdr3['header_0'].keys()
+print hdr3.keys()
 # for entry in hdr3:
 #     print entry.keys()
 

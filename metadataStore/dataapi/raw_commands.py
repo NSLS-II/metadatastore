@@ -229,7 +229,8 @@ def update_header_status(header_id, status):
         raise
 
 
-def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False):
+def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
+         num_header=50):
     #TODO: add beamline_config to search() returns
 
     """
@@ -323,7 +324,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                 else:
                     query_dict['end_time'] = {'$gte': end_time,
                                               '$lt': datetime.datetime.utcnow()}
-        header = __decode_hdr_cursor(find_header(query_dict))
+        header = __decode_hdr_cursor(find_header(query_dict).limit(num_header))
         #TODO: For each header within the returned results, add event_desc field
         hdr_keys = header.keys()
         for key in hdr_keys:

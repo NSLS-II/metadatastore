@@ -4,7 +4,10 @@ import logging
 import getpass
 import datetime
 
+from pymongo.errors import OperationFailure
+
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event, insert_event_descriptor, find
+
 logger = logging.getLogger(__name__)
 
 #TODO: Use whoosh to add "did you mean ....?" for misspells
@@ -175,8 +178,9 @@ search_keys_dict = {
         },
     }
 
+
 def search(owner=None, start_time=None, end_time=None, scan_id=None,
-           data=False):
+           data=False, num_header=50):
     """
     Search the experimental database with the provided search keys. If no search
     keys are provided, the default behavior is to return nothing.
@@ -268,7 +272,7 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
     logger.info("Search dictionary: {0}".format(search_dict))
     # actually perform the search
     try:
-        result = find(**search_dict)
-    except OperationError:
+        result = find(**search_dict, num_header=num_header)
+    except OperationFailure:
         raise
     return result

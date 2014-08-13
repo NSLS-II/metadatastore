@@ -160,7 +160,7 @@ def record(event=dict()):
         raise
 
 
-def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False):
+def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False, num_header=50):
     """
     Provides an easy way to search Header objects that are saved in metadataStore
 
@@ -188,7 +188,7 @@ def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time
 
     """
     result = find(scan_id=scan_id, owner=owner, start_time=start_time, beamline_id=beamline_id, end_time=end_time,
-                  data=data)
+                  data=data, num_header=num_header)
     return result
 
 
