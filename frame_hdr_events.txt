@@ -12,40 +12,39 @@ run_hdr : {
         custom: dictionary
     }
 
-    event_group: {
+    event_descriptor: {
         id : hashed input
         headers: list of run headers specific event group belongs
         event_type_id: integer
         descriptor_name: string
         aliases: dictionary
         custom: dictionary
-    }
+    events:{
+            event: {
+                id: hashed input
+                event_groups: list of event groups specific event belongs
+                description: String
+                seq_no: integer
+                data: dictionary
+            }
 
-    event: {
-        id: hashed input
-        event_groups: list of event groups specific event belongs
-        description: String
-        seq_no: integer
-        data: dictionary
-    }
-
-    event: {
-        id: hashed input
-        event_groups: list of event groups specific event belongs
-        description: String
-        seq_no: integer
-        data: dictionary
-    }
-
+            event: {
+                id: hashed input
+                event_groups: list of event groups specific event belongs
+                description: String
+                seq_no: integer
+                data: dictionary
+            }
 
 
-    event: {
-        id: hashed input
-        event_groups: list of event groups specific event belongs
-        description: String
-        seq_no: integer
-        data: dictionary
-    }
 
+            event: {
+                id: hashed input
+                event_groups: list of event groups specific event belongs
+                description: String
+                seq_no: integer
+                data: dictionary
+            }
 
+        }
     }
