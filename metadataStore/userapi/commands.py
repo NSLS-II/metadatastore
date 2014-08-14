@@ -1,15 +1,16 @@
 __author__ = 'arkilic'
 
-import logging
 import getpass
 import datetime
 
 from pymongo.errors import OperationFailure
 
+from metadataStore.sessionManager.databaseInit import metadataLogger
+
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event, insert_event_descriptor, find
 
 
-logger = logging.getLogger(__name__)
+logger = metadataLogger.logger
 
 #TODO: Use whoosh to add "did you mean ....?" for misspells
 
