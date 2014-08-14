@@ -9,15 +9,16 @@ from metadataStore.database.databaseTables import Header
 from metadataStore.sessionManager.databaseInit import db
 
 
-class TestHeaderObject(unittest.TestCase):
+class TestHeader(unittest.TestCase):
     """
     Tests Included:
-        scan_id uniqueness
-        Header save data verification
-        scan_id consistency using _id
-        start_time data type
-        end_time data type
-        status data type
+        1. scan_id uniqueness
+        2. Header save data verification
+        3. scan_id consistency using _id
+        4. start_time data type(datetime.datetime)
+        5. end_time data type(datetime.datetime)
+        6. status data type(str)
+        7. custom data type(dict)
 
     """
     def setUp(self):

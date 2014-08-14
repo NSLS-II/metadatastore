@@ -28,6 +28,8 @@ end = time.time()
 print('Event insert time is ' + str((end-start)*1000) + ' ms')
 
 
+
+
 start = time.time()
 insert_event(scan_id=h_id, descriptor_name='scan', owner='arkilic', seq_no=1)
 end = time.time()

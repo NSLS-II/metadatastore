@@ -5,9 +5,6 @@ import random
 from metadataStore.collectionapi.commands import create, record, search
 
 s_id = random.randint(0, 10000)
-
-print("s_id: {0}".format(s_id))
-
 create(header={'scan_id': s_id})
 create(beamline_config={'scan_id': s_id})
 create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})

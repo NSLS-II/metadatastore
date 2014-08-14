@@ -8,6 +8,9 @@ from metadataStore.sessionManager.databaseInit import db
 
 
 class Header(object):
+    """
+    Run Header that captures all aspects of a given run using its keys and other collections
+    """
     def __init__(self, start_time, scan_id, beamline_id=None, status='In Progress', owner=getpass.getuser(),
                  end_time=None, custom=dict()):
         """

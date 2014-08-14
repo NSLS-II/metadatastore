@@ -8,19 +8,58 @@ from metadataStore.dataapi.raw_commands import find
 
 def create(header=None, beamline_config=None, event_descriptor=None):
     """
-    Create header, beamline_config, and event_descriptor
+    Create header, beamline_config, and event_descriptor given dictionaries with appropriate name-value pairs
 
+    Parameters
+    ----------
     :param header: Header attribute-value pairs
     :type header: dict
+
     :param beamline_config: BeamlineConfig attribute-value pairs
     :type beamline_config: dict
+
     :param event_descriptor: EventDescriptor attribute-value pairs
     :type event_descriptor: dict
 
-    :Raises: TypeError, ValueError, ConnectionFailure, NotUniqueError
+    :raises: TypeError, ValueError, ConnectionFailure, NotUniqueError
 
-     :returns: None
+    :returns: None
 
+    Usage:
+    >>> sample_header = {'scan_id': 1234}
+    >>> create(header=sample_header)
+
+    >>> create(header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline'})
+
+    >>> create(header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
+    ...                 'owner': 'arkilic'})
+
+    >>> create(header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
+    ...                 'owner': 'arkilic', 'custom': {'attribute1': 'value1', 'attribute2':'value2'}})
+
+    >>> create(beamline_config={'scan_id': s_id})
+
+    >>> create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
+
+    >>> create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental',
+    ...                          'type_descriptor':{'attribute1': 'value1', 'attribute2': 'value2'}})
+
+    >>> sample_event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental',
+    ...                          'type_descriptor':{'attribute1': 'value1', 'attribute2': 'value2'}})
+    >>> sample_header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
+    ...                 'owner': 'arkilic', 'custom': {'attribute1': 'value1', 'attribute2':'value2'}})
+    >>> create(event_descriptor=sample_event_descriptor, header=sample_header)
+
+    >>> create(beamline_config={'scan_id': 1234})
+
+    >>> create(beamline_config={'scan_id': 1234, 'config_params': {'attribute1': 'value1', 'attribute2': 'value2'}})
+
+    >>> sample_event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental',
+    ...                          'type_descriptor':{'attribute1': 'value1', 'attribute2': 'value2'}})
+    >>> sample_header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
+    ...                 'owner': 'arkilic', 'custom': {'attribute1': 'value1', 'attribute2':'value2'}})
+    >>> sample_beamline_config = {'scan_id': 1234, 'config_params': {'attribute1': 'value1', 'attribute2': 'value2'}}
+    >>> create(header=sample_header, event_descriptor=sample_event_descriptor, beamline_config=sample_beamline_config)
     """
     if header is not None:
         if isinstance(header, dict):
@@ -111,16 +150,19 @@ def record(event=dict()):
     """
     Events are saved given scan_id and descriptor name and additional optional parameters
 
-    :param event: Dictionary used in order to save name-value pairs for Event entries
-    :type event: dict
-
-    :Raises: ConnectionFailure, NotUniqueError, ValueError
-
     Required fields: scan_id, descriptor_name
     Optional fields: owner, seq_no, data, description
 
-    Usage:
+    Parameters
+    ----------
+    :param event: Dictionary used in order to save name-value pairs for Event entries
+    :type event: dict
 
+    :raises: ConnectionFailure, NotUniqueError, ValueError
+
+    :rtype: None
+
+    Usage:
     >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan'})
 
     >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
@@ -164,33 +206,43 @@ def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time
     """
     Provides an easy way to search Header objects that are saved in metadataStore
 
+    Parameters
+    ----------
     :param scan_id: Unique identifier for a given run
     :type scan_id: int
+
     :param owner: run header owner(unix user by default)
     :type owner: str
+
     :param start_time: Header creation time
     :type start_time: datetime.datetime object
+
     :param beamline_id: beamline descriptor
     :type beamline_id: str
+
     :param end_time: Header status time
     :type end_time: datetime.datetime object
+
     :param data: data field for collection routines to save experiemental progress
     :type data: dict
 
+    :raises: TypeError, OperationError, ValueError
+
+    :returns: Dictionary
+
     Usage:
-
     >>> search(scan_id=s_id)
-    >>> search(scan_id=s_id, owner='ark*')
-    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5))
-    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkilic')
-    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='ark*')
-    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkili.')
 
+    >>> search(scan_id=s_id, owner='ark*')
+
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5))
+
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkilic')
+
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='ark*')
+
+    >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkili.')
     """
     result = find(scan_id=scan_id, owner=owner, start_time=start_time, beamline_id=beamline_id, end_time=end_time,
                   data=data, num_header=num_header)
     return result
-
-
-def end_collection():
-    pass
