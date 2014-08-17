@@ -11,5 +11,6 @@ create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type
 record(event={'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0})
 record(event={'scan_id': s_id, 'descriptor_name': 'scan', 'owner': 'arkilic', 'seq_no': 0,
               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
-search(scan_id=s_id)
-search(scan_id=s_id, owner='ark*')
+print search(scan_id=s_id)
+print search(scan_id=s_id, owner='ark*')
+print search()

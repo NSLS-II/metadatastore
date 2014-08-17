@@ -325,7 +325,6 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                     query_dict['end_time'] = {'$gte': end_time,
                                               '$lt': datetime.datetime.utcnow()}
         header = __decode_hdr_cursor(find_header(query_dict).limit(num_header))
-        #TODO: For each header within the returned results, add event_desc field
         hdr_keys = header.keys()
         for key in hdr_keys:
             beamline_cfg = find_beamline_config(header_id=header[key]['_id'])
@@ -341,6 +340,8 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                     i += 1
                 else:
                     i += 1
+        if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None:
+            header = None
     return header
 
 
