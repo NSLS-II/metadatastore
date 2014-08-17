@@ -332,8 +332,9 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
             header[key]['configs'] = __decode_bcfg_cursor(beamline_cfg)
             event_desc = find_event_descriptor(header[key]['_id'])
             i = 0
+            header[key]['event_descriptors'] = dict()
             for e_d in event_desc:
-                header[key]['event_descriptor_' + str(i)] = e_d
+                header[key]['event_descriptors']['event_descriptor_' + str(i)] = e_d
                 if data is True:
                     events = find_event(event_descriptor_id=e_d['_id'])
                     header[key]['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
