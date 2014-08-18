@@ -160,7 +160,7 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
     :type seq_no: int
     :param data: Data Collection routine defined name-value 
     :type data: dict
-    :Raises: TypeError, OperationFailure, ConnectionFailure
+    :raises: TypeError, OperationFailure, ConnectionFailure
     :returns: Event object
     """
     header_id, descriptor_id = get_event_descriptor_hid_edid(descriptor_name, scan_id)

@@ -1,5 +1,4 @@
-__author__ = 'arkilic'
-
+__author__ = ['arkilic', 'edill']
 import getpass
 import datetime
 import six
@@ -350,9 +349,6 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
         If the combination of search parameters finds nothing or no search
         parameters are provided, None is returned
     """
-
- #TODO: Modify according to changes in log() and raw_commands
-    #TODO: Make time range search user friendly: replace datetime with string time formatting
 
     search_dict = {}
 
