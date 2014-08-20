@@ -1,0 +1,1 @@
+Header insert with all defaults took 3.58301353455milliseconds in average over 1000 headers

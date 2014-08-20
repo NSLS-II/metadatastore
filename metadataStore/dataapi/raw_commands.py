@@ -336,7 +336,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                 header[key]['event_descriptors']['event_descriptor_' + str(i)] = e_d
                 if data is True:
                     events = find_event(event_descriptor_id=e_d['_id'])
-                    header[key]['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
+                    header[key]['event_descriptors']['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
                     i += 1
                 else:
                     i += 1

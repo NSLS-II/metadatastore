@@ -1,7 +1,6 @@
 __author__ = 'arkilic'
 import datetime
 import getpass
-
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
 from metadataStore.dataapi.raw_commands import find
 

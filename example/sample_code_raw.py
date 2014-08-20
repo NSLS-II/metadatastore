@@ -43,8 +43,8 @@ print('Event insert time is ' + str((end-start)*1000) + ' ms')
 
 
 
-hdr3 = find(scan_id=h_id, data=True)
-print hdr3['header_0']['event_descriptor_0']['events'].keys()
+# hdr3 = find(scan_id=h_id, data=True)
+# print hdr3['header_0']['event_descriptors']['event_descriptor_0']['events'].keys()
 
 
 start = time.time()
@@ -60,7 +60,7 @@ print('Header query time is '+str((end-start)*1000) + ' ms')
 start = time.time()
 hdr3 = find(data=True, num_header=45)
 end = time.time()
-print hdr3.keys()
+
 # for entry in hdr3:
 #     print entry.keys()
 
