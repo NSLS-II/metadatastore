@@ -160,7 +160,7 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
     :type seq_no: int
     :param data: Data Collection routine defined name-value 
     :type data: dict
-    :Raises: TypeError, OperationFailure, ConnectionFailure
+    :raises: TypeError, OperationFailure, ConnectionFailure
     :returns: Event object
     """
     header_id, descriptor_id = get_event_descriptor_hid_edid(descriptor_name, scan_id)
@@ -325,21 +325,23 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                     query_dict['end_time'] = {'$gte': end_time,
                                               '$lt': datetime.datetime.utcnow()}
         header = __decode_hdr_cursor(find_header(query_dict).limit(num_header))
-        #TODO: For each header within the returned results, add event_desc field
         hdr_keys = header.keys()
         for key in hdr_keys:
             beamline_cfg = find_beamline_config(header_id=header[key]['_id'])
             header[key]['configs'] = __decode_bcfg_cursor(beamline_cfg)
             event_desc = find_event_descriptor(header[key]['_id'])
             i = 0
+            header[key]['event_descriptors'] = dict()
             for e_d in event_desc:
-                header[key]['event_descriptor_' + str(i)] = e_d
+                header[key]['event_descriptors']['event_descriptor_' + str(i)] = e_d
                 if data is True:
                     events = find_event(event_descriptor_id=e_d['_id'])
-                    header[key]['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
+                    header[key]['event_descriptors']['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
                     i += 1
                 else:
                     i += 1
+        if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None:
+            header = None
     return header
 
 
