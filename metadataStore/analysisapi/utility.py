@@ -3,6 +3,10 @@ from __future__ import (absolute_import, division, print_function,
 import numpy as np
 import six
 
+
+_run_header_keys = ["key1", "key2", "key3"]
+
+
 def get_data_keys(run_header):
     """
 
@@ -19,7 +23,7 @@ def get_data_keys(run_header):
         List of the data keys in the run header
     """
 
-    pass
+    return _run_header_keys
 
 
 def listify(run_header, data_keys=None):
@@ -74,15 +78,18 @@ def listify(run_header, data_keys=None):
     # pretend like the next few lines are the result of
     # listifying the run header
     time = np.arange(10)/10.
-    run_header_keys = ["key1", "key2", "key3"]
-    data = [np.arange(10),
-            np.arange(10) + 2,
-            np.arange(10)+4]
+    run_header_keys = _run_header_keys
+    data = []
+    data.append(range(10))
+    data.append(range(2, 12))
+    data.append(range(4, 14))
+
     # ---------------------------- end temp behavior
+
     if data_keys == run_header_keys:
         # data_keys was None, return all
         return data, keys, time
-    
+
     key_subset = []
     data_subset = []
     # check to see if data_keys is a list
@@ -93,7 +100,7 @@ def listify(run_header, data_keys=None):
             key_subset.append(key)
     else:
         index = run_header_keys.index(data_keys)
-        key_subset.append(data_keys)
-        data_subset.append(data.pop(index))
+        key_subset = data_keys
+        data_subset = data.pop(index)
 
     return data_subset, key_subset, time
