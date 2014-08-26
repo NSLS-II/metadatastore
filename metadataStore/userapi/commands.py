@@ -218,7 +218,13 @@ def _isinstance(val, target_type, *args, **kwargs):
     if isinstance(val, target_type):
         return val
     else:
-        raise KeyError()
+        # try to cast it to the target type
+        val = target_type(val)
+        # check for the correct instance again
+        if isinstance(val, target_type):
+            return val
+        else:
+            raise KeyError()
 
 
 search_keys_dict = OrderedDict()
