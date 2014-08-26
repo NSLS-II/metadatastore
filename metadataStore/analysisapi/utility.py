@@ -1,5 +1,28 @@
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+import numpy as np
+import six
 
-def listify(run_header, data_key=None):
+def get_data_keys(run_header):
+    """
+
+    Return the names of the data keys
+
+    Parameters
+    ----------
+    run_header : dict
+        Run header to convert events to lists
+
+    Returns
+    -------
+    list
+        List of the data keys in the run header
+    """
+
+    pass
+
+
+def listify(run_header, data_keys=None):
     """
 
     Transpose the events into lists
@@ -22,7 +45,7 @@ def listify(run_header, data_key=None):
     ----------
     run_header : dict
         Run header to convert events to lists
-    data_key : str or list, optional
+    data_keys : str or list, optional
         - If data_key is a valid key for an event_data entry,
         turn that event_data into a list
         - If data_key is a list of valid keys for event_data
@@ -32,12 +55,45 @@ def listify(run_header, data_key=None):
 
     Returns
     -------
-    dict
-        Dict whose keys are data_key (if not None) or all
-        data keys (if data_key is None) and whose values
-        are the entries for those keys. Additionally there
-        is a 'time' key whose values are the time steps of
-        the values in the data_key lists
-
+    list, list, list
+        Order is data, keys, time
+        data : list of lists of data corresponding to the keys
+        keys : list of names of the data lists
+        time : list of times corresponding to the data
     """
-    pass
+    # get the keys from the run header
+    run_header_keys = get_data_keys(run_header)
+    if data_keys is None:
+        data_keys = run_header_keys
+
+    # listify the data in the run header
+
+    # this is the part where arman comes in
+
+    # ---------------------------- start temp behavior
+    # pretend like the next few lines are the result of
+    # listifying the run header
+    time = np.arange(10)/10.
+    run_header_keys = ["key1", "key2", "key3"]
+    data = [np.arange(10),
+            np.arange(10) + 2,
+            np.arange(10)+4]
+    # ---------------------------- end temp behavior
+    if data_keys == run_header_keys:
+        # data_keys was None, return all
+        return data, keys, time
+    
+    key_subset = []
+    data_subset = []
+    # check to see if data_keys is a list
+    if isinstance(data_keys, list):
+        for key in data_keys:
+            index = run_header_keys.index(key)
+            data_subset.append(data.pop(index))
+            key_subset.append(key)
+    else:
+        index = run_header_keys.index(data_keys)
+        key_subset.append(data_keys)
+        data_subset.append(data.pop(index))
+
+    return data_subset, key_subset, time
