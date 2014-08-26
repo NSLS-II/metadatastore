@@ -3,9 +3,7 @@ __version__ = '0.0.2'
 import getpass
 import datetime
 import re
-
 from pymongo.errors import OperationFailure
-
 from metadataStore.sessionManager.databaseInit import db
 from metadataStore.database.databaseTables import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger
