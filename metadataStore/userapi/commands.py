@@ -202,7 +202,7 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
         raise
 
 
-def _str_cast_bool(input_val):
+def _str_cast_bool(input_val, *args, **kwargs):
     if isinstance(input_val, six.string_types):
         val = input_val.lower()
         if val == "true":
@@ -214,37 +214,51 @@ def _str_cast_bool(input_val):
     return bool(input_val)
 
 
+def _isinstance(val, target_type, *args, **kwargs):
+    if isinstance(val, target_type):
+        return val
+    else:
+        # try to cast it to the target type
+        val = target_type(val)
+        # check for the correct instance again
+        if isinstance(val, target_type):
+            return val
+        else:
+            raise KeyError()
+
+
 search_keys_dict = OrderedDict()
 
 
 search_keys_dict["scan_id"] = {
     "description": "The unique identifier of the run",
     "type": int,
-    "validate_fun": int
+    "validate_fun": _isinstance
     }
 search_keys_dict["owner"] = {
     "description": "The user name of the person that created the header",
     "type": str,
-    "validate_fun": str
+    "validate_fun": _isinstance
     }
 search_keys_dict["start_time"] = {
     "description": "The start time in utc",
     "type": datetime.datetime,
-    "validate_fun": datetime.datetime,
+    "validate_fun": _isinstance,
     }
 search_keys_dict["end_time"] = {
     "description": "The end time in utc",
     "type": datetime.datetime,
-    "validate_fun": datetime.datetime,
+    "validate_fun": _isinstance,
     }
 search_keys_dict["num_header"] = {
     "description": ("Number of run headers to return"),
     "type": int,
-    "validate_fun": int
+    "validate_fun": _isinstance
     }
 search_keys_dict["data"] = {
-    "description": ("True: returns all fields. False: returns some subset "
-                     "of the fields"),
+    "description": ("False: returns all fields except for the data. True: "
+                    "returns all fields, including data (Fair warning: 'True' "
+                    "might be very slow)"),
     "type": bool,
     "validate_fun": _str_cast_bool
     }
@@ -303,7 +317,7 @@ def validate(var_dict, target_dict):
         val = var_dict[key]
         # typecheck the value
         try:
-            val = validate_fun(val)
+            val = validate_fun(val, target_type)
         except ValueError:
             raise ValueError("key [[{0}]] has a value of [[{1}]] which cannot "
                              "be cast to [[{2}]]".format(key, val, target_type))
@@ -372,6 +386,6 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
     # actually perform the search
     try:
         result = find(**search_dict)
-    except OperationError:
+    except OperationFailure:
         raise
     return result
