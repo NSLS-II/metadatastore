@@ -4,6 +4,9 @@ import datetime
 import random as rd
 from benchmark.userapi import *
 import matplotlib.pylab as plt
+from pycallgraph import PyCallGraph
+from pycallgraph.output import GraphvizOutput
+
 
 plt.figure(0)
 xa, ya, avg = create_header(10)
@@ -60,3 +63,5 @@ with PyCallGraph(output=graphviz):
                                'tag': 'experimental', 'type_descriptor': {'attribute1': 'value1',
                                                                           'attribute2': 'value2'}}
     create(event_descriptor=sample_event_descriptor)
+
+

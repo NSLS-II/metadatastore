@@ -1,109 +1,113 @@
-Header insert with all defaults took 0.657081604004 milliseconds in average over 10 headers
-Header insert with all defaults took 0.67400932312 milliseconds in average over 100 headers
-Header insert with all defaults took 0.722169876099 milliseconds in average over 1000 headers
-Header insert with all defaults took 0.542879104614 milliseconds in average over 10000 headers
-Header insert with all defaults took 0.650882720947 milliseconds in average over 100000 headers
-Header insert with all defaults took 0.637054443359 milliseconds in average over 1000000 headersHeader insert with all defaults took 0.901937484741 milliseconds in average over 10 headers
-Header insert with all defaults took 0.74315071106 milliseconds in average over 10 headers
-Header insert with all defaults took 0.910043716431 milliseconds in average over 10 headers
-Header insert with all defaults took 0.676155090332 milliseconds in average over 10 headers
-Header insert with all defaults took 0.603914260864 milliseconds in average over 100 headers
-Header insert with all defaults took 0.576972961426 milliseconds in average over 1000 headers
-Header insert with all defaults took 0.674962997437 milliseconds in average over 10000 headers
-Header insert with all defaults took 0.810861587524 milliseconds in average over 10 headers
-Header insert with all defaults took 0.66614151001 milliseconds in average over 10 headers
-Header insert with all defaults took 0.661849975586 milliseconds in average over 100 headers
-Header insert with all defaults took 0.678062438965 milliseconds in average over 1000 headers
-Header insert with all defaults took 0.679016113281 milliseconds in average over 10000 headers
-Header insert with all defaults took 0.830173492432 milliseconds in average over 10 headers
-Header insert with all defaults took 0.85711479187 milliseconds in average over 10 headers
-Header insert with all defaults took 0.722885131836 milliseconds in average over 10 headers
-Header insert with all defaults took 0.657081604004 milliseconds in average over 100 headers
-Header insert with all defaults took 0.765085220337 milliseconds in average over 1000 headers
-Header insert with all defaults took 0.669002532959 milliseconds in average over 10000 headers
-Header insert with all defaults took 0.766038894653 milliseconds in average over 10 headers
-Header insert with all defaults took 0.669002532959 milliseconds in average over 10 headers
-Header insert with all defaults took 0.534057617188 milliseconds in average over 100 headers
-Header insert with all defaults took 0.609874725342 milliseconds in average over 1000 headers
-Header insert with all defaults took 0.627994537354 milliseconds in average over 10000 headers
-Header insert with all defaults took 6.64615631104 milliseconds in average over 1 headers
-Header insert with all defaults took 2.21180915833 milliseconds in average over 1 headers
-Header insert with all defaults took 0.53882598877 milliseconds in average over 10 headers
-Header insert with all defaults took 0.739097595215 milliseconds in average over 100 headers
-Header insert with all defaults took 0.653028488159 milliseconds in average over 1000 headers
-Header insert with all defaults took 0.637054443359 milliseconds in average over 10000 headers
-Header insert with all defaults took 2.45094299316 milliseconds in average over 1 headers
-Header insert with all defaults took 1.94191932678 milliseconds in average over 1 headers
-Header insert with all defaults took 2.71511077881 milliseconds in average over 1 headers
-Header insert with all defaults took 2.53200531006 milliseconds in average over 1 headers
-Header insert with all defaults took 2.16507911682 milliseconds in average over 1 headers
-Header insert with all defaults took 2.02488899231 milliseconds in average over 1 headers
-Header insert with all defaults took 2.06184387207 milliseconds in average over 1 headers
-Header insert with all defaults took 2.92301177979 milliseconds in average over 1 headers
-Header insert with all defaults took 2.97904014587 milliseconds in average over 1 headers
-Header insert with all defaults took 2.75707244873 milliseconds in average over 1 headers
-Header insert with all defaults took 2.2189617157 milliseconds in average over 1 headers
-Header insert with all defaults took 2.00915336609 milliseconds in average over 1 headers
-Header insert with all defaults took 2.08282470703 milliseconds in average over 1 headers
-Header insert with all defaults took 2.08497047424 milliseconds in average over 1 headers
-Header took 2.16197967529 milliseconds in average over 1 headers
-Header took 2.28095054626 milliseconds in average over 1 headers
-Header took 2.23398208618 milliseconds in average over 1 headers
-Event insert took 2.77209281921 milliseconds in average for 1 eventsHeader took 1.90591812134 milliseconds in average over 1 headers
-Event insert took 2.79688835144 milliseconds in average for 1 eventsHeader took 2.1858215332 milliseconds in average over 1 headers
-Event insert took 2.82502174377 milliseconds in average for 1 eventsHeader took 2.09093093872 milliseconds in average over 1 headers
-Event insert took 2.9718875885 milliseconds in average for 1 eventsHeader took 2.10404396057 milliseconds in average over 1 headers
-Event insert took 2.76803970337 milliseconds in average for 1 eventsHeader took 2.13193893433 milliseconds in average over 1 headers
-Event insert took 0.0271391868591 milliseconds in average for 100 eventsEvent insert took 0.0523996353149 milliseconds in average for 100 eventsEvent insert took 0.0751495361328 milliseconds in average for 100 eventsEvent insert took 0.0963997840881 milliseconds in average for 100 eventsEvent insert took 0.118570327759 milliseconds in average for 100 eventsEvent insert took 0.140688419342 milliseconds in average for 100 eventsEvent insert took 0.162887573242 milliseconds in average for 100 eventsEvent insert took 0.185787677765 milliseconds in average for 100 eventsEvent insert took 0.207607746124 milliseconds in average for 100 eventsEvent insert took 0.230047702789 milliseconds in average for 100 eventsEvent insert took 0.252938270569 milliseconds in average for 100 eventsEvent insert took 0.273778438568 milliseconds in average for 100 eventsEvent insert took 0.295948982239 milliseconds in average for 100 eventsEvent insert took 0.318598747253 milliseconds in average for 100 eventsEvent insert took 0.342099666595 milliseconds in average for 100 eventsEvent insert took 0.364108085632 milliseconds in average for 100 eventsEvent insert took 0.385389328003 milliseconds in average for 100 eventsEvent insert took 0.441608428955 milliseconds in average for 100 eventsEvent insert took 0.463337898254 milliseconds in average for 100 eventsEvent insert took 0.484418869019 milliseconds in average for 100 eventsEvent insert took 0.505917072296 milliseconds in average for 100 eventsEvent insert took 0.528845787048 milliseconds in average for 100 eventsEvent insert took 0.552227497101 milliseconds in average for 100 eventsEvent insert took 0.573267936707 milliseconds in average for 100 eventsEvent insert took 0.594186782837 milliseconds in average for 100 eventsEvent insert took 0.615057945251 milliseconds in average for 100 eventsEvent insert took 0.63750743866 milliseconds in average for 100 eventsEvent insert took 0.660645961761 milliseconds in average for 100 eventsEvent insert took 0.682194232941 milliseconds in average for 100 eventsEvent insert took 0.704073905945 milliseconds in average for 100 eventsEvent insert took 0.729293823242 milliseconds in average for 100 eventsEvent insert took 0.753104686737 milliseconds in average for 100 eventsEvent insert took 0.775156021118 milliseconds in average for 100 eventsEvent insert took 0.797085762024 milliseconds in average for 100 eventsEvent insert took 0.818934440613 milliseconds in average for 100 eventsEvent insert took 0.840764045715 milliseconds in average for 100 eventsEvent insert took 0.863313674927 milliseconds in average for 100 eventsEvent insert took 0.890283584595 milliseconds in average for 100 eventsEvent insert took 0.936594009399 milliseconds in average for 100 eventsEvent insert took 0.961213111877 milliseconds in average for 100 eventsEvent insert took 0.983903408051 milliseconds in average for 100 eventsEvent insert took 1.00712537766 milliseconds in average for 100 eventsEvent insert took 1.02893590927 milliseconds in average for 100 eventsEvent insert took 1.05001449585 milliseconds in average for 100 eventsEvent insert took 1.07107400894 milliseconds in average for 100 eventsEvent insert took 1.09265327454 milliseconds in average for 100 eventsEvent insert took 1.11328363419 milliseconds in average for 100 eventsEvent insert took 1.13530397415 milliseconds in average for 100 eventsEvent insert took 1.1595749855 milliseconds in average for 100 eventsEvent insert took 1.18140459061 milliseconds in average for 100 eventsEvent insert took 1.20431423187 milliseconds in average for 100 eventsEvent insert took 1.22653245926 milliseconds in average for 100 eventsEvent insert took 1.24933242798 milliseconds in average for 100 eventsEvent insert took 1.27127170563 milliseconds in average for 100 eventsEvent insert took 1.29477024078 milliseconds in average for 100 eventsEvent insert took 1.3164806366 milliseconds in average for 100 eventsEvent insert took 1.33878231049 milliseconds in average for 100 eventsEvent insert took 1.36204242706 milliseconds in average for 100 eventsEvent insert took 1.38426303864 milliseconds in average for 100 eventsEvent insert took 1.4256811142 milliseconds in average for 100 eventsEvent insert took 1.44925117493 milliseconds in average for 100 eventsEvent insert took 1.47213220596 milliseconds in average for 100 eventsEvent insert took 1.4951133728 milliseconds in average for 100 eventsEvent insert took 1.51880264282 milliseconds in average for 100 eventsEvent insert took 1.54609203339 milliseconds in average for 100 eventsEvent insert took 1.57566070557 milliseconds in average for 100 eventsEvent insert took 1.60279035568 milliseconds in average for 100 eventsEvent insert took 1.62499904633 milliseconds in average for 100 eventsEvent insert took 1.64938926697 milliseconds in average for 100 eventsEvent insert took 1.6721200943 milliseconds in average for 100 eventsEvent insert took 1.69414997101 milliseconds in average for 100 eventsEvent insert took 1.71751976013 milliseconds in average for 100 eventsEvent insert took 1.74242973328 milliseconds in average for 100 eventsEvent insert took 1.76669120789 milliseconds in average for 100 eventsEvent insert took 1.7910027504 milliseconds in average for 100 eventsEvent insert took 1.81825399399 milliseconds in average for 100 eventsEvent insert took 1.84608221054 milliseconds in average for 100 eventsEvent insert took 1.87319278717 milliseconds in average for 100 eventsEvent insert took 1.92317247391 milliseconds in average for 100 eventsEvent insert took 1.94924354553 milliseconds in average for 100 eventsEvent insert took 1.9757437706 milliseconds in average for 100 eventsEvent insert took 2.00448513031 milliseconds in average for 100 eventsEvent insert took 2.02794551849 milliseconds in average for 100 eventsEvent insert took 2.0511341095 milliseconds in average for 100 eventsEvent insert took 2.07626342773 milliseconds in average for 100 eventsEvent insert took 2.09972381592 milliseconds in average for 100 eventsEvent insert took 2.12282419205 milliseconds in average for 100 eventsEvent insert took 2.14976549149 milliseconds in average for 100 eventsEvent insert took 2.17958450317 milliseconds in average for 100 eventsEvent insert took 2.20590353012 milliseconds in average for 100 eventsEvent insert took 2.23080396652 milliseconds in average for 100 eventsEvent insert took 2.25716590881 milliseconds in average for 100 eventsEvent insert took 2.28329658508 milliseconds in average for 100 eventsEvent insert took 2.31091499329 milliseconds in average for 100 eventsEvent insert took 2.33626365662 milliseconds in average for 100 eventsEvent insert took 2.36232280731 milliseconds in average for 100 eventsEvent insert took 2.3884510994 milliseconds in average for 100 eventsEvent insert took 2.41616010666 milliseconds in average for 100 eventsEvent insert took 2.44525909424 milliseconds in average for 100 eventsEvent insert took 2.47440814972 milliseconds in average for 100 eventsHeader took 1.96003913879 milliseconds in average over 1 headers
-Event insert took 2.25830078125 milliseconds in average for 10 eventsHeader took 2.03490257263 milliseconds in average over 1 headers
-Event insert took 2.26273536682 milliseconds in average for 10 eventsHeader took 2.92706489563 milliseconds in average over 1 headers
-Event insert took 2.84962654114 milliseconds in average for 10 eventsHeader took 2.13313102722 milliseconds in average over 1 headers
-Event insert took 2.37951278687 milliseconds in average for 10 eventsHeader took 2.02679634094 milliseconds in average over 1 headers
-Event insert took 2.29864120483 milliseconds in average for 10 eventsHeader took 2.1231174469 milliseconds in average over 1 headers
-Event insert took 2.35362052917 milliseconds in average for 10 eventsHeader took 3.29995155334 milliseconds in average over 1 headers
-Event insert took 2.86901950836 milliseconds in average for 100 eventsHeader took 2.25520133972 milliseconds in average over 1 headers
-Event insert took 2.72156953812 milliseconds in average for 100 eventsHeader took 2.03394889832 milliseconds in average over 1 headers
-Event insert took 2.63262271881 milliseconds in average for 100 eventsHeader took 4.56213951111 milliseconds in average over 1 headers
-Event insert took 2.3015666008 milliseconds in average for 100 eventsHeader took 3.39007377625 milliseconds in average over 1 headers
-Event insert took 2.75667667389 milliseconds in average for 100 eventsHeader took 2.032995224 milliseconds in average over 1 headers
-Event insert took 2.29806184769 milliseconds in average for 100 eventsHeader took 2.11596488953 milliseconds in average over 1 headers
-Event insert took 2.27953696251 milliseconds in average for 1000 eventsHeader took 2.03418731689 milliseconds in average over 1 headers
-Event insert took 2.30695962906 milliseconds in average for 1000 eventsHeader took 1.70803070068 milliseconds in average over 1 headers
-Event insert took 2.25715637207 milliseconds in average for 10 eventsHeader took 2.70104408264 milliseconds in average over 1 headers
-Event insert took 3.25014591217 milliseconds in average for 10 eventsHeader took 1.8630027771 milliseconds in average over 1 headers
-Event insert took 5.76784610748 milliseconds in average for 10 eventsHeader took 2.5110244751 milliseconds in average over 1 headers
-Event insert took 2.83549070358 milliseconds in average for 100 eventsHeader took 2.88510322571 milliseconds in average over 1 headers
-Event insert took 2.6869392395 milliseconds in average for 100 eventsHeader took 1.98221206665 milliseconds in average over 1 headers
-Event insert took 2.30085849762 milliseconds in average for 100 eventsHeader took 1.96099281311 milliseconds in average over 1 headers
-Event insert took 2.41805791855 milliseconds in average for 100 eventsHeader took 2.05087661743 milliseconds in average over 1 headers
-Header took 1.76596641541 milliseconds in average over 1 headers
-Event insert took 2.31060504913 milliseconds in average for 100 eventsHeader took 2.14195251465 milliseconds in average over 1 headers
-Event insert took 2.3725271225 milliseconds in average for 100 eventsHeader took 2.1698474884 milliseconds in average over 1 headers
-Header took 2.8178691864 milliseconds in average over 1 headers
-Header took 2.50005722046 milliseconds in average over 1 headers
-Event insert took 2.75063276291 milliseconds in average for 100 eventsHeader took 2.60210037231 milliseconds in average over 1 headers
-Event insert took 2.85795927048 milliseconds in average for 100 eventsHeader took 2.04706192017 milliseconds in average over 1 headers
-Event insert took 2.38263607025 milliseconds in average for 100 eventsHeader took 1.82199478149 milliseconds in average over 1 headers
-Event insert took 2.51340150833 milliseconds in average for 100 eventsHeader took 2.73299217224 milliseconds in average over 1 headers
-Event insert took 2.31770515442 milliseconds in average for 100 eventsHeader took 1.97005271912 milliseconds in average over 1 headers
-Event insert took 2.27365255356 milliseconds in average for 100 eventsHeader took 2.67887115479 milliseconds in average over 1 headers
-Event insert took 2.79649496078 milliseconds in average for 100 eventsHeader took 2.01892852783 milliseconds in average over 1 headers
-Event insert took 2.28699684143 milliseconds in average for 100 eventsHeader took 2.11095809937 milliseconds in average over 1 headers
-Event insert took 2.28413510323 milliseconds in average for 1000 eventsHeader took 2.01416015625 milliseconds in average over 1 headers
-Event insert took 2.30524420738 milliseconds in average for 1000 eventsHeader took 2.05087661743 milliseconds in average over 1 headers
-Event insert took 2.29414916039 milliseconds in average for 1000 eventsHeader took 2.68507003784 milliseconds in average over 1 headers
-Event insert took 2.43728160858 milliseconds in average for 10 eventsEvent insert took 2.4343252182 milliseconds in average for 100 eventsEvent insert took 2.7081451416 milliseconds in average for 1000 eventsEvent insert took 2.56168003082 milliseconds in average for 10000 eventsHeader took 1.95002555847 milliseconds in average over 1 headers
-Event insert took 2.58595943451 milliseconds in average for 10 eventsEvent insert took 2.2417473793 milliseconds in average for 100 eventsEvent insert took 2.30609297752 milliseconds in average for 1000 eventsEvent insert took 2.51427018642 milliseconds in average for 10000 eventsHeader took 2.12001800537 milliseconds in average over 1 headers
-Event insert took 2.71685123444 milliseconds in average for 10 eventsEvent insert took 2.89992332458 milliseconds in average for 100 eventsEvent insert took 2.72028636932 milliseconds in average for 1000 eventsHeader took 2.17199325562 milliseconds in average over 1 headers
-Event insert took 3.23295593262 milliseconds in average for 10 eventsEvent insert took 3.18051338196 milliseconds in average for 100 eventsEvent insert took 2.90198349953 milliseconds in average for 1000 eventsEvent insert took 2.71551103592 milliseconds in average for 10000 eventsEvent insert took 2.72684423923 milliseconds in average for 10000 eventsHeader took 2.08187103271 milliseconds in average over 1 headers
-Header took 1.83296203613 milliseconds in average over 1 headers
-Event insert took 2.41277217865 milliseconds in average for 10 eventsEvent insert took 2.39495754242 milliseconds in average for 100 eventsEvent insert took 2.53268933296 milliseconds in average for 1000 eventsHeader took 1.8310546875 milliseconds in average over 1 headers
-Event insert took 2.62298583984 milliseconds in average for 10 eventsEvent insert took 3.13564062119 milliseconds in average for 100 eventsHeader took 1.80101394653 milliseconds in average over 1 headers
-Event insert took 2.57353782654 milliseconds in average for 10 eventsEvent insert took 2.65832901001 milliseconds in average for 100 eventsHeader took 1.68609619141 milliseconds in average over 1 headers
-Event insert took 2.41129398346 milliseconds in average for 10 eventsEvent insert took 2.59605407715 milliseconds in average for 100 eventsEvent insert took 2.38731520176 milliseconds in average for 10000 eventsHeader took 1.94787979126 milliseconds in average over 1 headers
-Event insert took 2.42509841919 milliseconds in average for 10 eventsEvent insert took 2.33192205429 milliseconds in average for 100 eventsEvent insert took 2.36182427406 milliseconds in average for 1000 eventsEvent insert took 2.36013960838 milliseconds in average for 1000 eventsEvent insert took 2.43392801285 milliseconds in average for 1000 eventsHeader took 1.74808502197 milliseconds in average over 1 headers
-Event insert took 3.11641693115 milliseconds in average for 10 eventsEvent insert took 2.5145478487 milliseconds in average for 10000 eventsEvent insert took 2.54493060112 milliseconds in average for 10000 eventsEvent insert took 2.58881196976 milliseconds in average for 10000 eventsHeader took 2.71606445312 milliseconds in average over 1 headers
-Event insert took 3.46426963806 milliseconds in average for 10 eventsHeader took 2.80618667603 milliseconds in average over 1 headers
-Event insert took 2.51109600067 milliseconds in average for 10 eventsHeader took 2.17890739441 milliseconds in average over 1 headers
-Event insert took 2.36418247223 milliseconds in average for 10 eventsHeader took 2.36392021179 milliseconds in average over 1 headers
-Event insert took 2.39145755768 milliseconds in average for 10 events
+Header took 1.55401229858 milliseconds in average over 1 headers
+Event insert took 2.14672088623 milliseconds in average for 10 eventsEvent insert took 1.98300600052 milliseconds in average for 100 eventsEvent insert took 1.78955483437 milliseconds in average for 1000 eventsEvent insert took 1.75913219452 milliseconds in average for 10000 eventsHeader took 1.84893608093 milliseconds in average over 1 headers
+Header took 1.74808502197 milliseconds in average over 1 headers
+Header took 1.67202949524 milliseconds in average over 1 headers
+Header took 1.66487693787 milliseconds in average over 1 headers
+Header took 0.43797492981 milliseconds in average over 10 headers
+Header took 0.452995300293 milliseconds in average over 100 headers
+Header took 0.367879867554 milliseconds in average over 1000 headers
+Header took 0.377893447876 milliseconds in average over 10000 headers
+Header took 1.54995918274 milliseconds in average over 1 headers
+Header took 1.7409324646 milliseconds in average over 1 headers
+Header took 1.79505348206 milliseconds in average over 1 headers
+Header took 1.56307220459 milliseconds in average over 1 headers
+Header took 1.4910697937 milliseconds in average over 1 headers
+Header took 1.87206268311 milliseconds in average over 1 headers
+Header took 1.84512138367 milliseconds in average over 1 headers
+Header took 1.44195556641 milliseconds in average over 1 headers
+Header took 1.71494483948 milliseconds in average over 1 headers
+Header took 1.55401229858 milliseconds in average over 1 headers
+Header took 1.56092643738 milliseconds in average over 1 headers
+Header took 1.68514251709 milliseconds in average over 1 headers
+Header took 1.70302391052 milliseconds in average over 1 headers
+Header took 1.66702270508 milliseconds in average over 1 headers
+Header took 1.52206420898 milliseconds in average over 1 headers
+Header took 1.51586532593 milliseconds in average over 1 headers
+Header took 1.8789768219 milliseconds in average over 1 headers
+Header took 1.64198875427 milliseconds in average over 1 headers
+Header took 1.71399116516 milliseconds in average over 1 headers
+Header took 1.60694122314 milliseconds in average over 1 headers
+Header took 1.84893608093 milliseconds in average over 1 headers
+Header took 1.50918960571 milliseconds in average over 1 headers
+Header took 1.45792961121 milliseconds in average over 1 headers
+Header took 1.89995765686 milliseconds in average over 1 headers
+Header took 1.51801109314 milliseconds in average over 1 headers
+Header took 1.44195556641 milliseconds in average over 1 headers
+Header took 1.42002105713 milliseconds in average over 1 headers
+Header took 1.57403945923 milliseconds in average over 1 headers
+Header took 1.79409980774 milliseconds in average over 1 headers
+Header took 1.5070438385 milliseconds in average over 1 headers
+Header took 23.74792099 milliseconds in average over 1 headers
+Header took 14.6789550781 milliseconds in average over 1 headers
+Header took 1.39880180359 milliseconds in average over 1 headers
+Header took 1.8310546875 milliseconds in average over 1 headers
+Header took 1.51515007019 milliseconds in average over 1 headers
+Header took 1.49011611938 milliseconds in average over 1 headers
+Header took 1.60098075867 milliseconds in average over 1 headers
+Event insert took 1.74171924591 milliseconds in average for 10 eventsEvent insert took 1.75599336624 milliseconds in average for 100 eventsEvent insert took 1.75450539589 milliseconds in average for 1000 eventsEvent insert took 1.76023550034 milliseconds in average for 10000 eventsEvent insert took 1.75727036476 milliseconds in average for 100000 eventsHeader took 3.92079353333 milliseconds in average over 1 headers
+Header took 0.408887863159 milliseconds in average over 10 headers
+Header took 0.416994094849 milliseconds in average over 100 headers
+Header took 0.385999679565 milliseconds in average over 1000 headers
+Header took 0.420093536377 milliseconds in average over 10000 headers
+Header took 1.66606903076 milliseconds in average over 1 headers
+Header took 2.32291221619 milliseconds in average over 1 headers
+Header took 1.44100189209 milliseconds in average over 1 headers
+Header took 1.51681900024 milliseconds in average over 1 headers
+Header took 1.49703025818 milliseconds in average over 1 headers
+Event insert took 2.0726442337 milliseconds in average for 10 eventsEvent insert took 1.80440187454 milliseconds in average for 100 eventsEvent insert took 1.83667206764 milliseconds in average for 1000 eventsEvent insert took 1.79835639 milliseconds in average for 10000 eventsEvent insert took 1.75896132708 milliseconds in average for 100000 eventsHeader took 26.319026947 milliseconds in average over 1 headers
+Header took 0.418901443481 milliseconds in average over 1000000 headers
+Header took 1.71494483948 milliseconds in average over 1 headers
+Header took 1.36399269104 milliseconds in average over 1 headers
+Event insert took 2.86560058594 milliseconds in average for 10 eventsEvent insert took 1.85276985168 milliseconds in average for 100 eventsEvent insert took 1.92645168304 milliseconds in average for 1000 eventsEvent insert took 1.86932537556 milliseconds in average for 10000 eventsEvent insert took 1.83213065386 milliseconds in average for 100000 eventsHeader took 1.66010856628 milliseconds in average over 1 headers
+Header took 1.9359588623 milliseconds in average over 1 headers
+Header took 1.39689445496 milliseconds in average over 1 headers
+Header took 1.72305107117 milliseconds in average over 1 headers
+Header took 1.64818763733 milliseconds in average over 1 headers
+Header took 1.37710571289 milliseconds in average over 1 headers
+Header took 1.41596794128 milliseconds in average over 1 headers
+Header took 1.36804580688 milliseconds in average over 1 headers
+Header took 1.48105621338 milliseconds in average over 1 headers
+Header took 1.44100189209 milliseconds in average over 1 headers
+Header took 2.60806083679 milliseconds in average over 1 headers
+Header took 1.89781188965 milliseconds in average over 1 headers
+Header took 1.92904472351 milliseconds in average over 1 headers
+Header took 2.61497497559 milliseconds in average over 1 headers
+Header took 3.2799243927 milliseconds in average over 1 headers
+Header took 2.72083282471 milliseconds in average over 1 headers
+Header took 3.15093994141 milliseconds in average over 1 headers
+Header took 3.07989120483 milliseconds in average over 1 headers
+Header took 2.48599052429 milliseconds in average over 1 headers
+Header took 3.28683853149 milliseconds in average over 1 headers
+Header took 2.42900848389 milliseconds in average over 1 headers
+Header took 3.66497039795 milliseconds in average over 1 headers
+Header took 2.38800048828 milliseconds in average over 1 headers
+Header took 1.57022476196 milliseconds in average over 1 headers
+Header took 2.3410320282 milliseconds in average over 1 headers
+Header took 2.00605392456 milliseconds in average over 1 headers
+Header took 3.91602516174 milliseconds in average over 1 headers
+Header took 1.67202949524 milliseconds in average over 1 headers
+Header took 2.47001647949 milliseconds in average over 1 headers
+Header took 2.48193740845 milliseconds in average over 1 headers
+Header took 1.99389457703 milliseconds in average over 1 headers
+Header took 2.48193740845 milliseconds in average over 1 headers
+Header took 3.96490097046 milliseconds in average over 1 headers
+Header took 3.68189811707 milliseconds in average over 1 headers
+Header took 1.51395797729 milliseconds in average over 1 headers
+Header took 1.53517723083 milliseconds in average over 1 headers
+Header took 3.51595878601 milliseconds in average over 1 headers
+Header took 2.06398963928 milliseconds in average over 1 headers
+Header took 14.0099525452 milliseconds in average over 1 headers
+Header took 2.04706192017 milliseconds in average over 1 headers
+Header took 1.53017044067 milliseconds in average over 1 headers
+Header took 1.53803825378 milliseconds in average over 1 headers
+Header took 1.54590606689 milliseconds in average over 1 headers
+Header took 1.55210494995 milliseconds in average over 1 headers
+Header took 1.6028881073 milliseconds in average over 1 headers
+Header took 1.43909454346 milliseconds in average over 1 headers
+Header took 1.44004821777 milliseconds in average over 1 headers
+Header took 1.68299674988 milliseconds in average over 1 headers
+Header took 1.50680541992 milliseconds in average over 1 headers
+Header took 1.61409378052 milliseconds in average over 1 headers
+Header took 1.40786170959 milliseconds in average over 1 headers
+Header took 1.88803672791 milliseconds in average over 1 headers
+Header took 1.55210494995 milliseconds in average over 1 headers
