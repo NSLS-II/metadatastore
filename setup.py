@@ -3,6 +3,7 @@ from __future__ import (absolute_import, division, print_function)
 
 import sys
 import warnings
+import shutil
 try:
     from setuptools import setup
 except ImportError:
@@ -85,3 +86,5 @@ setup(
         "Programming Language :: Python :: 2.7",
     ],
 )
+
+shutil.copy('dataBroker.conf', os.path.expanduser('~')+os.sep+'dataBroker.conf')
