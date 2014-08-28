@@ -1,6 +1,7 @@
 run_hdr : {
     id : hashed input
     beamline_id : string
+    run_header_version: id (0.0.1, 0.0.2, etc...)
     configs: {
         config_0: {
             id: hashed input
@@ -24,15 +25,16 @@ run_hdr : {
         header_id: hashed input
         tag: list
         type_descriptor: ??
+        data_keys: list
     }
 
     events: {
         event_0: {
             _id: hashed input
             data: {
-                data_keys[0]: data0,
-                data_keys[1]: data1,
-                data_keys[N]: dataN
+                event_descriptor[data_keys][0]: data0,
+                event_descriptor[data_keys][1]: data1,
+                event_descriptor[data_keys][N]: dataN
             }
             time: datetime (unix/epics?)
             description:
