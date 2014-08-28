@@ -28,7 +28,12 @@ def get_data_keys(run_header):
         for h_key in header_keys:
             descriptor_keys = run_header[h_key]['event_descriptors']
             for d_key in descriptor_keys:
-                e_keys = list(run_header[h_key]['event_descriptors'][d_key]['events'])
+                temp_e_keys = run_header[h_key]['event_descriptors'][d_key]
+                if temp_e_keys.has_key('events'):
+                    e_keys = list(run_header[h_key]['event_descriptors'][d_key]['events'])
+                else:
+                    raise ValueError('Header does not include any events. Make sure data=True in search() and header '
+                                     'includes events')
                 _run_header_keys = list(run_header[h_key]['event_descriptors'][d_key]['events'][e_keys[0]]['data'])
     else:
         raise TypeError('Invalid run header. Headers must be Python dictionaries not ' + str(type(run_header)))
@@ -104,6 +109,7 @@ def listify(run_header, data_keys=None):
     # check to see if data_keys is a list
     if isinstance(data_keys, list):
         for key in data_keys:
+            print(run_header_keys)
             index = run_header_keys.index(key)
             data_subset.append(data.pop(index))
             key_subset.append(key)
