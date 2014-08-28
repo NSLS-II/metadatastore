@@ -1,50 +1,47 @@
 run_hdr : {
     id : hashed input
-    start_time : number
-    end_time : number
-    uid : string
     beamline_id : string
-
-    beamline_config: {
-        id: hashed input
-        headers: list of run headers specific beamline_config belongs
-        beamline_id: string
-        custom: dictionary
+    configs: {
+        config_0: {
+            id: hashed input
+            headers: list of run headers specific beamline_config belongs
+            beamline_id: string
+            custom: dictionary
+        },
+        ...
     }
+    custom: ??
+    end_time : number
+    owner: string
+    scan_id: int
+    start_time : number
+    status: string (In Progress or Complete)
 
     event_descriptor: {
         id : hashed input
-        headers: list of run headers specific event group belongs
-        event_type_id: integer
         descriptor_name: string
-        aliases: dictionary
-        custom: dictionary
-    events:{
-            event: {
-                id: hashed input
-                event_groups: list of event groups specific event belongs
-                description: String
-                seq_no: integer
-                data: dictionary
-            }
-
-            event: {
-                id: hashed input
-                event_groups: list of event groups specific event belongs
-                description: String
-                seq_no: integer
-                data: dictionary
-            }
-
-
-
-            event: {
-                id: hashed input
-                event_groups: list of event groups specific event belongs
-                description: String
-                seq_no: integer
-                data: dictionary
-            }
-
+        event_type_id: integer
+        header_id: hashed input
+        tag: list
+        type_descriptor: ??
+        events: {
+            event_0: {
+                _id: hashed input
+                data: {
+                    data_keys[0]: data0,
+                    data_keys[1]: data1,
+                    data_keys[N]: dataN
+                }
+                time: datetime (unix/epics?)
+                description:
+                event_descriptor_id: hashed input
+                header_id: hashed input
+                owner: string
+                seq_no: int
+            },
+            event_1: {}
+            event_2: {}
+            ...
         }
     }
+}
