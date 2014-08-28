@@ -22,7 +22,17 @@ def get_data_keys(run_header):
     list
         List of the data keys in the run header
     """
-
+    if isinstance(run_header, dict):
+        print(run_header.keys())
+        header_keys = run_header.keys()
+        for h_key in header_keys:
+            descriptor_keys = run_header[h_key]['event_descriptors']
+            for d_key in descriptor_keys:
+                e_keys = run_header[h_key]['event_descriptors'][d_key]['events'].keys()
+                for e_key in e_keys:
+                    _run_header_keys = run_header[h_key]['event_descriptors'][d_key]['events'][e_key].keys()
+    else:
+        raise TypeError('Invalid run header. Headers must be Python dictionaries not ' + str(type(run_header)))
     return _run_header_keys
 
 

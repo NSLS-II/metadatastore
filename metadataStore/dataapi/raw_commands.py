@@ -1,5 +1,5 @@
 __author__ = 'arkilic'
-__version__ = '0.0.2'
+
 import getpass
 import datetime
 import re

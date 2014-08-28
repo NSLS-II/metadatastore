@@ -58,7 +58,10 @@ end = time.time()
 print('Header query time is '+str((end-start)*1000) + ' ms')
 
 start = time.time()
-hdr3 = find(data=True, num_header=45)
+hdr3 = find(scan_id=h_id , data=False, num_header=4)
+hdr3 = find(scan_id=h_id , data=False, num_header=4)
+hdr3 = find(scan_id=h_id , data=False, num_header=4)
+hdr2 = find(scan_id='current', data=False)
 end = time.time()
 
 # for entry in hdr3:
