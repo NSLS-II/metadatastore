@@ -20,7 +20,7 @@ def get_data_keys(run_header):
 
     Returns
     -------
-    dict
+    list
         List of the data keys in the run header keyed by the event_descriptor
         name
     """
