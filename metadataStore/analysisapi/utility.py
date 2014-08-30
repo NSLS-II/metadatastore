@@ -100,7 +100,6 @@ def listify(run_header, data_keys=None):
         print("sorted data keys: {0}".format(data_key))
         for index, (ev_key) in enumerate(data_key):
             ev_dict = ev_desc_dict['events'][ev_key]
-            data_dict['time'].append(index)
             for data_key, data in six.iteritems(ev_dict['data']):
                 if data_key in list(data_dict):
                     data_dict[data_key].append(data)
