@@ -2,7 +2,7 @@ __author__ = 'arkilic'
 import datetime
 import getpass
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
-from metadataStore.dataapi.raw_commands import save_bulk_header
+from metadataStore.dataapi.raw_commands import save_bulk_header, insert_bulk_event
 from metadataStore.dataapi.raw_commands import find
 
 
@@ -127,7 +127,6 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                     status = 'In Progress'
                 header_list.append(single_header)
             save_bulk_header(header_list=header_list)
-
         else:
             raise TypeError('Header must be a Python dictionary or list of Python dictionaries ')
 
@@ -204,35 +203,66 @@ def record(event=dict()):
     >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
                   ... 'data':{'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'}},'description': 'Linear scan')
     """
-    if 'scan_id' in event:
-        scan_id = event['scan_id']
-    else:
-        raise ValueError('scan_id is required in order to record an event')
-    if 'descriptor_name' in event:
-        descriptor_name = event['descriptor_name']
-    else:
-        raise ValueError('Descriptor is required in order to record an event')
-    if 'description' in event:
-        description = event['description']
-    else:
-        description = None
-    if 'owner' in event:
-        owner = event['owner']
-    else:
-        owner = getpass.getuser()
-    if 'seq_no' in event:
-        seq_no = event['seq_no']
-    else:
-        raise ValueError('seq_no is required field')
-    if 'data' in event:
-        data = event['data']
-    else:
-        data = dict()
-    try:
-        insert_event(scan_id=scan_id, descriptor_name=descriptor_name, owner=owner, seq_no=seq_no, data=data,
-                     description=description)
-    except:
-        raise
+    if isinstance(event, dict):
+        if 'scan_id' in event:
+            scan_id = event['scan_id']
+        else:
+            raise ValueError('scan_id is required in order to record an event')
+        if 'descriptor_name' in event:
+            descriptor_name = event['descriptor_name']
+        else:
+            raise ValueError('Descriptor is required in order to record an event')
+        if 'description' in event:
+            description = event['description']
+        else:
+            description = None
+        if 'owner' in event:
+            owner = event['owner']
+        else:
+            owner = getpass.getuser()
+        if 'seq_no' in event:
+            seq_no = event['seq_no']
+        else:
+            raise ValueError('seq_no is required field')
+        if 'data' in event:
+            data = event['data']
+        else:
+            data = dict()
+        try:
+            insert_event(scan_id=scan_id, descriptor_name=descriptor_name, owner=owner, seq_no=seq_no, data=data,
+                         description=description)
+        except:
+            raise
+    elif isinstance(event, list):
+            event_list = list()
+            for single_event in event:
+                print single_event
+                if 'scan_id' in single_event:
+                    scan_id = single_event['scan_id']
+                else:
+                    raise ValueError('scan_id is required in order to record an single_event')
+                if 'descriptor_name' in single_event:
+                    descriptor_name = single_event['descriptor_name']
+                else:
+                    raise ValueError('Descriptor is required in order to record an single_event')
+                if 'description' in single_event:
+                    description = single_event['description']
+                else:
+                    description = None
+                if 'owner' in single_event:
+                    owner = single_event['owner']
+                else:
+                    owner = getpass.getuser()
+                if 'seq_no' in single_event:
+                    seq_no = single_event['seq_no']
+                else:
+                    raise ValueError('seq_no is required field')
+                if 'data' in single_event:
+                    data = single_event['data']
+                else:
+                    data = dict()
+                event_list.append(single_event)
+            insert_bulk_event(event_list=event_list)
 
 
 def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False, num_header=50):

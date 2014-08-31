@@ -61,6 +61,7 @@ def get_header_object(id):
         raise
     return header_object
 
+
 def save_bulk_header(header_list):
     """
     Given a list of headers, creates a bulk of headers
@@ -129,6 +130,20 @@ def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_d
         raise
     return event_descriptor
 
+
+def insert_bulk_event(event_list):
+    """
+    Given a list of events, event entries are inserted in bulk
+    :param event_list: List of events to be bulk inserted
+    :return: None
+    """
+    if isinstance(event_list, list):
+        try:
+            db['event'].insert(event_list)
+        except:
+            raise
+    else:
+        raise TypeError('header_list must be a python list')
 
 def get_event_descriptor_hid_edid(name, s_id):
     """
