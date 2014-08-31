@@ -1,7 +1,7 @@
 __author__ = 'arkilic'
 
 import random
-
+import time
 from metadataStore.collectionapi.commands import create, record, search
 
 s_id = random.randint(0, 10000)
@@ -23,3 +23,10 @@ record(event=[{'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0},
               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'}])
 print search(scan_id=s_id)
 print search(scan_id=s_id, owner='ark*')
+some_list = list()
+for i in xrange(10000):
+    some_list.append({'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': i})
+start = time.time()
+record(event=some_list)
+end = time.time()
+print 'It took ' + str((end-start)*1000) + ' milliseconds to process bulk inserts'

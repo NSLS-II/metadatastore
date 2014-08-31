@@ -236,7 +236,6 @@ def record(event=dict()):
     elif isinstance(event, list):
             event_list = list()
             for single_event in event:
-                print single_event
                 if 'scan_id' in single_event:
                     scan_id = single_event['scan_id']
                 else:
