@@ -61,6 +61,22 @@ def get_header_object(id):
         raise
     return header_object
 
+def save_bulk_header(header_list):
+    """
+    Given a list of headers, creates a bulk of headers
+
+    :param header_list: List of headers from collection api to be created in bulk
+    :raises: OperationError, TypeError
+    :return: None
+    """
+    if isinstance(header_list, list):
+        try:
+            db['header'].insert(header_list)
+        except:
+            raise
+    else:
+        raise TypeError('header_list must be a python list')
+
 
 def get_header_id(scan_id):
     """

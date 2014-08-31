@@ -2,8 +2,9 @@ __author__ = 'arkilic'
 import datetime
 import getpass
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
+from metadataStore.dataapi.raw_commands import save_bulk_header
 from metadataStore.dataapi.raw_commands import find
-from metadataStore.sessionManager.databaseInit import db
+
 
 def create(header=None, beamline_config=None, event_descriptor=None):
     """
@@ -125,11 +126,8 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                 else:
                     status = 'In Progress'
                 header_list.append(single_header)
-            print header_list
-            try:
-                db['header'].insert(header_list)
-            except:
-                raise
+            save_bulk_header(header_list=header_list)
+
         else:
             raise TypeError('Header must be a Python dictionary or list of Python dictionaries ')
 
