@@ -3,7 +3,7 @@ import datetime
 import getpass
 from metadataStore.dataapi.raw_commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
 from metadataStore.dataapi.raw_commands import find
-
+from metadataStore.sessionManager.databaseInit import db
 
 def create(header=None, beamline_config=None, event_descriptor=None):
     """
@@ -94,8 +94,44 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                             status=status, custom=custom)
             except:
                 raise
+        elif isinstance(header, list):
+            header_list = list()
+            for single_header in header:
+                if 'scan_id' in single_header:
+                    if isinstance(single_header['scan_id'], int):
+                        scan_id = single_header['scan_id']
+                    else:
+                        raise TypeError('scan_id must be an integer')
+                else:
+                    raise ValueError('scan_id is a required field')
+                if 'start_time' in single_header:
+                    start_time = single_header['start_time']
+                else:
+                    start_time = datetime.datetime.utcnow()
+                if 'owner' in single_header:
+                    owner = single_header['owner']
+                else:
+                    owner = getpass.getuser()
+                if 'beamline_id' in single_header:
+                    beamline_id = single_header['beamline_id']
+                else:
+                    beamline_id = None
+                if 'custom' in single_header:
+                    custom = single_header['custom']
+                else:
+                    custom = dict()
+                if 'status' in single_header:
+                    status = single_header['status']
+                else:
+                    status = 'In Progress'
+                header_list.append(single_header)
+            print header_list
+            try:
+                db['header'].insert(header_list)
+            except:
+                raise
         else:
-            raise TypeError('Header must be a Python dictionary ')
+            raise TypeError('Header must be a Python dictionary or list of Python dictionaries ')
 
     if beamline_config is not None:
         if isinstance(beamline_config, dict):
