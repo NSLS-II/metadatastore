@@ -262,6 +262,11 @@ search_keys_dict["data"] = {
     "type": bool,
     "validate_fun": _str_cast_bool
     }
+search_keys_dict['_id'] = {
+    "description": ("Unique ID generated from a hash function"),
+    "type": str,
+    "validate_fun": _isinstance
+}
 
 
 def validate(var_dict, target_dict):

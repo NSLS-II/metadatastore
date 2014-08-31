@@ -20,7 +20,7 @@ def get_data_keys(run_header):
 
     Returns
     -------
-    dict
+    list
         List of the data keys in the run header keyed by the event_descriptor
         name
     """
@@ -100,7 +100,6 @@ def listify(run_header, data_keys=None):
         print("sorted data keys: {0}".format(data_key))
         for index, (ev_key) in enumerate(data_key):
             ev_dict = ev_desc_dict['events'][ev_key]
-            data_dict['time'].append(index)
             for data_key, data in six.iteritems(ev_dict['data']):
                 if data_key in list(data_dict):
                     data_dict[data_key].append(data)
@@ -140,12 +139,12 @@ def listify(run_header, data_keys=None):
 if __name__ == "__main__":
     from metadataStore.userapi.commands import search
     search_dict = search(data=True, scan_id=388, owner='edill')
-    print(search_dict)
+    print('search_dict: {0}'.format(search_dict))
     keys = list(search_dict)
-    print(keys)
     search_dict = search_dict[keys[0]]
-    print(search_dict)
+    print('search_dict: {0}'.format(search_dict))
     keys = get_data_keys(search_dict)
+    print('keys: {0}'.format(keys))
     data = listify(search_dict, 'wavelength')
     print("data: {0}".format(data))
     print("search_dict keys: {0}".format(list(search_dict)))
