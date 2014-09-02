@@ -13,20 +13,27 @@ s_id2 = random.randint(0, 10000)
 create(header=[{'scan_id': s_id}, {'scan_id': s_id2}]) #Bulk Header create
 
 create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
+create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'ascan', 'event_type_id': 13, 'tag': 'experimental'})
+
 """
 >>> record(event={'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0})
 >>> record(event={'scan_id': s_id, 'descriptor_name': 'scan', 'owner': 'arkilic', 'seq_no': 0,
               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
 """
+
+#TODO: Fix whatever is wrong with bulk insert on events beacuse something is seriously wrong
 record(event=[{'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0},
-              {'scan_id': s_id, 'descriptor_name': 'scan', 'owner': 'arkilic', 'seq_no': 0,
+              {'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'}])
-print search(scan_id=s_id)
-print search(scan_id=s_id, owner='ark*')
-some_list = list()
-for i in xrange(10000):
-    some_list.append({'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': i})
-start = time.time()
-record(event=some_list)
-end = time.time()
-print 'It took ' + str((end-start)*1000) + ' milliseconds to process bulk inserts'
+
+
+record({'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
+              'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
+
+query_a = search(scan_id=s_id, data=True)
+
+print query_a['header_0']['event_descriptors']['event_descriptor_0']['descriptor_name']
+print query_a['header_0']['event_descriptors']['event_descriptor_1']['descriptor_name']
+
+print query_a['header_0']['event_descriptors']['event_descriptor_0']['data_keys']
+print query_a['header_0']['event_descriptors']['event_descriptor_1']['data_keys']

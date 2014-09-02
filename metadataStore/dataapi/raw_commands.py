@@ -368,6 +368,8 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                 if data is True:
                     events = find_event(event_descriptor_id=e_d['_id'])
                     header[key]['event_descriptors']['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
+                    data_keys = __get_event_keys(header[key]['event_descriptors']['event_descriptor_' + str(i)])
+                    header[key]['event_descriptors']['event_descriptor_' + str(i)]['data_keys'] = data_keys
                     i += 1
                 else:
                     i += 1
@@ -402,6 +404,7 @@ def __decode_bcfg_cursor(cursor_object):
         i += 1
     return b_configs
 
+
 def __decode_e_d_cursor(cursor_object):
     event_descriptors = dict()
     for temp_dict in cursor_object:
@@ -416,6 +419,16 @@ def __decode_cursor(cursor_object):
         events['event_' + str(i)] = temp_dict
         i += 1
     return events
+
+
+def __get_event_keys(event_descriptor):
+    #TODO: In the future, place a mechanism that assures all events have the same set of data!!
+    ev_keys = list()
+    if event_descriptor['events']:
+        ev_keys = event_descriptor['events']['event_0']['data'].keys()
+    else:
+        pass
+    return ev_keys
 
 
 def find_header(query_dict):
