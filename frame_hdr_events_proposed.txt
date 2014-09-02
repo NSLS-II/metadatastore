@@ -1,4 +1,4 @@
-run_hdr : {
+ : {
     id : hashed input
     beamline_id : string
     run_header_version: id (0.0.1, 0.0.2, etc...)
@@ -48,3 +48,28 @@ run_hdr : {
         ...
     }
 }
+
+
+event_descriptor: {
+    event_descriptor0: {
+        descriptor_name: hkl_scan,
+        data_keys: {'img': {
+                        'type': type,
+                        'PV_name': string,
+                        },
+                    'motors': {
+                        'type': type,
+                        '
+                    }
+    },
+    event_descriptor1: {
+        descriptor_name: temp_scan,
+        data_keys: [temp, time],
+    },
+    event_descriptor2: {
+        descriptor_name: temp_scan,
+        data_keys: [temp, time],
+    },
+}
+
+{'hkl_scan': {data_keys:
