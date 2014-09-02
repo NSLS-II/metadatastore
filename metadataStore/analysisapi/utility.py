@@ -7,6 +7,27 @@ import six
 import itertools
 
 
+def get_calib_dict(run_header):
+    """
+    Return the calibration dictionary that is saved in the run_header
+
+    Parameters
+    ----------
+    run_header : dict
+        Run header to convert events to lists. Can only be one header.
+
+    Returns
+    -------
+    dict
+        Dictionary that contains all information inside the run_header's
+        beamline_config key. If there are multiple 'configs' then the return
+        value is a nested dictionary keyed on config_# for the number of config
+        dicts
+    """
+    return {key: run_header['configs'][key]['config_params'] for
+            key in run_header['configs']}
+
+
 def get_data_keys(run_header):
     """
 
@@ -199,13 +220,15 @@ def listify(run_header, data_keys=None, bash_to_lower=True):
 
 if __name__ == "__main__":
     from metadataStore.userapi.commands import search
-    search_dict = search(data=True, scan_id=388, owner='edill')
-    print('search_dict: {0}'.format(search_dict))
-    keys = list(search_dict)
-    search_dict = search_dict[keys[0]]
-    print('search_dict: {0}'.format(search_dict))
-    keys = get_data_keys(search_dict)
+    return_dict = search(data=True, scan_id=388, owner='edill')
+    print('search_dict: {0}'.format(return_dict))
+    keys = list(return_dict)
+    return_dict = return_dict[keys[0]]
+    print('search_dict: {0}'.format(return_dict))
+    keys = get_data_keys(return_dict)
     print('keys: {0}'.format(keys))
-    data = listify(search_dict, u'ub')
+    data = listify(return_dict, u'ub')
     print("data: {0}".format(data))
-    print("search_dict keys: {0}".format(list(search_dict)))
+    print("search_dict keys: {0}".format(list(return_dict)))
+
+    print('calibration_dict: {0}'.format(get_calib_dict(return_dict)))
