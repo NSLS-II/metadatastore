@@ -9,6 +9,7 @@ s_id = random.randint(0, 10000)
 seq_n = random.randint(0, 10)
 print("s_id: {0}".format(s_id))
 print("seq_n: {0}".format(seq_n))
+
 create(header={'scan_id': s_id})
 create(beamline_config={'scan_id': s_id})
 create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
@@ -35,3 +36,5 @@ record(scan_id=s_id, descriptor_name='scan', seq_no=3, data={'name': 'value'})
 a = search(owner='arkilic', data=True)
 print a.keys()
 print a['header_0']['event_descriptors']['event_descriptor_0']['data_keys']
+
+query_b = search(header_id='54060f37fa44834941de90ed')

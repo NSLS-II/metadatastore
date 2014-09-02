@@ -334,7 +334,7 @@ def validate(var_dict, target_dict):
     return typechecked_dict
 
 
-def search(owner=None, start_time=None, end_time=None, scan_id=None,
+def search(owner=None, start_time=None, end_time=None, scan_id=None, header_id=None,
            data=False, num_header=50):
     """
     Search the experimental database with the provided search keys. If no search
@@ -389,6 +389,7 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None,
     # log the search dictionary as info
     logger.info("Search dictionary: {0}".format(search_dict))
     # actually perform the search
+    print search_dict
     try:
         result = find(**search_dict)
     except OperationFailure:

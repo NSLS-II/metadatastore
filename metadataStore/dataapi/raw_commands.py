@@ -9,6 +9,7 @@ from pymongo.errors import OperationFailure
 from metadataStore.sessionManager.databaseInit import db
 from metadataStore.database.databaseTables import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger
+from bson.objectid import ObjectId
 
 
 def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.datetime.utcnow(), beamline_id=None,
@@ -262,6 +263,7 @@ def update_header_status(header_id, status):
 
 def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
          num_header=50):
+
     #TODO: add beamline_config to search() returns
 
     """
@@ -271,11 +273,11 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
      Usage:
      If contents=False, only run_header information is returned
         contents=True will return beamline_config and events related to given run_header(s)
-     >>> find(header_id='last')
-     >>> find(header_id='last', contents=True)
-     >>> find(header_id=130, contents=True)
-     >>> find(header_id=[130,123,145,247,...])
-     >>> find(header_id={'start': 129, 'end': 141})
+     >>> find(scan_id='last')
+     >>> find(scan_id='last', contents=True)
+     >>> find(scan_id=130, contents=True)
+     >>> find(scan_id=[130,123,145,247,...])
+     >>> find(scan_id={'start': 129, 'end': 141})
      >>> find(start_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
      >>> find(start_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
      >>> find(start_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000),
@@ -318,7 +320,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                 i += 1
     else:
         if header_id is not None:
-            query_dict['_id'] = header_id
+            query_dict['_id'] = ObjectId(header_id)
         if owner is not None:
             for entry in supported_wildcard:
                     if entry in owner:

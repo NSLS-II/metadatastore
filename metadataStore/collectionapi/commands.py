@@ -264,7 +264,8 @@ def record(event=dict()):
             insert_bulk_event(event_list=event_list)
 
 
-def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False, num_header=50):
+def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
+           header_id=None, num_header=50):
     """
     Provides an easy way to search Header objects that are saved in metadataStore
 
@@ -306,5 +307,5 @@ def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time
     >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkili.')
     """
     result = find(scan_id=scan_id, owner=owner, start_time=start_time, beamline_id=beamline_id, end_time=end_time,
-                  data=data, num_header=num_header)
+                  data=data, header_id=header_id, num_header=num_header)
     return result
