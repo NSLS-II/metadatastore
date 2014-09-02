@@ -23,9 +23,20 @@ def get_calib_dict(run_header):
         beamline_config key. If there are multiple 'configs' then the return
         value is a nested dictionary keyed on config_# for the number of config
         dicts
+    bool
+        True: Multiple 'config' sections were present, dict is a nested dict
+        False: One 'config' section was present, dict is not a nested dict
     """
-    return {key: run_header['configs'][key]['config_params'] for
-            key in run_header['configs']}
+    nested = True
+    calib_dict = {key: run_header['configs'][key]['config_params'] for
+                  key in run_header['configs']}
+
+    # if there is only one configs section, no need to return an extra calib
+    if len(calib_dict) == 1:
+        calib_dict = calib_dict[list(calib_dict)[0]]
+        nested = False
+
+    return calib_dict, nested
 
 
 def get_data_keys(run_header):
