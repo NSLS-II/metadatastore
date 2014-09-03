@@ -10,7 +10,7 @@ s_id2 = random.randint(0, 10000)
 >>> create(header={'scan_id': s_id})
 >>> create(beamline_config={'scan_id': s_id})
 """
-create(header=[{'scan_id': s_id}, {'scan_id': s_id2}]) #Bulk Header create
+create(header=[{'scan_id': s_id, 'tags': ['CSX_collection', 'arman']}, {'scan_id': s_id2}]) #Bulk Header create
 
 create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
 create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'ascan', 'event_type_id': 13, 'tag': 'experimental'})
@@ -37,7 +37,3 @@ print query_a['header_0']['event_descriptors']['event_descriptor_1']['descriptor
 
 print query_a['header_0']['event_descriptors']['event_descriptor_0']['data_keys']
 print query_a['header_0']['event_descriptors']['event_descriptor_1']['data_keys']
-
-
-query_b = search(header_id='54060f37fa44834941de90ed')
-print query_b['header_0']

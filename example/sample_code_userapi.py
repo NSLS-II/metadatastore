@@ -10,7 +10,8 @@ seq_n = random.randint(0, 10)
 print("s_id: {0}".format(s_id))
 print("seq_n: {0}".format(seq_n))
 
-create(header={'scan_id': s_id})
+create(header={'scan_id': s_id, 'tags': ['CSX_Experiment']})
+
 create(beamline_config={'scan_id': s_id})
 create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
 some_list = [12.3, 34.5, 45.3]

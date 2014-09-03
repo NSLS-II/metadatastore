@@ -13,7 +13,7 @@ from bson.objectid import ObjectId
 
 
 def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.datetime.utcnow(), beamline_id=None,
-                status='In Progress',custom=dict()):
+                status='In Progress', tags=list(), custom=dict()):
     """
     Saves a run header that serves as a container for even descriptors, beamline configurations, and events.
     
@@ -41,8 +41,8 @@ def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.dat
     """
     try:
         header = Header(owner=header_owner, start_time=start_time,
-                        end_time=start_time, beamline_id=beamline_id, scan_id=scan_id,
-                        custom=custom, status=status).save(wtimeout=100,write_concern={'w': 1})
+                        end_time=start_time, beamline_id=beamline_id, scan_id=scan_id, tags=tags,
+                        custom=custom, status=status).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Header cannot be created')
         raise

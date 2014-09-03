@@ -38,6 +38,14 @@ def validate_dict(entry):
     return res
 
 
+def validate_list(entry):
+    if isinstance(entry, list):
+        res = entry
+    else:
+        raise TypeError('Entry must be a list')
+    return res
+
+
 def validate_int(entry):
     if isinstance(entry, int):
         res = entry

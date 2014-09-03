@@ -1,9 +1,9 @@
 
 __author__ = 'arkilic'
-import getpass
 
+import getpass
 from metadataStore.database.utility_routines import validate_dict, validate_string, validate_end_time, \
-    validate_start_time, validate_int
+    validate_start_time, validate_int, validate_list
 from metadataStore.sessionManager.databaseInit import db
 
 
@@ -12,7 +12,7 @@ class Header(object):
     Run Header that captures all aspects of a given run using its keys and other collections
     """
     def __init__(self, start_time, scan_id, beamline_id=None, status='In Progress', owner=getpass.getuser(),
-                 end_time=None, custom=dict()):
+                 end_time=None, tags=list(), custom=dict()):
         """
         :param start_time: run header initialization timestamp
         :type start_time: datetime object
@@ -31,6 +31,7 @@ class Header(object):
         self.end_time = validate_end_time(end_time)
         self.owner = validate_string(owner)
         self.scan_id = scan_id
+        self.tags = validate_list(tags)
         self.status = validate_string(status)
         self.beamline_id = validate_string(beamline_id)
         self.custom = validate_dict(custom)
@@ -47,6 +48,7 @@ class Header(object):
         document_template['status'] = self.status
         document_template['beamline_id'] = self.beamline_id
         document_template['custom'] = self.custom
+        document_template['tags'] = self.tags
         return document_template
 
     def save(self, **kwargs):
