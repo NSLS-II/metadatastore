@@ -262,7 +262,7 @@ search_keys_dict["data"] = {
     "type": bool,
     "validate_fun": _str_cast_bool
     }
-search_keys_dict['_id'] = {
+search_keys_dict['header_id'] = {
     "description": ("Unique ID generated from a hash function"),
     "type": str,
     "validate_fun": _isinstance
@@ -382,14 +382,13 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None, header_id=N
     for name, val in zip(varnames, varvals):
         if val is not None:
             search_dict[name] = val
-
     # validate the search dictionary
+    print search_keys_dict
     search_dict = validate(search_dict, search_keys_dict)
 
     # log the search dictionary as info
     logger.info("Search dictionary: {0}".format(search_dict))
     # actually perform the search
-    print search_dict
     try:
         result = find(**search_dict)
     except OperationFailure:
