@@ -37,3 +37,6 @@ print query_a['header_0']['event_descriptors']['event_descriptor_1']['descriptor
 
 print query_a['header_0']['event_descriptors']['event_descriptor_0']['data_keys']
 print query_a['header_0']['event_descriptors']['event_descriptor_1']['data_keys']
+
+query_b = search(tags='CSX_Experiment2', data=True)
+print query_b

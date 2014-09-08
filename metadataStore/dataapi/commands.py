@@ -7,7 +7,7 @@ import re
 from pymongo.errors import OperationFailure
 
 from metadataStore.sessionManager.databaseInit import db
-from metadataStore.database.databaseTables import Header, BeamlineConfig, Event, EventDescriptor
+from metadataStore.database.collections import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger
 from bson.objectid import ObjectId
 
@@ -262,7 +262,7 @@ def update_header_status(header_id, status):
 
 
 def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
-         num_header=50):
+         tags=None, num_header=50):
 
     #TODO: add beamline_config to search() returns
 
@@ -357,6 +357,8 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                 else:
                     query_dict['end_time'] = {'$gte': end_time,
                                               '$lt': datetime.datetime.utcnow()}
+        if tags is not None:
+            query_dict['tags'] = {'$in': [tags]}
         header = __decode_hdr_cursor(find_header(query_dict).limit(num_header))
         hdr_keys = header.keys()
         for key in hdr_keys:
@@ -375,7 +377,8 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                     i += 1
                 else:
                     i += 1
-        if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None:
+        if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None \
+                and tags is None:
             header = None
     return header
 

@@ -10,7 +10,7 @@ seq_n = random.randint(0, 10)
 print("s_id: {0}".format(s_id))
 print("seq_n: {0}".format(seq_n))
 
-create(header={'scan_id': s_id, 'tags': ['CSX_Experiment']})
+create(header={'scan_id': s_id, 'tags': ['CSX_Experiment1', 'CSX_Experiment2']})
 
 create(beamline_config={'scan_id': s_id})
 create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
@@ -38,12 +38,12 @@ record(scan_id=s_id, descriptor_name='scan', seq_no=3, data=data_dict)
 # #        print 'It took ' + str(elapsed) + ' milliseconds to record one event'
 
 a = search(scan_id=s_id, owner='arkilic', data=True)
-print a.keys()
+
 print a['header_0']['event_descriptors']['event_descriptor_0']['data_keys']
 some_id = a['header_0']['_id']
 
-print some_id
-
-
 query_b = search(header_id=some_id,data=True)
 print query_b['header_0']['event_descriptors']['event_descriptor_0']['data_keys']
+
+query_c = search(tags='CSX_Experiment1',data=True)
+print query_c.keys()

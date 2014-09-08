@@ -5,6 +5,8 @@ import random
 from metadataStore.dataapi.commands import *
 
 
+
+
 h_id = random.randint(0, 200000)
 bc_id = random.randint(0, 450000)
 ev_d_id = random.randint(0, 200000)
@@ -71,3 +73,4 @@ print('Header insert time is ' + str((end-start)*1000) + ' ms')
 # # for entry in hdr3:
 # #     print entry.keys()
 #
+print db.header.find({'tags': {'$in': ['CSX_Experiment1']}})[0]

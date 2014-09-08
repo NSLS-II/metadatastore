@@ -2,7 +2,7 @@
 __author__ = 'arkilic'
 
 import getpass
-from metadataStore.database.utility_routines import validate_dict, validate_string, validate_end_time, \
+from metadataStore.database.utility import validate_dict, validate_string, validate_end_time, \
     validate_start_time, validate_int, validate_list
 from metadataStore.sessionManager.databaseInit import db
 

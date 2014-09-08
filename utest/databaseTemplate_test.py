@@ -5,7 +5,7 @@ import unittest
 
 from pymongo.errors import DuplicateKeyError
 
-from metadataStore.database.databaseTables import Header
+from metadataStore.database.collections import Header
 from metadataStore.sessionManager.databaseInit import db
 
 

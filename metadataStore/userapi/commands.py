@@ -266,6 +266,12 @@ search_keys_dict["data"] = {
     "type": bool,
     "validate_fun": _str_cast_bool
     }
+
+search_keys_dict["tags"] = {
+    "description": "Tags for a given header",
+    "type": str,
+    "validate_fun": _isinstance
+    }
 search_keys_dict['header_id'] = {
     "description": ("Unique ID generated from a hash function"),
     "type": str,
@@ -338,7 +344,7 @@ def validate(var_dict, target_dict):
     return typechecked_dict
 
 
-def search(owner=None, start_time=None, end_time=None, scan_id=None, header_id=None,
+def search(owner=None, start_time=None, end_time=None, tags=None, scan_id=None, header_id=None,
            data=False, num_header=50):
     """
     Search the experimental database with the provided search keys. If no search
@@ -358,6 +364,10 @@ def search(owner=None, start_time=None, end_time=None, scan_id=None, header_id=N
     :param scan_id : Search by specific scan_id.  If scan_id is a string, search() will try
                      to cast it to an integer.  If this fails, an error message will be logged
     :type scan_id: int, optional
+
+    :param tags: Provides means to create tags for run headers as in Olog
+
+    :type description: str, optional
 
     :param data: True: Add data to the returned dictionary
                  False: Don't include data in the returned dictionary. If data is a string, search() will test to see
