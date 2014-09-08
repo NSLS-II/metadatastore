@@ -253,7 +253,7 @@ def update_header_status(header_id, status):
     original_entry = list()
     for entry in result:
         original_entry.append(entry)
-    original_entry[0]['status'] =  status
+    original_entry[0]['status'] = status
     try:
         coll.update({'_id': header_id}, original_entry[0] ,upsert=False)
     except:

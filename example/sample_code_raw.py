@@ -2,7 +2,7 @@ __author__ = 'arkilic'
 import time
 import random
 
-from metadataStore.dataapi.raw_commands import *
+from metadataStore.dataapi.commands import *
 
 
 h_id = random.randint(0, 200000)

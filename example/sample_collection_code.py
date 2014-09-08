@@ -27,8 +27,8 @@ record(event=[{'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0},
               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'}])
 
 
-record({'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
-              'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
+# record({'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
+#               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
 
 query_a = search(scan_id=s_id, data=True)
 
