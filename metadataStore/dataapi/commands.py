@@ -139,12 +139,14 @@ def insert_bulk_event(event_list):
     :return: None
     """
     if isinstance(event_list, list):
-        try:
-            db['event'].insert(event_list)
-        except:
-            raise
+        bulk = db['event'].initialize_ordered_bulk_op()
+        for entry in event_list:
+            bulk.insert(entry)
+
+        bulk.execute({'write_concern': 1})
     else:
         raise TypeError('header_list must be a python list')
+
 
 def get_event_descriptor_hid_edid(name, s_id):
     """

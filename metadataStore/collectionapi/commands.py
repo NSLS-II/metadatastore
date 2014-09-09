@@ -3,7 +3,7 @@ import datetime
 import getpass
 from metadataStore.dataapi.commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
 from metadataStore.dataapi.commands import save_bulk_header, insert_bulk_event
-from metadataStore.dataapi.commands import find
+from metadataStore.dataapi.commands import find, get_event_descriptor_hid_edid, db
 
 
 def create(header=None, beamline_config=None, event_descriptor=None):
@@ -243,33 +243,39 @@ def record(event=dict()):
             raise
     elif isinstance(event, list):
             event_list = list()
+            bulk = db['event'].initialize_ordered_bulk_op()
             for single_event in event:
+                composed_dict = dict()
                 if 'scan_id' in single_event:
-                    scan_id = single_event['scan_id']
+                    composed_dict['scan_id'] = single_event['scan_id']
                 else:
                     raise ValueError('scan_id is required in order to record an single_event')
                 if 'descriptor_name' in single_event:
-                    descriptor_name = single_event['descriptor_name']
+                    composed_dict['descriptor_name'] = single_event['descriptor_name']
                 else:
                     raise ValueError('Descriptor is required in order to record an single_event')
                 if 'description' in single_event:
-                    description = single_event['description']
+                    composed_dict['description'] = single_event['description']
                 else:
                     description = None
                 if 'owner' in single_event:
-                    owner = single_event['owner']
+                    composed_dict['owner'] = single_event['owner']
                 else:
-                    owner = getpass.getuser()
+                    composed_dict['owner'] = getpass.getuser()
                 if 'seq_no' in single_event:
-                    seq_no = single_event['seq_no']
+                    composed_dict['seq_no'] = single_event['seq_no']
                 else:
                     raise ValueError('seq_no is required field')
                 if 'data' in single_event:
-                    data = single_event['data']
+                    composed_dict['data'] = single_event['data']
                 else:
-                    data = dict()
-                event_list.append(single_event)
-            insert_bulk_event(event_list=event_list)
+                    composed_dict['data'] = dict()
+                header_id, descriptor_id = get_event_descriptor_hid_edid(single_event['descriptor_name'],
+                                                                         single_event['scan_id'])
+                composed_dict['header_id'] = header_id
+                composed_dict['descriptor_id'] = descriptor_id
+                bulk.insert(composed_dict)
+            bulk.execute()
 
 
 def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
