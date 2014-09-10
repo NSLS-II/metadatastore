@@ -1,0 +1,75 @@
+ : {
+    id : hashed input
+    beamline_id : string
+    run_header_version: id (0.0.1, 0.0.2, etc...)
+    configs: {
+        config_0: {
+            id: hashed input
+            headers: list of run headers specific beamline_config belongs
+            beamline_id: string
+            custom: dictionary
+        },
+        ...
+    }
+    custom: ??
+    end_time : number
+    owner: string
+    scan_id: int
+    start_time : number
+    status: string (In Progress or Complete)
+
+    event_descriptor: {
+        id : hashed input
+        descriptor_name: string
+        event_type_id: integer
+        header_id: hashed input
+        tag: list
+        type_descriptor: ??
+        data_keys: list
+    }
+
+    events: {
+        event_0: {
+            _id: hashed input
+            data: {
+                event_descriptor[data_keys][0]: data0,
+                event_descriptor[data_keys][1]: data1,
+                event_descriptor[data_keys][N]: dataN
+            }
+            time: datetime (unix/epics?)
+            description:
+            event_descriptor_id: hashed input
+            header_id: hashed input
+            owner: string
+            seq_no: int
+        },
+        event_1: {}
+        event_2: {}
+        ...
+    }
+}
+
+
+event_descriptor: {
+    event_descriptor0: {
+        descriptor_name: hkl_scan,
+        data_keys: {'img': {
+                        'type': type,
+                        'PV_name': string,
+                        },
+                    'motors': {
+                        'type': type,
+                        '
+                    }
+    },
+    event_descriptor1: {
+        descriptor_name: temp_scan,
+        data_keys: [temp, time],
+    },
+    event_descriptor2: {
+        descriptor_name: temp_scan,
+        data_keys: [temp, time],
+    },
+}
+
+{'hkl_scan': {data_keys:

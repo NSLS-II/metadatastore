@@ -3,6 +3,7 @@ from __future__ import (absolute_import, division, print_function)
 
 import sys
 import warnings
+import shutil
 try:
     from setuptools import setup
 except ImportError:
@@ -72,7 +73,8 @@ setup(
     author_email=None,
     license="BSD (3-clause)",
     url = "https://github.com/arkilic/metadataStore",
-    packages=['metadataStore',
+    packages=['metadataStore', 'metadataStore.analysisapi',
+              'metadataStore.collectionapi',
               'metadataStore.config', 'metadataStore.dataapi',
               'metadataStore.database', 'metadataStore.sessionManager',
               'metadataStore.userapi',
@@ -84,3 +86,5 @@ setup(
         "Programming Language :: Python :: 2.7",
     ],
 )
+
+shutil.copy('dataBroker.conf', os.path.expanduser('~')+os.sep+'dataBroker.conf')

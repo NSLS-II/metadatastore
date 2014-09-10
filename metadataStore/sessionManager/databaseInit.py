@@ -1,14 +1,14 @@
 __author__ = 'arkilic'
-from mongoengine import connect
-from pymongo.errors import ConnectionFailure
 
+from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 
 from metadataStore.config.parseConfig import database, host, port
 from metadataStore.sessionManager.databaseLogger import DbLogger
 
+
 try:
-    print(host)
-    conn = connect(db=database, host=host, port=int(port))
+    conn = MongoClient(host=host, port=int(port))
     db = conn['metaDataStore']
 except:
     raise ConnectionFailure('Connection cannot be established')
