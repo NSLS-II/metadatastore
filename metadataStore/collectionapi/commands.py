@@ -90,13 +90,17 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                 tags = header['tags']
             else:
                 tags = list()
+            if 'header_versions' in header:
+                header_versions = header['header_versions']
+            else:
+                header_versions = list()
             if 'status' in header:
                 status = header['status']
             else:
                 status = 'In Progress'
             try:
                 save_header(scan_id=scan_id, header_owner=owner, start_time=start_time, beamline_id=beamline_id,
-                            status=status, tags=tags, custom=custom)
+                            status=status, tags=tags, header_versions=header_versions, custom=custom)
             except:
                 raise
         elif isinstance(header, list):
@@ -129,6 +133,10 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                     tags = single_header['tags']
                 else:
                     tags = list()
+                if 'header_versions' in single_header:
+                    header_versions = single_header['header_versions']
+                else:
+                    header_versions = list()
                 if 'status' in single_header:
                     status = single_header['status']
                 else:

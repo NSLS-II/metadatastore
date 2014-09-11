@@ -11,7 +11,7 @@ class Header(object):
     """
     Run Header that captures all aspects of a given run using its keys and other collections
     """
-    def __init__(self, start_time, scan_id, beamline_id=None, status='In Progress', owner=getpass.getuser(),
+    def __init__(self, start_time, scan_id, beamline_id=None, header_versions=list(), status='In Progress', owner=getpass.getuser(),
                  end_time=None, tags=list(), custom=dict()):
         """
         :param start_time: run header initialization timestamp
@@ -30,6 +30,7 @@ class Header(object):
         self.start_time = validate_start_time(start_time)
         self.end_time = validate_end_time(end_time)
         self.owner = validate_string(owner)
+        self.header_versions = validate_list(header_versions)
         self.scan_id = scan_id
         self.tags = validate_list(tags)
         self.status = validate_string(status)
@@ -47,6 +48,7 @@ class Header(object):
         document_template['scan_id'] = self.scan_id
         document_template['status'] = self.status
         document_template['beamline_id'] = self.beamline_id
+        document_template['header_versions'] = self.header_versions
         document_template['custom'] = self.custom
         document_template['tags'] = self.tags
         return document_template

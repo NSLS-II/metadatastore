@@ -11,7 +11,7 @@ h_id = random.randint(0, 200000)
 bc_id = random.randint(0, 450000)
 ev_d_id = random.randint(0, 200000)
 start = time.time()
-save_header(beamline_id='csx29', scan_id=h_id, tags=['arman', 123])
+save_header(beamline_id='csx29', scan_id=h_id, tags=['arman', 123], header_versions=[0, 1, 3])
 end = time.time()
 print('Header insert time is ' + str((end-start)*1000) + ' ms')
 
@@ -74,3 +74,5 @@ print('Header insert time is ' + str((end-start)*1000) + ' ms')
 # #     print entry.keys()
 #
 print db.header.find({'tags': {'$in': ['CSX_Experiment1']}})[0]
+
+print db.header.find({'scan_id': h_id})[0].keys()
