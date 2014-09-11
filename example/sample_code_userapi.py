@@ -2,6 +2,7 @@ __author__ = 'arkilic'
 
 import random
 from metadataStore.userapi.commands import create, record, search
+from metadataStore.utilities.utility import tablify
 import time
 
 
@@ -47,3 +48,13 @@ print query_b['header_0']['event_descriptors']['event_descriptor_0']['data_keys'
 
 query_c = search(tags='CSX_Experiment1',data=True)
 print query_c.keys()
+
+a = tablify(query_c)
+print a.keys()
+print len(a['headers'])
+print len(a['event_descriptors'])
+print len(a['descriptor_fields'])
+print a['headers'][0:3]
+print a['event_descriptors'][0:3]
+print a['descriptor_fields'][0:3]
+# print a['event_descriptors'][0]['event_descriptor_0'].keys()

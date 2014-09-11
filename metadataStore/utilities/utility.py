@@ -229,6 +229,27 @@ def listify(run_header, data_keys=None, bash_to_lower=True):
     return data_dict
 
 
+def tablify(run_headers):
+    if isinstance(run_headers, dict):
+        header_keys = run_headers.keys()
+        table = dict()
+        desc_list = list()
+        table['headers'] = header_keys
+        desc_fields = list()
+        for entry in header_keys:
+            descriptor_keys = run_headers[entry]['event_descriptors'].keys()
+            desc_list.append(descriptor_keys)
+            temp = list()
+            for desc in descriptor_keys:
+                temp.append(run_headers[entry]['event_descriptors'][desc])
+            desc_fields.append(temp)
+        table['descriptor_fields'] = desc_fields
+        table['event_descriptors'] = desc_list
+    else:
+        raise TypeError('Header must be a python dict')
+    return table
+
+
 if __name__ == "__main__":
     from metadataStore.userapi.commands import search
     return_dict = search(data=True, scan_id=388, owner='edill')
