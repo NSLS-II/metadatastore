@@ -8,7 +8,7 @@ from metadataStore.dataapi.commands import find, get_event_descriptor_hid_edid, 
 
 def create(header=None, beamline_config=None, event_descriptor=None):
     """
-    Create header, beamline_config, and event_descriptor given dictionaries with appropriate name-value pairs
+    Create header, beamline_config, and event_descriptor given dictionaries with appropriate name-value pairs.
 
     Parameters
     ----------
@@ -26,6 +26,7 @@ def create(header=None, beamline_config=None, event_descriptor=None):
     :returns: None
 
     Usage:
+
     >>> sample_header = {'scan_id': 1234}
     >>> create(header=sample_header)
 
@@ -46,8 +47,10 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
     >>> sample_event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental',
     ...                          'type_descriptor':{'attribute1': 'value1', 'attribute2': 'value2'}})
+
     >>> sample_header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
     ...                 'owner': 'arkilic', 'custom': {'attribute1': 'value1', 'attribute2':'value2'}})
+
     >>> create(event_descriptor=sample_event_descriptor, header=sample_header)
 
     >>> create(beamline_config={'scan_id': 1234})
@@ -56,10 +59,14 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
     >>> sample_event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental',
     ...                          'type_descriptor':{'attribute1': 'value1', 'attribute2': 'value2'}})
+
     >>> sample_header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
     ...                 'owner': 'arkilic', 'custom': {'attribute1': 'value1', 'attribute2':'value2'}})
+
     >>> sample_beamline_config = {'scan_id': 1234, 'config_params': {'attribute1': 'value1', 'attribute2': 'value2'}}
+
     >>> create(header=sample_header, event_descriptor=sample_event_descriptor, beamline_config=sample_beamline_config)
+
     """
     if header is not None:
         if isinstance(header, dict):
@@ -196,9 +203,11 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
 def record(event=dict()):
     """
-    Events are saved given scan_id and descriptor name and additional optional parameters
+
+    Events are saved given scan_id and descriptor name and additional optional parameters.
 
     Required fields: scan_id, descriptor_name
+
     Optional fields: owner, seq_no, data, description
 
     Parameters
@@ -208,9 +217,10 @@ def record(event=dict()):
 
     :raises: ConnectionFailure, NotUniqueError, ValueError
 
-    :rtype: None
+    :returns: None
 
     Usage:
+
     >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan'})
 
     >>> record(event={'scan_id': 1344, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,

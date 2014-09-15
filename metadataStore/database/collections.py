@@ -55,7 +55,7 @@ class Header(object):
 
     def save(self, **kwargs):
         """
-        Inserts a header into metadataStore.header collection
+        Inserts a header into metadataStore.header collection. Also, handles uniqueness and indexing.
         """
         composed_dict = self.__compose_document()
         _id = db['header'].insert(composed_dict, **kwargs)
@@ -112,15 +112,26 @@ class Event(object):
         """
         Constructor
         :param even_descriptor_id: foreign key pointing back to event_descriptor
+
         :type event_descriptor_id: integer
+
         :param description: User generated text field
+
         :type description: string
+
         :param seq_no: sequence number for the data collected
+
         :type seq_no: integer
+
         :param owner: data collection or system defined user info
+
         :type owner: string
+
         :param data: data point name-value pair container
+
         :type data: dictionary
+
+        :returns: None
         """
         self.header_id = header_id
         self.event_descriptor_id = event_descriptor_id
@@ -151,10 +162,13 @@ class BeamlineConfig(object):
         """
         :param beamline_id: beamline descriptor
         :type beamline_id: string
+
         :param header_id: foreign key pointing back to header
         :type header_id: integer
+
         :param config_params: configuration parameter name-value container
         :type config_params: dictionary
+
         """
         self.header_id = header_id
         self.config_params = validate_dict(config_params)
