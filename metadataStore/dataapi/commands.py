@@ -15,7 +15,8 @@ from bson.objectid import ObjectId
 def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.datetime.utcnow(), beamline_id=None,
                 header_versions= list(), status='In Progress', tags=list(), custom=dict()):
     """
-    Saves a run header that serves as a container for even descriptors, beamline configurations, and events.
+    Saves a run header that serves as a container for even descriptors, beamline configurations, and events. Please see
+    Introduction section for return document structure
     
     :param scan_id: Consumer specified id for a specific scan
     :type scan_id: int
@@ -52,7 +53,7 @@ def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.dat
 
 def get_header_object(id):
     """
-    Return the Header object with given id
+    Return a Header instance given id (unique hashed _id field assigned by mongo daemon).
     
     :param id: Header _id
     :type id: pymongo.ObjectId instance
@@ -66,9 +67,10 @@ def get_header_object(id):
 
 def save_bulk_header(header_list):
     """
-    Given a list of headers, creates a bulk of headers
+    Given a list of headers, creates a set of headers in bulk.
 
     :param header_list: List of headers from collection api to be created in bulk
+    :type header_list: list
     :raises: OperationError, TypeError
     :return: None
     """
@@ -87,7 +89,6 @@ def get_header_id(scan_id):
 
     :param scan_id: scan_id for a run header
     :type scan_id: int
-
     """
     collection = db['header']
     try:
@@ -103,7 +104,8 @@ def get_header_id(scan_id):
 def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_descriptor=dict(),
                             tag=None):
     """
-    Create event_descriptor entries that serve as descriptors for given events that are part of a run header
+    Create event_descriptor entries that serve as descriptors for given events that are part of a run header.
+    EventDescriptor instances serve as headers for a given set of events that hold metadata for a run
     
     :param scan_id: Consumer specified id for a specific scan
     :type scan_id: int
@@ -116,10 +118,10 @@ def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_d
     :param tag: Provides information regarding nature of event
     :type tag: str
 
-    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan')
-    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan',
+    >>> insert_event_descriptor(descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan')
+    >>> insert_event_descriptor(descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan',
     ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'})
-    >>> insert_event_descriptor(event_descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan',
+    >>> insert_event_descriptor(descriptor_id=134, header_id=1345, event_type_id=0, descriptor_name='scan',
     ... type_descriptor={'custom_field': 'value', 'custom_field2': 'value2'}, tag='analysis')
     """
     header_id = get_header_id(scan_id)
@@ -135,15 +137,17 @@ def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_d
 
 def insert_bulk_event(event_list):
     """
-    Given a list of events, event entries are inserted in bulk
+    Given a list of events, event entries are inserted in bulk. This routine uses the bulk execution routine made
+    available in pymongo v2.6.
+
     :param event_list: List of events to be bulk inserted
-    :return: None
+    :type event_list: list
+    :returns: None
     """
     if isinstance(event_list, list):
         bulk = db['event'].initialize_ordered_bulk_op()
         for entry in event_list:
             bulk.insert(entry)
-
         bulk.execute({'write_concern': 1})
     else:
         raise TypeError('header_list must be a python list')
@@ -151,24 +155,26 @@ def insert_bulk_event(event_list):
 
 def get_event_descriptor_hid_edid(name, s_id):
     """
-    Returns EventDescriptor instance given _id
+    Returns specific EventDescriptor object given _id
 
     :param id: Unique identifier for EventDescriptor instance (refers to _id in mongodb schema)
     :type id: int
-    :returns: header_id and event_descriptor_id
-
+    :returns: header_id and descriptor_id
     """
     header_id = get_header_id(s_id)
     try:
-        result =  db['event_type_descriptor'].find({'header_id': header_id, 'descriptor_name': name}).limit(1)[0]
+        result = db['event_type_descriptor'].find({'header_id': header_id, 'descriptor_name': name}).limit(1)[0]
     except:
         raise
     return result['header_id'], result['_id']
 
 
 def list_event_descriptors():
+    #TODO: Check whether anything uses this routine and remove it permanently because it is dangerous!!!!
     """
-    Returns all EventDescriptor instances saved into the database
+    Grabs all event_descriptor objects. (Currently obsolete and should be removed after testing&evaluation)
+
+    :returns:  pymongo cursor object More on cursors in pymongo documentation.
     """
     collection = db['event_descriptor']
     try:
@@ -200,7 +206,7 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
     """
     header_id, descriptor_id = get_event_descriptor_hid_edid(descriptor_name, scan_id)
     try:
-        event = Event(event_descriptor_id=descriptor_id, header_id=header_id, description=description,
+        event = Event(descriptor_id=descriptor_id, header_id=header_id, description=description,
                       owner=owner, seq_no=seq_no, data=data).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Event cannot be recorded')
@@ -210,7 +216,8 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
 
 def save_beamline_config(scan_id, config_params={}):
     """
-    Save beamline configuration
+    Save beamline configuration. See collections documentation for details.
+
     :param scan_id: Unique identifier for a scan
     :param config_params:
     """
@@ -226,7 +233,13 @@ def save_beamline_config(scan_id, config_params={}):
 
 def update_header_end_time(header_id, end_time):
     """
-    Updates header end_time to current timestamp given end_time and header_id. See insert_event
+    Updates header end_time to current timestamp given end_time and header_id.
+
+    :param header_id: Hashed unique identifier that specifies an entry into Header collection
+    :type header_id: ObjectId instance
+    :param end_time: Time of header closure
+    :type end_time: datetime object
+    :returns: None
     """
     coll = db['header']
     try:
@@ -236,7 +249,7 @@ def update_header_end_time(header_id, end_time):
     original_entry = list()
     for entry in result:
         original_entry.append(entry)
-    original_entry[0]['end_time'] =  end_time
+    original_entry[0]['end_time'] = end_time
     try:
         coll.update({'_id': header_id}, original_entry[0] ,upsert=False)
     except:
@@ -247,6 +260,11 @@ def update_header_end_time(header_id, end_time):
 def update_header_status(header_id, status):
     """
     Updates run header status given header_id and status
+
+    :param header_id: Hashed unique identifier that specifies an entry into Header collection
+    :param status: Header usage status. In Progress for open header & Complete for closed header
+    :type status: str
+    :return: None
     """
     coll = db['header']
     try:
@@ -273,9 +291,10 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
     Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
     So iterating it multiple times will only cause a single query.
     If this is not the desired behavour you can call no_cache (version 0.8.3+) to return a non-caching queryset.
-     Usage:
-     If contents=False, only run_header information is returned
-        contents=True will return beamline_config and events related to given run_header(s)
+
+    **contents=False**, only run_header information is returned.
+    **contents=True** will return beamline_config and events related to given run_header(s)
+
      >>> find(scan_id='last')
      >>> find(scan_id='last', contents=True)
      >>> find(scan_id=130, contents=True)
@@ -285,8 +304,8 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
      >>> find(start_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
      >>> find(start_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000),
                       ... 'end': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)})
-      >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
-      >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
+     >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
+     >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
     """
     supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
@@ -302,7 +321,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
         i = 0
         for e_d in event_desc:
             header['event_descriptor_' + str(i)] = e_d
-            events = find_event(event_descriptor_id=e_d['_id'])
+            events = find_event(descriptor_id=e_d['_id'])
             if data is True:
                 header['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
                 i += 1
@@ -315,7 +334,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
         i = 0
         for e_d in event_desc:
             header['event_descriptor_' + str(i)] = e_d
-            events = find_event(event_descriptor_id=e_d['_id'])
+            events = find_event(descriptor_id=e_d['_id'])
             if data is True:
                 header['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
                 i += 1
@@ -370,15 +389,19 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
             event_desc = find_event_descriptor(header[key]['_id'])
             i = 0
             header[key]['event_descriptors'] = dict()
+            print 'here i am 1'
             for e_d in event_desc:
                 header[key]['event_descriptors']['event_descriptor_' + str(i)] = e_d
                 if data is True:
-                    events = find_event(event_descriptor_id=e_d['_id'])
+                    events = find_event(descriptor_id=e_d['_id'])
                     header[key]['event_descriptors']['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
+                    print 'here i am true'
+                    print header[key]['event_descriptors']['event_descriptor_' + str(i)]['events']
                     data_keys = __get_event_keys(header[key]['event_descriptors']['event_descriptor_' + str(i)])
                     header[key]['event_descriptors']['event_descriptor_' + str(i)]['data_keys'] = data_keys
                     i += 1
                 else:
+                    print 'here i am false'
                     i += 1
         if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None \
                 and tags is None:
@@ -444,8 +467,8 @@ def find_header(query_dict):
     return collection.find(query_dict)
 
 
-def find_event(event_descriptor_id, event_query_dict={}):
-    event_query_dict['event_descriptor_id'] = event_descriptor_id
+def find_event(descriptor_id, event_query_dict={}):
+    event_query_dict['descriptor_id'] = descriptor_id
     collection = db['event']
     return collection.find(event_query_dict)
 
@@ -467,9 +490,9 @@ def convertToHumanReadable(date_time):
     converts a python datetime object to the
     format "X days, Y hours ago"
 
-    @param date_time: Python datetime object
+    :param date_time: Python datetime object
 
-    @return:
+    :return:
         fancy datetime:: string
     """
     current_datetime = datetime.datetime.now()
