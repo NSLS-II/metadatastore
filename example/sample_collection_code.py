@@ -34,10 +34,9 @@ record(event=[{'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0},
 #               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
 
 query_a = search(scan_id=s_id, data=True)
-
+print s_id
 #Fix insert
 print query_a['header_0'].keys()
 #TODO: Fix collection api search
 print query_a['header_0']['event_descriptors']['event_descriptor_0']['events']
 print query_a['header_0']['event_descriptors']['event_descriptor_1']['events']
-
