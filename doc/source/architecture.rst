@@ -50,7 +50,7 @@ Collection API
 
 Provides routines for data collection libraries to populate metadataStore
 
-.. automodule:: metadataStore.collectionapi.commands
+.. literalinclude:: metadataStore.collectionapi.commands.py
    :members:
 
 
