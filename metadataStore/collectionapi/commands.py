@@ -2,7 +2,7 @@ __author__ = 'arkilic'
 import datetime
 import getpass
 from metadataStore.dataapi.commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
-from metadataStore.dataapi.commands import save_bulk_header, insert_bulk_event
+from metadataStore.dataapi.commands import save_bulk_header
 from metadataStore.dataapi.commands import find, get_event_descriptor_hid_edid, db
 
 
@@ -260,7 +260,6 @@ def record(event=dict()):
         except:
             raise
     elif isinstance(event, list):
-            event_list = list()
             bulk = db['event'].initialize_ordered_bulk_op()
             for single_event in event:
                 composed_dict = dict()
@@ -275,7 +274,7 @@ def record(event=dict()):
                 if 'description' in single_event:
                     composed_dict['description'] = single_event['description']
                 else:
-                    description = None
+                    composed_dict['description'] = None
                 if 'owner' in single_event:
                     composed_dict['owner'] = single_event['owner']
                 else:
@@ -299,10 +298,8 @@ def record(event=dict()):
 def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
            header_id=None, tags=None, num_header=50):
     """
-    Provides an easy way to search Header objects that are saved in metadataStore
+    Provides an easy way to search Header entries inserted in metadataStore
 
-    Parameters
-    ----------
     :param scan_id: Unique identifier for a given run
     :type scan_id: int
 
@@ -325,17 +322,11 @@ def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time
 
     :returns: Dictionary
 
-    Usage:
     >>> search(scan_id=s_id)
-
     >>> search(scan_id=s_id, owner='ark*')
-
     >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5))
-
     >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkilic')
-
     >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='ark*')
-
     >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkili.')
     """
     result = find(scan_id=scan_id, owner=owner, start_time=start_time, beamline_id=beamline_id, end_time=end_time,

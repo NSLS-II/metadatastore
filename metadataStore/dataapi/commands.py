@@ -2,10 +2,6 @@ __author__ = 'arkilic'
 
 import getpass
 import datetime
-import re
-
-from pymongo.errors import OperationFailure
-
 from metadataStore.sessionManager.databaseInit import db
 from metadataStore.database.collections import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger
@@ -20,16 +16,22 @@ def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.dat
     
     :param scan_id: Consumer specified id for a specific scan
     :type scan_id: int
+
     :param header_owner: Run header owner (default: debian session owner)
     :type header_owner: str
+
     :param start_time: Run header create time
     :type start_time: datetime object
+
     :param beamline_id: Beamline Id
     :type beamline_id: str
+
     :param status: Run header completion status( In Progress/Complete
     :type status: str
+
     :param custom: Additional attribute value fields that can be user defined
     :type custom: dict
+
     :returns: header object
 
     >>> save_header(scan_id=12)
@@ -57,6 +59,8 @@ def get_header_object(id):
     
     :param id: Header _id
     :type id: pymongo.ObjectId instance
+
+    :returns: Header instance
     """
     try:
         header_object = db['header'].find({'_id': id})
@@ -71,8 +75,10 @@ def save_bulk_header(header_list):
 
     :param header_list: List of headers from collection api to be created in bulk
     :type header_list: list
+
     :raises: OperationError, TypeError
-    :return: None
+
+    :returns: None
     """
     if isinstance(header_list, list):
         try:
@@ -89,6 +95,8 @@ def get_header_id(scan_id):
 
     :param scan_id: scan_id for a run header
     :type scan_id: int
+
+    :returns: header_id
     """
     collection = db['header']
     try:
@@ -109,12 +117,16 @@ def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_d
     
     :param scan_id: Consumer specified id for a specific scan
     :type scan_id: int
+
     :param event_type_id: Simple identifier for a given event type. Refer to api documentation for specific event types
     :type event_type_id: int
+
     :param descriptor_name: Name information for a given event
     :type descriptor_name: str
+
     :param type_descriptor: Additional user/data collection define attribute-value pairs
     :type type_descriptor: dict
+
     :param tag: Provides information regarding nature of event
     :type tag: str
 
@@ -142,6 +154,7 @@ def insert_bulk_event(event_list):
 
     :param event_list: List of events to be bulk inserted
     :type event_list: list
+
     :returns: None
     """
     if isinstance(event_list, list):
@@ -159,6 +172,7 @@ def get_event_descriptor_hid_edid(name, s_id):
 
     :param id: Unique identifier for EventDescriptor instance (refers to _id in mongodb schema)
     :type id: int
+
     :returns: header_id and descriptor_id
     """
     header_id = get_header_id(s_id)
@@ -169,39 +183,44 @@ def get_event_descriptor_hid_edid(name, s_id):
     return result['header_id'], result['_id']
 
 
-def list_event_descriptors():
-    #TODO: Check whether anything uses this routine and remove it permanently because it is dangerous!!!!
-    """
-    Grabs all event_descriptor objects. (Currently obsolete and should be removed after testing&evaluation)
-
-    :returns:  pymongo cursor object More on cursors in pymongo documentation.
-    """
-    collection = db['event_descriptor']
-    try:
-        event_descriptors = db.find()
-    except:
-        metadataLogger.logger.warning('EventDescriptors can not be retrieved')
-        raise
-    return event_descriptors
+# def list_event_descriptors():
+#     #TODO: Check whether anything uses this routine and remove it permanently because it is dangerous!!!!
+#     """
+#     Grabs all event_descriptor objects. (Currently obsolete and should be removed after testing&evaluation)
+#
+#     :returns:  pymongo cursor object More on cursors in pymongo documentation.
+#     """
+#     collection = db['event_descriptor']
+#     try:
+#         event_descriptors = db.find()
+#     except:
+#         metadataLogger.logger.warning('EventDescriptors can not be retrieved')
+#         raise
+#     return event_descriptors
 
 
 def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getuser(), seq_no=None,
                  data=dict()):
-    #TODO: Make seq_no required
     """
     Create event entries that record experimental data 
     
     :param descriptor_name: EventDescriptor name that contains info regarding set of events to be saved
     :type descriptor_name: str
+
     :param description: User generated optional string to be used as descriptors
     :type description: str
+
     :param owner: Event owner (default: unix session owner)
     :type owner: str
+
     :param seq_no: specifies the event's place in data sequence within a the event descriptor set
     :type seq_no: int
-    :param data: Data Collection routine defined name-value 
+
+    :param data: Data Collection routine defined name-value
     :type data: dict
+
     :raises: TypeError, OperationFailure, ConnectionFailure
+
     :returns: Event object
     """
     header_id, descriptor_id = get_event_descriptor_hid_edid(descriptor_name, scan_id)
@@ -237,8 +256,10 @@ def update_header_end_time(header_id, end_time):
 
     :param header_id: Hashed unique identifier that specifies an entry into Header collection
     :type header_id: ObjectId instance
+
     :param end_time: Time of header closure
     :type end_time: datetime object
+
     :returns: None
     """
     coll = db['header']
@@ -262,8 +283,11 @@ def update_header_status(header_id, status):
     Updates run header status given header_id and status
 
     :param header_id: Hashed unique identifier that specifies an entry into Header collection
+    :type header_id: ObjectId instance
+
     :param status: Header usage status. In Progress for open header & Complete for closed header
     :type status: str
+
     :return: None
     """
     coll = db['header']
@@ -293,7 +317,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
     If this is not the desired behavour you can call no_cache (version 0.8.3+) to return a non-caching queryset.
 
     **contents=False**, only run_header information is returned.
-    **contents=True** will return beamline_config and events related to given run_header(s)
+    **contents=True** will return beamline_configs, event_descriptors, and events related to given run_header(s)
 
      >>> find(scan_id='last')
      >>> find(scan_id='last', contents=True)
