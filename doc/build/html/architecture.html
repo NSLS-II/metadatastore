@@ -186,9 +186,165 @@ can hold any name-value pair within the given guidelines of python dictionaries 
 </div>
 <div class="section" id="provided-apis">
 <h1>Provided APIs<a class="headerlink" href="#provided-apis" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-metadataStore.userapi.commands">
-<span id="user-api"></span><h2>User API<a class="headerlink" href="#module-metadataStore.userapi.commands" title="Permalink to this headline">¶</a></h2>
+<p>Following is the list of APIs provided:</p>
+<div class="section" id="collection-api">
+<h2>Collection API<a class="headerlink" href="#collection-api" title="Permalink to this headline">¶</a></h2>
+<p>Provides routines for data collection libraries to populate metadataStore</p>
+<span class="target" id="module-metadataStore.collectionapi.commands"></span><dl class="function">
+<dt id="metadataStore.collectionapi.commands.create">
+<tt class="descclassname">metadataStore.collectionapi.commands.</tt><tt class="descname">create</tt><big>(</big><em>header=None</em>, <em>beamline_config=None</em>, <em>event_descriptor=None</em><big>)</big><a class="reference internal" href="_modules/metadataStore/collectionapi/commands.html#create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.collectionapi.commands.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create header, beamline_config, and event_descriptor given dictionaries with appropriate name-value pairs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>header</strong> (<em>dict</em>) &#8211; Header attribute-value pairs</li>
+<li><strong>beamline_config</strong> (<em>dict</em>) &#8211; BeamlineConfig attribute-value pairs</li>
+<li><strong>event_descriptor</strong> (<em>dict</em>) &#8211; EventDescriptor attribute-value pairs</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first">TypeError, ValueError, ConnectionFailure, NotUniqueError</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">beamline_config</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">beamline_config</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">beamline_config</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s">&#39;config_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_beamline_config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s">&#39;config_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">,</span> <span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">beamline_config</span><span class="o">=</span><span class="n">sample_beamline_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="function">
+<dt id="metadataStore.collectionapi.commands.record">
+<tt class="descclassname">metadataStore.collectionapi.commands.</tt><tt class="descname">record</tt><big>(</big><em>event={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/collectionapi/commands.html#record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.collectionapi.commands.record" title="Permalink to this definition">¶</a></dt>
+<dd><p>Events are saved given scan_id and descriptor name and additional optional parameters.</p>
+<p>Required fields: scan_id, descriptor_name</p>
+<p>Optional fields: owner, seq_no, data, description</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>dict</em>) &#8211; Dictionary used in order to save name-value pairs for Event entries</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">ConnectionFailure, NotUniqueError, ValueError</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1344</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;ascan&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1344</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;ascan&#39;</span><span class="p">,</span> <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;seq_no&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="go">              ... &#39;data&#39;:{&#39;motor1&#39;: 13.4, &#39;image1&#39;: &#39;/home/arkilic/sample.tiff&#39;}})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1344</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;ascan&#39;</span><span class="p">,</span> <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;seq_no&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="go">              ... &#39;data&#39;:{&#39;motor1&#39;: 13.4, &#39;image1&#39;: &#39;/home/arkilic/sample.tiff&#39;}},&#39;description&#39;: &#39;Linear scan&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="metadataStore.collectionapi.commands.search">
+<tt class="descclassname">metadataStore.collectionapi.commands.</tt><tt class="descname">search</tt><big>(</big><em>scan_id=None</em>, <em>owner=None</em>, <em>start_time=None</em>, <em>beamline_id=None</em>, <em>end_time=None</em>, <em>data=False</em>, <em>header_id=None</em>, <em>tags=None</em>, <em>num_header=50</em><big>)</big><a class="reference internal" href="_modules/metadataStore/collectionapi/commands.html#search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.collectionapi.commands.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides an easy way to search Header entries inserted in metadataStore</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scan_id</strong> (<em>int</em>) &#8211; Unique identifier for a given run</li>
+<li><strong>owner</strong> (<em>str</em>) &#8211; run header owner(unix user by default)</li>
+<li><strong>start_time</strong> (<em>datetime.datetime object</em>) &#8211; Header creation time</li>
+<li><strong>beamline_id</strong> (<em>str</em>) &#8211; beamline descriptor</li>
+<li><strong>end_time</strong> (<em>datetime.datetime object</em>) &#8211; Header status time</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; data field for collection routines to save experiemental progress</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first">TypeError, OperationError, ValueError</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Dictionary</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;ark*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;arkilic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;ark*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;arkili.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="user-api">
+<h2>User API<a class="headerlink" href="#user-api" title="Permalink to this headline">¶</a></h2>
+<p>Provides routines for data collection libraries to populate metadataStore</p>
+<span class="target" id="module-metadataStore.userapi.commands"></span><dl class="function">
 <dt id="metadataStore.userapi.commands.create">
 <tt class="descclassname">metadataStore.userapi.commands.</tt><tt class="descname">create</tt><big>(</big><em>header=None</em>, <em>beamline_config=None</em>, <em>event_descriptor=None</em><big>)</big><a class="reference internal" href="_modules/metadataStore/userapi/commands.html#create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.userapi.commands.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create header, beamline_config, and event_descriptor</p>
@@ -386,160 +542,6 @@ a dict with &#8220;description&#8221; and &#8220;type&#8221; keys.
 <dt>KeyError</dt>
 <dd>If any of the keys in var_dict are not in target_dict</dd>
 </dl>
-</dd></dl>
-
-</div>
-<div class="section" id="collection-api">
-<h2>Collection API<a class="headerlink" href="#collection-api" title="Permalink to this headline">¶</a></h2>
-<p>Provides routines for data collection libraries to populate metadataStore</p>
-<span class="target" id="module-metadataStore.collectionapi.commands"></span><dl class="function">
-<dt id="metadataStore.collectionapi.commands.create">
-<tt class="descclassname">metadataStore.collectionapi.commands.</tt><tt class="descname">create</tt><big>(</big><em>header=None</em>, <em>beamline_config=None</em>, <em>event_descriptor=None</em><big>)</big><a class="reference internal" href="_modules/metadataStore/collectionapi/commands.html#create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.collectionapi.commands.create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create header, beamline_config, and event_descriptor given dictionaries with appropriate name-value pairs.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>header</strong> (<em>dict</em>) &#8211; Header attribute-value pairs</li>
-<li><strong>beamline_config</strong> (<em>dict</em>) &#8211; BeamlineConfig attribute-value pairs</li>
-<li><strong>event_descriptor</strong> (<em>dict</em>) &#8211; EventDescriptor attribute-value pairs</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first">TypeError, ValueError, ConnectionFailure, NotUniqueError</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">beamline_config</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">beamline_config</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">beamline_config</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s">&#39;config_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_beamline_config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s">&#39;config_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}}</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">,</span> <span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">beamline_config</span><span class="o">=</span><span class="n">sample_beamline_config</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="metadataStore.collectionapi.commands.record">
-<tt class="descclassname">metadataStore.collectionapi.commands.</tt><tt class="descname">record</tt><big>(</big><em>event={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/collectionapi/commands.html#record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.collectionapi.commands.record" title="Permalink to this definition">¶</a></dt>
-<dd><p>Events are saved given scan_id and descriptor name and additional optional parameters.</p>
-<p>Required fields: scan_id, descriptor_name</p>
-<p>Optional fields: owner, seq_no, data, description</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>dict</em>) &#8211; Dictionary used in order to save name-value pairs for Event entries</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">ConnectionFailure, NotUniqueError, ValueError</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-<p>Usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1344</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;ascan&#39;</span><span class="p">})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1344</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;ascan&#39;</span><span class="p">,</span> <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;seq_no&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="go">              ... &#39;data&#39;:{&#39;motor1&#39;: 13.4, &#39;image1&#39;: &#39;/home/arkilic/sample.tiff&#39;}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1344</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;ascan&#39;</span><span class="p">,</span> <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;seq_no&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="go">              ... &#39;data&#39;:{&#39;motor1&#39;: 13.4, &#39;image1&#39;: &#39;/home/arkilic/sample.tiff&#39;}},&#39;description&#39;: &#39;Linear scan&#39;)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="metadataStore.collectionapi.commands.search">
-<tt class="descclassname">metadataStore.collectionapi.commands.</tt><tt class="descname">search</tt><big>(</big><em>scan_id=None</em>, <em>owner=None</em>, <em>start_time=None</em>, <em>beamline_id=None</em>, <em>end_time=None</em>, <em>data=False</em>, <em>header_id=None</em>, <em>tags=None</em>, <em>num_header=50</em><big>)</big><a class="reference internal" href="_modules/metadataStore/collectionapi/commands.html#search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.collectionapi.commands.search" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provides an easy way to search Header entries inserted in metadataStore</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>scan_id</strong> (<em>int</em>) &#8211; Unique identifier for a given run</li>
-<li><strong>owner</strong> (<em>str</em>) &#8211; run header owner(unix user by default)</li>
-<li><strong>start_time</strong> (<em>datetime.datetime object</em>) &#8211; Header creation time</li>
-<li><strong>beamline_id</strong> (<em>str</em>) &#8211; beamline descriptor</li>
-<li><strong>end_time</strong> (<em>datetime.datetime object</em>) &#8211; Header status time</li>
-<li><strong>data</strong> (<em>dict</em>) &#8211; data field for collection routines to save experiemental progress</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first">TypeError, OperationError, ValueError</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Dictionary</p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;ark*&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;arkilic&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;ark*&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="p">(</span><span class="n">scan_id</span><span class="o">=</span><span class="n">s_id</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">owner</span><span class="o">=</span><span class="s">&#39;arkili.&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </div>
@@ -745,7 +747,7 @@ EventDescriptor instances serve as headers for a given set of events that hold m
 
 <dl class="function">
 <dt id="metadataStore.dataapi.commands.save_header">
-<tt class="descclassname">metadataStore.dataapi.commands.</tt><tt class="descname">save_header</tt><big>(</big><em>scan_id</em>, <em>header_owner='arkilic'</em>, <em>start_time=datetime.datetime(2014</em>, <em>9</em>, <em>17</em>, <em>20</em>, <em>5</em>, <em>47</em>, <em>798646)</em>, <em>beamline_id=None</em>, <em>header_versions=[]</em>, <em>status='In Progress'</em>, <em>tags=[]</em>, <em>custom={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/dataapi/commands.html#save_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.dataapi.commands.save_header" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">metadataStore.dataapi.commands.</tt><tt class="descname">save_header</tt><big>(</big><em>scan_id</em>, <em>header_owner='arkilic'</em>, <em>start_time=datetime.datetime(2014</em>, <em>9</em>, <em>17</em>, <em>20</em>, <em>36</em>, <em>28</em>, <em>922579)</em>, <em>beamline_id=None</em>, <em>header_versions=[]</em>, <em>status='In Progress'</em>, <em>tags=[]</em>, <em>custom={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/dataapi/commands.html#save_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.dataapi.commands.save_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves a run header that serves as a container for even descriptors, beamline configurations, and events. Please see
 Introduction section for return document structure</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -950,8 +952,8 @@ False: Compare strings without casting to lowercase</dd>
 </ul>
 </li>
 <li><a class="reference internal" href="#provided-apis">Provided APIs</a><ul>
-<li><a class="reference internal" href="#module-metadataStore.userapi.commands">User API</a></li>
 <li><a class="reference internal" href="#collection-api">Collection API</a></li>
+<li><a class="reference internal" href="#user-api">User API</a></li>
 <li><a class="reference internal" href="#data-api">Data API</a></li>
 <li><a class="reference internal" href="#module-metadataStore.utilities.utility">Utiliy Library</a></li>
 </ul>

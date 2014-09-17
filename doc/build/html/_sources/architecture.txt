@@ -37,13 +37,7 @@ BeamlineConfig
 Provided APIs
 ===================================
 
-
-User API
-----------------------------------
-
-.. automodule:: metadataStore.userapi.commands
-   :members:
-
+Following is the list of APIs provided:
 
 Collection API
 --------------------------------------
@@ -51,6 +45,15 @@ Collection API
 Provides routines for data collection libraries to populate metadataStore
 
 .. automodule:: metadataStore.collectionapi.commands
+   :members:
+
+
+User API
+-------------------------------------
+
+Provides routines for data collection libraries to populate metadataStore
+
+.. automodule:: metadataStore.userapi.commands
    :members:
 
 
