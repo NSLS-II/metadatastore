@@ -33,7 +33,7 @@ Python(version 2.7.X), pymongo (version 2.6+), six, Distutils, Git
 Installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If a MongoDb
+.. automodule:::: ../../metadataStore/dataapi/commands.py
 
 
 MongoDb Installation
