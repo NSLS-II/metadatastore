@@ -5,6 +5,27 @@ from metadataStore.dataapi.commands import save_header, save_beamline_config, in
 from metadataStore.dataapi.commands import save_bulk_header
 from metadataStore.dataapi.commands import find, get_event_descriptor_hid_edid, db
 
+"""
+    Return the calibration dictionary that is saved in the run_header
+
+    Parameters
+    ----------
+    run_header : dict
+        Run header to convert events to lists. Can only be one header.
+
+    Returns
+    -------
+    dict
+        Dictionary that contains all information inside the run_header's
+        beamline_config key. If there are multiple 'configs' then the return
+        value is a nested dictionary keyed on config_# for the number of config
+        dicts
+    bool
+        True: Multiple 'config' sections were present, dict is a nested dict
+        False: One 'config' section was present, dict is not a nested dict
+"""
+
+
 
 def create(header=None, beamline_config=None, event_descriptor=None):
     """
