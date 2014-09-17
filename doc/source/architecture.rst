@@ -59,7 +59,10 @@ Data API
 
 Includes the raw commands. Developers/expert users can create a set of new behaviors using this module.
 
-.. automodule:: metadataStore.dataapi.commands
+.. automodule:: dataapi.commands
+   :members:
+
+.. autofunction:: metadataStore.dataapi.commands.search()
    :members:
 
 Utiliy Library

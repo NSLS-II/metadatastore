@@ -157,23 +157,29 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
 def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(), description=None):
     """
-        Return the calibration dictionary that is saved in the run_header
+    Events are saved given scan_id and descriptor name and additional optional parameters
 
-        Parameters
-        ----------
-        run_header : dict
-            Run header to convert events to lists. Can only be one header.
+    :param scan_id: Unique run identifier
+    :type scan_id: int, required
+    :param descriptor_name: EventDescriptor that serves as an Event header
+    :type descriptor_name: str, required
+    :param seq_no: Data point sequence number
+    :type seq_no: int, required
+    :param owner: Run owner(default: unix session owner)
+    :type owner: str, optional
+    :param data: Serves as an experimental data storage structure
+    :type data: dict, optional
+    :param description: Provides user specified text to describe a given event
+    :type description: str, optional
+    :raises: ConnectionFailure, NotUniqueError, ValueError
 
-        Returns
-        -------
-        dict
-            Dictionary that contains all information inside the run_header's
-            beamline_config key. If there are multiple 'configs' then the return
-            value is a nested dictionary keyed on config_# for the number of config
-            dicts
-        bool
-            True: Multiple 'config' sections were present, dict is a nested dict
-            False: One 'config' section was present, dict is not a nested dict
+    >>> record(scan_id=135, descriptor_name='some_scan', seq_no=0)
+    >>> record(scan_id=135, descriptor_name='some_scan', seq_no=1, owner='arkilic')
+
+    >>> record(scan_id=135, descriptor_name='some_scan', seq_no=2, data={'name': 'value'})
+
+    >>> record(scan_id=135, descriptor_name='some_scan', seq_no=2, data={'name': 'value'},
+           ... description='some entry')
     """
 
     try:
