@@ -8,6 +8,9 @@ Welcome to metadataStore's documentation!
 
 Contents:
 
+.. image:: black-and-white-dog-md.png
+
+
 .. toctree::
    :maxdepth: 2
    

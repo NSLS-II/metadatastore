@@ -57,3 +57,5 @@ print a['headers'][0:3]
 print a['event_descriptors'][0:3]
 print a['descriptor_fields'][0:3]
 # print a['event_descriptors'][0]['event_descriptor_0'].keys()
+
+print query_c['header_0']

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Overview &mdash; metadataStore .1 documentation</title>
+    <title>metadataStore &mdash; metadataStore .1 documentation</title>
     
     <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -59,8 +59,9 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+  <img alt="_images/black-and-white-dog-md.png" src="_images/black-and-white-dog-md.png" />
+<div class="section" id="metadatastore">
+<h1>metadataStore<a class="headerlink" href="#metadatastore" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <p>Advanced techniques for a new generation of hardware will drive higher data rates for experiments at NSLS2 beamlines.
@@ -87,18 +88,39 @@ operations.</p>
 </div>
 <div class="section" id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
-<p>Install MongoDB on Debian:
-Step 1:</p>
-<p>sudo apt-key adv &#8211;keyserver keyserver.ubuntu.com &#8211;recv 7F0CEB10</p>
-<p>Step 2:</p>
-<p>sudo apt-key adv &#8211;keyserver keyserver.ubuntu.com &#8211;recv 7F0CEB10</p>
-<p>Step 3:</p>
-<p>sudo apt-get update</p>
+<p>If a MongoDb</p>
+<div class="section" id="mongodb-installation">
+<h4>MongoDb Installation<a class="headerlink" href="#mongodb-installation" title="Permalink to this headline">¶</a></h4>
+<p><em>Step 1</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+</pre></div>
+</div>
+<p><em>Step 2</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+</pre></div>
+</div>
+<p><em>Step 3</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-get update
+</pre></div>
+</div>
+<p><em>Step 4</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-get install -y mongodb-org
+</pre></div>
+</div>
+<p><em>Step 5</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-get install -y mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1mongodb-org-tools=2.6.1
+</pre></div>
+</div>
+</div>
+<div class="section" id="metadatastore-installation">
+<h4>metadataStore Installation<a class="headerlink" href="#metadatastore-installation" title="Permalink to this headline">¶</a></h4>
+<p><em>Step 1</em>:</p>
 <p>metadataStore is available via git repository: <a class="reference external" href="https://github.com/arkilic/metadataStore">https://github.com/arkilic/metadataStore</a></p>
 <p>Clone this repository:</p>
 <div class="highlight-python"><div class="highlight"><pre>%git clone https://github.com/arkilic/metadataStore
 </pre></div>
 </div>
+<p><em>Step 2</em>:</p>
 <p>metadataStore includes a setup.py script. Distutils, building and installing a module distribution using the Distutils
 is one simple command to run from a terminal:</p>
 <div class="highlight-python"><div class="highlight"><pre>% python setup.py install
@@ -110,12 +132,62 @@ is one simple command to run from a terminal:</p>
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="getting-help">
 <h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
-<p>Python Docs and contact information</p>
+<p>metadataStore can be embedded within other applications or used interactively. If used within IPython, &#8216;help&#8217; keyword provides information regarding routines:</p>
+<div class="highlight-python"><div class="highlight"><pre>% from metadataStore.userapi.commands import search
+% help(search)
+% search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False, header_id=None, tags=None, num_header=50)
+%
+% Provides an easy way to search Header entries inserted in metadataStore
+% Usage:
+%   search(scan_id=s_id)
+%   search(scan_id=s_id, owner=&#39;ark*&#39;)
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5))
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner=&#39;arkilic&#39;)
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner=&#39;ark*&#39;)
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner=&#39;arkili.&#39;)
+</pre></div>
+</div>
 </div>
 <div class="section" id="schema">
 <h2>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h2>
+<p>Explanation goes here!</p>
+<p><em>Header Format</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>%{&#39;status&#39;: &#39;In Progress&#39;,
+% &#39;beamline_id&#39;: None,
+% &#39;tags&#39;: [&#39;CSX_Experiment1&#39;, &#39;CSX_Experiment2&#39;],
+% &#39;start_time&#39;: datetime.datetime(2014, 9, 16, 13, 7, 58, 299000),
+% &#39;scan_id&#39;: 3315, &#39;custom&#39;: {},
+% &#39;event_descriptors&#39;: {&#39;event_descriptor_0&#39;: {&#39;data_keys&#39;: [&#39;motor5&#39;, &#39;motor4&#39;, &#39;motor3&#39;, &#39;list_of_1k&#39;, &#39;motor1&#39;, &#39;motor2&#39;],
+%                                              &#39;tag&#39;: &#39;experimental&#39;, &#39;descriptor_name&#39;: &#39;scan&#39;,
+%                                              &#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                                              &#39;event_type_id&#39;: 12, &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0a&#39;),
+%                                              &#39;events&#39;: {
+%                                                         &#39;event_0&#39;: {&#39;descriptor_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0a&#39;),
+%                                                                     &#39;description&#39;: None,
+%                                                                     &#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                                                                     &#39;seq_no&#39;: 3,
+%                                                                     &#39;owner&#39;: &#39;arkilic&#39;,
+%                                                                     &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0c&#39;),
+%                                                                     &#39;data&#39;: {u&#39;motor5&#39;: 36, u&#39;motor4&#39;: 71, u&#39;motor3&#39;: 55, u&#39;list_of_1k&#39;: [12.3, 34.5, 45.3], u&#39;motor1&#39;: 44, u&#39;motor2&#39;: 35}},
+%                                                         &#39;event_1&#39;: {&#39;descriptor_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0a&#39;),
+%                                                                     &#39;description&#39;: None,
+%                                                                     &#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                                                                     &#39;seq_no&#39;: 1,
+%                                                                     &#39;owner&#39;: u&#39;arkilic&#39;,
+%                                                                     &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0b&#39;),
+%                                                                     &#39;data&#39;: {}}}, u&#39;type_descriptor&#39;: {}}},
+% &#39;end_time&#39;: datetime.datetime(2014, 9, 16, 13, 7, 58, 299000),
+% &#39;owner&#39;: u&#39;arkilic&#39;,
+% &#39;configs&#39;: {&#39;config_0&#39;: {&#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                          &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d09&#39;),
+%                          &#39;config_params&#39;: {}}},
+%                          &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+% &#39;header_versions&#39;: []}
+</pre></div>
+</div>
 </div>
 <div class="section" id="tutorial">
 <h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
@@ -135,12 +207,16 @@ is one simple command to run from a terminal:</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Overview</a><ul>
+<li><a class="reference internal" href="#">metadataStore</a><ul>
 <li><a class="reference internal" href="#purpose">Purpose</a></li>
 <li><a class="reference internal" href="#technology">Technology</a></li>
 <li><a class="reference internal" href="#downloading-installing">Downloading/Installing</a><ul>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
-<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#mongodb-installation">MongoDb Installation</a></li>
+<li><a class="reference internal" href="#metadatastore-installation">metadataStore Installation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#getting-help">Getting Help</a></li>
