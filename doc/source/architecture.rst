@@ -30,24 +30,40 @@ Event
 BeamlineConfig
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: metadataStore.database.collections.Beam
+.. autoclass:: metadataStore.database.collections.BeamlineConfig
    :members: __init__
 
 
+Provided APIs
+===================================
 
 
-dataapi.commands()
-----------------------------------
-
-Includes the raw commands. Developers/expert users can create a set of new behaviors using this module. 
-
-.. automodule:: metadataStore.dataapi.commands 
-   :members:
-
-
-
-userapi.commands()
+User API
 ----------------------------------
 
 .. automodule:: metadataStore.userapi.commands
+   :members:
+
+
+Collection API
+--------------------------------------
+
+Provides routines for data collection libraries to populate metadataStore
+
+.. automodule:: metadataStore.collectionapi.commands
+   :members:
+
+
+Data API
+----------------------------------
+
+Includes the raw commands. Developers/expert users can create a set of new behaviors using this module.
+
+.. automodule:: metadataStore.dataapi.commands
+   :members:
+
+Utiliy Library
+-----------------------------------
+
+.. automodule:: metadataStore.utilities.utility
    :members:

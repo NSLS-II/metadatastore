@@ -22,7 +22,6 @@ data_dict = {'list_of_1k': some_list, 'motor1': random.randint(0, 90), 'motor2':
 record(scan_id=s_id, descriptor_name='scan', seq_no=1)
 record(scan_id=s_id, descriptor_name='scan', seq_no=3, data=data_dict)
 
-
 # for i in xrange(100):
 #     s_id = random.randint(0, 10000000)
 #     create(header={'scan_id': s_id})

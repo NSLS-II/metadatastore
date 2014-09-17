@@ -1,4 +1,4 @@
-__author__ = ['arkilic', 'edill']
+__author__ = ['arkilic', 'dill']
 import getpass
 import datetime
 import six
@@ -21,22 +21,15 @@ def create(header=None, beamline_config=None, event_descriptor=None):
     """
     Create header, beamline_config, and event_descriptor
 
-    Parameters
-    ----------
     :param header: Header attribute-value pairs
     :type header: dict
-
     :param beamline_config: BeamlineConfig attribute-value pairs
     :type beamline_config: dict
-
     :param event_descriptor: EventDescriptor attribute-value pairs
     :type event_descriptor: dict
-
     :raises: TypeError, ValueError, ConnectionFailure, NotUniqueError
-
     :returns: None
 
-    Usage:
 
     >>> sample_header = {'scan_id': 1234}
     >>> create(header=sample_header)
@@ -166,31 +159,21 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
     """
     Events are saved given scan_id and descriptor name and additional optional parameters
 
-    Parameters
-    ----------
     :param scan_id: Unique run identifier
     :type scan_id: int, required
-
     :param descriptor_name: EventDescriptor that serves as an Event header
     :type descriptor_name: str, required
-
     :param seq_no: Data point sequence number
     :type seq_no: int, required
-
     :param owner: Run owner(default: unix session owner)
     :type owner: str, optional
-
     :param data: Serves as an experimental data storage structure
     :type data: dict, optional
-
     :param description: Provides user specified text to describe a given event
     :type description: str, optional
-
     :raises: ConnectionFailure, NotUniqueError, ValueError
 
-    Usage:
     >>> record(scan_id=135, descriptor_name='some_scan', seq_no=0)
-
     >>> record(scan_id=135, descriptor_name='some_scan', seq_no=1, owner='arkilic')
 
     >>> record(scan_id=135, descriptor_name='some_scan', seq_no=2, data={'name': 'value'})
@@ -287,19 +270,19 @@ def validate(var_dict, target_dict):
 
     Parameters
     ----------
-    var_dict : dict
-        Dictionary whose keys are in target_dict and whose values are to be
-        type checked against the "type" field in the target_dict. None values
-        cannot be typechecked and are thus added to the return_dict as None.
-    target_dict : dict
-        Dictionary whose keys are input parameter names and whose value is
-        a dict with "description" and "type" keys.
+    :param var_dict : Dictionary whose keys are in target_dict and whose values are to be
+    type checked against the "type" field in the target_dict. None values
+    cannot be typechecked and are thus added to the return_dict as None.
+    :type var_dict: dict
 
-    Returns
-    -------
-    dict
-        Validated dictionary whose keys are all in target_dict and whose
-        values are correctly typed or None
+    :param target_dict : Dictionary whose keys are input parameter names and whose value is
+    a dict with "description" and "type" keys.
+    :type target_dict: dict
+
+    :returns: Validated dictionary whose keys are all in target_dict and whose
+    values are correctly typed or None
+    :rtype: dict
+
 
     Raises
     ------

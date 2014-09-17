@@ -307,7 +307,6 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
      >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
      >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
     """
-    supported_wildcard = ['*', '.', '?', '/', '^']
     query_dict = dict()
     try:
         coll = db['header']
@@ -344,12 +343,10 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
         if header_id is not None:
             query_dict['_id'] = ObjectId(header_id)
         if owner is not None:
-            for entry in supported_wildcard:
-                    if entry in owner:
-                        query_dict['owner'] = {'$regex': re.compile(owner, re.IGNORECASE)}
-                        break
-                    else:
-                        query_dict['owner'] = owner
+            if "*" in owner:
+                query_dict['owner'] = {'$regex': "^" + owner.replace("*", ".*"), '$options': 'i'}
+            else:
+                query_dict['owner'] = owner
         if scan_id is not None:
             if isinstance(scan_id, int):
                 query_dict['scan_id'] = scan_id
@@ -363,7 +360,7 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
                         __validate_time([time_entry])
                     query_dict['start_time'] = {'$in': start_time}
                 elif isinstance(start_time, dict):
-                    __validate_time([start_time['start'],start_time['end']])
+                    __validate_time([start_time['start'], start_time['end']])
                     query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
                 else:
                     if __validate_time([start_time]):

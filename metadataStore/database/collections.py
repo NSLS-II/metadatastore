@@ -108,12 +108,12 @@ class EventDescriptor(object):
 
 
 class Event(object):
-    def __init__(self, header_id, event_descriptor_id, seq_no, owner=getpass.getuser(), description=None, data=dict()):
+    def __init__(self, header_id, descriptor_id, seq_no, owner=getpass.getuser(), description=None, data=dict()):
         """
         Constructor
-        :param even_descriptor_id: foreign key pointing back to event_descriptor
+        :param descriptor_id: foreign key pointing back to event_descriptor
 
-        :type event_descriptor_id: integer
+        :type descriptor_id: integer
 
         :param description: User generated text field
 
@@ -134,7 +134,7 @@ class Event(object):
         :returns: None
         """
         self.header_id = header_id
-        self.event_descriptor_id = event_descriptor_id
+        self.descriptor_id = descriptor_id
         self.seq_no = validate_int(seq_no)
         self.owner = validate_string(owner)
         self.description = validate_string(description)
@@ -143,7 +143,7 @@ class Event(object):
     def __compose_document(self):
         document_template = dict()
         document_template['header_id'] = self.header_id
-        document_template['event_descriptor_id'] = self.event_descriptor_id
+        document_template['descriptor_id'] = self.descriptor_id
         document_template['seq_no'] = self.seq_no
         document_template['owner'] = self.owner
         document_template['description'] = self.description
@@ -153,22 +153,22 @@ class Event(object):
     def save(self, **kwargs):
         composed_dict = self.__compose_document()
         _id = db['event'].insert(composed_dict, **kwargs)
-        db['event'].ensure_index([('event_descriptor_id', -1), ('header_id', 1), ('data', -1)])
+        db['event'].ensure_index([('descriptor_id', -1), ('header_id', 1), ('data', -1)])
         return _id
 
 
 class BeamlineConfig(object):
     def __init__(self, header_id, config_params=dict()):
         """
+        BeamlineConfig is reserved for holding beamline specific calibration/experiment information. config_params field
+        can hold any name-value pair within the given guidelines of python dictionaries and mongodb python driver
+
         :param beamline_id: beamline descriptor
         :type beamline_id: string
-
         :param header_id: foreign key pointing back to header
         :type header_id: integer
-
         :param config_params: configuration parameter name-value container
         :type config_params: dictionary
-
         """
         self.header_id = header_id
         self.config_params = validate_dict(config_params)
