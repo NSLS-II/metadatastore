@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview &mdash; metadataStore .1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="metadataStore .1 documentation" href="index.html" />
+    <link rel="next" title="Library Reference" href="architecture.html" />
+    <link rel="prev" title="Welcome to metadataStore’s documentation!" href="index.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="architecture.html" title="Library Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to metadataStore’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">metadataStore .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Advanced techniques for a new generation of hardware will drive higher data rates for experiments at NSLS2 beamlines.
+The large data volumes and data acquisition rates require high-performance logging and storage systems.
+A typical experiment involves not only the raw data from detectors, but also requires additional data from the beamline
+such as experiment owner, beamline_id, energy, motor positions, wavelength, etc… To date, this information is largely
+held separately  and manipulated individually. metadataStore is a service that is used in order to record this sort of
+metadata in beamline experiments. It is designed and implemented  with the needs of various experiments in mind,
+therefore it is flexible enough to satisfy the needs of different experimental setups.</p>
+<p>metadataStore can be used independently or embedded with the dataBroker, which utilizes an integrated approach that
+integrates different data resources and makes these data resources available for data analysis clients.</p>
+</div>
+<div class="section" id="technology">
+<h2>Technology<a class="headerlink" href="#technology" title="Permalink to this headline">¶</a></h2>
+<p>metadataStore backend database is mongoDb, a No-SQL database that was chosen due to its performance and flexibility.
+Python(v 2.7) is chosen as language of implementation. mongoDb Python driver(pymongo) is used to perform database related
+operations.</p>
+</div>
+<div class="section" id="downloading-installing">
+<h2>Downloading/Installing<a class="headerlink" href="#downloading-installing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<p>Python(version 2.7.X), pymongo (version 2.6+), six, Distutils, Git</p>
+</div>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>Install MongoDB on Debian:
+Step 1:</p>
+<p>sudo apt-key adv &#8211;keyserver keyserver.ubuntu.com &#8211;recv 7F0CEB10</p>
+<p>Step 2:</p>
+<p>sudo apt-key adv &#8211;keyserver keyserver.ubuntu.com &#8211;recv 7F0CEB10</p>
+<p>Step 3:</p>
+<p>sudo apt-get update</p>
+<p>metadataStore is available via git repository: <a class="reference external" href="https://github.com/arkilic/metadataStore">https://github.com/arkilic/metadataStore</a></p>
+<p>Clone this repository:</p>
+<div class="highlight-python"><div class="highlight"><pre>%git clone https://github.com/arkilic/metadataStore
+</pre></div>
+</div>
+<p>metadataStore includes a setup.py script. Distutils, building and installing a module distribution using the Distutils
+is one simple command to run from a terminal:</p>
+<div class="highlight-python"><div class="highlight"><pre>% python setup.py install
+</pre></div>
+</div>
+<p>If user does not have sudo access to the machine and/or does not want to install this package for all users:</p>
+<div class="highlight-python"><div class="highlight"><pre>% python setup.py install --user
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>Python Docs and contact information</p>
+</div>
+<div class="section" id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<p>Start here for a quick overview</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Examples of how to perform specific tasks</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Overview</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#technology">Technology</a></li>
+<li><a class="reference internal" href="#downloading-installing">Downloading/Installing</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li><a class="reference internal" href="#schema">Schema</a></li>
+<li><a class="reference internal" href="#tutorial">Tutorial</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to metadataStore&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="architecture.html"
+                        title="next chapter">Library Reference</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="architecture.html" title="Library Reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to metadataStore’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">metadataStore .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arman Arkilic.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
