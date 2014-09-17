@@ -381,7 +381,6 @@ def search(owner=None, start_time=None, end_time=None, tags=None, scan_id=None, 
         if val is not None:
             search_dict[name] = val
     # validate the search dictionary
-    print search_keys_dict
     search_dict = validate(search_dict, search_keys_dict)
 
     # log the search dictionary as info
