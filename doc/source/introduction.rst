@@ -30,9 +30,23 @@ Python(version 2.7.X), pymongo (version 2.6+), six, Distutils, Git
 
 Installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Install MongoDB on Debian:
+Step 1::
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+
+Step 2::
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+
+Step 3::
+
+sudo apt-get update
+
 metadataStore is available via git repository: https://github.com/arkilic/metadataStore
 
-You clone this repository::
+Clone this repository::
 
 %git clone https://github.com/arkilic/metadataStore
 
