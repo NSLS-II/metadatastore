@@ -8,7 +8,7 @@
     
     <title>Library Reference &mdash; metadataStore .1 documentation</title>
     
-    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,17 +24,10 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="metadataStore .1 documentation" href="index.html" />
-    <link rel="next" title="User API" href="tutorial.html" />
-    <link rel="prev" title="metadataStore" href="introduction.html" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<!--[if lte IE 6]>
-<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
-<![endif]-->
-
+    <link rel="next" title="Tutorials" href="tutorial.html" />
+    <link rel="prev" title="Overview" href="introduction.html" /> 
   </head>
   <body>
-
     <div class="related">
       <h3>Navigation</h3>
       <ul>
@@ -45,10 +38,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial.html" title="User API"
+          <a href="tutorial.html" title="Tutorials"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="metadataStore"
+          <a href="introduction.html" title="Overview"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">metadataStore .1 documentation</a> &raquo;</li> 
       </ul>
@@ -84,6 +77,7 @@
 <li><strong>scan_id</strong> (<em>str or int</em>) &#8211; unique identifier describing a given run</li>
 <li><strong>beamline_id</strong> (<em>string</em>) &#8211; descriptor for beamline</li>
 <li><strong>custom</strong> (<em>dictionary</em>) &#8211; dictionary field for custom information</li>
+<li><strong>header_versions</strong> (<em>list</em>) &#8211; Keeps track of header version</li>
 </ul>
 </td>
 </tr>
@@ -183,10 +177,6 @@ can hold any name-value pair within the given guidelines of python dictionaries 
 
 </div>
 </div>
-</div>
-<div class="section" id="provided-apis">
-<h1>Provided APIs<a class="headerlink" href="#provided-apis" title="Permalink to this headline">¶</a></h1>
-<p>Following is the list of APIs provided:</p>
 <div class="section" id="collection-api">
 <h2>Collection API<a class="headerlink" href="#collection-api" title="Permalink to this headline">¶</a></h2>
 <p>Provides routines for data collection libraries to populate metadataStore</p>
@@ -747,7 +737,7 @@ EventDescriptor instances serve as headers for a given set of events that hold m
 
 <dl class="function">
 <dt id="metadataStore.dataapi.commands.save_header">
-<tt class="descclassname">metadataStore.dataapi.commands.</tt><tt class="descname">save_header</tt><big>(</big><em>scan_id</em>, <em>header_owner='arkilic'</em>, <em>start_time=datetime.datetime(2014</em>, <em>9</em>, <em>17</em>, <em>20</em>, <em>36</em>, <em>28</em>, <em>922579)</em>, <em>beamline_id=None</em>, <em>header_versions=[]</em>, <em>status='In Progress'</em>, <em>tags=[]</em>, <em>custom={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/dataapi/commands.html#save_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.dataapi.commands.save_header" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">metadataStore.dataapi.commands.</tt><tt class="descname">save_header</tt><big>(</big><em>scan_id</em>, <em>header_owner='arkilic'</em>, <em>start_time=datetime.datetime(2014</em>, <em>9</em>, <em>19</em>, <em>15</em>, <em>17</em>, <em>51</em>, <em>787443)</em>, <em>beamline_id=None</em>, <em>header_versions=[]</em>, <em>status='In Progress'</em>, <em>tags=[]</em>, <em>custom={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/dataapi/commands.html#save_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.dataapi.commands.save_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves a run header that serves as a container for even descriptors, beamline configurations, and events. Please see
 Introduction section for return document structure</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -949,9 +939,6 @@ False: Compare strings without casting to lowercase</dd>
 <li><a class="reference internal" href="#beamlineconfig">BeamlineConfig</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="reference internal" href="#provided-apis">Provided APIs</a><ul>
 <li><a class="reference internal" href="#collection-api">Collection API</a></li>
 <li><a class="reference internal" href="#user-api">User API</a></li>
 <li><a class="reference internal" href="#data-api">Data API</a></li>
@@ -962,10 +949,15 @@ False: Compare strings without casting to lowercase</dd>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="introduction.html"
-                        title="previous chapter">metadataStore</a></p>
+                        title="previous chapter">Overview</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorial.html"
-                        title="next chapter">User API</a></p>
+                        title="next chapter">Tutorials</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/architecture.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -993,10 +985,10 @@ False: Compare strings without casting to lowercase</dd>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial.html" title="User API"
+          <a href="tutorial.html" title="Tutorials"
              >next</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="metadataStore"
+          <a href="introduction.html" title="Overview"
              >previous</a> |</li>
         <li><a href="index.html">metadataStore .1 documentation</a> &raquo;</li> 
       </ul>

@@ -34,10 +34,6 @@ BeamlineConfig
    :members: __init__
 
 
-Provided APIs
-===================================
-
-Following is the list of APIs provided:
 
 Collection API
 --------------------------------------
@@ -71,3 +67,5 @@ Utiliy Library
 
 .. automodule:: metadataStore.utilities.utility
    :members:
+
+

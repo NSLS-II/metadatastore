@@ -3,23 +3,31 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to metadataStore's documentation!
+metadataStore User Guide
 =========================================
 
 
-.. image:: black-and-white-dog-md.png
+Contact Information
+---------------------------
 
+**author:** *Arman Arkilic*
 
-Contents:
+**contact:** arkilic@bnl.gov
+
+.. _arkilic@bnl.gov:: arkilic@bnl.gov
+
+*Brookhaven National Laboratory*
+
+*National Synchrotron Light Source-II*
+
 
 .. toctree::
    :maxdepth: 2
-   
+
    introduction.rst
    architecture.rst
    tutorial.rst
-
-
+   vistrails.rst
 
 Indices and tables
 ==================

@@ -15,17 +15,28 @@ class Header(object):
                  end_time=None, tags=list(), custom=dict()):
         """
         :param start_time: run header initialization timestamp
+
         :type start_time: datetime object
+
         :param end_time: run header close timestamp
         :type  end_time: datetime object
+
         :param owner: data collection or system defined user info
         :type owner: string
+
         :param scan_id: unique identifier describing a given run
         :type scan_id: str or int
+
         :param beamline_id: descriptor for beamline
         :type beamline_id: string
+
         :param custom: dictionary field for custom information
         :type custom: dictionary
+
+        :param header_versions: Keeps track of header version
+        :type header_versions: list
+
+
         """
         self.start_time = validate_start_time(start_time)
         self.end_time = validate_end_time(end_time)
