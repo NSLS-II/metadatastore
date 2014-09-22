@@ -6,6 +6,10 @@
 metadataStore User Guide
 =========================================
 
+.. image:: black-and-white-dog-md.png
+   :width: 100
+   :height: 100
+
 
 Contact Information
 ---------------------------
@@ -20,6 +24,10 @@ Contact Information
 
 *National Synchrotron Light Source-II*
 
+
+
+Contents
+----------------------------
 
 .. toctree::
    :maxdepth: 2

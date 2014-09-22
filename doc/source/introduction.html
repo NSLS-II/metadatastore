@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title></title>
+<style type="text/css">
+
+/*
+:Author: Arman Arkilic (arkilic@bnl.gov)
+:Id: $Id: html4css1.css 7614 2013-02-21 15:55:51Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document">
+
+
+<img alt="black-and-white-dog-md.png" src="black-and-white-dog-md.png" />
+<div class="section" id="introduction">
+<h1>Introduction</h1>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/Users/arkilic/projects/metadataStore/doc/source/introduction.rst</tt>, line 6)</p>
+<p>Unknown directive type &quot;codeauthor&quot;.</p>
+<pre class="literal-block">
+.. codeauthor:: Arman Arkilic arkilic&#64;bnl.gov
+
+
+</pre>
+</div>
+<div class="section" id="purpose">
+<h2>Purpose</h2>
+<p>Advanced techniques for a new generation of hardware will drive higher data rates for experiments at NSLS2 beamlines.
+The large data volumes and data acquisition rates require high-performance logging and storage systems.
+A typical experiment involves not only the raw data from detectors, but also requires additional data from the beamline
+such as experiment owner, beamline_id, energy, motor positions, wavelength, etc… To date, this information is largely
+held separately  and manipulated individually. metadataStore is a service that is used in order to record this sort of
+metadata in beamline experiments. It is designed and implemented  with the needs of various experiments in mind,
+therefore it is flexible enough to satisfy the needs of different experimental setups.</p>
+<p>metadataStore can be used independently or embedded with the dataBroker, which utilizes an integrated approach that
+integrates different data resources and makes these data resources available for data analysis clients.</p>
+</div>
+<div class="section" id="technology">
+<h2>Technology</h2>
+<p>metadataStore backend database is mongoDb, a No-SQL database that was chosen due to its performance and flexibility.
+Python(v 2.7) is chosen as language of implementation. mongoDb Python driver(pymongo) is used to perform database related
+operations.</p>
+</div>
+<div class="section" id="downloading-installing">
+<h2>Downloading/Installing</h2>
+<div class="section" id="requirements">
+<h3>Requirements</h3>
+<p>Python(version 2.7.X), pymongo (version 2.6+), six, Distutils, Git</p>
+</div>
+<div class="section" id="installation">
+<h3>Installation</h3>
+<!-- automodule:::: ../../metadataStore/dataapi/commands.py -->
+<div class="section" id="mongodb-installation">
+<h4>MongoDb Installation</h4>
+<p><em>Step 1</em>:</p>
+<pre class="literal-block">
+% sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+</pre>
+<p><em>Step 2</em>:</p>
+<pre class="literal-block">
+% sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+</pre>
+<p><em>Step 3</em>:</p>
+<pre class="literal-block">
+% sudo apt-get update
+</pre>
+<p><em>Step 4</em>:</p>
+<pre class="literal-block">
+% sudo apt-get install -y mongodb-org
+</pre>
+<p><em>Step 5</em>:</p>
+<pre class="literal-block">
+% sudo apt-get install -y mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1mongodb-org-tools=2.6.1
+</pre>
+</div>
+<div class="section" id="metadatastore-installation">
+<h4>metadataStore Installation</h4>
+<p><em>Step 1</em>:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/Users/arkilic/projects/metadataStore/doc/source/introduction.rst</tt>, line 72)</p>
+Literal block expected; none found.</div>
+<p>metadataStore is available via git repository: <a class="reference external" href="https://github.com/arkilic/metadataStore">https://github.com/arkilic/metadataStore</a></p>
+<p>Clone this repository:</p>
+<pre class="literal-block">
+%git clone https://github.com/arkilic/metadataStore
+</pre>
+<p><em>Step 2</em>:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/Users/arkilic/projects/metadataStore/doc/source/introduction.rst</tt>, line 80)</p>
+Literal block expected; none found.</div>
+<p>metadataStore includes a setup.py script. Distutils, building and installing a module distribution using the Distutils
+is one simple command to run from a terminal:</p>
+<pre class="literal-block">
+% python setup.py install
+</pre>
+<p>If user does not have sudo access to the machine and/or does not want to install this package for all users:</p>
+<pre class="literal-block">
+% python setup.py install --user
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="getting-help">
+<h2>Getting Help</h2>
+<p>metadataStore can be embedded within other applications or used interactively. If used within IPython, 'help' keyword provides information regarding routines:</p>
+<pre class="literal-block">
+% from metadataStore.userapi.commands import search
+% help(search)
+% search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False, header_id=None, tags=None, num_header=50)
+%
+% Provides an easy way to search Header entries inserted in metadataStore
+% Usage:
+%   search(scan_id=s_id)
+%   search(scan_id=s_id, owner='ark*')
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5))
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkilic')
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='ark*')
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkili.')
+</pre>
+</div>
+<div class="section" id="schema">
+<h2>Schema</h2>
+<p>Each run stands for a specific set of operations performed by data collection routines. An experiment is a collection of
+these runs. metadataStore service does not group set of specific runs as experiments. This is done within dataBroker
+service(currently in development). Users/developers that use metadataStore can either use dataBroker API or develop
+simple applications on top of metadataStore that keep track of set of scan_id(s) to define specific experiments.</p>
+<p>Each header consists of the following keys:</p>
+<p><em>scan_id: (bson.ObjectId) unique identifier describing a given run</em></p>
+<p><em>start_time: (datetime) run header initialization timestamp</em></p>
+<p><em>end_time: (datetime) run header close timestamp</em></p>
+<p><em>owner: (str) data collection or system defined user info</em></p>
+<p><em>header_versions: (list) Keeps track of header version</em></p>
+<p><em>beamline_id: (str) descriptor for beamline</em></p>
+<p><em>custom: (dict) Field for custom information</em></p>
+<p><strong>Header Format</strong>:</p>
+<pre class="literal-block">
+%{'status': 'In Progress',
+% 'beamline_id': None,
+% 'tags': ['CSX_Experiment1', 'CSX_Experiment2'],
+% 'start_time': datetime.datetime(2014, 9, 16, 13, 7, 58, 299000),
+% 'scan_id': 3315, 'custom': {},
+% 'owner': u'arkilic',
+% 'end_time': datetime.datetime(2014, 9, 16, 13, 7, 58, 299000),
+% 'header_versions': [],
+% 'event_descriptors': {'event_descriptor_0': {'data_keys': ['motor5', 'motor4', 'motor3', 'list_of_1k', 'motor1', 'motor2'],
+%                                              'tag': 'experimental', 'descriptor_name': 'scan',
+%                                              'header_id': ObjectId('5418362efa44833ca9b08d08'),
+%                                              'event_type_id': 12, '_id': ObjectId('5418362efa44833ca9b08d0a'),
+%                                              'events': {
+%                                                         'event_0': {'descriptor_id': ObjectId('5418362efa44833ca9b08d0a'),
+%                                                                     'description': None,
+%                                                                     'header_id': ObjectId('5418362efa44833ca9b08d08'),
+%                                                                     'seq_no': 3,
+%                                                                     'owner': 'arkilic',
+%                                                                     '_id': ObjectId('5418362efa44833ca9b08d0c'),
+%                                                                     'data': {u'motor5': 36, u'motor4': 71, u'motor3': 55, u'list_of_1k': [12.3, 34.5, 45.3], u'motor1': 44, u'motor2': 35}},
+%                                                         'event_1': {'descriptor_id': ObjectId('5418362efa44833ca9b08d0a'),
+%                                                                     'description': None,
+%                                                                     'header_id': ObjectId('5418362efa44833ca9b08d08'),
+%                                                                     'seq_no': 1,
+%                                                                     'owner': u'arkilic',
+%                                                                     '_id': ObjectId('5418362efa44833ca9b08d0b'),
+%                                                                     'data': {}}}, u'type_descriptor': {}}}}}},
+% 'configs': {'config_0': {'header_id': ObjectId('5418362efa44833ca9b08d08'),
+%                          '_id': ObjectId('5418362efa44833ca9b08d09'),
+%                          'config_params': {}}},
+%                          '_id': ObjectId('5418362efa44833ca9b08d08')}}
+% }
+</pre>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial</h2>
+<p>Start here for a quick overview</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples</h2>
+<p>Examples of how to perform specific tasks</p>
+</div>
+</div>
+</div>
+</body>
+</html>
