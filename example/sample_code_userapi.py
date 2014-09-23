@@ -45,7 +45,7 @@ some_id = a['header_0']['_id']
 query_b = search(header_id=some_id,data=True)
 print query_b['header_0']['event_descriptors']['event_descriptor_0']['data_keys']
 
-query_c = search(tags='CSX_Experiment1',data=True)
+query_c = search(tags='CSX_Experiment1', data=True)
 print query_c.keys()
 
 a = tablify(query_c)

@@ -176,7 +176,6 @@ def record(scan_id, descriptor_name, seq_no, owner=getpass.getuser(), data=dict(
     :type data: dict, optional
     
     :param description: Provides user specified text to describe a given event
-    
     :type description: str, optional
     
     :raises: ConnectionFailure, NotUniqueError, ValueError
@@ -353,7 +352,6 @@ def search(owner=None, start_time=None, end_time=None, tags=None, scan_id=None, 
     :type scan_id: int, optional
 
     :param tags: Provides means to create tags for run headers as in Olog
-
     :type description: str, optional
 
     :param data: True: Add data to the returned dictionary
@@ -369,9 +367,7 @@ def search(owner=None, start_time=None, end_time=None, tags=None, scan_id=None, 
         If the combination of search parameters finds nothing or no search
         parameters are provided, None is returned
     """
-
     search_dict = {}
-
     # construct a dictionary whose keys are input parameter names and whose
     # values are the input parameter values. Drop values which are None
     # get the number of arguments

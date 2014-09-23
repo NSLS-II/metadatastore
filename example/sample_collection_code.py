@@ -27,7 +27,7 @@ create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'ascan', 'event_typ
 
 record(event=[{'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0},
               {'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
-              'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'}])
+              'data': {'motor4': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'}])
 
 
 # record({'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
