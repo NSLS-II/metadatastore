@@ -230,13 +230,9 @@ can hold any name-value pair within the given guidelines of python dictionaries 
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">beamline_config</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">})</span>
@@ -247,16 +243,10 @@ can hold any name-value pair within the given guidelines of python dictionaries 
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_event_descriptor</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="n">s_id</span><span class="p">,</span> <span class="s">&#39;descriptor_name&#39;</span><span class="p">:</span> <span class="s">&#39;scan&#39;</span><span class="p">,</span> <span class="s">&#39;event_type_id&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">:</span> <span class="s">&#39;experimental&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="s">&#39;type_descriptor&#39;</span><span class="p">:{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_header</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1235</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="s">&#39;beamline_id&#39;</span><span class="p">:</span> <span class="s">&#39;my_beamline&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="s">&#39;owner&#39;</span><span class="p">:</span> <span class="s">&#39;arkilic&#39;</span><span class="p">,</span> <span class="s">&#39;custom&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span><span class="s">&#39;value2&#39;</span><span class="p">}})</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_beamline_config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s">&#39;config_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}}</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">,</span> <span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">beamline_config</span><span class="o">=</span><span class="n">sample_beamline_config</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_beamline_config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scan_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s">&#39;config_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;attribute1&#39;</span><span class="p">:</span> <span class="s">&#39;value1&#39;</span><span class="p">,</span> <span class="s">&#39;attribute2&#39;</span><span class="p">:</span> <span class="s">&#39;value2&#39;</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">sample_header</span><span class="p">,</span> <span class="n">event_descriptor</span><span class="o">=</span><span class="n">sample_event_descriptor</span><span class="p">,</span> <span class="n">beamline_config</span><span class="o">=</span><span class="n">sample_beamline_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -519,15 +509,19 @@ a dict with &#8220;description&#8221; and &#8220;type&#8221; keys.
 </table>
 <p>values are correctly typed or None
 :rtype: dict</p>
-<dl class="docutils">
-<dt>ValueError</dt>
-<dd><ul class="first simple">
-<li>If any of the input parameters are not correctly typed or they</li>
-</ul>
-<p class="last">cannot be cast to the correct type
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">ValueError
+- If any of the input parameters are not correctly typed or they
+cannot be cast to the correct type
 - If var_dict has no entries.
-- If target_dict has no entries.</p>
-</dd>
+- If target_dict has no entries.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
 <dt>KeyError</dt>
 <dd>If any of the keys in var_dict are not in target_dict</dd>
 </dl>
@@ -736,7 +730,7 @@ EventDescriptor instances serve as headers for a given set of events that hold m
 
 <dl class="function">
 <dt id="metadataStore.dataapi.commands.save_header">
-<tt class="descclassname">metadataStore.dataapi.commands.</tt><tt class="descname">save_header</tt><big>(</big><em>scan_id</em>, <em>header_owner='arkilic'</em>, <em>start_time=datetime.datetime(2014</em>, <em>9</em>, <em>22</em>, <em>14</em>, <em>25</em>, <em>51</em>, <em>636680)</em>, <em>beamline_id=None</em>, <em>header_versions=[]</em>, <em>status='In Progress'</em>, <em>tags=[]</em>, <em>custom={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/dataapi/commands.html#save_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.dataapi.commands.save_header" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">metadataStore.dataapi.commands.</tt><tt class="descname">save_header</tt><big>(</big><em>scan_id</em>, <em>header_owner='arkilic'</em>, <em>start_time=datetime.datetime(2014</em>, <em>9</em>, <em>22</em>, <em>17</em>, <em>27</em>, <em>56</em>, <em>693954)</em>, <em>beamline_id=None</em>, <em>header_versions=[]</em>, <em>status='In Progress'</em>, <em>tags=[]</em>, <em>custom={}</em><big>)</big><a class="reference internal" href="_modules/metadataStore/dataapi/commands.html#save_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.dataapi.commands.save_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves a run header that serves as a container for even descriptors, beamline configurations, and events. Please see
 Introduction section for return document structure</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -818,19 +812,31 @@ Introduction section for return document structure</p>
 <dt id="metadataStore.utilities.utility.get_calib_dict">
 <tt class="descclassname">metadataStore.utilities.utility.</tt><tt class="descname">get_calib_dict</tt><big>(</big><em>run_header</em><big>)</big><a class="reference internal" href="_modules/metadataStore/utilities/utility.html#get_calib_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.utilities.utility.get_calib_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the calibration dictionary that is saved in the run_header</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>run_header</strong> (<em>dict</em>) &#8211; Run header to convert events to lists. Can only be one header.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary that contains all information inside the run_header&#8217;s</td>
+</tr>
+</tbody>
+</table>
+<p>beamline_config key. If there are multiple &#8216;configs&#8217; then the return
+value is a nested dictionary keyed on config_# for the number of config</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
 <dl class="docutils">
-<dt>run_header <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd>Run header to convert events to lists. Can only be one header.</dd>
-</dl>
-<dl class="docutils">
-<dt>dict</dt>
-<dd>Dictionary that contains all information inside the run_header&#8217;s
-beamline_config key. If there are multiple &#8216;configs&#8217; then the return
-value is a nested dictionary keyed on config_# for the number of config
-dicts</dd>
 <dt>bool</dt>
-<dd>True: Multiple &#8216;config&#8217; sections were present, dict is a nested dict
-False: One &#8216;config&#8217; section was present, dict is not a nested dict</dd>
+<dd><p class="first">True: Multiple &#8216;config&#8217; sections were present, dict is a nested dict</p>
+<p class="last">False: One &#8216;config&#8217; section was present, dict is not a nested dict</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -839,15 +845,18 @@ False: One &#8216;config&#8217; section was present, dict is not a nested dict</
 <tt class="descclassname">metadataStore.utilities.utility.</tt><tt class="descname">get_data_keys</tt><big>(</big><em>run_header</em><big>)</big><a class="reference internal" href="_modules/metadataStore/utilities/utility.html#get_data_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.utilities.utility.get_data_keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the names of the data keys. This function assumes that there is
 only one event descriptor in a run header</p>
-<dl class="docutils">
-<dt>run_header <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd>Run header to convert events to lists. Can only be one header.</dd>
-</dl>
-<dl class="docutils">
-<dt>list</dt>
-<dd>List of the data keys in the run header keyed by the event_descriptor
-name</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>run_header</strong> (<em>dict</em>) &#8211; run header to convert events to lists. Can only be one header.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of the data keys in the run header keyed by the event_descriptor</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -855,25 +864,25 @@ name</dd>
 <tt class="descclassname">metadataStore.utilities.utility.</tt><tt class="descname">get_data_keys_futureproof</tt><big>(</big><em>run_header</em><big>)</big><a class="reference internal" href="_modules/metadataStore/utilities/utility.html#get_data_keys_futureproof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metadataStore.utilities.utility.get_data_keys_futureproof" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the names of the data keys. This function assumes that there is
 only one event descriptor in a run header</p>
-<p>Note: This function only works for one event_descriptor per run_header. As
+<p><strong>Note:</strong> This function only works for one event_descriptor per run_header. As
 soon as we start getting multiple event_descriptors per run header this
 function will need to be modified</p>
-<dl class="docutils">
-<dt>run_header <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd>Run header to convert events to lists. Can only be one header.</dd>
-</dl>
-<dl class="docutils">
-<dt>dict</dt>
-<dd>List of the data keys in the run header keyed by the event_descriptor
-descriptor_name. If descriptor_name is not unique for all
-event_descriptors, see Notes 1</dd>
-</dl>
-<ol class="arabic simple">
-<li>the descriptor_name field in event_descriptors is assumed to be unique.
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>run_header</strong> (<em>dict</em>) &#8211; Run header to convert events to lists. Can only be one header.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of the data keys in the run header keyed by the event_descriptor</td>
+</tr>
+</tbody>
+</table>
+<p>descriptor_name. If descriptor_name is not unique for all
+event_descriptors, see Note</p>
+<p>Note:</p>
+<p>The descriptor_name field in event_descriptors is assumed to be unique.
 If it is not, then append the last four characters of _id to it.
-Ideally this would be something more like a PV name and less hostile
-than the hashed _id field</li>
-</ol>
+Ideally this would be something more like a PV name and less hostile than the hashed _id field</p>
 </dd></dl>
 
 <dl class="function">

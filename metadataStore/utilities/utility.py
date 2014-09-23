@@ -11,20 +11,18 @@ def get_calib_dict(run_header):
     """
     Return the calibration dictionary that is saved in the run_header
 
-    Parameters
-    ----------
-    run_header : dict
-        Run header to convert events to lists. Can only be one header.
+    :param run_header: Run header to convert events to lists. Can only be one header.
+    :type run_header: dict
+    
+    :returns: Dictionary that contains all information inside the run_header's 
+    beamline_config key. If there are multiple 'configs' then the return
+    value is a nested dictionary keyed on config_# for the number of config
+    
+    :rtype: dict
 
-    Returns
-    -------
-    dict
-        Dictionary that contains all information inside the run_header's
-        beamline_config key. If there are multiple 'configs' then the return
-        value is a nested dictionary keyed on config_# for the number of config
-        dicts
     bool
         True: Multiple 'config' sections were present, dict is a nested dict
+        
         False: One 'config' section was present, dict is not a nested dict
     """
     nested = True
@@ -41,22 +39,15 @@ def get_calib_dict(run_header):
 
 def get_data_keys(run_header):
     """
-
     Return the names of the data keys. This function assumes that there is
     only one event descriptor in a run header
 
-    Parameters
-    ----------
-    run_header : dict
-        Run header to convert events to lists. Can only be one header.
+    :param run_header: run header to convert events to lists. Can only be one header.
+    :type run_header: dict
 
-    Returns
-    -------
-    list
-        List of the data keys in the run header keyed by the event_descriptor
-        name
+    :returns: List of the data keys in the run header keyed by the event_descriptor
+    :rtype: list
     """
-    # print('run_header: {0}'.format(list(run_header)))
     try:
         for ev_desc_key, ev_desc_dict in six.iteritems(run_header[u'event_descriptors']):
             descriptor_name = ev_desc_dict['descriptor_name']
@@ -79,43 +70,24 @@ def get_data_keys_futureproof(run_header):
     Return the names of the data keys. This function assumes that there is
     only one event descriptor in a run header
 
-    Note: This function only works for one event_descriptor per run_header. As
+    **Note:** This function only works for one event_descriptor per run_header. As
     soon as we start getting multiple event_descriptors per run header this
     function will need to be modified
 
-    Parameters
-    ----------
-    run_header : dict
-        Run header to convert events to lists. Can only be one header.
+    :param run_header: Run header to convert events to lists. Can only be one header.
+    :type run_header: dict
 
-    Returns
-    -------
-    dict
-        List of the data keys in the run header keyed by the event_descriptor
-        descriptor_name. If descriptor_name is not unique for all
-        event_descriptors, see Notes 1
+    :returns: List of the data keys in the run header keyed by the event_descriptor
+    descriptor_name. If descriptor_name is not unique for all
+    event_descriptors, see Note
 
-    Notes
-    -----
-    1. the descriptor_name field in event_descriptors is assumed to be unique.
-       If it is not, then append the last four characters of _id to it.
-       Ideally this would be something more like a PV name and less hostile
-       than the hashed _id field
+    **Note:** The descriptor_name field in event_descriptors is assumed to be unique. 
+    If it is not, then append the last four characters of _id to it.
+    Ideally this would be something more like a PV name and less hostile than the hashed _id field
 
     """
-    # print('run_header: {0}'.format(list(run_header)))
     ev_keys = {}
     try:
-        # get the event descriptor keys
-        # ev_desc_names = [ev_desc_dict['descriptor_name'] for ev_desc_dict in
-        #                  six.itervalues(run_header[u'event_descriptors'])]
-        # if len(ev_desc_names) != len(set(ev_desc_names)):
-        #     # there is at least one name collision in ev_desc_keys
-        #     raise NotImplementedError("You passed me a run header with "
-        #                               "multiple event_descriptors of the same "
-        #                               "name. I cannot handle this yet. Go yell"
-        #                               " at Arman or Eric.\nDescriptor names: "
-        #                               "{0}".format(ev_desc_names))
         try:
             for (ev_desc_key, ev_desc_dict) in six.iteritems(
                     run_header[u'event_descriptors']):
@@ -130,17 +102,6 @@ def get_data_keys_futureproof(run_header):
                              'sure data=True in search() and header '
                              'includes events.'
                              '\nOriginal error: {0}'.format(e))
-            #
-            # try:
-            #     for ev_key, ev_dict in six.iteritems(ev_desc_dict['events']):
-            #         # this assumes all events in an event_descriptor have the
-            #         # same keys. Which they should...
-            #         return list(ev_dict['data'])
-            # except KeyError as e:
-            #     raise ValueError('Header does not include any events. Make '
-            #                      'sure data=True in search() and header '
-            #                      'includes events.'
-            #                      '\nOriginal error: {0}'.format(e))
     except KeyError as e:
         print(e)
         raise KeyError('Header does not include "event_descriptors". '
@@ -206,7 +167,6 @@ def listify(run_header, data_keys=None, bash_to_lower=True):
 
     if not 'time' in data_keys:
         data_keys.append('time')
-    # print('data_keys: {0}'.format(data_keys))
     # forcibly cast to lower case
     if bash_to_lower:
         data_keys, header_keys = [[k.lower() for k in key_tmp] for
@@ -214,12 +174,9 @@ def listify(run_header, data_keys=None, bash_to_lower=True):
 
     # listify the data in the run header
     data_dict = defaultdict(list)
-    # print('data_dict keys: {0}'.format(list(data_dict)))
     for ev_desc_key, ev_desc_dict in \
             six.iteritems(run_header['event_descriptors']):
         data_key = list(ev_desc_dict['events'])
-        # data_key.sort(key=lambda x: int(x.split("_")[-1]))
-        # print("sorted data keys: {0}".format(data_key))
         for index, (ev_key) in enumerate(data_key):
             ev_dict = ev_desc_dict['events'][ev_key]
             for data_key, data in six.iteritems(ev_dict['data']):

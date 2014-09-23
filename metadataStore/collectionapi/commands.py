@@ -10,8 +10,6 @@ def create(header=None, beamline_config=None, event_descriptor=None):
     """
     Create header, beamline_config, and event_descriptor given dictionaries with appropriate name-value pairs.
 
-    Parameters
-    ----------
     :param header: Header attribute-value pairs
     :type header: dict
 
@@ -47,24 +45,19 @@ def create(header=None, beamline_config=None, event_descriptor=None):
 
     >>> sample_event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental',
     ...                          'type_descriptor':{'attribute1': 'value1', 'attribute2': 'value2'}})
-
     >>> sample_header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
     ...                 'owner': 'arkilic', 'custom': {'attribute1': 'value1', 'attribute2':'value2'}})
-
     >>> create(event_descriptor=sample_event_descriptor, header=sample_header)
-
+    
     >>> create(beamline_config={'scan_id': 1234})
 
     >>> create(beamline_config={'scan_id': 1234, 'config_params': {'attribute1': 'value1', 'attribute2': 'value2'}})
 
     >>> sample_event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental',
     ...                          'type_descriptor':{'attribute1': 'value1', 'attribute2': 'value2'}})
-
     >>> sample_header={'scan_id': 1235, 'start_time': datetime.datetime.utcnow(), 'beamline_id': 'my_beamline',
     ...                 'owner': 'arkilic', 'custom': {'attribute1': 'value1', 'attribute2':'value2'}})
-
     >>> sample_beamline_config = {'scan_id': 1234, 'config_params': {'attribute1': 'value1', 'attribute2': 'value2'}}
-
     >>> create(header=sample_header, event_descriptor=sample_event_descriptor, beamline_config=sample_beamline_config)
 
     """
@@ -210,8 +203,6 @@ def record(event=dict()):
 
     Optional fields: owner, seq_no, data, description
 
-    Parameters
-    ----------
     :param event: Dictionary used in order to save name-value pairs for Event entries
     :type event: dict
 
