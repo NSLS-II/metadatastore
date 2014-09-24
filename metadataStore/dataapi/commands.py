@@ -183,22 +183,6 @@ def get_event_descriptor_hid_edid(name, s_id):
     return result['header_id'], result['_id']
 
 
-# def list_event_descriptors():
-#     #TODO: Check whether anything uses this routine and remove it permanently because it is dangerous!!!!
-#     """
-#     Grabs all event_descriptor objects. (Currently obsolete and should be removed after testing&evaluation)
-#
-#     :returns:  pymongo cursor object More on cursors in pymongo documentation.
-#     """
-#     collection = db['event_descriptor']
-#     try:
-#         event_descriptors = db.find()
-#     except:
-#         metadataLogger.logger.warning('EventDescriptors can not be retrieved')
-#         raise
-#     return event_descriptors
-
-
 def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getuser(), seq_no=None,
                  data=dict()):
     """
@@ -238,7 +222,10 @@ def save_beamline_config(scan_id, config_params={}):
     Save beamline configuration. See collections documentation for details.
 
     :param scan_id: Unique identifier for a scan
-    :param config_params:
+    :type scan_id: bson.ObjectId
+
+    :param config_params: Name-value pairs that specify contents of specific configuration
+    :type config_params: dict
     """
     header_id = get_header_id(scan_id)
     beamline_cfg = BeamlineConfig(header_id=header_id, config_params=config_params)
@@ -307,10 +294,7 @@ def update_header_status(header_id, status):
 
 
 def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
-         tags=None, num_header=50):
-
-    #TODO: add beamline_config to search() returns
-
+         tags=None, event_classifier=dict(), num_header=50):
     """
     Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
     So iterating it multiple times will only cause a single query.
@@ -410,19 +394,15 @@ def find(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=
             event_desc = find_event_descriptor(header[key]['_id'])
             i = 0
             header[key]['event_descriptors'] = dict()
-            print 'here i am 1'
             for e_d in event_desc:
                 header[key]['event_descriptors']['event_descriptor_' + str(i)] = e_d
                 if data is True:
-                    events = find_event(descriptor_id=e_d['_id'])
+                    events = find_event(descriptor_id=e_d['_id'], event_query_dict=event_classifier)
                     header[key]['event_descriptors']['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
-                    print 'here i am true'
-                    print header[key]['event_descriptors']['event_descriptor_' + str(i)]['events']
                     data_keys = __get_event_keys(header[key]['event_descriptors']['event_descriptor_' + str(i)])
                     header[key]['event_descriptors']['event_descriptor_' + str(i)]['data_keys'] = data_keys
                     i += 1
                 else:
-                    print 'here i am false'
                     i += 1
         if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None \
                 and tags is None:
@@ -490,6 +470,7 @@ def find_header(query_dict):
 
 def find_event(descriptor_id, event_query_dict={}):
     event_query_dict['descriptor_id'] = descriptor_id
+    print event_query_dict
     collection = db['event']
     return collection.find(event_query_dict)
 
@@ -512,6 +493,7 @@ def convertToHumanReadable(date_time):
     format "X days, Y hours ago"
 
     :param date_time: Python datetime object
+    :type date_time: datetime.datetime
 
     :return:
         fancy datetime:: string

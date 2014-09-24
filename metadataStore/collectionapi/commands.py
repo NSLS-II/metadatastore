@@ -287,7 +287,7 @@ def record(event=dict()):
 
 
 def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
-           header_id=None, tags=None, num_header=50):
+           header_id=None, tags=None, num_header=50, event_classifier=dict()):
     """
     Provides an easy way to search Header entries inserted in metadataStore
 
@@ -321,5 +321,5 @@ def search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time
     >>> search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner='arkili.')
     """
     result = find(scan_id=scan_id, owner=owner, start_time=start_time, beamline_id=beamline_id, end_time=end_time,
-                  data=data, tags=tags, header_id=header_id, num_header=num_header)
+                  data=data, tags=tags, header_id=header_id, num_header=num_header, event_classifier=event_classifier)
     return result

@@ -40,3 +40,10 @@ print query_a['header_0'].keys()
 #TODO: Fix collection api search
 print query_a['header_0']['event_descriptors']['event_descriptor_0']['events']
 print query_a['header_0']['event_descriptors']['event_descriptor_1']['events']
+
+record(event={'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
+              'data': {'some_motor_1': 16.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
+
+res = search(owner='arkilic', data=True, event_classifier={'data.some_motor_1': 16.4})
+for entry in res:
+    print res[entry]['event_descriptors']['event_descriptor_1']
