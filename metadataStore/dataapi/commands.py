@@ -470,7 +470,6 @@ def find_header(query_dict):
 
 def find_event(descriptor_id, event_query_dict={}):
     event_query_dict['descriptor_id'] = descriptor_id
-    print event_query_dict
     collection = db['event']
     return collection.find(event_query_dict)
 
@@ -495,8 +494,8 @@ def convertToHumanReadable(date_time):
     :param date_time: Python datetime object
     :type date_time: datetime.datetime
 
-    :return:
-        fancy datetime:: string
+    :return: fancy datetime
+    :rtype: str
     """
     current_datetime = datetime.datetime.now()
     delta = str(current_datetime - date_time)
@@ -527,3 +526,171 @@ def convertToHumanReadable(date_time):
     if not (xdays or months or years):
         date_lets.append('%d minute%s' % (minutes, plural(minutes)))
     return ', '.join(date_lets) + ' ago.'
+
+
+def find2(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False,
+         tags=None, event_classifier=dict(), num_header=50):
+    """
+    Find by event_id, beamline_config_id, header_id. As of MongoEngine 0.8 the querysets utilise a local cache.
+    So iterating it multiple times will only cause a single query.
+    If this is not the desired behavour you can call no_cache (version 0.8.3+) to return a non-caching queryset.
+
+    **contents=False**, only run_header information is returned.
+    **contents=True** will return beamline_configs, event_descriptors, and events related to given run_header(s)
+
+     >>> find(scan_id='last')
+     >>> find(scan_id='last', contents=True)
+     >>> find(scan_id=130, contents=True)
+     >>> find(scan_id=[130,123,145,247,...])
+     >>> find(scan_id={'start': 129, 'end': 141})
+     >>> find(start_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
+     >>> find(start_time=date.datetime(2014, 6, 13, 17, 51, 21, 987000)))
+     >>> find(start_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000),
+                      ... 'end': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)})
+     >>> find(event_time=datetime.datetime(2014, 6, 13, 17, 51, 21, 987000)
+     >>> find(event_time={'start': datetime.datetime(2014, 6, 13, 17, 51, 21, 987000})
+    """
+    query_dict = dict()
+    try:
+        coll = db['header']
+    except:
+        metadataLogger.logger.warning('Collection Header cannot be accessed')
+        raise
+    if scan_id is 'current':
+        header_cursor = coll.find().sort([('end_time', -1)]).limit(1)
+        header = header_cursor[0]
+        event_desc = find_event_descriptor(header['_id'])
+        i = 0
+        for e_d in event_desc:
+            header['event_descriptor_' + str(i)] = e_d
+            events = find_event(descriptor_id=e_d['_id'])
+            if data is True:
+                header['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
+                i += 1
+            else:
+                i += 1
+    elif scan_id is 'last':
+        header_cursor = coll.find().sort([('end_time', -1)]).limit(5)
+        header = header_cursor[1]
+        event_desc = find_event_descriptor(header['_id'])
+        i = 0
+        for e_d in event_desc:
+            header['event_descriptor_' + str(i)] = e_d
+            events = find_event(descriptor_id=e_d['_id'])
+            if data is True:
+                header['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
+                i += 1
+            else:
+                i += 1
+    else:
+        if header_id is not None:
+            query_dict['_id'] = ObjectId(header_id)
+        if owner is not None:
+            if "*" in owner:
+                query_dict['owner'] = {'$regex': "^" + owner.replace("*", ".*"), '$options': 'i'}
+            else:
+                query_dict['owner'] = owner
+        if scan_id is not None:
+            if isinstance(scan_id, int):
+                query_dict['scan_id'] = scan_id
+            else:
+                raise TypeError('scan_id must be an integer')
+        if beamline_id is not None:
+            query_dict['beamline_id'] = beamline_id
+        if start_time is not None:
+                if isinstance(start_time, list):
+                    for time_entry in start_time:
+                        __validate_time([time_entry])
+                    query_dict['start_time'] = {'$in': start_time}
+                elif isinstance(start_time, dict):
+                    __validate_time([start_time['start'], start_time['end']])
+                    query_dict['start_time'] = {'$gte': start_time['start'], '$lt': start_time['end']}
+                else:
+                    if __validate_time([start_time]):
+                        query_dict['start_time'] = {'$gte': start_time,
+                                                    '$lt': datetime.datetime.utcnow()}
+        if end_time is not None:
+                if isinstance(end_time, list):
+                    for time_entry in end_time:
+                        __validate_time([time_entry])
+                    query_dict['end_time'] = {'$in': end_time}
+                elif isinstance(end_time, dict):
+                    query_dict['end_time'] = {'$gte': end_time['start'], '$lt': end_time['end']}
+                else:
+                    query_dict['end_time'] = {'$gte': end_time,
+                                              '$lt': datetime.datetime.utcnow()}
+        if tags is not None:
+            query_dict['tags'] = {'$in': [tags]}
+        headers = __decode_hdr_cursor2(find_header(query_dict).limit(num_header))
+        beamline_configs = dict()
+        event_descriptors = dict()
+        events = dict()
+        hdr_keys = headers.keys()
+        for key in hdr_keys:
+            beamline_cfg = find_beamline_config(header_id=headers[key]['_id'])
+            e_desc = find_event_descriptor(headers[key]['_id'])
+            for entry in beamline_cfg:
+                beamline_configs[entry['_id']] = entry
+            for entry in e_desc:
+                event_descriptors[entry['_id']] = entry
+                evts = find_event(descriptor_id=entry['_id'], event_query_dict=event_classifier)
+                for entry in evts:
+                    events[entry['_id']] = entry
+        #     i = 0
+        #     header[key]['event_descriptors'] = dict()
+        #     for e_d in event_desc:
+        #         header[key]['event_descriptors']['event_descriptor_' + str(i)] = e_d
+        #         if data is True:
+        #             events = find_event(descriptor_id=e_d['_id'], event_query_dict=event_classifier)
+        #             header[key]['event_descriptors']['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
+        #             data_keys = __get_event_keys(header[key]['event_descriptors']['event_descriptor_' + str(i)])
+        #             header[key]['event_descriptors']['event_descriptor_' + str(i)]['data_keys'] = data_keys
+        #             i += 1
+        #         else:
+        #             i += 1
+        # if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None \
+        #         and tags is None:
+        #     header = None
+    return headers, beamline_configs, event_descriptors, events
+
+
+def __decode_hdr_cursor2(cursor_object):
+    headers = dict()
+    i = 0
+    for temp_dict in cursor_object:
+        headers[temp_dict['_id']] = temp_dict
+        i += 1
+    return headers
+
+
+def __decode_bcfg_cursor2(cursor_object):
+    b_configs = dict()
+    for temp_dict in cursor_object:
+        b_configs[temp_dict['_id']] = temp_dict
+    return b_configs
+
+
+def __decode_e_d_cursor2(cursor_object):
+    event_descriptors = dict()
+    for temp_dict in cursor_object:
+        event_descriptors[temp_dict['_id']] = temp_dict
+    return event_descriptors
+
+
+def __decode_cursor2(cursor_object):
+    events = dict()
+    i = 0
+    for temp_dict in cursor_object:
+        events['event_' + str(i)] = temp_dict
+        i += 1
+    return events
+
+
+def __get_event_keys2(event_descriptor):
+    #TODO: In the future, place a mechanism that assures all events have the same set of data!!
+    ev_keys = list()
+    if event_descriptor['events']:
+        ev_keys = event_descriptor['events']['event_0']['data'].keys()
+    else:
+        pass
+    return ev_keys

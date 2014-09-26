@@ -1,10 +1,13 @@
 __author__ = 'arkilic'
 import time
 import random
-from metadataStore.dataapi.commands import *
+from metadataStore.dataapi.commands import save_header, insert_event_descriptor, save_beamline_config, insert_event
+from metadataStore.dataapi.commands import db, find, find2
 
 
 h_id = random.randint(0, 200000)
+h_id2 = random.randint(0, 200000)
+
 bc_id = random.randint(0, 450000)
 ev_d_id = random.randint(0, 200000)
 start = time.time()
@@ -30,7 +33,17 @@ print db.header.find({'tags': {'$in': ['CSX_Experiment1']}})[0]
 
 print db.header.find({'scan_id': h_id})[0].keys()
 
-
 sample_result = find(owner='arman', data=True, event_classifier={'data.motor1': 12.44})
 print sample_result.keys()
 print sample_result['header_0']
+
+hdr, bcfg, e_desc, events = find2(scan_id=h_id)
+
+print hdr.keys()
+print e_desc.keys()
+print events.keys()
+
+print events[events.keys()[0]]['header_id']
+
+print hdr[events[events.keys()[0]]['header_id']]
+print e_desc[events[events.keys()[0]]['descriptor_id']]
