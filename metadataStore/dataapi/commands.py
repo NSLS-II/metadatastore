@@ -636,21 +636,6 @@ def find2(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id
                 evts = find_event(descriptor_id=entry['_id'], event_query_dict=event_classifier)
                 for entry in evts:
                     events[entry['_id']] = entry
-        #     i = 0
-        #     header[key]['event_descriptors'] = dict()
-        #     for e_d in event_desc:
-        #         header[key]['event_descriptors']['event_descriptor_' + str(i)] = e_d
-        #         if data is True:
-        #             events = find_event(descriptor_id=e_d['_id'], event_query_dict=event_classifier)
-        #             header[key]['event_descriptors']['event_descriptor_' + str(i)]['events'] = __decode_cursor(events)
-        #             data_keys = __get_event_keys(header[key]['event_descriptors']['event_descriptor_' + str(i)])
-        #             header[key]['event_descriptors']['event_descriptor_' + str(i)]['data_keys'] = data_keys
-        #             i += 1
-        #         else:
-        #             i += 1
-        # if header_id is None and scan_id is None and owner is None and start_time is None and beamline_id is None \
-        #         and tags is None:
-        #     header = None
     return headers, beamline_configs, event_descriptors, events
 
 

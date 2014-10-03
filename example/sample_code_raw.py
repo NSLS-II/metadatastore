@@ -29,9 +29,7 @@ insert_event(scan_id=h_id, descriptor_name='scan', owner='arkilic', seq_no=0, da
 end = time.time()
 print('Event insert time is ' + str((end-start)*1000) + ' ms')
 
-print db.header.find({'tags': {'$in': ['CSX_Experiment1']}})[0]
 
-print db.header.find({'scan_id': h_id})[0].keys()
 
 sample_result = find(owner='arman', data=True, event_classifier={'data.motor1': 12.44})
 print sample_result.keys()
