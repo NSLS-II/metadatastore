@@ -1,5 +1,5 @@
 __author__ = 'arkilic'
-
+import six
 import random
 import time
 from metadataStore.collectionapi.commands import create, record, search
@@ -16,8 +16,9 @@ create(header={'scan_id': s_id, 'tags': ['CSX_collection', 'arman']})
 
 #TODO: Bulk header create does not create using the default!!!!
 
-create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental'})
-create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'ascan', 'event_type_id': 13, 'tag': 'experimental'})
+data = {'motor4': 13.4, 'image1': '/home/arkilic/sample.tiff'}
+create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'scan', 'event_type_id': 12, 'tag': 'experimental', 'data_keys': list(six.iterkeys(data))})
+create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'ascan', 'event_type_id': 13, 'tag': 'experimental', 'data_keys': list(six.iterkeys(data))})
 
 """
 >>> record(event={'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0})
@@ -27,9 +28,9 @@ create(event_descriptor={'scan_id': s_id, 'descriptor_name': 'ascan', 'event_typ
 
 record(event=[{'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0},
               {'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
-              'data': {'motor4': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'}])
+              'data': data,'description': 'Linear scan'}])
 
-record(event={'scan_id': 800, 'seq_no': 2, 'descriptor_name': 'scan'})
+record(event={'scan_id': s_id, 'seq_no': 2, 'descriptor_name': 'scan'})
 # record({'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
 #               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
 
