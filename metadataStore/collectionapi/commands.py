@@ -169,6 +169,11 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                 scan_id = event_descriptor['scan_id']
             else:
                 raise ValueError('scan_id is required for EventDescriptor entries')
+            if 'data_keys' in event_descriptor:
+                data_keys = event_descriptor['data_keys']
+            else:
+                raise ValueError('data keys are required for EventDescriptor entries')
+
             if 'event_type_id' in event_descriptor:
                 event_type_id = event_descriptor['event_type_id']
             else:
@@ -187,7 +192,7 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                 tag = None
             try:
                 insert_event_descriptor(scan_id=scan_id, event_type_id=event_type_id, descriptor_name=descriptor_name,
-                                        type_descriptor=type_descriptor, tag=tag)
+                                        data_keys=data_keys, type_descriptor=type_descriptor, tag=tag)
             except:
                 raise
         else:

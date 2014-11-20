@@ -111,7 +111,7 @@ def get_header_id(scan_id):
     return result
 
 
-def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_descriptor=dict(),
+def insert_event_descriptor(scan_id, event_type_id, data_keys, descriptor_name=None, type_descriptor=dict(),
                             tag=None):
     """
     Create event_descriptor entries that serve as descriptors for given events that are part of a run header.
@@ -142,6 +142,7 @@ def insert_event_descriptor(scan_id, event_type_id, descriptor_name=None, type_d
     try:
         event_descriptor = EventDescriptor(header_id=header_id, event_type_id=event_type_id,
                                            descriptor_name=descriptor_name, type_descriptor=type_descriptor,
+                                           data_keys=data_keys,
                                            tag=tag).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('EventDescriptor cannot be created')
