@@ -86,7 +86,7 @@ class Header(object):
 
 
 class EventDescriptor(object):
-    def __init__(self, header_id, event_type_id, descriptor_name, tag=None, type_descriptor=dict()):
+    def __init__(self, header_id, event_type_id, descriptor_name, data_keys, tag=None, type_descriptor=dict()):
         """
         Constructor that Validates data types for EventDescriptor object fields. These fields are used to compose a python dictionary which is converted to a bson document by MongoDb python driver (pymongo).
        
@@ -108,6 +108,7 @@ class EventDescriptor(object):
         self.header_id = header_id
         self.event_type_id = event_type_id
         self.tag = tag
+        self.data_keys = data_keys
         self.descriptor_name = validate_string(descriptor_name)
         self.type_descriptor = validate_dict(type_descriptor)
 
@@ -121,6 +122,7 @@ class EventDescriptor(object):
         document_template['descriptor_name'] = self.descriptor_name
         document_template['tag'] = self.tag
         document_template['type_descriptor'] = self.type_descriptor
+        document_template['data_keys'] = self.data_keys
         return document_template
 
     def save(self, **kwargs):

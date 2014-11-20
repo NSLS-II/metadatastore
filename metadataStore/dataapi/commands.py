@@ -2,6 +2,8 @@ __author__ = 'arkilic'
 
 import getpass
 import datetime
+import re
+from pymongo.errors import OperationFailure
 from metadataStore.sessionManager.databaseInit import db
 from metadataStore.database.collections import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger

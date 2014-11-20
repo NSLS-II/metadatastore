@@ -10,7 +10,7 @@ class DbLogger(object):
         Constructor: MongoClient, Database, and native python loggers are created
         """
         self.logger = logging.getLogger('MetadataStore')
-        log_handler = logging.FileHandler('/var/tmp/MetaDataStore.log')
+        log_handler = logging.FileHandler('/tmp/MetaDataStore.log')
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         log_handler.setFormatter(formatter)
         self.logger.addHandler(log_handler)
