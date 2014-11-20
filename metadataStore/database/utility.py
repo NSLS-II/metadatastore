@@ -1,6 +1,6 @@
 __author__ = 'arkilic'
 import datetime
-
+import six
 
 def validate_start_time(time_entry):
     if isinstance(time_entry, datetime.datetime):
@@ -21,6 +21,17 @@ def validate_end_time(time_entry):
 
 
 def validate_string(entry):
+    """ Will cast from unicode to string
+
+    Parameters
+    ----------
+    entry : str, unicode or something that can be cast to string or unicode
+    """
+    if six.PY2:
+        entry = str(entry)
+    elif six.PY3:
+        entry = six.text_type(entry)
+    print('entry value: {}, type: {}'.format(entry, type(entry)))
     if isinstance(entry, str):
         res = entry
     elif entry is None:
