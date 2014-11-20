@@ -74,10 +74,9 @@ setup(
     license="BSD (3-clause)",
     url = "https://github.com/arkilic/metadataStore",
     packages=['metadataStore', 'metadataStore.utilities',
-              'metadataStore.collectionapi',
               'metadataStore.config', 'metadataStore.dataapi',
               'metadataStore.database', 'metadataStore.sessionManager',
-              'metadataStore.userapi',
+              'metadataStore.api'
     ],
     long_description=read('README.md'),
     classifiers=[

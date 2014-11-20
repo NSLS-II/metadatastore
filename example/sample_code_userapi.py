@@ -1,7 +1,7 @@
 __author__ = 'arkilic'
 
 import random
-from metadataStore.userapi.commands import create, record, search
+from metadataStore.api.user import create, record, search
 from metadataStore.utilities.utility import tablify
 import time
 

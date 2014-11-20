@@ -6,6 +6,7 @@ from pymongo.errors import ConnectionFailure
 from metadataStore.config.parseConfig import database, host, port
 from metadataStore.sessionManager.databaseLogger import DbLogger
 
+print('host: {}'.format(host))
 
 try:
     conn = MongoClient(host=host, port=int(port))

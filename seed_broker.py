@@ -1,8 +1,10 @@
 __author__ = 'edill'
 
-from metadataStore.userapi.commands import log, create
 import datetime
 from os import listdir
+
+from metadataStore.api.user import record, create
+
 
 run_header_id = 1987
 owner="edill"
@@ -80,8 +82,8 @@ if __name__ == "__main__":
     create(sample_dict)
 
     # log the frames
-    log(**log_frames(files))
+    record(**log_frames(files))
 
     # log the calibration
-    log(**log_calib)
+    record(**log_calib)
 
