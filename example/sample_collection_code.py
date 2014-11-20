@@ -29,7 +29,7 @@ record(event=[{'scan_id': s_id, 'descriptor_name': 'scan', 'seq_no': 0},
               {'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
               'data': {'motor4': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'}])
 
-
+record(event={'scan_id': 800, 'seq_no': 2, 'descriptor_name': 'scan'})
 # record({'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
 #               'data': {'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
 
@@ -45,5 +45,5 @@ record(event={'scan_id': s_id, 'descriptor_name': 'ascan', 'owner': 'arkilic', '
               'data': {'some_motor_1': 16.4, 'image1': '/home/arkilic/sample.tiff'},'description': 'Linear scan'})
 
 res = search(owner='arkilic', data=True, event_classifier={'data.some_motor_1': 16.4})
-for entry in res:
-    print res[entry]['event_descriptors']['event_descriptor_1']
+# for entry in res:
+#     print res[entry]['event_descriptors']['event_descriptor_1']
