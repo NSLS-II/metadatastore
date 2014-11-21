@@ -1,17 +1,19 @@
 __author__ = 'arkilic'
 import six
 import getpass
-import datetime
+import time
 import re
+import os
 from pymongo.errors import OperationFailure
 from metadataStore.sessionManager.databaseInit import db
 from metadataStore.database.collections import Header, BeamlineConfig, Event, EventDescriptor
 from metadataStore.sessionManager.databaseInit import metadataLogger
 from bson.objectid import ObjectId
+from .. import header_version as CURRENT_HEADER_VERSION
 
 
-def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.datetime.utcnow(), beamline_id=None,
-                header_versions= list(), status='In Progress', tags=list(), custom=dict()):
+def save_header(scan_id, owner=None, start_time=None, beamline_id=None,
+                header_version=None, status=None, tags=None, custom=None):
     """
     Saves a run header that serves as a container for even descriptors, beamline configurations, and events. Please see
     Introduction section for return document structure
@@ -44,15 +46,40 @@ def save_header(scan_id, header_owner=getpass.getuser(), start_time=datetime.dat
     >>> save_header(scan_id=15, owner='some owner', start_time=datetime.datetime(2014, 3, 4), beamline_id='csx')
     >>> save_header(scan_id=15, start_time=datetime.datetime(2014, 3, 4), custom={'att': 'value'})
     """
+    args_dict = {}
+    if owner is None:
+        owner = getpass.getuser()
+    if start_time is None:
+        start_time = time.time()
+    if beamline_id is None:
+        beamline_id = os.uname()[1].split('-')[0][2:]
+    if header_version is None:
+        header_version = CURRENT_HEADER_VERSION
+    if status is None or not status in save_header.status:
+        status = 'In Progress'
+    if custom is None:
+        custom = {}
+    if tags is None:
+        tags = []
+
+    args_dict['scan_id'] = scan_id
+    args_dict['owner'] = owner
+    args_dict['start_time'] = start_time
+    args_dict['beamline_id'] = beamline_id
+    args_dict['header_version'] = header_version
+    args_dict['status'] = status
+    args_dict['tags'] = tags
+    args_dict['custom'] = custom
+
     try:
-        header = Header(owner=header_owner, start_time=start_time,
-                        end_time=start_time, beamline_id=beamline_id, scan_id=scan_id, tags=tags,
-                        header_versions=header_versions, custom=custom,
-                        status=status).save(wtimeout=100, write_concern={'w': 1})
+        header = Header(**args_dict).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Header cannot be created')
         raise
     return header
+
+# options for the `status` input parameter
+save_header.status = ['In Progress', 'Complete']
 
 
 def get_header_object(id):
@@ -186,8 +213,8 @@ def get_event_descriptor_hid_edid(name, s_id):
     return result['header_id'], result['_id']
 
 
-def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getuser(), seq_no=None,
-                 data=dict()):
+def insert_event(scan_id, descriptor_name, seq_no, description=None,
+                 owner=None, data=None):
     """
     Create event entries that record experimental data 
     
@@ -210,17 +237,21 @@ def insert_event(scan_id, descriptor_name, description=None, owner=getpass.getus
 
     :returns: Event object
     """
-    header_id, descriptor_id = get_event_descriptor_hid_edid(descriptor_name, scan_id)
+    if owner is None:
+        owner = getpass.getuser()
+    header_id, descriptor_id = get_event_descriptor_hid_edid(descriptor_name,
+                                                             scan_id)
     try:
-        event = Event(descriptor_id=descriptor_id, header_id=header_id, description=description,
-                      owner=owner, seq_no=seq_no, data=data).save(wtimeout=100, write_concern={'w': 1})
+        event = Event(descriptor_id=descriptor_id, header_id=header_id,
+                      description=description, owner=owner, seq_no=seq_no,
+                      data=data).save(wtimeout=100, write_concern={'w': 1})
     except:
         metadataLogger.logger.warning('Event cannot be recorded')
         raise
     return event
 
 
-def save_beamline_config(scan_id, config_params={}):
+def save_beamline_config(scan_id, config_params):
     """
     Save beamline configuration. See collections documentation for details.
 
