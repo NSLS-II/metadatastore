@@ -151,6 +151,8 @@ def listify(run_header, data_keys=None, bash_to_lower=True):
     """
     # get the keys from the run header
     header_keys = get_data_keys(run_header)
+    print('header_keys: {}'.format(header_keys))
+    print('data keys: {}'.format(data_keys))
     if len(header_keys) == 1:
         # turn it in to a list
         header_keys = [header_keys]
@@ -179,7 +181,11 @@ def listify(run_header, data_keys=None, bash_to_lower=True):
         data_key = list(ev_desc_dict['events'])
         for index, (ev_key) in enumerate(data_key):
             ev_dict = ev_desc_dict['events'][ev_key]
+            # print('ev_dict[\'data\']: {}'.format(ev_dict['data']))
             for data_key, data in six.iteritems(ev_dict['data']):
+                data_key = data_key.lower()
+                # data_keys_in_dict = data_key in data_keys
+                # print('if {} in {}: {}'.format(data_key, data_keys, data_keys_in_dict))
                 if data_key in data_keys:
                     data_dict[data_key].append(data)
 

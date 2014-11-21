@@ -267,11 +267,11 @@ search_keys_dict['header_id'] = {
     "type": str,
     "validate_fun": _isinstance
 }
-search_keys_dict['event_classifier'] = {
-    "description": ("Qualifies events to be returned based on given condition"),
-    "type": dict,
-    "validate_fun": _isinstance
-}
+# search_keys_dict['event_classifier'] = {
+#     "description": ("Qualifies events to be returned based on given condition"),
+#     "type": dict,
+#     "validate_fun": _isinstance
+# }
 
 
 def validate(var_dict, target_dict):
@@ -336,7 +336,7 @@ def validate(var_dict, target_dict):
 
 
 def search(owner=None, start_time=None, end_time=None, tags=None, scan_id=None, header_id=None,
-           data=False, num_header=50, event_classifier=dict()):
+           data=False, num_header=50, event_classifier=None):
     """
     Search the experimental database with the provided search keys. If no search
     keys are provided, the default behavior is to return nothing.
@@ -383,6 +383,8 @@ def search(owner=None, start_time=None, end_time=None, tags=None, scan_id=None, 
         if val is not None:
             search_dict[name] = val
     # validate the search dictionary
+    # print('search_dict: {}'.format(search_dict))
+    # print('search_keys_dict: {}'.format(search_keys_dict))
     search_dict = validate(search_dict, search_keys_dict)
 
     # log the search dictionary as info
