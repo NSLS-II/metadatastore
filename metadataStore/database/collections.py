@@ -4,8 +4,9 @@ __author__ = 'arkilic'
 import sys
 import six
 import getpass
-from metadataStore.database.utility import validate_dict, validate_string, validate_end_time, \
-    validate_start_time, validate_int, validate_list
+from metadataStore.database.utility import (
+    validate_dict, validate_string, validate_time, validate_int, validate_list
+)
 from metadataStore.sessionManager.databaseInit import db
 from pymongo.errors import DuplicateKeyError
 
@@ -64,8 +65,8 @@ class Header(object):
             header_versions = list()
 
         # validate and stash the input
-        self.start_time = validate_start_time(start_time)
-        self.end_time = validate_end_time(end_time)
+        self.start_time = validate_time(start_time)
+        self.end_time = validate_time(end_time)
         self.owner = validate_string(owner)
         self.header_versions = validate_list(header_versions)
         self.scan_id = scan_id

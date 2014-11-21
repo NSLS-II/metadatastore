@@ -1,5 +1,5 @@
 __author__ = 'arkilic'
-
+import six
 import getpass
 import datetime
 import re
@@ -639,7 +639,9 @@ def find2(header_id=None, scan_id=None, owner=None, start_time=None, beamline_id
                 evts = find_event(descriptor_id=entry['_id'], event_query_dict=event_classifier)
                 for entry in evts:
                     events[entry['_id']] = entry
-    return headers, beamline_configs, event_descriptors, events
+    return {'headers': headers, 'beamline_configs': beamline_configs,
+            'event_descriptors': event_descriptors,
+            'events': events}
 
 
 def __decode_hdr_cursor2(cursor_object):
