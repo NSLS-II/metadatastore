@@ -1,18 +1,22 @@
 
 __author__ = 'arkilic'
 
+import sys
+import six
 import getpass
 from metadataStore.database.utility import validate_dict, validate_string, validate_end_time, \
     validate_start_time, validate_int, validate_list
 from metadataStore.sessionManager.databaseInit import db
-
+from pymongo.errors import DuplicateKeyError
 
 class Header(object):
     """
     Run Header that captures all aspects of a given run using its keys and other collections
     """
-    def __init__(self, start_time, scan_id, beamline_id=None, header_versions=list(), status='In Progress', owner=getpass.getuser(),
-                 end_time=None, tags=list(), custom=dict()):
+    def __init__(self, start_time, scan_id, beamline_id=None,
+                 header_versions=None, status=None,
+                 owner=None, end_time=None, tags=None,
+                 custom=None):
         """
         Constructor that Validates data types for Header object fields. These fields are used to compose a python dictionary which is converted to a bson document by MongoDb python driver (pymongo). 
 
@@ -45,6 +49,16 @@ class Header(object):
         :type tag: list
 
         """
+        if custom is None:
+            custom = dict()
+        if owner is None:
+            owner = getpass.getuser()
+        if tags is None:
+            tags = list()
+        if status is None:
+            status = 'In Progress'
+        if header_versions is None:
+            header_versions = list()
         self.start_time = validate_start_time(start_time)
         self.end_time = validate_end_time(end_time)
         self.owner = validate_string(owner)
@@ -76,7 +90,10 @@ class Header(object):
         Inserts a header into metadataStore.header collection. Handles uniqueness and indexing. Any changes performed on this routine might cuase inconsistency with already existing data. It would be wise to back up your data and restart mongo daemon.
         """
         composed_dict = self.__compose_document()
-        _id = db['header'].insert(composed_dict, **kwargs)
+        try:
+            _id = db['header'].insert(composed_dict, **kwargs)
+        except DuplicateKeyError as dup_key:
+            six.reraise(KeyError, KeyError(dup_key), sys.exc_info()[2])
         db['header'].ensure_index([('scan_id', -1)], unique=True)
         db['header'].ensure_index([('owner', -1), ('start_time', -1)])
         return _id
