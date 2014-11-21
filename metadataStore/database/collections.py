@@ -18,7 +18,9 @@ class Header(object):
                  owner=None, end_time=None, tags=None,
                  custom=None):
         """
-        Constructor that Validates data types for Header object fields. These fields are used to compose a python dictionary which is converted to a bson document by MongoDb python driver (pymongo). 
+        Constructor that Validates data types for Header object fields.
+        These fields are used to compose a python dictionary which is
+        converted to a bson document by MongoDb python driver (pymongo).
 
 
         :param _id: primary key for header entry
@@ -49,6 +51,7 @@ class Header(object):
         :type tag: list
 
         """
+        # handling of defaults
         if custom is None:
             custom = dict()
         if owner is None:
@@ -59,6 +62,8 @@ class Header(object):
             status = 'In Progress'
         if header_versions is None:
             header_versions = list()
+
+        # validate and stash the input
         self.start_time = validate_start_time(start_time)
         self.end_time = validate_end_time(end_time)
         self.owner = validate_string(owner)
