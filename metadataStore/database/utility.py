@@ -2,28 +2,15 @@ __author__ = 'arkilic'
 import datetime
 import six
 
-def validate_start_time(time_entry):
-    if isinstance(time_entry, datetime.datetime):
-        res = time_entry
-    else:
-        raise TypeError('start_time must be a datetime object. '
+def validate_time(time_entry):
+    try:
+        datetime.datetime.fromtimestamp(time_entry)
+    except Exception:
+        raise TypeError('time must be a timestamp (float).'
                         '\nYou provided: {}'
                         '\n\tIt has type: {}'.format(time_entry,
                                                      type(time_entry)))
-    return res
-
-
-def validate_end_time(time_entry):
-    if isinstance(time_entry, datetime.datetime):
-        res = time_entry
-    elif time_entry is None:
-        res = None
-    else:
-        raise TypeError('end_time must be a datetime object. '
-                        '\nYou provided: {}'
-                        '\n\tIt has type: {}'.format(time_entry,
-                                                     type(time_entry)))
-    return res
+    return time_entry
 
 
 def validate_string(entry):

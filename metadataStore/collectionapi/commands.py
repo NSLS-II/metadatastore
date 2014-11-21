@@ -1,5 +1,5 @@
 __author__ = 'arkilic'
-import datetime
+import time
 import getpass
 from metadataStore.dataapi.commands import save_header, save_beamline_config, insert_event_descriptor, insert_event
 from metadataStore.dataapi.commands import save_bulk_header
@@ -73,7 +73,7 @@ def create(header=None, beamline_config=None, event_descriptor=None):
             if 'start_time' in header:
                 start_time = header['start_time']
             else:
-                start_time = datetime.datetime.utcnow()
+                start_time = time.time()
             if 'owner' in header:
                 owner = header['owner']
             else:
@@ -116,7 +116,7 @@ def create(header=None, beamline_config=None, event_descriptor=None):
                 if 'start_time' in single_header:
                     start_time = single_header['start_time']
                 else:
-                    start_time = datetime.datetime.utcnow()
+                    start_time = time.time()
                 if 'owner' in single_header:
                     owner = single_header['owner']
                 else:
