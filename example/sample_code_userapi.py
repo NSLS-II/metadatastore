@@ -1,3 +1,7 @@
+# dill broke the code, go yell at him to fix it
+demo_script_is_functional = False
+assert(demo_script_is_functional)
+
 __author__ = 'arkilic'
 
 import random
