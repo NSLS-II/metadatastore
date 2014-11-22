@@ -25,7 +25,6 @@ def validate_string(entry):
         entry = str(entry)
     elif six.PY3:
         entry = six.text_type(entry)
-    print('entry value: {}, type: {}'.format(entry, type(entry)))
     if isinstance(entry, str):
         res = entry
     elif entry is None:

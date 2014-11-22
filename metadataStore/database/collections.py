@@ -14,10 +14,9 @@ class Header(object):
     """
     Run Header that captures all aspects of a given run using its keys and other collections
     """
-    def __init__(self, start_time, scan_id, beamline_id=None,
-                 header_versions=None, status=None,
-                 owner=None, end_time=None, tags=None,
-                 custom=None):
+    def __init__(self, start_time, scan_id, beamline_id,
+                 header_version, status,
+                 owner, tags, custom, end_time=None):
         """
         Constructor that Validates data types for Header object fields.
         These fields are used to compose a python dictionary which is
@@ -53,22 +52,15 @@ class Header(object):
 
         """
         # handling of defaults
-        if custom is None:
-            custom = dict()
-        if owner is None:
-            owner = getpass.getuser()
-        if tags is None:
-            tags = list()
-        if status is None:
-            status = 'In Progress'
-        if header_versions is None:
-            header_versions = list()
+        # todo handle end_time correctly
+        if end_time is None:
+            end_time = start_time
 
         # validate and stash the input
         self.start_time = validate_time(start_time)
         self.end_time = validate_time(end_time)
         self.owner = validate_string(owner)
-        self.header_versions = validate_list(header_versions)
+        self.header_versions = validate_string(header_version)
         self.scan_id = scan_id
         self.tags = validate_list(tags)
         self.status = validate_string(status)
@@ -162,9 +154,12 @@ class EventDescriptor(object):
 
 
 class Event(object):
-    def __init__(self, header_id, descriptor_id, seq_no, owner=getpass.getuser(), description=None, data=dict()):
+    def __init__(self, header_id, descriptor_id, seq_no, owner, data,
+                 description=None):
         """
-        Constructor that Validates data types for Event object fields. These fields are used to compose a python dictionary which is     converted to a bson document by MongoDb python driver (pymongo). 
+        Constructor that Validates data types for Event object fields.
+        These fields are used to compose a python dictionary which is
+        converted to a bson document by MongoDb python driver (pymongo).
        
 
         :param _id: primary key for Event entry
@@ -195,19 +190,19 @@ class Event(object):
         self.data = validate_dict(data)
 
     def __compose_document(self):
-        document_template = dict()
-        document_template['header_id'] = self.header_id
-        document_template['descriptor_id'] = self.descriptor_id
-        document_template['seq_no'] = self.seq_no
-        document_template['owner'] = self.owner
-        document_template['description'] = self.description
-        document_template['data'] = self.data
-        return document_template
+        return {'header_id': self.header_id,
+                'descriptor_id': self.descriptor_id,
+                'seq_no': self.seq_no,
+                'owner': self.owner,
+                'description': self.description,
+                'data': self.data}
 
     def save(self, **kwargs):
         composed_dict = self.__compose_document()
         _id = db['event'].insert(composed_dict, **kwargs)
-        db['event'].ensure_index([('descriptor_id', -1), ('header_id', 1), ('data', -1)])
+        db['event'].ensure_index([('descriptor_id', -1),
+                                  ('header_id', 1),
+                                  ('data', -1)])
         return _id
 
 
