@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview &mdash; metadataStore .1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="metadataStore .1 documentation" href="index.html" />
+    <link rel="next" title="Library Reference" href="architecture.html" />
+    <link rel="prev" title="metadataStore User Guide" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="architecture.html" title="Library Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="metadataStore User Guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">metadataStore .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Advanced techniques for a new generation of hardware will drive higher data rates for experiments at NSLS2 beamlines.
+The large data volumes and data acquisition rates require high-performance logging and storage systems.
+A typical experiment involves not only the raw data from detectors, but also requires additional data from the beamline
+such as experiment owner, beamline_id, energy, motor positions, wavelength, etc… To date, this information is largely
+held separately  and manipulated individually. metadataStore is a service that is used in order to record this sort of
+metadata in beamline experiments. It is designed and implemented  with the needs of various experiments in mind,
+therefore it is flexible enough to satisfy the needs of different experimental setups.</p>
+<p>metadataStore can be used independently or embedded with the dataBroker, which utilizes an integrated approach that
+blends different data resources together and makes them available for data analysis and visualization clients.</p>
+</div>
+<div class="section" id="technology">
+<h2>Technology<a class="headerlink" href="#technology" title="Permalink to this headline">¶</a></h2>
+<p>metadataStore backend database is mongoDb, a No-SQL database that was chosen due to its performance and flexibility.
+Python(v 2.7) is chosen as language of implementation. mongoDb Python driver(pymongo) is used to perform database related
+operations.</p>
+</div>
+<div class="section" id="downloading-installing">
+<h2>Downloading/Installing<a class="headerlink" href="#downloading-installing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<p>Python(version 2.7.X), pymongo (version 2.6+), six, Distutils, Git</p>
+</div>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mongodb-installation">
+<h4>MongoDb Installation<a class="headerlink" href="#mongodb-installation" title="Permalink to this headline">¶</a></h4>
+<p><em>Step 1</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+</pre></div>
+</div>
+<p><em>Step 2</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+</pre></div>
+</div>
+<p><em>Step 3</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-get update
+</pre></div>
+</div>
+<p><em>Step 4</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-get install -y mongodb-org
+</pre></div>
+</div>
+<p><em>Step 5</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>% sudo apt-get install -y mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1mongodb-org-tools=2.6.1
+</pre></div>
+</div>
+</div>
+<div class="section" id="metadatastore-installation">
+<h4>metadataStore Installation<a class="headerlink" href="#metadatastore-installation" title="Permalink to this headline">¶</a></h4>
+<p><em>Step 1</em>:</p>
+<p>metadataStore is available via git repository: <a class="reference external" href="https://github.com/arkilic/metadataStore">https://github.com/arkilic/metadataStore</a></p>
+<p>Clone this repository:</p>
+<div class="highlight-python"><div class="highlight"><pre>%git clone https://github.com/arkilic/metadataStore
+</pre></div>
+</div>
+<p><em>Step 2</em>:</p>
+<p>metadataStore includes a setup.py script. Distutils, building and installing a module distribution using the Distutils
+is one simple command to run from a terminal:</p>
+<div class="highlight-python"><div class="highlight"><pre>% python setup.py install
+</pre></div>
+</div>
+<p>If user does not have sudo access to the machine and/or does not want to install this package for all users:</p>
+<div class="highlight-python"><div class="highlight"><pre>% python setup.py install --user
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>metadataStore can be embedded within other applications or used interactively. If used within IPython, &#8216;help&#8217; keyword provides information regarding routines:</p>
+<div class="highlight-python"><div class="highlight"><pre>% from metadataStore.userapi.commands import search
+% help(search)
+% search(scan_id=None, owner=None, start_time=None, beamline_id=None, end_time=None, data=False, header_id=None, tags=None, num_header=50)
+%
+% Provides an easy way to search Header entries inserted in metadataStore
+% Usage:
+%   search(scan_id=s_id)
+%   search(scan_id=s_id, owner=&#39;ark*&#39;)
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5))
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner=&#39;arkilic&#39;)
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner=&#39;ark*&#39;)
+%   search(scan_id=s_id, start_time=datetime.datetime(2014, 4, 5), owner=&#39;arkili.&#39;)
+</pre></div>
+</div>
+</div>
+<div class="section" id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h2>
+<p>metadataStore service consists of four collections: header, beamline_config, event_descriptor and event</p>
+<p><strong>A Sample Header</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>%{&#39;status&#39;: &#39;In Progress&#39;,
+% &#39;beamline_id&#39;: None,
+% &#39;tags&#39;: [&#39;CSX_Experiment1&#39;, &#39;CSX_Experiment2&#39;],
+% &#39;start_time&#39;: datetime.datetime(2014, 9, 16, 13, 7, 58, 299000),
+% &#39;scan_id&#39;: 3315, &#39;custom&#39;: {},
+% &#39;owner&#39;: u&#39;arkilic&#39;,
+% &#39;end_time&#39;: datetime.datetime(2014, 9, 16, 13, 7, 58, 299000),
+% &#39;header_versions&#39;: [],
+% &#39;event_descriptors&#39;: {&#39;event_descriptor_0&#39;: {&#39;data_keys&#39;: [&#39;motor5&#39;, &#39;motor4&#39;, &#39;motor3&#39;, &#39;list_of_1k&#39;, &#39;motor1&#39;, &#39;motor2&#39;],
+%                                              &#39;tag&#39;: &#39;experimental&#39;, &#39;descriptor_name&#39;: &#39;scan&#39;,
+%                                              &#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                                              &#39;event_type_id&#39;: 12, &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0a&#39;),
+%                                              &#39;events&#39;: {
+%                                                         &#39;event_0&#39;: {&#39;descriptor_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0a&#39;),
+%                                                                     &#39;description&#39;: None,
+%                                                                     &#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                                                                     &#39;seq_no&#39;: 3,
+%                                                                     &#39;owner&#39;: &#39;arkilic&#39;,
+%                                                                     &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0c&#39;),
+%                                                                     &#39;data&#39;: {u&#39;motor5&#39;: 36, u&#39;motor4&#39;: 71, u&#39;motor3&#39;: 55, u&#39;list_of_1k&#39;: [12.3, 34.5, 45.3], u&#39;motor1&#39;: 44, u&#39;motor2&#39;: 35}},
+%                                                         &#39;event_1&#39;: {&#39;descriptor_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0a&#39;),
+%                                                                     &#39;description&#39;: None,
+%                                                                     &#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                                                                     &#39;seq_no&#39;: 1,
+%                                                                     &#39;owner&#39;: u&#39;arkilic&#39;,
+%                                                                     &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0b&#39;),
+%                                                                     &#39;data&#39;: {}}}, u&#39;type_descriptor&#39;: {}}}}}},
+% &#39;configs&#39;: {&#39;config_0&#39;: {&#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+%                          &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d09&#39;),
+%                          &#39;config_params&#39;: {}}},
+%                          &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;)}}
+% }
+</pre></div>
+</div>
+<div class="section" id="header">
+<h3>Header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h3>
+<p>Each run stands for a specific set of operations performed by data collection routines. An experiment is a collection of
+these runs. metadataStore service does not group set of specific runs as experiments. This is done within dataBroker
+service(currently in development). Users/developers that use metadataStore can either use dataBroker API or develop
+simple applications on top of metadataStore that keep track of set of scan_id(s) to define specific experiments.</p>
+<p>Each header consists of the following keys:</p>
+<p><em>_id</em>: (bson.ObjectId) primary key for header entry</p>
+<p><em>scan_id</em>:  user/data collection defined unique identifier describing a given run</p>
+<p><em>start_time</em>: (datetime) run header initialization timestamp</p>
+<p><em>end_time</em>: (datetime) run header close timestamp</p>
+<p><em>tag</em>: (list) list of strings that assigns a user/data collection defined tag to each header</p>
+<p><em>owner</em>: (str) data collection or system defined user info</p>
+<p><em>header_versions</em>: (list) Keeps track of header version</p>
+<p><em>beamline_id</em>: (str) descriptor for beamline</p>
+<p><em>custom</em>: (dict) Field for custom information</p>
+<p><em>configs</em>: (dict) Field that holds information regarding beamline configurations</p>
+<p><em>event_descriptors</em>: (dict) Field that holds event definitions and events</p>
+</div>
+<div class="section" id="beamline-config">
+<h3>Beamline Config<a class="headerlink" href="#beamline-config" title="Permalink to this headline">¶</a></h3>
+<p>The &#8216;configs&#8217; key inside each header holds name-value pairs and/or nested dictionaries with name-value pairs for a given run.</p>
+<p>Beamline Config Keys:</p>
+<p><em>_id</em>: (bson.ObjectId) Unique identifier for entry in beamline_config collection.</p>
+<p><em>header_id</em>: (bson.ObjectId) foreign key pointing back to header.</p>
+<p><em>config_params</em>: (dict) data collection/user scripts can populate this dictionary with information of their choice.</p>
+</div>
+<div class="section" id="event-descriptor">
+<h3>Event Descriptor<a class="headerlink" href="#event-descriptor" title="Permalink to this headline">¶</a></h3>
+<p>Data related to a given run is captured inside &#8216;events&#8217;. Event descriptors serve as event containers and  define the contents of each event.
+In other words, event descriptor holds the actual run metadata under &#8216;events&#8217; key.</p>
+<p>Event Descriptor Keys:</p>
+<p><em>_id</em>: (bson.ObjectId) Unique identifier for entry in event_descriptor collection.</p>
+<p><em>header_id</em> : (bson.ObjectId) foreign key pointing back to header.</p>
+<p><em>event_type_id</em>: (int) event type integer descriptor generated by data collection routines.</p>
+<p><em>tag</em>: (list) list of strings that assigns a user/data collection defined tag to each event descriptor</p>
+<p><em>descriptor_name</em>: (str) event type string descriptor</p>
+<p><em>type_descriptor</em>: (dict) defines fields and field data types for a given event type</p>
+</div>
+<div class="section" id="event">
+<h3>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h3>
+<p>Metadata for each run is captured inside events. A set of events that belong to a run header can be accessed within
+event descriptors as described above. Data analysis/visualization tools that want to access metadata can do this by
+parsing run header. For the example above:</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt; from metadataStore.userapi.commands import search
+&gt; headers = search(owner=&#39;arkilic&#39;, data=True)
+&gt;
+&gt; my_event_0 = headers[&#39;header_0&#39;][&#39;event_descriptors&#39;][&#39;event_descriptor_0&#39;][&#39;event_0&#39;]
+&gt;
+&gt;&#39;event_0&#39;: {&#39;descriptor_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0a&#39;),
+&gt;                                                                     &#39;description&#39;: None,
+&gt;                                                                     &#39;header_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d08&#39;),
+&gt;                                                                     &#39;seq_no&#39;: 3,
+&gt;                                                                     &#39;owner&#39;: &#39;arkilic&#39;,
+&gt;                                                                     &#39;_id&#39;: ObjectId(&#39;5418362efa44833ca9b08d0c&#39;),
+&gt;                                                                     &#39;data&#39;: {u&#39;motor5&#39;: 36, u&#39;motor4&#39;: 71, u&#39;motor3&#39;: 55, u&#39;list_of_1k&#39;: [12.3, 34.5, 45.3], u&#39;motor1&#39;: 44, u&#39;motor2&#39;: 35}}
+</pre></div>
+</div>
+<p>There are also series of utility libraries that allow manipulation of query results. See utilities section for more information.</p>
+<p>Event Keys:</p>
+<p><em>header_id</em>: (bson.ObjectId) foreign key pointing back to header</p>
+<p><em>descriptor_id</em>: (bson.ObjectId) foreign key pointing to event descriptor</p>
+<p><em>seq_no</em>: (int) defines an event&#8217;s order in an event descriptor.(order in a set of events within descriptor)</p>
+<p><em>owner</em>: (str) event owner</p>
+<p><em>description</em>: (str) string field that describes an event(optional)</p>
+<p><em>data</em>: (dict) stores the metadata as a python dictionary</p>
+</div>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<p>Start here for a quick overview</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Examples of how to perform specific tasks</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Overview</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#technology">Technology</a></li>
+<li><a class="reference internal" href="#downloading-installing">Downloading/Installing</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#mongodb-installation">MongoDb Installation</a></li>
+<li><a class="reference internal" href="#metadatastore-installation">metadataStore Installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li><a class="reference internal" href="#schema">Schema</a><ul>
+<li><a class="reference internal" href="#header">Header</a></li>
+<li><a class="reference internal" href="#beamline-config">Beamline Config</a></li>
+<li><a class="reference internal" href="#event-descriptor">Event Descriptor</a></li>
+<li><a class="reference internal" href="#event">Event</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial">Tutorial</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">metadataStore User Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="architecture.html"
+                        title="next chapter">Library Reference</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/introduction.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="architecture.html" title="Library Reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="metadataStore User Guide"
+             >previous</a> |</li>
+        <li><a href="index.html">metadataStore .1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arman Arkilic.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

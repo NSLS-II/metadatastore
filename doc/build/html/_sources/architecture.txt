@@ -11,27 +11,27 @@ Header
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: metadataStore.database.collections.Header
-   :members: __init__, save
+   :members: __init__
 
 
 EventDescriptor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: metadataStore.database.collections.EventDescriptor
-   :members: __init__, save
+   :members: __init__
 
 Event
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: metadataStore.database.collections.Event
-   :members: __init__, save
+   :members: __init__
 
 
 BeamlineConfig
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: metadataStore.database.collections.BeamlineConfig
-   :members: __init__, save
+   :members: __init__
 
 
 
