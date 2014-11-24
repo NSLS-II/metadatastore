@@ -22,7 +22,6 @@ var/
 .installed.cfg
 *.egg
 doc/_build
-doc/build/
 
 # Installer logs
 pip-log.txt

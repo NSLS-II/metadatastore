@@ -17,7 +17,7 @@ def save_header(scan_id, owner=None, start_time=None, beamline_id=None,
     """
     Saves a run header that serves as a container for even descriptors, beamline configurations, and events. Please see
     Introduction section for return document structure
-
+    
     :param scan_id: Consumer specified id for a specific scan
     :type scan_id: int
 
@@ -85,7 +85,7 @@ save_header.status = ['In Progress', 'Complete']
 def get_header_object(id):
     """
     Return a Header instance given id (unique hashed _id field assigned by mongo daemon).
-
+    
     :param id: Header _id
     :type id: pymongo.ObjectId instance
 
@@ -143,7 +143,7 @@ def insert_event_descriptor(scan_id, event_type_id, data_keys, descriptor_name=N
     """
     Create event_descriptor entries that serve as descriptors for given events that are part of a run header.
     EventDescriptor instances serve as headers for a given set of events that hold metadata for a run
-
+    
     :param scan_id: Consumer specified id for a specific scan
     :type scan_id: int
 
@@ -216,39 +216,26 @@ def get_event_descriptor_hid_edid(name, s_id):
 def insert_event(scan_id, descriptor_name, seq_no, description=None,
                  owner=None, data=None):
     """
-    Create event entries that record experimental data
+    Create event entries that record experimental data 
+    
+    :param descriptor_name: EventDescriptor name that contains info regarding set of events to be saved
+    :type descriptor_name: str
 
-    Parameters
-    ----------
-    scan_id : ??
-        The scan identifier
+    :param description: User generated optional string to be used as descriptors
+    :type description: str
 
-    descriptor_name : str
-         EventDescriptor name that contains info regarding set of
-         events to be saved
+    :param owner: Event owner (default: unix session owner)
+    :type owner: str
 
-    seq_no : int
-        specifies the event's place in data sequence within a the event
-        descriptor set
+    :param seq_no: specifies the event's place in data sequence within a the event descriptor set
+    :type seq_no: int
 
-    description : str, optional
-        User generated optional string to be used as descriptors
+    :param data: Data Collection routine defined name-value
+    :type data: dict
 
-    owner : str, optional
-         Event owner (default: unix session owner)
+    :raises: TypeError, OperationFailure, ConnectionFailure
 
-    data : dict, optional
-        Data Collection routine defined name-value pairs
-
-    Returns
-    -------
-    event : str
-       uuid from the mongo db
-
-    Raises
-    ------
-    TypeError, OperationFailure, ConnectionFailure
-
+    :returns: Event object
     """
     if owner is None:
         owner = getpass.getuser()
