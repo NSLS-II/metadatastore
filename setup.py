@@ -77,7 +77,7 @@ setup(
               'metadataStore.collectionapi',
               'metadataStore.config', 'metadataStore.dataapi',
               'metadataStore.database', 'metadataStore.sessionManager',
-              'metadataStore.userapi',
+              'metadataStore.userapi', 'metadataStore.api',
     ],
     long_description=read('README.md'),
     classifiers=[
