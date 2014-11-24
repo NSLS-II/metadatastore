@@ -1,72 +1,112 @@
 __author__ = 'arkilic'
-import time
+
 import getpass
-from metadataStore.dataapi.commands import save_header as create_header
-from metadataStore.dataapi.commands import (save_beamline_config
-                                            as create_beamline_config)
-from metadataStore.dataapi.commands import (insert_event_descriptor,
-                                            insert_event)
-from metadataStore.dataapi.commands import save_bulk_header
+from metadataStore.dataapi.commands import insert_event
+
+
+# this needs to be moved up a level or three
+def validate_dict_keys(input_dict, req_set):
+    """
+    Validate that the required keys are in the input dictionary.
+
+    This function returns None if the dict is valid, and raises
+    `ValueError` if it is not.
+
+    Parameters
+    ----------
+    input_dict : dict
+        The dictionary to have it's keys validate
+
+    req_set : iterable
+        The keys that must be in the dictionary
+
+    Raises
+    ------
+    `ValueError` if any of the required keys are missing
+    """
+    missing = []
+    for k in req_set:
+        if k not in input_dict:
+            missing.append(k)
+    if len(missing):
+        missing = ', '.join('{}'.format(k) for k in missing)
+        raise ValueError("The required key(s) {} are missing".format(missing))
 
 
 def create_event(event):
     """
-
-    Events are saved given scan_id and descriptor name and additional optional parameters.
+    Events are saved given scan_id and descriptor name and additional
+    optional parameters.
 
     Required fields: scan_id, descriptor_name
 
     Optional fields: owner, seq_no, data, description
 
-    :param event: Dictionary used in order to save name-value pairs for Event entries
-    :type event: dict
+    Parameters
+    ----------
+    event : dict
+         Dictionary used in order to save name-value pairs for Event entries.
 
-    :raises: ConnectionFailure, NotUniqueError, ValueError
+         Required fields (with tautological descriptions until I find
+         where they are really documented)
 
-    :returns: None
+         ===============   ==========================
+         field             value
+         ===============   ==========================
+         scan_id           The scan id number
+         seq_no            The sequence number
+         descriptor_name   The name of the descriptor
+         ===============   ==========================
 
-    Usage:
+         Optional fields
+
+         ===========   ============  =============
+         field         description   default value
+         ===========   ============  =============
+         description   description   None
+         owner         the owner     current user
+         data          data payload  empty dict
+         ===========   ============  =============
+
+    Raises
+    ------
+    ConnectionFailure, NotUniqueError, ValueError
+
+    Examples
+    --------
 
     >>> create_event(event={'scan_id': 1344, 'descriptor_name': 'ascan'})
 
-    >>> create_event(event={'scan_id': 1344, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
-                  ... 'data':{'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'}})
+    >>> create_event(event={'scan_id': 1344, 'descriptor_name': 'ascan',
+                  ... 'owner': 'arkilic', 'seq_no': 0,
+                  ... 'data':{'motor1': 13.4,
+                  ...         'image1': '/home/arkilic/sample.tiff'}})
 
-    >>> create_event(event={'scan_id': 1344, 'descriptor_name': 'ascan', 'owner': 'arkilic', 'seq_no': 0,
-                  ... 'data':{'motor1': 13.4, 'image1': '/home/arkilic/sample.tiff'}},'description': 'Linear scan')
+    >>> create_event(event={'scan_id': 1344, 'descriptor_name': 'ascan',
+                  ... 'owner': 'arkilic', 'seq_no': 0,
+                  ... 'data':{'motor1': 13.4,
+                  ...         'image1': '/home/arkilic/sample.tiff'}},
+                  ... 'description': 'Linear scan')
     """
     if isinstance(event, dict):
-        if 'scan_id' in event:
-            scan_id = event['scan_id']
-        else:
-            raise ValueError('scan_id is required in order to record an event')
-        if 'descriptor_name' in event:
-            descriptor_name = event['descriptor_name']
-        else:
-            raise ValueError('descriptor_name is required in order to record an event')
-        if 'description' in event:
-            description = event['description']
-        else:
-            description = None
-        if 'owner' in event:
-            owner = event['owner']
-        else:
-            owner = getpass.getuser()
-        if 'seq_no' in event:
-            seq_no = event['seq_no']
-        else:
-            raise ValueError('seq_no is required field')
-        if 'data' in event:
-            data = event['data']
-        else:
-            data = dict()
-        try:
-            insert_event(scan_id=scan_id, descriptor_name=descriptor_name, owner=owner, seq_no=seq_no, data=data,
-                         description=description)
-        except:
-            raise
+        # validate that the required keys are in the dict
+        validate_dict_keys(event, {'scan_id',
+                                   'descriptor_name', 'seq_no'})
+        # grab the required fields
+        descriptor_name = event['descriptor_name']
+        scan_id = event['scan_id']
+        seq_no = event['seq_no']
+        # get the optional fields, use defaults if needed
+        description = event.get('description', None)
+        owner = event.get('owner', getpass.getuser())
+        data = event.get('data', dict())
+
+        ret = insert_event(scan_id, descriptor_name, seq_no,
+                     description=description,
+                     owner=owner, data=data)
+        print("the returned thing is {}".format(ret))
+
     elif isinstance(event, list):
-        # bulk = db['event'].initialize_ordered_bulk_op()
         errors = []
         for idx, single_event in enumerate(event):
             try:
@@ -76,38 +116,6 @@ def create_event(event):
                               ''.format(idx, len(event)-1), ve, single_event)
         if errors:
             raise ValueError(errors)
-        #     composed_dict = dict()
-        #     if 'scan_id' in single_event:
-        #         composed_dict['scan_id'] = single_event['scan_id']
-        #     else:
-        #         raise ValueError('scan_id is required in order to record an single_event')
-        #     if 'descriptor_name' in single_event:
-        #         composed_dict['descriptor_name'] = single_event['descriptor_name']
-        #     else:
-        #         raise ValueError('Descriptor is required in order to record an single_event')
-        #     if 'description' in single_event:
-        #         composed_dict['description'] = single_event['description']
-        #     else:
-        #         composed_dict['description'] = None
-        #     if 'owner' in single_event:
-        #         composed_dict['owner'] = single_event['owner']
-        #     else:
-        #         composed_dict['owner'] = getpass.getuser()
-        #     if 'seq_no' in single_event:
-        #         composed_dict['seq_no'] = single_event['seq_no']
-        #     else:
-        #         raise ValueError('seq_no is required field')
-        #     if 'data' in single_event:
-        #         composed_dict['data'] = single_event['data']
-        #     else:
-        #         composed_dict['data'] = dict()
-        #     header_id, descriptor_id = get_event_descriptor_hid_edid(single_event['descriptor_name'],
-        #                                                              single_event['scan_id'])
-        #     composed_dict['header_id'] = header_id
-        #     composed_dict['descriptor_id'] = descriptor_id
-        #     bulk.insert(composed_dict)
-        # bulk.execute()
     else:
         raise ValueError("Event must be a dict or a list. You provided a {}: "
                          "{}".format(type(event), event))
-
