@@ -40,6 +40,7 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
+    'sphinx.ext.autosummary',
     'numpydoc'
 ]
 
@@ -291,6 +292,12 @@ class Mock(object):
         else:
             return Mock()
 
-MOCK_MODULES = ['pymongo', 'pymongo.errors']
+    def __setitem__(self, key, value):
+        return
+
+    def __getitem__(self, key):
+        return Mock()
+
+MOCK_MODULES = ['pymongo', 'pymongo.errors', 'bson', 'bson.objectid']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
