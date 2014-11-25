@@ -21,6 +21,7 @@ def validate_string(entry):
     entry : str, unicode or something that can be cast to a string.
         Must be a string because of pymongo/Javascript requirements
     """
+
     if six.PY2:
         entry = str(entry)
     elif six.PY3:

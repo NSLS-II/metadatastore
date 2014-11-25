@@ -4,10 +4,12 @@ __version__ = '0.0.2'
 import logging
 import getpass
 
+
 def create_file_logger(filename):
     if not filename.endswith('.log'):
         filename += '.log'
     return logging.FileHandler(filename)
+
 
 class DbLogger(object):
     def __init__(self, db_name, host, port):
@@ -21,7 +23,6 @@ class DbLogger(object):
             log_handler = create_file_logger(log_root)
         except IOError:
             # probably permission denied because of user permissions
-            print getpass.getuser()
             log_root += '_{}'.format(getpass.getuser())
             log_handler = create_file_logger(log_root)
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
