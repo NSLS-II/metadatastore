@@ -2,8 +2,7 @@ __author__ = 'arkilic'
 __version__ = '0.0.2'
 
 import logging
-import os
-
+import getpass
 
 def create_file_logger(filename):
     if not filename.endswith('.log'):
@@ -16,12 +15,14 @@ class DbLogger(object):
         Constructor: MongoClient, Database, and native python loggers are created
         """
         self.logger = logging.getLogger('MetadataStore')
+        print self.logger
         log_root = '/tmp/MetaDataStore'
         try:
             log_handler = create_file_logger(log_root)
         except IOError:
             # probably permission denied because of user permissions
-            log_root += '_{}'.format(os.getlogin())
+            print getpass.getuser()
+            log_root += '_{}'.format(getpass.getuser())
             log_handler = create_file_logger(log_root)
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         log_handler.setFormatter(formatter)
